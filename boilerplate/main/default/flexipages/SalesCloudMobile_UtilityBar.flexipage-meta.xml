@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>De standaardbalk voor hulpprogramma&apos;s voor de toepassing Sales Cloud Mobile.</description>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>runtime_sales_todo_list:unifiedToDoListAuraWrapper</componentName>
+                <identifier>runtime_sales_todo_list_unifiedToDoListAuraWrapper</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>utilityItems</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>Balk voor hulpprogramma&apos;s voor de app Sales Cloud Mobile</masterLabel>
+    <template>
+        <name>one:utilityBarTemplateDesktop</name>
+    </template>
+    <type>UtilityBar</type>
+</FlexiPage>

@@ -1,0 +1,15 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    },
+    {
+      "path": "boilerplate"
+    }
+  ],
+  "name": "experience-cloud",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "61.0"
+}
