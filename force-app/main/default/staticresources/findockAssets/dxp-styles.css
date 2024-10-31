@@ -1,0 +1,99 @@
+/*
+   To use this Global CSS file in an Experience Cloud Site, add the following tag to the Settings > Advanced > Head Markup.
+   <link rel="stylesheet" href="{ basePath }/sfsites/c/resource/findockAssets/dxp-styles.css?{ versionKey }" />
+*/
+
+/* SLDS Experience Cloud Component Fixes */
+
+:root {
+    --dxp-s-form-element-text-line-height: 1; /* Normalize input heights */
+    --_slds-g-shadow-inset-focus: 0 0 3px var(--dxp-g-brand, #0176d3);
+}
+
+.slds-form-element_address .slds-form-element__row {
+    align-items: start;
+}
+
+button.slds-combobox__input.fix-slds-input_faux {
+    line-height: var(--dxp-s-form-element-text-line-height, 1); /* Normalize input heights */
+}
+
+.slds-input-has-icon {
+    --slds-c-button-spacing-block-start: 0; /* Normalize input heights */
+    --slds-c-button-spacing-block-end: 0; /* Normalize input heights */
+}
+
+.giving-page-flow legend {
+    display: none !important;
+}
+
+.giving-page-flow lightning-picklist {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.giving-page-flow label {
+    color: #202124;
+      display: inline-block;
+      font-size: 15px;
+      padding-bottom: 10px;
+}
+
+.giving-page-flow input {
+    font-size: 15px;
+    max-width: 100%;
+    min-width: 100%;
+    padding: 15px 10px;
+}
+
+.giving-page-flow .slds-input[readonly][role="combobox"] {
+    padding: 15px 10px;
+    font-size: 15px;
+}
+
+.giving-page-flow button {
+    appearance: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    outline: none;
+    padding: 14px 28px;
+    text-align: center;
+    width: 100%;
+}
+
+.giving-page-flow .navigation-bar__right-align {
+    flex: 1;
+}
+
+.giving-page-flow .flow-button__FINISH {
+    width: 100%;
+}
+
+.giving-page-flow .slds-form-element_address .slds-form-element__row {
+    align-items: flex-start;
+}
+
+.giving-page-flow .flowruntime-input.slds-form-element.flowruntime-inline-container{
+    align-items: start;
+}
+
+.giving-page-flow .flowruntime-input.slds-form-element.flowruntime-inline-container .flowruntime-input-label.flowruntime-inline {
+    margin-top: 2px;
+}
+
+
+/* Giving Page styling */
+
+.logo {
+    margin-top: 1rem;
+    padding: 10px;
+}
+
+.right-column {
+    background: #FAF7F2;
+}

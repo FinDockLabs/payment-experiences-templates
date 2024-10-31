@@ -1,0 +1,72 @@
+<template>
+  <form onsubmit={handleSubmit} autocomplete="off">
+    <lightning-modal-header label={label}></lightning-modal-header>
+
+    <lightning-modal-body>
+      <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+        <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+          <lightning-select
+            label="Object"
+            name="object"
+            options={objectsOptions}
+            value={object}
+            required
+            onchange={handleSelectObject}>
+          </lightning-select>
+        </div>
+        <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+          <lightning-select
+            label="Field"
+            name="field"
+            options={fieldsOptions}
+            value={field}
+            disabled={disableField}
+            required
+            onchange={handleInputChange}>
+          </lightning-select>
+        </div>
+        <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+          <lightning-input
+            label="Custom Field Label"
+            name="fieldLabel"
+            value={fieldLabel}
+            field-level-help="If left blank, this will use the field label set on the field within Salesforce."
+            onblur={handleInputChange}>
+          </lightning-input>
+        </div>
+      </div>
+      <fieldset class="slds-m-top_small">
+        <legend>
+          <b>Show custom field when Amount is:</b>
+        </legend>
+        <div class="slds-grid slds-gutters_direct-x-small">
+          <div class="slds-col slds-size_3-of-12">
+            <lightning-select
+              label="Operator"
+              name="conditionOperator"
+              options={conditionOptions}
+              value={conditionOperator}
+              onchange={handleInputChange}>
+            </lightning-select>
+          </div>
+          <div class="slds-col slds-size_4-of-12">
+            <lightning-input
+              label="value"
+              name="conditionValue"
+              type="number"
+              value={conditionValue}
+              onblur={handleInputChange}>
+            </lightning-input>
+          </div>
+        </div>
+      </fieldset>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+      <button type="button" class="slds-button slds-button_neutral" aria-label="Cancel and close"
+              onclick={handleCancel}>Cancel
+      </button>
+      <button type="submit" class="slds-button slds-button_brand">Add</button>
+    </lightning-modal-footer>
+  </form>
+</template>

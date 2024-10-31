@@ -1,0 +1,16 @@
+ul {
+    display: block;
+}
+
+li {
+    display: inline-block;
+    float: right;
+    background: #e5e7e9;
+    height: 2px;
+    width: 40px;
+    margin-left: 10px;
+}
+
+.active {
+    background: var(--dxp-g-brand);
+}

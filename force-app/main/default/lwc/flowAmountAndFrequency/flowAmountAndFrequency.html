@@ -1,0 +1,68 @@
+<template>
+  <section>
+    <!-- Step 1 -->
+    <div class="payment-steps payment-step-1">
+
+      <div class="payment-frequency">
+        <lightning-radio-group
+          name="radioGroup"
+          label="Pay Period"
+          options={periodOptions}
+          value={_frequencyValue}
+          type={paymentConfigData.payPeriodStyle}
+          onchange={handleFrequencySelect}>
+        </lightning-radio-group>
+      </div>
+
+      <div class="payment-amount">
+        <div class="payment-amount-options">
+          <template for:each={presetOptions} for:item="option">
+            <label key={option.key}>
+              <input type="radio" name="amount" value={option.value} onchange={handleAmount} />
+              <span class="label-amount-content">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="checked">
+                  <use href="#checkmark" />
+                </svg>
+                <span class="unchecked"></span>
+                {option.label}
+              </span>
+            </label>
+          </template>
+        </div>
+        <!-- Open Amount -->
+        <!--        TODO: Swap between payperiods-->
+        <div lwc:if={paymentConfigData.openAmountEnabled1} class="payment-amount-custom">
+          <label class="payment-other-field">
+            <input type="radio" name="amount" value="other" lwc:ref="customAmount" onchange={handleAmount} />
+            {paymentConfigData.openAmountLabel1}
+          </label>
+          <lightning-input
+            label={paymentConfigData.openAmountLabel1}
+            placeholder={paymentConfigData.openAmountPlaceholder1} type="number" min={paymentConfigData.openAmountMin1}
+            variant="label-hidden"
+            onfocus={handleCustomAmountFocus}
+            onchange={handleCustomAmount}></lightning-input>
+        </div>
+      </div>
+
+      <div class="custom-message slds-m-bottom_medium">
+        <template for:each={presetOptions} for:item="option">
+          <div key={option.key} lwc:if={option.selected}>
+            {option.impact}
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="checkmark-symbol">
+      <symbol id="checkmark">
+        <path
+          d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z" />
+      </symbol>
+    </svg>
+
+    <!--    <a href="https://www.findock.com/" target="_blank" class="powered-by-logo">-->
+    <!--      <img src={poweredByLogo} alt="Powered By FinDock" />-->
+    <!--    </a>-->
+  </section>
+</template>

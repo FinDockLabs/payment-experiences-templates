@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="45px" viewBox="0 0 65 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>bancontact</title>
+    <defs>
+        <linearGradient x1="20.2268332%" y1="50.7662402%" x2="93.3811444%" y2="39.5425848%" id="linearGradient-1">
+            <stop stop-color="#005AB9" offset="0%"></stop>
+            <stop stop-color="#1E3764" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="6.0547321%" y1="59.7386483%" x2="83.7294305%" y2="48.7920652%" id="linearGradient-2">
+            <stop stop-color="#FBA900" offset="0%"></stop>
+            <stop stop-color="#FFD800" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="payment-methods" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bancontact">
+            <g id="yellow_and_blue" transform="translate(0.000000, 9.000000)" fill-rule="nonzero">
+                <path d="M12.6762974,26 C22.2926942,26 27.1008925,19.5 31.9090909,13 L0,13 L0,26 L12.6762974,26 Z" id="blue-symbol" fill="url(#linearGradient-1)"></path>
+                <path d="M52.323701,0 C42.7073051,0 37.8991071,6.5 33.0909091,13 L65,13 L65,0 L52.323701,0 Z" id="yellow-symbol" fill="url(#linearGradient-2)"></path>
+            </g>
+            <rect id="Rectangle" x="0" y="0" width="65" height="45" rx="6"></rect>
+        </g>
+    </g>
+</svg>

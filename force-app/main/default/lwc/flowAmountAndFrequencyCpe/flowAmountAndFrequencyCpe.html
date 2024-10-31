@@ -1,0 +1,598 @@
+<template>
+  <lightning-select
+    label="Currency"
+    name="currency"
+    value={config.currency}
+    options={currencyOptions}
+    onchange={handleChange}>
+  </lightning-select>
+
+  <lightning-select
+    label="Default Payment Period"
+    name="defaultPayPeriod"
+    value={config.defaultPayPeriod}
+    options={payPeriodOptions}
+    onchange={handleChange}>
+  </lightning-select>
+
+  <lightning-radio-group
+    label="Payment Period Selector Style"
+    name="payPeriodStyle"
+    value={config.payPeriodStyle}
+    options={payPeriodStyle}
+    type="button"
+    onchange={handleChange}>
+  </lightning-radio-group>
+
+  <lightning-tabset>
+    <lightning-tab label="One-Time">
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-form-element__label">Enable One-Time Payment</span>
+        <lightning-input
+          type="toggle"
+          label="Enable One-Time Payment"
+          name="payPeriod1"
+          checked={config.payPeriod1}
+          onchange={handleChange}
+          variant="label-hidden"></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="One-Time Payment Label"
+          name="payPeriod1Label"
+          value={config.payPeriod1Label}
+          onblur={handleChange}></lightning-input>
+      </div>
+
+      <hr />
+
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-col slds-form-element__label">Number of Presets</span>
+        <lightning-select
+          label="Number of Presets"
+          name="payPeriod1Presets"
+          value={config.payPeriod1Presets}
+          options={numberOfPresetsOptions}
+          onchange={handleChange}
+          variant="label-hidden">
+        </lightning-select>
+      </div>
+
+      <div class="slds-grid slds-wrap slds-gutters_xx-small slds-m-bottom_small">
+        <lightning-input
+          class="slds-col slds-size_1-of-2"
+          type="number"
+          label="Preset 1"
+          name="payPeriod1Preset1"
+          value={config.payPeriod1Preset1}
+          onblur={handleChange}>
+        </lightning-input>
+
+        <div if:true={showPayPeriod1Preset2} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 2"
+            name="payPeriod1Preset2"
+            value={config.payPeriod1Preset2}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod1Preset3} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 3"
+            name="payPeriod1Preset3"
+            value={config.payPeriod1Preset3}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod1Preset4} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 4"
+            name="payPeriod1Preset4"
+            value={config.payPeriod1Preset4}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod1Preset5} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 5"
+            name="payPeriod1Preset5"
+            value={config.payPeriod1Preset5}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod1Preset6} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 6"
+            name="payPeriod1Preset6"
+            value={config.payPeriod1Preset6}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 1"
+          name="payPeriod1Preset1Impact"
+          value={config.payPeriod1Preset1Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod1Preset2} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 2"
+          name="payPeriod1Preset2Impact"
+          value={config.payPeriod1Preset2Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod1Preset3} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 3"
+          name="payPeriod1Preset3Impact"
+          value={config.payPeriod1Preset3Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod1Preset4} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 4"
+          name="payPeriod1Preset4Impact"
+          value={config.payPeriod1Preset4Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod1Preset5} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 5"
+          name="payPeriod1Preset5Impact"
+          value={config.payPeriod1Preset5Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod1Preset6} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 6"
+          name="payPeriod1Preset6Impact"
+          value={config.payPeriod1Preset6Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <hr />
+
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-form-element__label">Allow Open Amount</span>
+        <lightning-input
+          type="toggle"
+          label="Allow Open Amount"
+          name="openAmountEnabled1"
+          checked={config.openAmountEnabled1}
+          onchange={handleChange}
+          variant="label-hidden"></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Open Amount Label"
+          name="openAmountLabel1"
+          value={config.openAmountLabel1}
+          onblur={handleChange}></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Open Amount Placeholder"
+          name="openAmountPlaceholder1"
+          value={config.openAmountPlaceholder1}
+          onblur={handleChange}></lightning-input>
+      </div>
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="number"
+          label="Open Amount Minimum"
+          name="openAmountMin1"
+          value={config.openAmountMin1}
+          onblur={handleChange}></lightning-input>
+      </div>
+    </lightning-tab>
+
+    <lightning-tab label="Monthly">
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-form-element__label">Enable Monthly Payment</span>
+        <lightning-input
+          type="toggle"
+          label="Enable Monthly Payment"
+          name="payPeriod2"
+          checked={config.payPeriod2}
+          onchange={handleChange}
+          variant="label-hidden"></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Monthly Payment Label"
+          name="payPeriod2Label"
+          value={config.payPeriod2Label}
+          onblur={handleChange}></lightning-input>
+      </div>
+
+      <hr />
+
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-col slds-form-element__label">Number of Presets</span>
+        <lightning-select
+          label="Number of Presets"
+          name="payPeriod2Presets"
+          value={config.payPeriod2Presets}
+          options={numberOfPresetsOptions}
+          onchange={handleChange}
+          variant="label-hidden">
+        </lightning-select>
+      </div>
+
+      <div class="slds-grid slds-wrap slds-gutters_xx-small slds-m-bottom_small">
+        <lightning-input
+          class="slds-col slds-size_1-of-2"
+          type="number"
+          label="Preset 1"
+          name="payPeriod2Preset1"
+          value={config.payPeriod2Preset1}
+          onblur={handleChange}>
+        </lightning-input>
+
+        <div if:true={showPayPeriod2Preset2} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 2"
+            name="payPeriod2Preset2"
+            value={config.payPeriod2Preset2}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod2Preset3} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 3"
+            name="payPeriod2Preset3"
+            value={config.payPeriod2Preset3}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod2Preset4} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 4"
+            name="payPeriod2Preset4"
+            value={config.payPeriod2Preset4}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod2Preset5} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 5"
+            name="payPeriod2Preset5"
+            value={config.payPeriod2Preset5}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod2Preset6} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 6"
+            name="payPeriod2Preset6"
+            value={config.payPeriod2Preset6}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 1"
+          name="payPeriod2Preset1Impact"
+          value={config.payPeriod2Preset1Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod2Preset2} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 2"
+          name="payPeriod2Preset2Impact"
+          value={config.payPeriod2Preset2Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod2Preset3} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 3"
+          name="payPeriod2Preset3Impact"
+          value={config.payPeriod2Preset3Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod2Preset4} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 4"
+          name="payPeriod2Preset4Impact"
+          value={config.payPeriod2Preset4Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod2Preset5} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 5"
+          name="payPeriod2Preset5Impact"
+          value={config.payPeriod2Preset5Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod2Preset6} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 6"
+          name="payPeriod2Preset6Impact"
+          value={config.payPeriod2Preset6Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <hr />
+
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-form-element__label">Allow Open Amount</span>
+        <lightning-input
+          type="toggle"
+          label="Allow Open Amount"
+          name="openAmountEnabled2"
+          checked={config.openAmountEnabled2}
+          onchange={handleChange}
+          variant="label-hidden"></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Open Amount Label"
+          name="openAmountLabel2"
+          value={config.openAmountLabel2}
+          onblur={handleChange}></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Open Amount Placeholder"
+          name="openAmountPlaceholder2"
+          value={config.openAmountPlaceholder2}
+          onblur={handleChange}></lightning-input>
+      </div>
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="number"
+          label="Open Amount Minimum"
+          name="openAmountMin2"
+          value={config.openAmountMin2}
+          onblur={handleChange}></lightning-input>
+      </div>
+    </lightning-tab>
+
+    <lightning-tab label="Yearly">
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-form-element__label">Enable Yearly Payment</span>
+        <lightning-input
+          type="toggle"
+          label="Enable Yearly Payment"
+          name="payPeriod3"
+          checked={config.payPeriod3}
+          onchange={handleChange}
+          variant="label-hidden"></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Yearly Payment Label"
+          name="payPeriod3Label"
+          value={config.payPeriod3Label}
+          onblur={handleChange}></lightning-input>
+      </div>
+
+      <hr />
+
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-col slds-form-element__label">Number of Presets</span>
+        <lightning-select
+          label="Number of Presets"
+          name="payPeriod3Presets"
+          value={config.payPeriod3Presets}
+          options={numberOfPresetsOptions}
+          onchange={handleChange}
+          variant="label-hidden">
+        </lightning-select>
+      </div>
+
+      <div class="slds-grid slds-wrap slds-gutters_xx-small slds-m-bottom_small">
+        <lightning-input
+          class="slds-col slds-size_1-of-2"
+          type="number"
+          label="Preset 1"
+          name="payPeriod3Preset1"
+          value={config.payPeriod3Preset1}
+          onblur={handleChange}>
+        </lightning-input>
+
+        <div if:true={showPayPeriod3Preset2} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 2"
+            name="payPeriod3Preset2"
+            value={config.payPeriod3Preset2}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod3Preset3} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 3"
+            name="payPeriod3Preset3"
+            value={config.payPeriod3Preset3}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod3Preset4} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 4"
+            name="payPeriod3Preset4"
+            value={config.payPeriod3Preset4}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod3Preset5} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 5"
+            name="payPeriod3Preset5"
+            value={config.payPeriod3Preset5}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+
+        <div if:true={showPayPeriod3Preset6} class="slds-col slds-size_1-of-2">
+          <lightning-input
+            type="number"
+            label="Preset 6"
+            name="payPeriod3Preset6"
+            value={config.payPeriod3Preset6}
+            onblur={handleChange}>
+          </lightning-input>
+        </div>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 1"
+          name="payPeriod3Preset1Impact"
+          value={config.payPeriod3Preset1Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod3Preset2} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 2"
+          name="payPeriod3Preset2Impact"
+          value={config.payPeriod3Preset2Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod3Preset3} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 3"
+          name="payPeriod3Preset3Impact"
+          value={config.payPeriod3Preset3Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod3Preset4} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 4"
+          name="payPeriod3Preset4Impact"
+          value={config.payPeriod3Preset4Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod3Preset5} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 5"
+          name="payPeriod3Preset5Impact"
+          value={config.payPeriod3Preset5Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <div if:true={showPayPeriod3Preset6} class="slds-m-bottom_small">
+        <lightning-textarea
+          label="Impact Narrative for Preset 6"
+          name="payPeriod3Preset6Impact"
+          value={config.payPeriod3Preset6Impact}
+          onblur={handleChange}>
+        </lightning-textarea>
+      </div>
+
+      <hr />
+
+      <div class="slds-grid slds-grid_align-spread">
+        <span class="slds-form-element__label">Allow Open Amount</span>
+        <lightning-input
+          type="toggle"
+          label="Allow Open Amount"
+          name="openAmountEnabled3"
+          checked={config.openAmountEnabled3}
+          onchange={handleChange}
+          variant="label-hidden"></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Open Amount Label"
+          name="openAmountLabel3"
+          value={config.openAmountLabel3}
+          onblur={handleChange}></lightning-input>
+      </div>
+
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="text"
+          label="Open Amount Placeholder"
+          name="openAmountPlaceholder3"
+          value={config.openAmountPlaceholder3}
+          onblur={handleChange}></lightning-input>
+      </div>
+      <div class="slds-m-bottom_small">
+        <lightning-input
+          type="number"
+          label="Open Amount Minimum"
+          name="openAmountMin3"
+          value={config.openAmountMin3}
+          onblur={handleChange}></lightning-input>
+      </div>
+    </lightning-tab>
+  </lightning-tabset>
+</template>

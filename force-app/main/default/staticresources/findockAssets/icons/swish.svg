@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="45px" viewBox="0 0 65 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>swish</title>
+    <defs>
+        <linearGradient x1="80.8150544%" y1="59.6365716%" x2="59.8678229%" y2="8.14952521%" id="linearGradient-1">
+            <stop stop-color="#EF2131" offset="0%"></stop>
+            <stop stop-color="#FECF2C" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="58.8181173%" y1="0%" x2="9.24395007%" y2="94.0712606%" id="linearGradient-2">
+            <stop stop-color="#FBC52C" offset="0%"></stop>
+            <stop stop-color="#F87130" offset="26.3921199%"></stop>
+            <stop stop-color="#EF52E2" offset="56.079734%"></stop>
+            <stop stop-color="#661EEC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="20.5690473%" y1="41.0176198%" x2="40.5972643%" y2="91.2765373%" id="linearGradient-3">
+            <stop stop-color="#78F6D8" offset="0%"></stop>
+            <stop stop-color="#77D1F6" offset="26.5705044%"></stop>
+            <stop stop-color="#70A4F3" offset="55.447147%"></stop>
+            <stop stop-color="#661EEC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="42.4403836%" y1="100%" x2="91.6136906%" y2="6.27757791%" id="linearGradient-4">
+            <stop stop-color="#536EED" offset="0%"></stop>
+            <stop stop-color="#54C3EC" offset="24.6657524%"></stop>
+            <stop stop-color="#64D769" offset="56.4199509%"></stop>
+            <stop stop-color="#FECF2C" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="payment-methods" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="swish">
+            <rect id="Rectangle" fill="#000000" x="0" y="0" width="65" height="45" rx="6"></rect>
+            <g id="swish_logo" transform="translate(13, 3)" fill-rule="nonzero">
+                <g id="Symbol/Colour">
+                    <g id="Right-Swirl" transform="translate(11.0917, 4.5651)">
+                        <path d="M0,32.5360847 C7.83448277,36.2830046 17.503311,34.4286639 23.3445908,27.4687163 C30.2680898,19.2193607 29.1927261,6.9211758 20.9426849,0 L15.4581965,6.53486752 C21.9034853,11.9420409 22.7436287,21.5499693 17.3346653,27.994801 C13.0217464,33.1336571 5.92072761,34.8494783 0,32.5360847" id="Base-Shape" fill="url(#linearGradient-1)"></path>
+                        <path d="M0,32.5360847 C7.83448277,36.2830046 17.503311,34.4286639 23.3445908,27.4687163 C24.0599638,26.6163473 24.6896809,25.7206743 25.2351895,24.792247 C26.1576372,19.060008 24.1290522,13.0011799 19.3571566,8.99793987 C18.1447587,7.98080993 16.8323084,7.16138543 15.4590344,6.53562924 C21.9035614,11.9429168 22.7433621,21.5502739 17.3346653,27.994801 C13.0217464,33.1336571 5.92072761,34.8494783 0,32.5360847" id="Light-Cast" fill="url(#linearGradient-2)"></path>
+                    </g>
+                    <g id="Left-Swirl">
+                        <path d="M27.9082333,1.89883548 C20.0737887,-1.84808444 10.4049605,0.00621816224 4.56368066,6.9661657 C-2.3598184,15.2155595 -1.28445467,27.5137444 6.96554849,34.4349202 L12.4500749,27.9000526 C6.00474803,22.4928793 5.16464273,12.8849509 10.5736062,6.44008108 C14.886525,1.30122499 21.9875438,-0.414596213 27.9082333,1.89883548" id="Base-shape" fill="url(#linearGradient-3)"></path>
+                        <path d="M27.9082333,1.89883548 C20.0737887,-1.84808444 10.4049605,0.00621816224 4.56368066,6.9661657 C3.84826955,7.81857285 3.2185524,8.71424591 2.67308191,9.64267314 C1.75059617,15.3749122 3.77921928,21.4337022 8.5511149,25.4369803 C9.76351273,26.4540721 11.075963,27.2735347 12.4491989,27.8992528 C6.00470995,22.4920033 5.16487125,12.8846462 10.5736062,6.44008108 C14.886525,1.30122499 21.9875438,-0.414596213 27.9082333,1.89883548" id="Shadow" fill="url(#linearGradient-4)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,204 @@
+:host {
+    --fd-brand-color: var(--slds-c-button-brand-color-background, var(--dxp-s-button-color, var(--dxp-g-brand, #0176d3)));
+    --fd-border-radius: 0.3125rem;
+    --fd-border-color: #e5e7e9;
+    --fd-progress-max-width: 8.75rem;
+    --fd-progress-complete: var(--fd-brand-color);
+    --fd-progress-active: var(--fd-brand-color);
+    --fd-input-border-color: var(--dxp-s-form-element-color-border, #e5e7e9);
+    --fd-pay-method-box-shadow: 0 3px 20px #00000019;
+    --fd-payment-method-border-color: var(--dxp-s-form-element-color-border, #e5e7e9);
+    display: block;
+    font-size: var(--fd-font-size);
+}
+
+section {
+    background: var(--fd-background-color, var(--slds-c-card-color-background, #fff));
+}
+
+h3 {
+    font-size: 2rem;
+    text-align: center;
+    margin-block-end: 1rem;
+}
+
+.progress-tracker {
+    margin: 1rem 0 1rem auto;
+    max-width: var(--fd-progress-max-width);
+}
+
+.progress-tracker-steps {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.progress-step {
+    flex: 1;
+    border-block-start: 2px solid var(--fd-border-color);
+}
+
+.progress-step.is-complete {
+    border-color: var(--fd-progress-complete);
+}
+
+.progress-step.is-active {
+    border-color: var(--fd-progress-active);
+}
+
+.payment-frequency {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.payment-frequency > .slds-form-element__control {
+    align-items: center;
+    display: flex;
+    gap: 0.25rem;
+}
+
+.payment-frequency .slds-radio_faux {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.payment-frequency .slds-radio [type=radio]:checked + .slds-radio__label .slds-radio_faux:after {
+    width: 0.75rem;
+    height: 0.75rem;
+}
+
+.payment-amount-options {
+    display: grid;
+    gap: 0.25rem;
+    grid-template-columns: 1fr 1fr;
+    margin-block: var(--dxp-g-spacing-medium);
+}
+
+.payment-amount-options label {
+    align-items: center;
+    background-color: var(--sds-c-input-color-background, var(--dxp-s-form-element-color-background, var(--dxp-g-root, #fff)));
+    border: 2px solid var(--fd-input-border-color);
+    border-radius: var(--fd-border-radius);
+    display: flex;
+    justify-content: center;
+    font-size: 1.625rem;
+    padding: 1.25rem;
+    position: relative;
+}
+
+.payment-amount-options label:has(input:checked) {
+    align-items: center;
+    border: 2px solid var(--fd-brand-color);
+    border-radius: var(--fd-border-radius);
+    box-shadow: 0 3px 20px #00000019;
+}
+
+.payment-amount-options input,
+.payment-other-field {
+    display: block;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+}
+
+.label-amount-content .checked,
+.label-amount-content .unchecked {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.label-amount-content .checked {
+    display: none;
+    width: 1rem;
+    fill: var(--fd-brand-color);
+}
+
+.label-amount-content .unchecked {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--fd-input-border-color);
+    border-radius: 3px;
+}
+
+.payment-amount-options input:checked + .label-amount-content .checked {
+    display: block;
+}
+
+.payment-amount-options input:checked + .label-amount-content .unchecked {
+    display: none;
+}
+
+.custom-fields {
+    margin: 0 -0.25rem;
+}
+
+.form-actions {
+    display: flex;
+    margin-block-start: 2rem;
+    gap: 1rem;
+}
+
+.form-actions lightning-button {
+    flex: 1;
+}
+
+.label-content {
+    align-items: center;
+    border: 1px solid var(--fd-payment-method-border-color);
+    border-radius: var(--slds-c-button-radius-border, var(--dxp-s-button-radius-border, .25em));
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    margin-block: 1rem;
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.label-content img {
+    width: 2.5rem;
+    height: auto;
+}
+
+.label-content .checked {
+    width: 1rem;
+    fill: var(--fd-brand-color);
+}
+
+.label-content .unchecked {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid var(--fd-payment-method-border-color);
+    border-radius: 3px;
+}
+
+.label-content .checked {
+    display: none;
+}
+
+input:checked + .label-content {
+    border: 1px solid var(--fd-brand-color);
+    box-shadow: var(--fd-pay-method-box-shadow);
+}
+
+input:checked + .label-content .checked {
+    display: block;
+}
+
+input:checked + .label-content .unchecked {
+    display: none;
+}
+
+.checkmark-symbol {
+    display: none;
+}
+
+.powered-by-logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 152px;
+    padding-block-start: 1.5rem;
+}

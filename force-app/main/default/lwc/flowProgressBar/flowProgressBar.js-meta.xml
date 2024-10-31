@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>FinDock Progress Indicator</masterLabel>
+    <description>FinDock Progress Indicator</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+
+    <targetConfigs>  
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="currentPage" type="Integer" role="inputOnly" label="Current Progress"></property>
+            <property name="totalPages" type="Integer" role="inputOnly" label="Total Progress"></property>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="currentPage" type="Integer" label="Current Progress"/>
+            <property name="totalPages" type="Integer" label="Total Progress"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
