@@ -9,6 +9,7 @@
     --dxp-s-form-element-text-line-height: 1; /* Normalize input heights */
     --_slds-g-shadow-inset-focus: 0 0 3px var(--dxp-g-brand, #0176d3);
     --slds-kx-button-gradient-color: var(--dxp-g-brand);
+    --slds-c-radio-color-background-checked: var(--dxp-g-brand);
 }
 
 .slds-form-element_address .slds-form-element__row {
@@ -92,6 +93,11 @@ button.slds-combobox__input.fix-slds-input_faux {
 
 .giving-page-flow .flowruntime-input.slds-form-element.flowruntime-inline-container .flowruntime-input-label.flowruntime-inline {
     margin-top: 2px;
+}
+
+.giving-page-flow .radio-group .slds-form-element__control span.slds-radio {
+    display: inline-block;
+    width: 50%;
 }
 
 

@@ -59,7 +59,7 @@
             <inputParameters>
                 <name>totalPages</name>
                 <value>
-                    <numberValue>4.0</numberValue>
+                    <numberValue>3.0</numberValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -67,35 +67,18 @@
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>Amount_and_Frequency_Section1</name>
-            <fieldType>RegionContainer</fieldType>
-            <fields>
-                <name>Amount_and_Frequency_Section1_Column1</name>
-                <fieldType>Region</fieldType>
-                <fields>
-                    <name>AmountAndFrequency</name>
-                    <extensionName>c:flowAmountAndFrequency</extensionName>
-                    <fieldType>ComponentInstance</fieldType>
-                    <inputParameters>
-                        <name>paymentConfig</name>
-                        <value>
-                            <stringValue>{&quot;currency&quot;:&quot;EUR&quot;,&quot;defaultPayPeriod&quot;:&quot;One-Time&quot;,&quot;payPeriodStyle&quot;:&quot;button&quot;,&quot;payPeriod1&quot;:true,&quot;payPeriod1Label&quot;:&quot;One-Time Payment&quot;,&quot;payPeriod1Presets&quot;:&quot;4&quot;,&quot;payPeriod1Preset1&quot;:&quot;10&quot;,&quot;payPeriod2&quot;:true,&quot;payPeriod2Label&quot;:&quot;Monthly Payment&quot;,&quot;payPeriod2Presets&quot;:&quot;4&quot;,&quot;payPeriod3&quot;:false,&quot;payPeriod3Label&quot;:&quot;Yearly Payment&quot;,&quot;payPeriod3Presets&quot;:&quot;1&quot;,&quot;payPeriod1Preset2&quot;:&quot;15&quot;,&quot;payPeriod1Preset3&quot;:&quot;25&quot;,&quot;payPeriod1Preset4&quot;:&quot;35&quot;,&quot;openAmountEnabled1&quot;:true,&quot;openAmountLabel1&quot;:&quot;Other amount&quot;,&quot;openAmountPlaceholder1&quot;:&quot;Other amount&quot;,&quot;openAmountMin1&quot;:&quot;1&quot;,&quot;payPeriod2Preset1&quot;:&quot;5&quot;,&quot;payPeriod2Preset2&quot;:&quot;10&quot;,&quot;payPeriod2Preset3&quot;:&quot;15&quot;,&quot;payPeriod2Preset4&quot;:&quot;20&quot;,&quot;openAmountEnabled2&quot;:true,&quot;openAmountLabel2&quot;:&quot;Other amount&quot;,&quot;openAmountPlaceholder2&quot;:&quot;Other amount&quot;,&quot;openAmountMin2&quot;:&quot;5&quot;}</stringValue>
-                        </value>
-                    </inputParameters>
-                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-                    <isRequired>true</isRequired>
-                    <storeOutputAutomatically>true</storeOutputAutomatically>
-                </fields>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>12</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <isRequired>false</isRequired>
-            <regionContainerType>SectionWithoutHeader</regionContainerType>
+            <name>AmountAndFrequency</name>
+            <extensionName>c:flowAmountAndFrequency</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>paymentConfig</name>
+                <value>
+                    <stringValue>{&quot;currency&quot;:&quot;EUR&quot;,&quot;defaultPayPeriod&quot;:&quot;One-Time&quot;,&quot;payPeriodStyle&quot;:&quot;radio&quot;,&quot;payPeriod1&quot;:true,&quot;payPeriod1Label&quot;:&quot;One-Time Payment&quot;,&quot;payPeriod1Presets&quot;:&quot;4&quot;,&quot;payPeriod1Preset1&quot;:&quot;10&quot;,&quot;payPeriod2&quot;:true,&quot;payPeriod2Label&quot;:&quot;Monthly Payment&quot;,&quot;payPeriod2Presets&quot;:&quot;4&quot;,&quot;payPeriod3&quot;:false,&quot;payPeriod3Label&quot;:&quot;Yearly Payment&quot;,&quot;payPeriod3Presets&quot;:&quot;1&quot;,&quot;payPeriod1Preset2&quot;:&quot;15&quot;,&quot;payPeriod1Preset3&quot;:&quot;25&quot;,&quot;payPeriod1Preset4&quot;:&quot;35&quot;,&quot;openAmountEnabled1&quot;:true,&quot;openAmountLabel1&quot;:&quot;Other amount&quot;,&quot;openAmountPlaceholder1&quot;:&quot;Other amount&quot;,&quot;openAmountMin1&quot;:&quot;1&quot;,&quot;payPeriod2Preset1&quot;:&quot;5&quot;,&quot;payPeriod2Preset2&quot;:&quot;10&quot;,&quot;payPeriod2Preset3&quot;:&quot;15&quot;,&quot;payPeriod2Preset4&quot;:&quot;20&quot;,&quot;openAmountEnabled2&quot;:true,&quot;openAmountLabel2&quot;:&quot;Other amount&quot;,&quot;openAmountPlaceholder2&quot;:&quot;Other amount&quot;,&quot;openAmountMin2&quot;:&quot;5&quot;}</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -104,7 +87,7 @@
         <name>PaymentMethod</name>
         <label>PaymentMethod</label>
         <locationX>176</locationX>
-        <locationY>458</locationY>
+        <locationY>350</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -115,13 +98,13 @@
             <inputParameters>
                 <name>currentPage</name>
                 <value>
-                    <numberValue>4.0</numberValue>
+                    <numberValue>3.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>totalPages</name>
                 <value>
-                    <numberValue>4.0</numberValue>
+                    <numberValue>3.0</numberValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -163,7 +146,7 @@
         <allowPause>false</allowPause>
         <backButtonLabel>Back</backButtonLabel>
         <connector>
-            <targetReference>Shipping_Details</targetReference>
+            <targetReference>PaymentMethod</targetReference>
         </connector>
         <fields>
             <name>progressBar2</name>
@@ -172,7 +155,7 @@
             <inputParameters>
                 <name>totalPages</name>
                 <value>
-                    <numberValue>4.0</numberValue>
+                    <numberValue>3.0</numberValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -220,94 +203,6 @@
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
-        <fields>
-            <name>checkbox</name>
-            <dataType>Boolean</dataType>
-            <fieldText>some label</fieldText>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>radio</name>
-            <choiceReferences>Choice1</choiceReferences>
-            <choiceReferences>Radiochoice2</choiceReferences>
-            <dataType>String</dataType>
-            <fieldType>RadioButtons</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
-        <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
-        <name>Shipping_Details</name>
-        <label>Shipping Details</label>
-        <locationX>176</locationX>
-        <locationY>350</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <backButtonLabel>Back</backButtonLabel>
-        <connector>
-            <targetReference>PaymentMethod</targetReference>
-        </connector>
-        <fields>
-            <name>progressBar3</name>
-            <extensionName>c:flowProgressBar</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>currentPage</name>
-                <value>
-                    <numberValue>3.0</numberValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>totalPages</name>
-                <value>
-                    <numberValue>4.0</numberValue>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <fields>
-            <name>Copy_1_of_Personal_Details_Header</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 28px;&quot;&gt;Shipping Details&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Copy_1_of_Email</name>
-            <extensionName>flowruntime:email</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>placeholder</name>
-                <value>
-                    <stringValue>email@example.com</stringValue>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-        </fields>
-        <fields>
-            <name>Copy_1_of_checkbox</name>
-            <dataType>Boolean</dataType>
-            <fieldType>InputField</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>Copy_1_of_radio</name>
-            <choiceReferences>Choice1</choiceReferences>
-            <choiceReferences>Radiochoice2</choiceReferences>
-            <dataType>String</dataType>
-            <fieldType>RadioButtons</fieldType>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>false</isRequired>
-        </fields>
         <nextOrFinishButtonLabel>Next</nextOrFinishButtonLabel>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -319,5 +214,5 @@
             <targetReference>Amount_and_Frequency</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
 </Flow>

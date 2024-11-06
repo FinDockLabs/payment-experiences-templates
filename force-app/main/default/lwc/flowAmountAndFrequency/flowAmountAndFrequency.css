@@ -12,6 +12,11 @@ h3 {
     margin-block-end: 1rem;
 }
 
+.radio-group .slds-form-element__control span.slds-radio {
+    display: inline-block;
+    width: 50%;
+}
+
 .slds-radio_button {
     flex-grow: 1;
 }
@@ -25,7 +30,7 @@ h3 {
 
 .payment-amount-options label {
     align-items: center;
-    border: var(--dxp-s-form-element-width-border) solid var(--fd-input-border-color);
+    border: var(--dxp-s-form-element-width-border) solid var(--sds-g-color-surface-1, #ffffff);
     border-radius: var(--dxp-s-button-radius-border);
     display: flex;
     justify-content: center;
@@ -37,7 +42,7 @@ h3 {
 
 .payment-amount-options label:has(input:checked) {
     align-items: center;
-    border: 2px solid var(--dxp-g-brand);
+    border: var(--dxp-s-form-element-width-border) solid var(--dxp-g-brand);
     border-radius: var(--dxp-s-button-radius-border);
     box-shadow: 0 3px 20px #00000019;
     background: var(--sds-g-color-surface-1, #ffffff);
