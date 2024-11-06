@@ -8,6 +8,7 @@
 :root {
     --dxp-s-form-element-text-line-height: 1; /* Normalize input heights */
     --_slds-g-shadow-inset-focus: 0 0 3px var(--dxp-g-brand, #0176d3);
+    --slds-kx-button-gradient-color: var(--dxp-g-brand);
 }
 
 .slds-form-element_address .slds-form-element__row {
@@ -21,6 +22,10 @@ button.slds-combobox__input.fix-slds-input_faux {
 .slds-input-has-icon {
     --slds-c-button-spacing-block-start: 0; /* Normalize input heights */
     --slds-c-button-spacing-block-end: 0; /* Normalize input heights */
+}
+
+.slds-spinner {
+    display: none;
 }
 
 .giving-page-flow legend {
@@ -64,10 +69,13 @@ button.slds-combobox__input.fix-slds-input_faux {
     padding: 14px 28px;
     text-align: center;
     width: 100%;
+    background: var(--dxp-g-brand, rgb(1, 118, 211));
+    color: var(--dxp-g-brand-contrast, #ffffff);
 }
 
 .giving-page-flow .navigation-bar__right-align {
     flex: 1;
+    text-align: right;
 }
 
 .giving-page-flow .flow-button__FINISH {
