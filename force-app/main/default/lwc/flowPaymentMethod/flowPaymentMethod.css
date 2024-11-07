@@ -12,10 +12,6 @@
     font-size: var(--fd-font-size);
 }
 
-section {
-    background: var(--fd-background-color, var(--slds-c-card-color-background, #fff));
-}
-
 h3 {
     font-size: 2rem;
     text-align: center;
@@ -99,6 +95,11 @@ h3 {
     overflow: hidden;
     height: 1px;
     width: 1px;
+}
+
+div.payment-steps label {
+    display: block;
+    padding-bottom: 0;
 }
 
 .label-amount-content .checked,

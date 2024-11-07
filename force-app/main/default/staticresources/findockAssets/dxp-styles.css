@@ -74,13 +74,24 @@ button.slds-combobox__input.fix-slds-input_faux {
     color: var(--dxp-g-brand-contrast, #ffffff);
 }
 
+.giving-page-flow .navigation-bar__spacer {
+    flex: 0 !important;
+}
+
 .giving-page-flow .navigation-bar__right-align {
     flex: 1;
+    display: flex;
     text-align: right;
 }
 
-.giving-page-flow .flow-button__FINISH {
-    width: 100%;
+.giving-page-flow .flow-button__FINISH, .giving-page-flow .flow-button__NEXT, .giving-page-flow .flow-button__BACK {
+    flex-grow: 1;
+}
+
+.giving-page-flow .flow-button__BACK button {
+    background-color: var(--dxp-g-root-1, #f3f3f3);
+    border-color: var(--dxp-g-brand);
+    color: var(--dxp-g-neutral-contrast-1);
 }
 
 .giving-page-flow .slds-form-element_address .slds-form-element__row {
@@ -104,8 +115,13 @@ button.slds-combobox__input.fix-slds-input_faux {
 /* Giving Page styling */
 
 .logo {
-    margin-top: 1rem;
     padding: 10px;
+    padding: 10px;
+    background: var(--dxp-g-root-1, #f3f3f3);
+    display: block;
+    width: 5rem;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .right-column {
