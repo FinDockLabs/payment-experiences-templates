@@ -5,7 +5,7 @@
     "sfdc_cms:media" : {
       "source" : {
         "type" : "file",
-        "ref" : "0sNJX000000XBw0",
+        "ref" : "0sNJX000000d9gB",
         "size" : 125,
         "mimeType" : "text/css"
       }

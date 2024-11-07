@@ -7,7 +7,7 @@
       "children" : [ {
         "children" : [ {
           "attributes" : {
-            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCELJNEVVFZ5BJBHGXSATH7XQAGY?lastModifiedDate=Mon Sep 30 13:22:09 GMT 2024&height=144&width=192\",\"contentKey\":\"MCELJNEVVFZ5BJBHGXSATH7XQAGY\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center left\",\"bgSizeOrRepeat\":\"/cover\"}",
+            "backgroundImageConfig" : "{\"url\":\"/sfsites/c/cms/delivery/media/MCDOCVJ7GQHVFC3KNHILTH45TLXM?lastModifiedDate=Thu Nov 07 11:14:22 GMT 2024&height=144&width=192\",\"contentKey\":\"MCDOCVJ7GQHVFC3KNHILTH45TLXM\",\"altText\":\"\",\"contentType\":\"sfdc_cms__image\",\"bgPosition\":\"center center\",\"bgSizeOrRepeat\":\"/cover\"}",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "0rem",
             "dxpStyle" : {
@@ -23,7 +23,7 @@
             "layoutDirectionTablet" : "column",
             "maxContentWidth" : "",
             "sectionColumnGutterWidth" : "1rem",
-            "sectionConfig" : "{\"UUID\":\"dbeabaef-54bb-48d6-acd8-273e440d2fc6\",\"columns\":[{\"UUID\":\"d60cc344-40af-4160-b21a-b4a916adbde4\",\"columnName\":\"Theme Header\",\"columnKey\":\"headerSection\",\"columnWidth\":\"6\",\"seedComponents\":null},{\"UUID\":\"43325079-51d3-45cb-821c-49f9d72b128d\",\"columnName\":\"Column 2\",\"columnKey\":\"ec7e1\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}",
+            "sectionConfig" : "{\"UUID\":\"dbeabaef-54bb-48d6-acd8-273e440d2fc6\",\"columns\":[{\"UUID\":\"d60cc344-40af-4160-b21a-b4a916adbde4\",\"columnName\":\"Column 1\",\"columnKey\":\"headerSection\",\"columnWidth\":\"6\",\"seedComponents\":null},{\"UUID\":\"43325079-51d3-45cb-821c-49f9d72b128d\",\"columnName\":\"Column 2\",\"columnKey\":\"ec7e1\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}",
             "sectionMinHeight" : "500px",
             "sectionVerticalAlign" : "flex-start"
           },
@@ -41,10 +41,10 @@
                 },
                 "fit" : "contain",
                 "height" : 350,
-                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MCERPZSKMRAVGO7FNHLDYTJJ4EYU?lastModifiedDate=Mon Sep 30 13:21:36 GMT 2024\",\"altText\":\"\",\"contentKey\":\"MCERPZSKMRAVGO7FNHLDYTJJ4EYU\",\"contentType\":null}}",
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"\",\"altText\":\"\",\"contentKey\":\"MCFL7OMAEOBBAC3NKM37JEDYHTXE\",\"contentType\":null}}",
                 "overlayColor" : "rgba(255, 255, 255, 0)",
                 "position" : "center center",
-                "width" : 24
+                "width" : 100
               },
               "customCssClasses" : "logo",
               "definition" : "dxp_base:image",
@@ -65,7 +65,7 @@
                   "padding" : {
                     "bottom" : "80px",
                     "left" : "80px",
-                    "right" : "80px",
+                    "right" : "280px",
                     "top" : "100px"
                   }
                 },
