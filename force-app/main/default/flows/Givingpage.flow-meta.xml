@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Create_Payment_Intent</name>
+        <label>Create Payment Intent</label>
+        <locationX>176</locationX>
+        <locationY>566</locationY>
+        <actionName>FinDockPaymentIntentInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>paymentIntentRequest</name>
+            <value>
+                <elementReference>Transorm_Payment_Intent_Request</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>FinDockPaymentIntentInvocable</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>61.0</apiVersion>
     <choices>
         <name>Choice1</name>
@@ -11,6 +29,20 @@
         <choiceText>Radio choice 2</choiceText>
         <dataType>String</dataType>
     </choices>
+    <constants>
+        <name>FailureUrl</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>https://www.failure.com/</stringValue>
+        </value>
+    </constants>
+    <constants>
+        <name>SuccessUrl</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>https://www.findock.com/</stringValue>
+        </value>
+    </constants>
     <environments>Default</environments>
     <interviewLabel>Giving Page {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -72,13 +104,13 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>AmountAndFrequency</name>
+            <name>AmountFrequency</name>
             <extensionName>c:flowAmountAndFrequency</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
                 <name>paymentConfig</name>
                 <value>
-                    <stringValue>{&quot;currency&quot;:&quot;EUR&quot;,&quot;defaultPayPeriod&quot;:&quot;One-Time&quot;,&quot;payPeriodStyle&quot;:&quot;radio&quot;,&quot;payPeriod1&quot;:true,&quot;payPeriod1Label&quot;:&quot;One-Time Payment&quot;,&quot;payPeriod1Presets&quot;:&quot;4&quot;,&quot;payPeriod1Preset1&quot;:&quot;10&quot;,&quot;payPeriod2&quot;:true,&quot;payPeriod2Label&quot;:&quot;Monthly Payment&quot;,&quot;payPeriod2Presets&quot;:&quot;4&quot;,&quot;payPeriod3&quot;:false,&quot;payPeriod3Label&quot;:&quot;Yearly Payment&quot;,&quot;payPeriod3Presets&quot;:&quot;1&quot;,&quot;payPeriod1Preset2&quot;:&quot;15&quot;,&quot;payPeriod1Preset3&quot;:&quot;25&quot;,&quot;payPeriod1Preset4&quot;:&quot;35&quot;,&quot;openAmountEnabled1&quot;:true,&quot;openAmountLabel1&quot;:&quot;Other amount&quot;,&quot;openAmountPlaceholder1&quot;:&quot;Other amount&quot;,&quot;openAmountMin1&quot;:&quot;1&quot;,&quot;payPeriod2Preset1&quot;:&quot;5&quot;,&quot;payPeriod2Preset2&quot;:&quot;10&quot;,&quot;payPeriod2Preset3&quot;:&quot;15&quot;,&quot;payPeriod2Preset4&quot;:&quot;20&quot;,&quot;openAmountEnabled2&quot;:true,&quot;openAmountLabel2&quot;:&quot;Other amount&quot;,&quot;openAmountPlaceholder2&quot;:&quot;Other amount&quot;,&quot;openAmountMin2&quot;:&quot;5&quot;}</stringValue>
+                    <stringValue>{&quot;currency&quot;:&quot;EUR&quot;,&quot;defaultPayPeriod&quot;:&quot;One-Time&quot;,&quot;payPeriodStyle&quot;:&quot;radio&quot;,&quot;payPeriod1&quot;:true,&quot;payPeriod1Label&quot;:&quot;One-Time Payment&quot;,&quot;payPeriod1Presets&quot;:&quot;4&quot;,&quot;payPeriod1Preset1&quot;:&quot;10&quot;,&quot;payPeriod2&quot;:false,&quot;payPeriod2Label&quot;:&quot;Monthly Payment&quot;,&quot;payPeriod2Presets&quot;:&quot;1&quot;,&quot;payPeriod3&quot;:false,&quot;payPeriod3Label&quot;:&quot;Yearly Payment&quot;,&quot;payPeriod3Presets&quot;:&quot;1&quot;,&quot;payPeriod1Preset2&quot;:&quot;15&quot;,&quot;payPeriod1Preset3&quot;:&quot;20&quot;,&quot;payPeriod1Preset4&quot;:&quot;25&quot;}</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -96,6 +128,9 @@
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Transorm_Payment_Intent_Request</targetReference>
+        </connector>
         <fields>
             <name>progressBar4</name>
             <extensionName>c:flowProgressBar</extensionName>
@@ -211,5 +246,134 @@
             <targetReference>Amount_and_Frequency</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
+    <transforms>
+        <name>Transorm_Payment_Intent_Request</name>
+        <label>Transorm Payment Intent Request</label>
+        <locationX>176</locationX>
+        <locationY>458</locationY>
+        <apexClass>FinDockPaymentIntentRequest</apexClass>
+        <connector>
+            <targetReference>Create_Payment_Intent</targetReference>
+        </connector>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <scale>0</scale>
+        <transformValues>
+            <transformValueActions>
+                <outputFieldApiName>failureUrl</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <stringValue>https://www.failure.com/</stringValue>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>successUrl</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <stringValue>https://www.findock.com/</stringValue>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>oneTime.amount</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>AmountFrequency.amountValue</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.FirstName</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Name.firstName</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.LastName</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Name.lastName</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.Salutation</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Name.salutation</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.MailingCity</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Address.city</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.MailingCountry</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Address.country</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.MailingPostalCode</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Address.postalCode</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.MailingState</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Address.province</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>payer.contact.MailingStreet</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>Address.street</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>paymentMethod.name</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>PaymentMethodCmp.paymentMethod</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>paymentMethod.parameters[$EachItem].key</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>PaymentMethodCmp.parameters[$EachItem].key</elementReference>
+                </value>
+            </transformValueActions>
+            <transformValueActions>
+                <outputFieldApiName>paymentMethod.parameters[$EachItem].value</outputFieldApiName>
+                <transformType>Map</transformType>
+                <value>
+                    <elementReference>PaymentMethodCmp.parameters[$EachItem].value</elementReference>
+                </value>
+            </transformValueActions>
+        </transformValues>
+    </transforms>
+    <variables>
+        <name>currentItemFromSourceCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>cpm__Audit_Trail__c</objectType>
+    </variables>
+    <variables>
+        <name>RecordCollection</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>cpm__Audit_Trail__c</objectType>
+    </variables>
 </Flow>

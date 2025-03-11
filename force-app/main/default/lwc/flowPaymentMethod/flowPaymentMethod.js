@@ -1,8 +1,10 @@
-import { LightningElement } from "lwc";
+import { LightningElement, api } from "lwc";
 import FindockAssets from "@salesforce/resourceUrl/findockAssets";
 import { FlowAttributeChangeEvent } from "lightning/flowSupport";
 
 export default class flowPaymentMethod extends LightningElement {
+  @api paymentMethod;
+  @api parameters;
 
   // --- Private Properties ---
 
@@ -23,13 +25,12 @@ export default class flowPaymentMethod extends LightningElement {
     }
   ];
 
-  paymentValue;
 
   // --- Event Handlers ---
 
   handlePaymentMethod(event) {
-    this.paymentValue = event.target.value;
-    const attributeChangeEvent = new FlowAttributeChangeEvent("paymentValue", this.paymentValue);
+    this.paymentMethod = event.target.value;
+    const attributeChangeEvent = new FlowAttributeChangeEvent("paymentMethod", this.paymentMethod);
     this.dispatchEvent(attributeChangeEvent);
   }
 }

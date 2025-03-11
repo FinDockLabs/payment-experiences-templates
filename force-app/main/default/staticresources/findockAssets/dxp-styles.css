@@ -111,6 +111,14 @@ button.slds-combobox__input.fix-slds-input_faux {
     width: 50%;
 }
 
+.giving-page-flow flowruntime-flow {
+    background: none !important;
+}
+
+.giving-page-flow .slds-card__footer.navigationBar {
+    border-top: none !important;
+}
+
 
 /* Giving Page styling */
 

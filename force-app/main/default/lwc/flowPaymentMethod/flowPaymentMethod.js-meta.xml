@@ -7,4 +7,10 @@
     <targets>
         <target>lightning__FlowScreen</target>
     </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="paymentMethod" type="String" label="Payment Method"/>
+            <property name="parameters" type="apex://FinDockPaymentIntentParameterRequest[]" label="Payment Method Parameters"/>
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

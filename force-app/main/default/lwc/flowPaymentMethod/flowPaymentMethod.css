@@ -18,6 +18,10 @@ h3 {
     margin-block-end: 1rem;
 }
 
+section {
+    background: none;
+}
+
 .progress-tracker {
     margin: 1rem 0 1rem auto;
     max-width: var(--fd-progress-max-width);

@@ -12,7 +12,7 @@
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen" configurationEditor="c-flow-amount-and-frequency-cpe">
             <property name="paymentConfig" type="String" label="Payment Config"/>
-            <property name="amountValue" type="String" label="Amount Value"/>
+            <property name="amountValue" type="Integer" label="Amount Value"/>
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
             <property name="paymentConfig" type="String" label="Payment Config" editor="c/flowAmountAndFrequencyCpe"/>
