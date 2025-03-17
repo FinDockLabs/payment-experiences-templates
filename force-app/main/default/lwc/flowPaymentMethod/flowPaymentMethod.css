@@ -74,19 +74,19 @@ section {
     margin-block: var(--dxp-g-spacing-medium);
 }
 
-.payment-amount-options label {
+.payment-amount-options .label-content {
     align-items: center;
     background-color: var(--sds-c-input-color-background, var(--dxp-s-form-element-color-background, var(--dxp-g-root, #fff)));
-    border: 2px solid var(--fd-input-border-color);
+    border: none;
     border-radius: var(--fd-border-radius);
     display: flex;
     justify-content: center;
-    font-size: 1.625rem;
+    font-size: 1.25rem;
     padding: 1.25rem;
     position: relative;
 }
 
-.payment-amount-options label:has(input:checked) {
+.payment-amount-options .label-content:has(input:checked) {
     align-items: center;
     border: 2px solid var(--fd-brand-color);
     border-radius: var(--fd-border-radius);
