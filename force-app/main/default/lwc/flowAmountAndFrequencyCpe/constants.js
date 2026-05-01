@@ -1,2 +1,0 @@
-export const InputConfig = "paymentConfig";
-export const DefaultConfig = "{\"currency\":\"EUR\",\"defaultPayPeriod\":\"One-Time\",\"payPeriodStyle\":\"radio\",\"payPeriod1\":true,\"payPeriod1Label\":\"One-Time Payment\",\"payPeriod1Presets\":\"1\",\"payPeriod1Preset1\":\"10\",\"payPeriod2\":false,\"payPeriod2Label\":\"Monthly Payment\",\"payPeriod2Presets\":\"1\",\"payPeriod3\":false,\"payPeriod3Label\":\"Yearly Payment\",\"payPeriod3Presets\":\"1\"}";

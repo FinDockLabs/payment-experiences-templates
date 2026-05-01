@@ -1,0 +1,58 @@
+<template>
+    <div class="amount-frequency-container">
+
+        <!-- Frequency Toggle -->
+        <div class="frequency-toggle" role="group" aria-label="Donation frequency">
+            <button
+                type="button"
+                class={giveOnceClass}
+                aria-pressed={giveOnceAriaPressed}
+                data-value="oneTime"
+                onclick={handleFrequencyChange}
+            >Give once</button>
+            <button
+                type="button"
+                class={monthlyClass}
+                aria-pressed={monthlyAriaPressed}
+                data-value="recurring"
+                onclick={handleFrequencyChange}
+            >
+                <lightning-icon
+                    icon-name="utility:heart"
+                    size="x-small"
+                    class="monthly-icon"
+                    aria-hidden="true"
+                ></lightning-icon>
+                Monthly
+            </button>
+        </div>
+
+        <!-- Preset Amount Buttons -->
+        <div class="amount-grid" role="group" aria-label="Select a preset donation amount">
+            <template for:each={presetAmountOptions} for:item="option">
+                <button
+                    key={option.value}
+                    type="button"
+                    class={option.buttonClass}
+                    aria-pressed={option.ariaPressed}
+                    data-value={option.value}
+                    onclick={handlePresetAmountSelect}
+                >{option.label}</button>
+            </template>
+        </div>
+
+        <!-- Custom Amount Input -->
+        <lightning-input
+            type="number"
+            label="Other amount"
+            variant="label-hidden"
+            placeholder="Other amount"
+            value={_customAmount}
+            min="0"
+            step="any"
+            class="custom-amount-input"
+            onchange={handleCustomAmountChange}
+        ></lightning-input>
+
+    </div>
+</template>

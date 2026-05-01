@@ -1,0 +1,28 @@
+<template>
+    <div class="stage-progress" role="list" aria-label="Checkout progress">
+        <div class="stage-progress__stage" role="listitem">
+            <div class={stage1CircleClass}>
+                <span class={stage1NumberClass}>1</span>
+            </div>
+            <span class="stage-progress__label">{stage1Label}</span>
+        </div>
+
+        <div class={connectorOneClass} aria-hidden="true"></div>
+
+        <div class="stage-progress__stage" role="listitem">
+            <div class={stage2CircleClass}>
+                <span class={stage2NumberClass}>2</span>
+            </div>
+            <span class="stage-progress__label">{stage2Label}</span>
+        </div>
+
+        <div class={connectorTwoClass} aria-hidden="true"></div>
+
+        <div class="stage-progress__stage" role="listitem">
+            <div class={stage3CircleClass}>
+                <span class={stage3NumberClass}>3</span>
+            </div>
+            <span class="stage-progress__label">{stage3Label}</span>
+        </div>
+    </div>
+</template>

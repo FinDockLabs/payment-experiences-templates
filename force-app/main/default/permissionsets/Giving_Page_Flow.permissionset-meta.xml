@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <flowAccesses>
-        <enabled>true</enabled>
-        <flow>Givingpage</flow>
-    </flowAccesses>
-    <hasActivationRequired>false</hasActivationRequired>
-    <label>Giving Page Flow</label>
-</PermissionSet>
