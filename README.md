@@ -1,18 +1,13 @@
-# Salesforce DX Project: Next Steps
+# Experience Cloud Templates for FinDock
+This repository contains an example implementation of the FinDock for Experience Cloud features. It includes flow templates for a donation flow in both a multi-screen and single-screen variant. The templates are meant to be a starting point to build upon and can be further customized to fit specific use cases.
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+Additionally the repository includes an example Experience Cloud site that demonstrates how an Experience Cloud site could be set up to serve as a donations page in a non-profit use case. The site includes a donation flow that utilizes the provided flow templates.
 
-## How Do You Plan to Deploy Your Changes?
+# Installation
+1. Create a new Experience Cloud site with the "Build your own (LWR)" template and the name "Giving Page".
+2. Press the button to deploy the repo to the org.
+3. Follow [these instructions](https://help.salesforce.com/s/articleView?id=experience.rss_flow_guestuser.htm&type=5) to set up the guest user access for the flows.
+4. Open the Experience Cloud site and publish it.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
-
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+# Deploy to your org
+[![Deploy to Salesforce](https://app.jdeploy.cloud/images/flat.svg)](https://app.jdeploy.cloud/github/FinDockLabs/experience-cloud-templates/main)
