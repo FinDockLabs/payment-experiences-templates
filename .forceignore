@@ -1,2 +1,16 @@
 **/jsconfig.json
 **/.eslintrc.json
+force-app/main/default/appMenus/
+force-app/main/default/audience/
+force-app/main/default/components/
+force-app/main/default/dashboards/
+force-app/main/default/navigationMenus/
+force-app/main/default/networks/
+force-app/main/default/pages/
+force-app/main/default/permissionsetgroups/
+force-app/main/default/profiles/
+force-app/main/default/reports/
+force-app/main/default/reportTypes/
+force-app/main/default/sites/
+force-app/main/default/staticresources/SiteSamples/
+force-app/main/default/staticresources/SiteSamples.resource-meta.xml
