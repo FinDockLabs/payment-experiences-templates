@@ -6,8 +6,10 @@ Additionally the repository includes an example Experience Cloud site that demon
 # Installation
 1. Create a new Experience Cloud site with the "Build your own (LWR)" template and the name "Giving Page".
 2. Press the button to deploy the repo to the org.
-3. Follow [these instructions](https://help.salesforce.com/s/articleView?id=experience.rss_flow_guestuser.htm&type=5) to set up the guest user access for the flows.
-4. Open the Experience Cloud site and publish it.
+3. Follow [these instructions](https://help.salesforce.com/s/articleView?id=experience.rss_flow_guestuser.htm&type=5) to set up the guest user access for the flows. Do this for One_Screen_Dontation_Flow, Multi_Screen_Donation_Flow and Contact_Assignment flow.
+4. Go to the Experience Cloud Administration -> Preferences -> enable "Allow guest users to access public APIs".
+5. Publish the Experience Cloud
 
 # Deploy to your org
 [![Deploy to Salesforce](https://app.jdeploy.cloud/images/flat.svg)](https://app.jdeploy.cloud/github/FinDockLabs/experience-cloud-templates/main)
+[![Deploy to Salesforce](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png)](https://githubsfdeploy.herokuapp.com?owner=FinDockLabs&repo=experience-cloud-templates&ref=main)
