@@ -84,7 +84,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"/sfsites/c/resource/icons/shield.svg\" alt=\"\"> Secure &amp; Trusted</span>"
+                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/shield.svg\" alt=\"\"> Secure &amp; Trusted</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "4f7776c6-10f6-455f-b0d1-8ecfe9b0602e",
@@ -116,7 +116,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"/sfsites/c/resource/icons/lock.svg\" alt=\"\"> Tax Deductible</span>"
+                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/lock.svg\" alt=\"\"> Tax Deductible</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "5865ef9c-0ad2-418f-872e-ae89675ba336",
@@ -148,7 +148,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"/sfsites/c/resource/icons/envelope.svg\" alt=\"\"> Questions?</span>"
+                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/envelope.svg\" alt=\"\"> Questions?</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "698202b6-440e-4dd9-8b84-6c841d7f14c3",
