@@ -28,7 +28,7 @@ export default class AmountAndFrequency extends LightningElement {
             : DEFAULT_PRESET_AMOUNTS_ONE_TIME;
     }
     set presetAmounts(value) {
-        this._presetAmounts = Array.isArray(value) ? value : DEFAULT_PRESET_AMOUNTS;
+        this._presetAmounts = Array.isArray(value) ? value : DEFAULT_PRESET_AMOUNTS_ONE_TIME;
     }
 
     @api

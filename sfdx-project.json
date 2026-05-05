@@ -3,9 +3,6 @@
     {
       "path": "force-app",
       "default": true
-    },
-    {
-      "path": "boilerplate"
     }
   ],
   "name": "experience-cloud",
