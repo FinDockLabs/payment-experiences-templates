@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DigitalExperienceConfig xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label>Gibbon Page</label>
+    <label>Giving Page</label>
     <site>
         <urlPathPrefix></urlPathPrefix>
     </site>
-    <space>site/Gibbon_Page1</space>
+    <space>site/Giving_Page1</space>
 </DigitalExperienceConfig>

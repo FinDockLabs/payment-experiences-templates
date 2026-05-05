@@ -29,6 +29,7 @@
           "children" : [ {
             "children" : [ {
               "attributes" : {
+                "dxpStyle" : { },
                 "imageInfos" : "",
                 "richTextValue" : "<img src=\"{!cmsMedia.MCVJWDWL2FPJDRLIEGYWO6EYKR3M}\" alt=\"\" style=\"background: #0E7C66;padding: 4px;border-radius: 5px;margin-top: -5px;\"><span style=\"margin-left: .75rem;/*! line-height: 28px; *//*! margin-top: 10px; */display: inline-block;font-size: 1.25em;margin-top: 5px;\">FinDock for Gibbons</span>"
               },
@@ -38,6 +39,7 @@
             }, {
               "attributes" : {
                 "backgroundColor" : "",
+                "dxpStyle" : { },
                 "isLinkable" : false,
                 "linkAssistiveText" : "",
                 "paddingHorizontal" : "none",
@@ -53,6 +55,7 @@
             }, {
               "attributes" : {
                 "alignment" : "left",
+                "dxpStyle" : { },
                 "fit" : "contain",
                 "height" : 350,
                 "imageInfo" : "{\"imageInfoV1\":{\"url\":\"/sfsites/c/cms/delivery/media/MCCYD4Y5DZ6NCQLGMU3OWMJ75LMU?lastModifiedDate=Thu Apr 23 06:48:59 GMT 2026\",\"altText\":\"\",\"contentKey\":\"MCCYD4Y5DZ6NCQLGMU3OWMJ75LMU\",\"contentType\":null}}",
@@ -72,12 +75,10 @@
           }, {
             "children" : [ {
               "attributes" : {
-                "flowArguments" : "[{\"label\":\"status\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"status\",\"type\":\"String\",\"value\":\"{!status}\"}]",
-                "flowName" : "{\"flowName\":\"cpm__Payment_Flow\",\"flowLabel\":\"Payment Flow\"}"
+                "flowName" : "{\"flowName\":\"Multi_Screen_Donation_Flow\",\"flowLabel\":\"Multi Screen Donation Flow\"}"
               },
-              "customCssClasses" : "flow",
               "definition" : "dxp_flow:flow",
-              "id" : "f7f27fc8-d26c-4d09-94f6-59d74060e133",
+              "id" : "392ef778-a879-40df-b458-7297b24b840f",
               "type" : "component"
             } ],
             "id" : "ea02e98e-ea7b-4be0-a92f-08f2c535bb17",
@@ -98,6 +99,7 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
+            "dxpStyle" : { },
             "pageTitle" : "FinDock for Gibbons",
             "recordId" : "{!recordId}"
           },
