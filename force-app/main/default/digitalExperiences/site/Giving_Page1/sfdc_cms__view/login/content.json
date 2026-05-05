@@ -9,6 +9,7 @@
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "",
+            "dxpStyle" : { },
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
@@ -22,6 +23,7 @@
             "children" : [ {
               "attributes" : {
                 "alignment" : "left",
+                "dxpStyle" : { },
                 "imageInfo" : "",
                 "imageInfoMobile" : "",
                 "logoWidth" : 250
@@ -31,6 +33,7 @@
               "type" : "component"
             }, {
               "attributes" : {
+                "dxpStyle" : { },
                 "forgotPasswordLabel" : "Forgot your password?",
                 "forgotPasswordUrl" : "/ForgotPassword",
                 "loginButtonLabel" : "Log In",
@@ -45,6 +48,7 @@
               "type" : "component"
             }, {
               "attributes" : {
+                "dxpStyle" : { },
                 "employeeLoginLinkLabel" : "Are you an employee? Log in"
               },
               "definition" : "community_login:employeeLoginLink",
@@ -69,6 +73,7 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
+            "dxpStyle" : { },
             "pageTitle" : "Login",
             "recordId" : "{!recordId}"
           },

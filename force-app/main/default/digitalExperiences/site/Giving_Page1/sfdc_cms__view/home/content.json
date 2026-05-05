@@ -31,7 +31,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<img src=\"{!cmsMedia.MCVJWDWL2FPJDRLIEGYWO6EYKR3M}\" alt=\"\" style=\"background: #0E7C66;padding: 4px;border-radius: 5px;margin-top: -5px;\"><span style=\"margin-left: .75rem;/*! line-height: 28px; *//*! margin-top: 10px; */display: inline-block;font-size: 1.25em;margin-top: 5px;\">FinDock for Gibbons</span>"
+                "richTextValue" : "<img src=\"/sfsites/c/resource/icons/leaf.svg\" alt=\"\" style=\"background: #0E7C66;padding: 4px;border-radius: 5px;margin-top: -5px;\"><span style=\"margin-left: .75rem;/*! line-height: 28px; *//*! margin-top: 10px; */display: inline-block;font-size: 1.25em;margin-top: 5px;\">FinDock for Gibbons</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "72c5e4d2-7e21-42c7-895b-14895e0a38ca",
@@ -75,8 +75,10 @@
           }, {
             "children" : [ {
               "attributes" : {
+                "dxpStyle" : { },
                 "flowName" : "{\"flowName\":\"Multi_Screen_Donation_Flow\",\"flowLabel\":\"Multi Screen Donation Flow\"}"
               },
+              "customCssClasses" : "flow",
               "definition" : "dxp_flow:flow",
               "id" : "392ef778-a879-40df-b458-7297b24b840f",
               "type" : "component"
