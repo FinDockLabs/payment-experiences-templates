@@ -12,4 +12,3 @@ Additionally the repository includes an example Experience Cloud site that demon
 
 # Deploy to your org
 [![Deploy to Salesforce](https://app.jdeploy.cloud/images/flat.svg)](https://app.jdeploy.cloud/github/FinDockLabs/experience-cloud-templates/main)
-[![Deploy to Salesforce](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png)](https://githubsfdeploy.herokuapp.com?owner=FinDockLabs&repo=experience-cloud-templates&ref=main)
