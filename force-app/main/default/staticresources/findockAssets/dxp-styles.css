@@ -10,6 +10,10 @@
     border: none !important;
 }
 
+.flow {
+    --slds-c-input-shadow: none;
+}
+
 lightning-primitive-input-checkbox {
     display: block;
     margin-top: 10px;
@@ -31,7 +35,7 @@ flowruntime-lwc-body {
 		opacity: 1;
 	}
 }
-    
+
 flowruntime-spinner-lwc, flowruntime-spinner-lwc:before, flowruntime-spinner-lwc:after {
   border-radius: 50%;
   width: 2.5em;
