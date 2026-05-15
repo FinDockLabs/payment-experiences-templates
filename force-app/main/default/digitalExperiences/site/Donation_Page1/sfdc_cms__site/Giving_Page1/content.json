@@ -5,5 +5,5 @@
     "authenticationType" : "AUTHENTICATED_WITH_PUBLIC_ACCESS_ENABLED",
     "geoBotsAllowed" : false
   },
-  "urlName" : "giving-page"
+  "urlName" : "donation-page"
 }
