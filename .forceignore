@@ -14,3 +14,11 @@ force-app/main/default/reportTypes/
 force-app/main/default/sites/
 force-app/main/default/staticresources/SiteSamples/
 force-app/main/default/staticresources/SiteSamples.resource-meta.xml
+
+# Added by Illuminated Cloud
+/.illuminatedCloud/
+**/*.ts
+**/tsconfig*.json
+**/*.tsbuildinfo
+**/eslint.config.mjs
+**/graphql.config.yml
