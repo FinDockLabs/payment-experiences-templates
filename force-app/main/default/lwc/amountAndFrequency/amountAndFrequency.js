@@ -32,10 +32,16 @@ export default class AmountAndFrequency extends LightningElement {
     }
 
     @api
-    get amount() {
-        if (this._customAmount !== '') {
-            return Number(this._customAmount);
-        }
+    get amountOneTime() {
+        if (this._frequency !== 'oneTime') return null;
+        if (this._customAmount !== '') return Number(this._customAmount);
+        return this._selectedPreset;
+    }
+
+    @api
+    get amountRecurring() {
+        if (this._frequency !== 'recurring') return null;
+        if (this._customAmount !== '') return Number(this._customAmount);
         return this._selectedPreset;
     }
 
@@ -96,7 +102,8 @@ export default class AmountAndFrequency extends LightningElement {
     }
 
     dispatchChange() {
-        this.dispatchEvent(new FlowAttributeChangeEvent('amount', this.amount));
+        this.dispatchEvent(new FlowAttributeChangeEvent('amountOneTime', this.amountOneTime));
+        this.dispatchEvent(new FlowAttributeChangeEvent('amountRecurring', this.amountRecurring));
         this.dispatchEvent(new FlowAttributeChangeEvent('frequency', this._frequency));
     }
 }

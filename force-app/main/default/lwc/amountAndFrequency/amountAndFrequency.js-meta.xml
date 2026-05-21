@@ -10,7 +10,8 @@
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
             <property name="frequency" type="String" label="Frequency" description="Donation frequency: 'oneTime' or 'recurring'" role="outputOnly"/>
-            <property name="amount" type="Integer" label="Selected Amount" description="The selected or entered donation amount" role="outputOnly"/>
+            <property name="amountOneTime" type="Integer" label="One-Time Amount" description="The selected or entered amount when frequency is one-time; null when recurring" role="outputOnly"/>
+            <property name="amountRecurring" type="Integer" label="Recurring Amount" description="The selected or entered amount when frequency is recurring; null when one-time" role="outputOnly"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
