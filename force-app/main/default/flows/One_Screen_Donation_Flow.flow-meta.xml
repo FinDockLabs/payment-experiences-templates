@@ -54,7 +54,7 @@
         <name>One_Time_Amount</name>
         <dataType>Number</dataType>
         <expression>IF({!amountAndFrequency.frequency} = &quot;oneTime&quot;,
-{!amountAndFrequency.amount}
+{!amountAndFrequency.amountOneTime}
 ,0)</expression>
         <scale>2</scale>
     </formulas>
@@ -62,7 +62,7 @@
         <name>Recurring_Amount</name>
         <dataType>Number</dataType>
         <expression>IF({!amountAndFrequency.frequency} = &quot;recurring&quot;,
-{!amountAndFrequency.amount}
+{!amountAndFrequency.amountOneTime}
 ,0)</expression>
         <scale>2</scale>
     </formulas>

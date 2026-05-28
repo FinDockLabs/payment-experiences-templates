@@ -294,7 +294,7 @@
             <inputParameters>
                 <name>pixConfig</name>
                 <value>
-                    <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!amountAndFrequency.amount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;EUR&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
+                    <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!amountAndFrequency.amountOneTime}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;EUR&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -324,7 +324,7 @@
             <inputParameters>
                 <name>amountOneTime</name>
                 <value>
-                    <elementReference>amountAndFrequency.amount</elementReference>
+                    <elementReference>amountAndFrequency.amountOneTime</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
