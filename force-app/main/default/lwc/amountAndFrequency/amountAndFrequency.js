@@ -53,41 +53,25 @@ export default class AmountAndFrequency extends LightningElement {
         return this._frequency === 'recurring';
     }
 
-    get giveOnceAriaPressed() {
-        return String(this.isGiveOnce);
-    }
-
-    get monthlyAriaPressed() {
-        return String(this.isMonthly);
-    }
-
-    get giveOnceClass() {
-        return `toggle-option${this.isGiveOnce ? ' toggle-option-active' : ''}`;
-    }
-
-    get monthlyClass() {
-        return `toggle-option toggle-option-monthly${this.isMonthly ? ' toggle-option-active' : ''}`;
-    }
-
     get presetAmountOptions() {
         return this.presetAmounts.map(amount => {
             const isSelected = this._selectedPreset === amount && this._customAmount === '';
             return {
                 value: amount,
                 label: `$${amount.toLocaleString()}`,
-                ariaPressed: String(isSelected),
-                buttonClass: `amount-option${isSelected ? ' amount-option-selected' : ''}`
+                inputId: `preset-${amount}`,
+                isSelected
             };
         });
     }
 
     handleFrequencyChange(event) {
-        this._frequency = event.currentTarget.dataset.value;
+        this._frequency = event.target.value;
         this.dispatchChange();
     }
 
     handlePresetAmountSelect(event) {
-        this._selectedPreset = Number(event.currentTarget.dataset.value);
+        this._selectedPreset = Number(event.target.value);
         this._customAmount = '';
         this.dispatchChange();
     }

@@ -1,4 +1,13 @@
 /* Amount & Frequency Container */
+/* Reset default fieldset styles for both groups */
+.frequency-toggle,
+.amount-grid {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
 .amount-frequency-container {
     display: flex;
     flex-direction: column;
@@ -33,17 +42,6 @@
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.toggle-option-active {
-    background-color: var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100));
-    border-color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
-    color: var(--dxp-s-form-element-text-color, var(--slds-g-color-neutral-base-10));
-}
-
-.toggle-option:focus-visible {
-    outline: var(--slds-g-sizing-border-2) solid var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
-    outline-offset: var(--slds-g-sizing-border-2);
-}
-
 /* Monthly Icon (heart) */
 .monthly-icon {
     --slds-c-icon-color-foreground-default: var(--slds-g-color-error-base-50);
@@ -56,9 +54,17 @@
     gap: var(--slds-g-spacing-3);
 }
 
+/* Wrapper must not break the grid layout */
+.amount-cell {
+    display: contents;
+}
+
 /* Amount Option Button */
 .amount-option {
     height: var(--slds-g-sizing-10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: var(--dxp-s-form-element-width-border, var(--slds-g-sizing-border-2)) solid var(--dxp-s-form-element-color-border, var(--slds-g-color-border-1));
     border-radius: var(--dxp-s-form-element-radius-border, var(--slds-g-radius-border-2));
     background-color: var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100));
@@ -75,17 +81,6 @@
     border-color: var(--dxp-s-form-element-color-border-focus, var(--slds-g-color-border-2));
 }
 
-.amount-option:focus-visible {
-    outline: var(--slds-g-sizing-border-2) solid var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
-    outline-offset: var(--slds-g-sizing-border-2);
-}
-
-.amount-option-selected {
-    background-color: var(--dxp-s-form-element-color-background-active, var(--slds-g-color-brand-base-95));
-    border-color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
-    color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
-}
-
 /* Custom Amount Input */
 .custom-amount-input {
     --slds-c-input-color-border: var(--dxp-s-form-element-color-border, var(--slds-g-color-border-1));
@@ -93,4 +88,39 @@
     --slds-c-input-color-background: var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100));
     --slds-c-input-text-color: var(--dxp-s-form-element-text-color, var(--slds-g-color-neutral-base-10));
     --slds-c-input-radius-border: var(--dxp-s-form-element-radius-border, var(--slds-g-radius-border-2));
+}
+
+/* Visually hidden but still accessible to keyboard and screen readers */
+.visually-hidden-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Selected state driven by the :checked state of the adjacent input */
+.visually-hidden-input:checked + .toggle-option {
+    background-color: var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100));
+    border-color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
+    color: var(--dxp-s-form-element-text-color, var(--slds-g-color-neutral-base-10));
+}
+
+/* Selected state for preset amount buttons */
+.visually-hidden-input:checked + .amount-option {
+    background-color: var(--dxp-s-form-element-color-background-active, var(--slds-g-color-brand-base-95));
+    border-color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
+    color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
+}
+
+/* Focus ring (WCAG 2.4.11 / 2.4.13) drawn on the label */
+.visually-hidden-input:focus-visible + .toggle-option,
+.visually-hidden-input:focus-visible + .amount-option {
+    outline: 2px solid var(--dxp-s-form-element-color-border-focus, var(--dxp-g-brand, var(--slds-g-color-brand-base-60)));
+    outline-offset: 2px;
 }
