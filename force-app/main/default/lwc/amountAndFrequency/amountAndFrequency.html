@@ -7,25 +7,25 @@
 
             <input
                 type="radio"
-                id="freq-once"
-                name="frequency"
+                id={frequencyOnceId}
+                name={frequencyGroupName}
                 value="oneTime"
                 class="visually-hidden-input"
                 checked={isGiveOnce}
                 onchange={handleFrequencyChange}
             />
-            <label for="freq-once" class="toggle-option">Give once</label>
+            <label for={frequencyOnceId} class="toggle-option">Give once</label>
 
             <input
                 type="radio"
-                id="freq-monthly"
-                name="frequency"
+                id={frequencyMonthlyId}
+                name={frequencyGroupName}
                 value="recurring"
                 class="visually-hidden-input"
                 checked={isMonthly}
                 onchange={handleFrequencyChange}
             />
-            <label for="freq-monthly" class="toggle-option toggle-option-monthly">
+            <label for={frequencyMonthlyId} class="toggle-option toggle-option-monthly">
                 <lightning-icon
                     icon-name="utility:heart"
                     size="x-small"
@@ -44,11 +44,10 @@
                     <input
                         type="radio"
                         id={option.inputId}
-                        name="presetAmount"
+                        name={presetName}
                         value={option.value}
                         class="visually-hidden-input"
                         checked={option.isSelected}
-                        data-value={option.value}
                         onchange={handlePresetAmountSelect}
                     />
                     <label for={option.inputId} class="amount-option">{option.label}</label>

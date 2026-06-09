@@ -1,4 +1,11 @@
-/* Amount & Frequency Container */
+/* =========================================================================
+   Amount & Frequency styles
+   Color/visibility properties use a 3-level fallback chain:
+     --dxp-s-* (form-element semantic)  →  --dxp-g-* (global brand)  →  --slds-g-* (SLDS default)
+   so the component stays readable and contrast-safe even on an unconfigured theme.
+   Purely decorative properties (letter-spacing, radius) skip the middle level.
+   ========================================================================= */
+
 /* Reset default fieldset styles for both groups */
 .frequency-toggle,
 .amount-grid {
@@ -32,14 +39,14 @@
     font-family: var(--dxp-s-form-element-text-font-family, var(--slds-g-font-family-sans));
     font-size: var(--dxp-s-form-element-text-font-size, var(--slds-g-font-scale-1));
     font-weight: var(--dxp-s-form-element-text-font-weight, var(--slds-g-font-weight-medium));
-    color: var(--dxp-s-form-element-text-color, var(--slds-g-color-neutral-base-30));
-    letter-spacing: var(--dxp-s-form-element-text-letter-spacing, -0.3125px);
+    color: var(--dxp-s-form-element-text-color, var(--dxp-g-root-contrast-color, var(--slds-g-color-neutral-base-30)));
+    letter-spacing: var(--dxp-s-form-element-text-letter-spacing, normal);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--slds-g-spacing-2);
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
 /* Monthly Icon (heart) */
@@ -65,28 +72,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: var(--dxp-s-form-element-width-border, var(--slds-g-sizing-border-2)) solid var(--dxp-s-form-element-color-border, var(--slds-g-color-border-1));
+    border: var(--dxp-s-form-element-width-border, var(--slds-g-sizing-border-2)) solid var(--dxp-s-form-element-color-border, var(--dxp-g-root-border-color, var(--slds-g-color-border-1)));
     border-radius: var(--dxp-s-form-element-radius-border, var(--slds-g-radius-border-2));
-    background-color: var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100));
+    background-color: var(--dxp-s-form-element-color-background, var(--dxp-g-root-background-color, var(--slds-g-color-neutral-base-100)));
     font-family: var(--dxp-s-form-element-text-font-family, var(--slds-g-font-family-sans));
     font-size: var(--dxp-s-form-element-text-font-size, var(--slds-g-font-scale-1));
     font-weight: var(--dxp-s-form-element-text-font-weight, var(--slds-g-font-weight-medium));
-    color: var(--dxp-s-form-element-text-color, var(--slds-g-color-neutral-base-10));
-    letter-spacing: var(--dxp-s-form-element-text-letter-spacing, -0.3125px);
+    color: var(--dxp-s-form-element-text-color, var(--dxp-g-root-contrast-color, var(--slds-g-color-neutral-base-10)));
+    letter-spacing: var(--dxp-s-form-element-text-letter-spacing, normal);
     cursor: pointer;
-    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
-.amount-option:hover {
-    border-color: var(--dxp-s-form-element-color-border-focus, var(--slds-g-color-border-2));
+/* subtle hover tint, works on any theme, distinct from selected state */
+.visually-hidden-input:not(:checked) + .toggle-option:hover,
+.visually-hidden-input:not(:checked) + .amount-option:hover {
+    background-color: color-mix(in srgb, var(--dxp-g-brand, var(--slds-g-color-brand-base-60)) 8%, transparent);
 }
 
 /* Custom Amount Input */
 .custom-amount-input {
-    --slds-c-input-color-border: var(--dxp-s-form-element-color-border, var(--slds-g-color-border-1));
-    --slds-c-input-color-border-focus: var(--dxp-s-form-element-color-border-focus, var(--slds-g-color-brand-base-60));
-    --slds-c-input-color-background: var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100));
-    --slds-c-input-text-color: var(--dxp-s-form-element-text-color, var(--slds-g-color-neutral-base-10));
+    --slds-c-input-color-border: var(--dxp-s-form-element-color-border, var(--dxp-g-root-border-color, var(--slds-g-color-border-1)));
+    --slds-c-input-color-border-focus: var(--dxp-s-form-element-color-border-focus, var(--dxp-g-brand, var(--slds-g-color-brand-base-60)));
+    --slds-c-input-color-background: var(--dxp-s-form-element-color-background, var(--dxp-g-root-background-color, var(--slds-g-color-neutral-base-100)));
+    --slds-c-input-text-color: var(--dxp-s-form-element-text-color, var(--dxp-g-root-contrast-color, var(--slds-g-color-neutral-base-10)));
     --slds-c-input-radius-border: var(--dxp-s-form-element-radius-border, var(--slds-g-radius-border-2));
 }
 
@@ -104,23 +113,28 @@
     white-space: nowrap;
 }
 
-/* Selected state driven by the :checked state of the adjacent input */
+/* Selected state (toggle): inset ring via box-shadow — no layout shift, avoids a second border */
 .visually-hidden-input:checked + .toggle-option {
-    background-color: var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100));
-    border-color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
-    color: var(--dxp-s-form-element-text-color, var(--slds-g-color-neutral-base-10));
+    background-color: var(--dxp-s-form-element-color-background, var(--dxp-g-root-background-color, var(--slds-g-color-neutral-base-100)));
+    color: var(--dxp-s-form-element-text-color, var(--dxp-g-root-contrast-color, var(--slds-g-color-neutral-base-10)));
+    box-shadow: inset 0 0 0 2px var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
 }
 
-/* Selected state for preset amount buttons */
+/* Selected state (preset amount): inset brand ring, text color unchanged (consistent with toggle) */
 .visually-hidden-input:checked + .amount-option {
-    background-color: var(--dxp-s-form-element-color-background-active, var(--slds-g-color-brand-base-95));
-    border-color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
-    color: var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
+    background-color: var(--dxp-s-form-element-color-background-active, var(--dxp-s-form-element-color-background, var(--slds-g-color-neutral-base-100)));
+    box-shadow: inset 0 0 0 2px var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
 }
 
-/* Focus ring (WCAG 2.4.11 / 2.4.13) drawn on the label */
+/* Visible keyboard focus (WCAG 2.4.7 AA) drawn on the label as an outline */
 .visually-hidden-input:focus-visible + .toggle-option,
 .visually-hidden-input:focus-visible + .amount-option {
-    outline: 2px solid var(--dxp-s-form-element-color-border-focus, var(--dxp-g-brand, var(--slds-g-color-brand-base-60)));
+    outline: 2px solid var(--dxp-g-brand, var(--slds-g-color-brand-base-60));
     outline-offset: 2px;
+}
+
+/* Selected + focused: drop the inset ring so only the focus outline shows */
+.visually-hidden-input:checked:focus-visible + .toggle-option,
+.visually-hidden-input:checked:focus-visible + .amount-option {
+    box-shadow: none;
 }
