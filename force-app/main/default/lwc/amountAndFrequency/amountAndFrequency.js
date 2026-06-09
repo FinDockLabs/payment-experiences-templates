@@ -3,8 +3,11 @@ import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 
 const DEFAULT_PRESET_AMOUNTS_ONE_TIME = [25, 50, 100, 250, 500, 1000];
 const DEFAULT_PRESET_AMOUNTS_RECURRING = [5, 10, 25, 60, 125, 250];
+// Module-level counter ensures unique DOM IDs/radio names when multiple instances render on the same page.
+let _nextInstanceId = 0;
 
 export default class AmountAndFrequency extends LightningElement {
+    _instanceId = ++_nextInstanceId;
     _presetAmounts = null;
     _frequency = 'oneTime';
     _selectedPreset = null;
@@ -28,7 +31,7 @@ export default class AmountAndFrequency extends LightningElement {
             : DEFAULT_PRESET_AMOUNTS_ONE_TIME;
     }
     set presetAmounts(value) {
-      this._presetAmounts = Array.isArray(value) ? value : DEFAULT_PRESET_AMOUNTS_ONE_TIME;
+        this._presetAmounts = Array.isArray(value) ? value : DEFAULT_PRESET_AMOUNTS_ONE_TIME;
     }
 
     @api
@@ -45,6 +48,22 @@ export default class AmountAndFrequency extends LightningElement {
         return this._selectedPreset;
     }
 
+    get frequencyGroupName(){
+        return `frequency-${this._instanceId}`;
+    }
+
+    get presetName() {
+        return `presetAmount-${this._instanceId}`;
+    }
+
+    get frequencyOnceId() {
+        return `freq-once-${this._instanceId}`;
+    }
+
+    get frequencyMonthlyId() {
+        return `freq-monthly-${this._instanceId}`;
+    }
+
     get isGiveOnce() {
         return this._frequency === 'oneTime';
     }
@@ -53,41 +72,25 @@ export default class AmountAndFrequency extends LightningElement {
         return this._frequency === 'recurring';
     }
 
-    get giveOnceAriaPressed() {
-        return String(this.isGiveOnce);
-    }
-
-    get monthlyAriaPressed() {
-        return String(this.isMonthly);
-    }
-
-    get giveOnceClass() {
-        return `toggle-option${this.isGiveOnce ? ' toggle-option-active' : ''}`;
-    }
-
-    get monthlyClass() {
-        return `toggle-option toggle-option-monthly${this.isMonthly ? ' toggle-option-active' : ''}`;
-    }
-
     get presetAmountOptions() {
         return this.presetAmounts.map(amount => {
             const isSelected = this._selectedPreset === amount && this._customAmount === '';
             return {
                 value: amount,
                 label: `$${amount.toLocaleString()}`,
-                ariaPressed: String(isSelected),
-                buttonClass: `amount-option${isSelected ? ' amount-option-selected' : ''}`
+                inputId: `${this._instanceId}-preset-${amount}`,
+                isSelected
             };
         });
     }
 
     handleFrequencyChange(event) {
-        this._frequency = event.currentTarget.dataset.value;
+        this._frequency = event.target.value;
         this.dispatchChange();
     }
 
     handlePresetAmountSelect(event) {
-        this._selectedPreset = Number(event.currentTarget.dataset.value);
+        this._selectedPreset = Number(event.target.value);
         this._customAmount = '';
         this.dispatchChange();
     }
