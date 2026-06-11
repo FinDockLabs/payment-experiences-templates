@@ -12,3 +12,6 @@ node_modules/
 **/tsconfig*.json
 **/*.tsbuildinfo
 **/graphql.config.yml
+.vscode/
+.idea/
+core.code-workspace
