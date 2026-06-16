@@ -118,7 +118,7 @@
         </fields>
         <fields>
             <name>amountFreqDisplayText</name>
-            <fieldText>&lt;h2&gt;Choose an amount&lt;/h2&gt;</fieldText>
+            <fieldText>&lt;h2&gt;Select Your Donation Amount&lt;/h2&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -183,7 +183,7 @@
         </fields>
         <fields>
             <name>personalDetailsDisplayText</name>
-            <fieldText>&lt;h2&gt;Enter personal details&lt;/h2&gt;</fieldText>
+            <fieldText>&lt;h2&gt;Enter your details&lt;/h2&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -319,7 +319,7 @@
         </fields>
         <fields>
             <name>payDisplayText</name>
-            <fieldText>&lt;h2&gt;Enter payment details&lt;/h2&gt;</fieldText>
+            <fieldText>&lt;h2&gt;Payment Details&lt;/h2&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
