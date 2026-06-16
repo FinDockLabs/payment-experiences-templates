@@ -1,0 +1,94 @@
+<!-- Custom Payment -->
+<template>
+    <div class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <!-- Progress indicator (MultiScreen only) -->
+            <template lwc:if={isMultiScreen}>
+                <c-experience-progress-stages current-stage={currentStep}></c-experience-progress-stages>
+            </template>
+
+            <!-- Step 1: Amount & Frequency -->
+            <template lwc:if={showAmountStep}>
+                <div class="slds-form slds-form_stacked slds-m-bottom_medium">
+                    <c-amount-and-frequency
+                            onamountfrequencychanged={handleAmountFrequencyChanged}>
+                    </c-amount-and-frequency>
+                </div>
+                <template lwc:if={isMultiScreen}>
+                    <div class="step-navigation">
+                        <span></span>
+                        <lightning-button
+                            label="Next"
+                            variant="brand"
+                            onclick={handleNextStep}
+                            disabled={isStep1NextDisabled}>
+                        </lightning-button>
+                    </div>
+                </template>
+            </template>
+
+            <!-- Step 2: Personal Information -->
+            <template lwc:if={showPersonalInfoStep}>
+                <div class="slds-form slds-form_stacked slds-m-bottom_medium">
+                    <lightning-input type="text"
+                                     label="First Name"
+                                     placeholder="First name"
+                                     value={firstName}
+                                     data-field="firstName"
+                                     required
+                                     onchange={handleFieldChange}>
+                    </lightning-input>
+                    <lightning-input type="text"
+                                     label="Last Name"
+                                     placeholder="Last name"
+                                     value={lastName}
+                                     data-field="lastName"
+                                     required
+                                     onchange={handleFieldChange}>
+                    </lightning-input>
+                    <lightning-input type="email"
+                                     label="Email Address"
+                                     placeholder="name@example.com"
+                                     value={email}
+                                     data-field="email"
+                                     required
+                                     onchange={handleFieldChange}>
+                    </lightning-input>
+                </div>
+                <template lwc:if={isMultiScreen}>
+                    <div class="step-navigation">
+                        <lightning-button
+                            label="Back"
+                            onclick={handlePreviousStep}>
+                        </lightning-button>
+                        <lightning-button
+                            label="Next"
+                            variant="brand"
+                            onclick={handleNextStep}
+                            disabled={isStep2NextDisabled}>
+                        </lightning-button>
+                    </div>
+                </template>
+            </template>
+
+            <!-- Step 3: Payment Method & Pay Button -->
+            <template lwc:if={showPaymentStep}>
+                <cpm-payment-method-selector payment-method-config="{paymentMethodConfig}"
+                                             onpaymentmethodchanged={handlePaymentMethodChanged}></cpm-payment-method-selector>
+                <template lwc:if={isMultiScreen}>
+                    <div class="step-navigation">
+                        <lightning-button
+                            label="Back"
+                            onclick={handlePreviousStep}>
+                        </lightning-button>
+                        <cpm-pay-button payment-intent={paymentIntent} disabled={isPayButtonDisabled}></cpm-pay-button>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <cpm-pay-button payment-intent={paymentIntent} disabled={isPayButtonDisabled}></cpm-pay-button>
+                </template>
+            </template>
+
+        </div>
+    </div>
+</template>

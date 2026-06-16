@@ -108,5 +108,12 @@ export default class AmountAndFrequency extends LightningElement {
         this.dispatchEvent(new FlowAttributeChangeEvent('amountOneTime', this.amountOneTime));
         this.dispatchEvent(new FlowAttributeChangeEvent('amountRecurring', this.amountRecurring));
         this.dispatchEvent(new FlowAttributeChangeEvent('frequency', this._frequency));
+        this.dispatchEvent(new CustomEvent('amountfrequencychanged', {
+            detail: {
+                amountOneTime: this.amountOneTime,
+                amountRecurring: this.amountRecurring,
+                frequency: this._frequency
+            }
+        }));
     }
 }

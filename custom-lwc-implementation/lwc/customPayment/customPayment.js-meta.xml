@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <description>Custom Payment</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Custom Payment</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__HomePage,lightningCommunity__Default">
+            <property name="screenMode" type="String" label="Screen Mode"
+                      description="Controls the screen layout." datasource="OneScreen, MultiScreen" default="OneScreen"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,123 @@
+import { api, LightningElement, track, wire } from "lwc";
+import { CurrentPageReference } from "lightning/navigation";
+import {FlowAttributeChangeEvent} from "lightning/flowSupport";
+import { PAYMENT_METHOD_CONFIG } from "./customPaymentMethodConfiguration";
+
+export default class CustomPayment extends LightningElement {
+    @api recordId;
+    @api screenMode = 'OneScreen'; // Controls the form layout. Use 'OneScreen' to show all fields on a single page, or 'MultiScreen' to split amount, personal info, and payment method into separate steps.
+    @track firstName = '';
+    @track lastName = '';
+    @track email = '';
+    @track amountOneTime = null;
+    @track amountRecurring = null;
+    @track frequency = 'oneTime';
+    @track selectedPaymentMethod = null;
+    @track currentStep = 1;
+
+    @wire(CurrentPageReference)
+    currentPageReferenceWire;
+
+    paymentMethodConfig = PAYMENT_METHOD_CONFIG;
+
+    @track paymentIntent = {};
+
+    connectedCallback() {
+        console.log(JSON.stringify(this.paymentMethodConfig));
+    }
+
+    handleFieldChange(event) {
+        this[event.target.dataset.field] = event.detail.value;
+        this._updatePaymentIntentContext();
+    }
+    handleAmountFrequencyChanged(event) {
+        this.amountOneTime = event.detail.amountOneTime;
+        this.amountRecurring = event.detail.amountRecurring;
+        this.frequency = event.detail.frequency;
+        this._updatePaymentIntentContext();
+    }
+    handlePaymentMethodChanged(event) {
+        this.selectedPaymentMethod = event.detail;
+        this._updatePaymentIntentContext();
+    }
+
+    // MultiScreen navigation
+    get isMultiScreen() {
+        return this.screenMode === 'MultiScreen';
+    }
+    get showAmountStep() {
+        return !this.isMultiScreen || this.currentStep === 1;
+    }
+    get showPersonalInfoStep() {
+        return !this.isMultiScreen || this.currentStep === 2;
+    }
+    get showPaymentStep() {
+        return !this.isMultiScreen || this.currentStep === 3;
+    }
+    get isStep1NextDisabled() {
+        const amount = this.frequency === 'recurring' ? this.amountRecurring : this.amountOneTime;
+        return !(amount && Number(amount) > 0);
+    }
+    get isStep2NextDisabled() {
+        const inputs = this.template.querySelectorAll('lightning-input');
+        const allInputsValid = [...inputs].every(input => input.checkValidity());
+        return !(this.firstName && this.lastName && this.email) || !allInputsValid;
+    }
+    handleNextStep() {
+        if (this.currentStep < 3) {
+            this.currentStep += 1;
+        }
+    }
+    handlePreviousStep() {
+        if (this.currentStep > 1) {
+            this.currentStep -= 1;
+        }
+    }
+    get isPayButtonDisabled() {
+        const amount = this.frequency === 'recurring' ? this.amountRecurring : this.amountOneTime;
+        const inputs = this.template.querySelectorAll('lightning-input');
+        const allInputsValid = [...inputs].every(input => input.checkValidity());
+
+        return !(
+            this.firstName &&
+            this.lastName &&
+            this.email &&
+            amount &&
+            Number(amount) > 0 &&
+            this.selectedPaymentMethod
+            && allInputsValid
+        );
+    }
+    _updatePaymentIntentContext() {
+        const isRecurring = this.frequency === 'recurring';
+        this.paymentIntent = {
+            SuccessURL: 'https://example.com/success',
+            FailureURL: 'https://example.com/failure',
+            Payer: {
+                Contact: {
+                    SalesforceFields: {
+                        FirstName: this.firstName,
+                        LastName: this.lastName,
+                        Email: this.email,
+                    }
+                }
+            },
+            ...(isRecurring ? {
+                Recurring: {
+                    Amount: this.amountRecurring,
+                    CurrencyISOCode: 'EUR'
+                }
+            } : {
+                OneTime: {
+                    Amount: this.amountOneTime,
+                    CurrencyISOCode: 'EUR'
+                }
+            }),
+            PaymentMethod: {
+                Name: this.selectedPaymentMethod?.name ?? 'CreditCard',
+                Processor: this.selectedPaymentMethod?.processor ?? 'DummyExtension-PSP',
+                Target: this.selectedPaymentMethod?.target ?? 'TestMerchant1'
+            }
+        };
+    }
+}
