@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
+import { labels } from './amountAndFrequencyLabels';
 
 const DEFAULT_PRESET_AMOUNTS_ONE_TIME = [25, 50, 100, 250, 500, 1000];
 const DEFAULT_PRESET_AMOUNTS_RECURRING = [5, 10, 25, 60, 125, 250];
@@ -12,6 +13,8 @@ export default class AmountAndFrequency extends LightningElement {
     _frequency = 'oneTime';
     _selectedPreset = null;
     _customAmount = '';
+
+    labels = labels;
 
     @api
     get frequency() {
