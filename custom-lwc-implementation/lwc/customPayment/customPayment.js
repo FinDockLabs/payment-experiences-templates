@@ -1,10 +1,11 @@
 import { api, LightningElement, track, wire } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
 import {FlowAttributeChangeEvent} from "lightning/flowSupport";
+import { PAYMENT_METHOD_CONFIG } from "./customPaymentMethodConfiguration";
 
 export default class CustomPayment extends LightningElement {
     @api recordId;
-    @api screenMode = 'OneScreen'; // OneScreen | MultiScreen
+    @api screenMode = 'OneScreen'; // Controls the form layout. Use 'OneScreen' to show all fields on a single page, or 'MultiScreen' to split amount, personal info, and payment method into separate steps.
     @track firstName = '';
     @track lastName = '';
     @track email = '';
@@ -17,60 +18,14 @@ export default class CustomPayment extends LightningElement {
     @wire(CurrentPageReference)
     currentPageReferenceWire;
 
-    paymentMethodConfig = [
-        {
-            "key": "PaymentHub-Stripe-CreditCard",
-            "name": "CreditCard",
-            "processor": "PaymentHub-Stripe",
-            "processorPrettyName": "Stripe",
-            "processorFriendlyName": "Stripe",
-            "active": true,
-            "supportsRecurring": true,
-            "displayLabel": "Credit Card",
-            "enabledOneTime": true,
-            "isDefaultOneTime": true,
-            "enabledRecurring": true,
-            "isDefaultRecurring": true,
-            "merchantAccount": "stripe_merchant_account",
-            "merchantAccountGroup": "static",
-            "redirectInstruction": "",
-            "target": "TestMerchant1",
-            "parameters": null
-        },
-        {
-            "key": "PaymentHub-Stripe-iDEAL",
-            "name": "iDEAL",
-            "processor": "PaymentHub-Stripe",
-            "processorPrettyName": "Stripe",
-            "processorFriendlyName": "Stripe",
-            "active": true,
-            "supportsRecurring": false,
-            "displayLabel": "iDEAL",
-            "enabledOneTime": true,
-            "isDefaultOneTime": false,
-            "enabledRecurring": false,
-            "isDefaultRecurring": false,
-            "merchantAccount": "stripe_merchant_account",
-            "merchantAccountGroup": "static",
-            "redirectInstruction": "You will be redirected to your bank to complete the payment.",
-            "target": "TestMerchant1",
-            "parameters": null
-        }];
+    paymentMethodConfig = PAYMENT_METHOD_CONFIG;
 
     @track paymentIntent = {};
 
     connectedCallback() {
-        const attributeChangeEvent = new FlowAttributeChangeEvent('context', '{}');
-        console.log(attributeChangeEvent);
-
-        const ce = new CustomEvent('deploymentStarted', {
-            bubbles: true,
-            composed: true
-        });
-
-        console.log(ce);
-
+        console.log(JSON.stringify(this.paymentMethodConfig));
     }
+
     handleFieldChange(event) {
         this[event.target.dataset.field] = event.detail.value;
         this._updatePaymentIntentContext();
@@ -85,6 +40,7 @@ export default class CustomPayment extends LightningElement {
         this.selectedPaymentMethod = event.detail;
         this._updatePaymentIntentContext();
     }
+
     // MultiScreen navigation
     get isMultiScreen() {
         return this.screenMode === 'MultiScreen';
