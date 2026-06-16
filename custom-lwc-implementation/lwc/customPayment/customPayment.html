@@ -1,0 +1,51 @@
+<!-- Custom Payment -->
+<template>
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure slds-line-height_reset">
+                    <lightning-icon icon-name="utility:payment_gateway" size="small" alternative-text="Payment"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Payment</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-form slds-form_stacked slds-m-bottom_medium">
+                <c-amount-and-frequency
+                        onamountfrequencychanged={handleAmountFrequencyChanged}>
+                </c-amount-and-frequency>
+                <lightning-input type="text"
+                                 label="First Name"
+                                 placeholder="First name"
+                                 value={firstName}
+                                 data-field="firstName"
+                                 required
+                                 onchange={handleFieldChange}>
+                </lightning-input>
+                <lightning-input type="text"
+                                 label="Last Name"
+                                 placeholder="Last name"
+                                 value={lastName}
+                                 data-field="lastName"
+                                 required
+                                 onchange={handleFieldChange}>
+                </lightning-input>
+                <lightning-input type="email"
+                                 label="Email Address"
+                                 placeholder="name@example.com"
+                                 value={email}
+                                 data-field="email"
+                                 required
+                                 onchange={handleFieldChange}>
+                </lightning-input>
+            </div>
+            <cpm-payment-method-selector payment-method-config="{paymentMethodConfig}"
+                                         onpaymentmethodchanged={handlePaymentMethodChanged}></cpm-payment-method-selector>
+            <cpm-pay-button payment-intent={paymentIntent} disabled={isPayButtonDisabled}></cpm-pay-button>
+        </div>
+    </div>
+</template>

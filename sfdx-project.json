@@ -1,0 +1,24 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    },
+    {
+      "path": "flow-templates",
+      "default": false
+    },
+    {
+      "path": "donation-page",
+      "default": false
+    },
+    {
+      "path": "custom-lwc-implementation",
+      "default": false
+    }
+  ],
+  "name": "experience-cloud-templates",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "67.0"
+}
