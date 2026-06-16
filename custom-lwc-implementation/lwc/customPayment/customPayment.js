@@ -12,6 +12,7 @@ export default class CustomPayment extends LightningElement {
     @track amountRecurring = null;
     @track frequency = 'oneTime';
     @track selectedPaymentMethod = null;
+    @track currentStep = 1;
 
     @wire(CurrentPageReference)
     currentPageReferenceWire;
@@ -84,6 +85,36 @@ export default class CustomPayment extends LightningElement {
         this.selectedPaymentMethod = event.detail;
         this._updatePaymentIntentContext();
     }
+    // MultiScreen navigation
+    get isMultiScreen() {
+        return this.screenMode === 'MultiScreen';
+    }
+    get showAmountStep() {
+        return !this.isMultiScreen || this.currentStep === 1;
+    }
+    get showPersonalInfoStep() {
+        return !this.isMultiScreen || this.currentStep === 2;
+    }
+    get showPaymentStep() {
+        return !this.isMultiScreen || this.currentStep === 3;
+    }
+    get isStep1NextDisabled() {
+        const amount = this.frequency === 'recurring' ? this.amountRecurring : this.amountOneTime;
+        return !(amount && Number(amount) > 0);
+    }
+    get isStep2NextDisabled() {
+        return !(this.firstName && this.lastName && this.email);
+    }
+    handleNextStep() {
+        if (this.currentStep < 3) {
+            this.currentStep += 1;
+        }
+    }
+    handlePreviousStep() {
+        if (this.currentStep > 1) {
+            this.currentStep -= 1;
+        }
+    }
     get isPayButtonDisabled() {
         const amount = this.frequency === 'recurring' ? this.amountRecurring : this.amountOneTime;
         return !(
@@ -94,9 +125,6 @@ export default class CustomPayment extends LightningElement {
             Number(amount) > 0 &&
             this.selectedPaymentMethod
         );
-    }
-    get payButtonContainerClass() {
-        return this.isPayButtonDisabled ? 'pay-button-container pay-button-container_disabled' : 'pay-button-container';
     }
     _updatePaymentIntentContext() {
         const isRecurring = this.frequency === 'recurring';
