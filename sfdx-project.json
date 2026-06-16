@@ -11,10 +11,6 @@
     {
       "path": "donation-page",
       "default": false
-    },
-    {
-      "path": "custom-lwc-implementation",
-      "default": false
     }
   ],
   "name": "experience-cloud-templates",
