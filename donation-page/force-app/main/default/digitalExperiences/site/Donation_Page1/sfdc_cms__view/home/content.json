@@ -31,7 +31,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<img src=\"https://external.findock.com/experience-cloud/icons/leaf.svg\" alt=\"\" style=\"background: #0E7C66;padding: 4px;border-radius: 5px;margin-top: -5px;\"><span style=\"margin-left: .75rem;/*! line-height: 28px; *//*! margin-top: 10px; */display: inline-block;font-size: 1.25em;margin-top: 5px;\">FinDock for Gibbons</span>"
+                "richTextValue" : "<img src=\"https://external.findock.com/experience-cloud/icons/leaf.svg\" aria-hidden=\"true\" alt=\"\" style=\"background: #0E7C66;padding: 4px;border-radius: 5px;margin-top: -5px;\"><span style=\"margin-left: .75rem;/*! line-height: 28px; *//*! margin-top: 10px; */display: inline-block;font-size: 1.25em;margin-top: 5px;\">FinDock for Gibbons</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "72c5e4d2-7e21-42c7-895b-14895e0a38ca",
@@ -58,7 +58,7 @@
                 "dxpStyle" : { },
                 "fit" : "contain",
                 "height" : 350,
-                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"https://external.findock.com/experience-cloud/gibbons.jpg\",\"altText\":\"\",\"contentKey\":\"\",\"contentType\":null}}",
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"https://external.findock.com/experience-cloud/gibbons.jpg\",\"altText\":\"Image of three gibbons in a tree\",\"contentKey\":\"\",\"contentType\":null}}",
                 "overlayColor" : "",
                 "position" : "center center",
                 "width" : 100

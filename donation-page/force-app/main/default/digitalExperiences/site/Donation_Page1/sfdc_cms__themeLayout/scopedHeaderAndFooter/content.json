@@ -30,14 +30,14 @@
                 "backgroundColor" : "",
                 "dxpStyle" : { },
                 "isLinkable" : true,
-                "linkAssistiveText" : "Go back to FinDock.com",
+                "linkAssistiveText" : "Go back to FinDockForGibbons.org",
                 "paddingHorizontal" : "none",
                 "paddingVertical" : "none",
-                "text" : "← FinDock",
+                "text" : "← FinDock for Gibbons",
                 "textAlign" : "left",
                 "textDecoration" : "{\"underline\":true}",
                 "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
-                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findock.com/\"}}}}"
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findockforgibbons.org/\"}}}}"
               },
               "definition" : "dxp_base:textBlock",
               "id" : "a40eebfd-351d-476d-9d3c-7d8d090673df",
@@ -61,10 +61,10 @@
           "attributes" : {
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgb(255, 0, 0)",
-            "componentSpacerSize" : "",
+            "componentSpacerSize" : ".5rem",
             "dxpStyle" : {
               "margin" : {
-                "bottom" : "0rem",
+                "bottom" : "4rem",
                 "left" : "0rem",
                 "right" : "0rem",
                 "top" : "1rem"
@@ -74,7 +74,7 @@
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
             "maxContentWidth" : "",
-            "sectionColumnGutterWidth" : "10rem",
+            "sectionColumnGutterWidth" : "",
             "sectionConfig" : "{\"UUID\":\"a287d405-7fcb-4648-962e-828464270ed8\",\"columns\":[{\"UUID\":\"827a63c6-657b-4249-b5c3-8730588c4d16\",\"columnName\":\"Theme Footer\",\"columnKey\":\"footerSection\",\"columnWidth\":\"4\",\"seedComponents\":null},{\"UUID\":\"5465abbd-18bc-4510-a68c-21ebc8cf414d\",\"columnName\":\"Column 2\",\"columnKey\":\"4df0f\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"a4d37fa2-afa0-4b5f-aea1-55353cf1f21f\",\"columnName\":\"Column 3\",\"columnKey\":\"abd74\",\"columnWidth\":\"4\",\"seedComponents\":[]}]}",
             "sectionMinHeight" : "",
             "sectionVerticalAlign" : "flex-start"
@@ -84,7 +84,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/shield.svg\" alt=\"\"> Secure &amp; Trusted</span>"
+                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/shield.svg\" alt=\"\" aria-hidden=\"true\"> Secure &amp; Trusted</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "4f7776c6-10f6-455f-b0d1-8ecfe9b0602e",
@@ -97,7 +97,7 @@
                 "linkAssistiveText" : "",
                 "paddingHorizontal" : "none",
                 "paddingVertical" : "none",
-                "text" : "Your donation is secure and encrypted. We use industry-standard security measures to protect your information.",
+                "text" : "Your donation is secure and encrypted. We use industry-standard security measures to protect your information.\nAll data within FinDock is secured by Salesforce’s robust security protocols.",
                 "textAlign" : "left",
                 "textColor" : "rgb(74, 85, 101)",
                 "textDecoration" : "{}",
@@ -116,7 +116,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/lock.svg\" alt=\"\"> Tax Deductible</span>"
+                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/lock.svg\" alt=\"\" aria-hidden=\"true\"> Tax Deductible</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "5865ef9c-0ad2-418f-872e-ae89675ba336",
@@ -148,7 +148,7 @@
               "attributes" : {
                 "dxpStyle" : { },
                 "imageInfos" : "",
-                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/envelope.svg\" alt=\"\"> Questions?</span>"
+                "richTextValue" : "<span style=\"color: #0E7C66;\"><img src=\"https://external.findock.com/experience-cloud/icons/envelope.svg\" alt=\"\" aria-hidden=\"true\"> Questions?</span>"
               },
               "definition" : "community_builder:htmlEditor",
               "id" : "698202b6-440e-4dd9-8b84-6c841d7f14c3",
@@ -161,7 +161,7 @@
                 "linkAssistiveText" : "",
                 "paddingHorizontal" : "none",
                 "paddingVertical" : "none",
-                "text" : "Contact us at donations@findockforgibbons.org",
+                "text" : "We'd love to hear from you! You can reach us at donations@findockforgibbons.org for questions, comments, or ideas.",
                 "textAlign" : "left",
                 "textColor" : "rgb(74, 85, 101)",
                 "textDecoration" : "{}",
@@ -181,49 +181,93 @@
           "type" : "component"
         }, {
           "attributes" : {
-            "alignment" : "center",
-            "color" : "#ecebea",
-            "dxpStyle" : { },
-            "lineStyle" : "solid",
-            "size" : 1,
-            "width" : 100
-          },
-          "definition" : "dxp_base:horizontalLine",
-          "id" : "11ac3ea4-f836-4b8d-aed8-1c14ef55ca93",
-          "type" : "component"
-        }, {
-          "attributes" : {
             "backgroundImageConfig" : "",
-            "backgroundImageOverlay" : "rgba(0,0,0,0)",
-            "componentSpacerSize" : "",
-            "dxpStyle" : { },
+            "backgroundImageOverlay" : "rgb(0, 0, 0)",
+            "componentSpacerSize" : "0rem",
+            "dxpStyle" : {
+              "padding" : {
+                "bottom" : "3rem",
+                "left" : "",
+                "right" : "",
+                "top" : "2rem"
+              }
+            },
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
             "maxContentWidth" : "",
-            "sectionColumnGutterWidth" : "",
-            "sectionConfig" : "{\"UUID\":\"2bc685a3-3d35-4ae9-be2d-b5d41b5cc0dc\",\"columns\":[{\"UUID\":\"25e08013-18f1-4aeb-a0df-fbadd98cd58e\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"250c4bdc-c421-4ea1-b7c4-4e86b279712d\",\"columnName\":\"Column 2\",\"columnKey\":\"7d416\",\"columnWidth\":\"4\",\"seedComponents\":[]},{\"UUID\":\"35048837-3041-4654-8a53-4494894cfded\",\"columnName\":\"Column 3\",\"columnKey\":\"44990\",\"columnWidth\":\"4\",\"seedComponents\":[]}]}",
+            "sectionColumnGutterWidth" : "1rem",
+            "sectionConfig" : "{\"UUID\":\"2bc685a3-3d35-4ae9-be2d-b5d41b5cc0dc\",\"columns\":[{\"UUID\":\"25e08013-18f1-4aeb-a0df-fbadd98cd58e\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"6\",\"seedComponents\":[]},{\"UUID\":\"250c4bdc-c421-4ea1-b7c4-4e86b279712d\",\"columnName\":\"Column 2\",\"columnKey\":\"7d416\",\"columnWidth\":\"3\",\"seedComponents\":[]},{\"UUID\":\"35048837-3041-4654-8a53-4494894cfded\",\"columnName\":\"Column 3\",\"columnKey\":\"44990\",\"columnWidth\":\"3\",\"seedComponents\":[]}]}",
             "sectionMinHeight" : "",
             "sectionVerticalAlign" : "flex-start"
           },
           "children" : [ {
             "children" : [ {
               "attributes" : {
+                "alignment" : "left",
+                "dxpStyle" : {
+                  "margin" : {
+                    "bottom" : ".5rem",
+                    "left" : "",
+                    "right" : "",
+                    "top" : ""
+                  }
+                },
+                "fit" : "contain",
+                "height" : 350,
+                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"https://external.findock.com/experience-cloud/regulator-watermark-example-inverse.png\",\"altText\":\"Registered with Fundraising Regulator\",\"contentKey\":\"\",\"contentType\":null}}",
+                "overlayColor" : "",
+                "position" : "center center",
+                "width" : 33
+              },
+              "definition" : "dxp_base:image",
+              "id" : "9273370b-ada6-4909-b067-273fbf6b000f",
+              "type" : "component"
+            }, {
+              "attributes" : {
                 "backgroundColor" : "",
-                "dxpStyle" : { },
-                "isLinkable" : true,
+                "dxpStyle" : {
+                  "margin" : {
+                    "bottom" : "",
+                    "left" : "",
+                    "right" : "1rem",
+                    "top" : ""
+                  }
+                },
+                "isLinkable" : false,
                 "linkAssistiveText" : "",
                 "paddingHorizontal" : "none",
                 "paddingVertical" : "none",
-                "text" : "©️ Findock For Gibbons. All rights reserved.",
+                "text" : "FinDock for Gibbons is a fictional non-profit organization for the purpose of demonstrating the FinDock Experience Cloud capabilities.",
                 "textAlign" : "left",
-                "textColor" : "rgb(106, 114, 130)",
                 "textDecoration" : "{}",
-                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
-                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findock.com/\"}}}}"
+                "textDisplayInfo" : "{\"textStyle\":\"body-small\",\"headingTag\":\"p\",\"enableOverride\":false}"
               },
               "definition" : "dxp_base:textBlock",
-              "id" : "200e7f6d-52cf-4170-ad4e-7d9bf560dffd",
+              "id" : "bb55ec06-32f9-45a6-af24-8bf672ba0fe0",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
+                "dxpStyle" : {
+                  "margin" : {
+                    "bottom" : "",
+                    "left" : "",
+                    "right" : "1rem",
+                    "top" : ""
+                  }
+                },
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "FinDock for Gibbons is not real and you should not attempt to donate or otherwise transfer real money to us.",
+                "textAlign" : "left",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-small\",\"headingTag\":\"p\",\"enableOverride\":false}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "624396fd-9205-4896-bcd7-5d6ff8fd7753",
               "type" : "component"
             } ],
             "id" : "25e08013-18f1-4aeb-a0df-fbadd98cd58e",
@@ -234,20 +278,69 @@
             "children" : [ {
               "attributes" : {
                 "backgroundColor" : "",
-                "dxpStyle" : { },
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "About Us",
+                "textAlign" : "left",
+                "textColor" : "rgb(222, 222, 222)",
+                "textDecoration" : "{\"bold\":true}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "81ccd460-0e7e-48a6-9348-c94b47f90d59",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
                 "isLinkable" : true,
                 "linkAssistiveText" : "",
                 "paddingHorizontal" : "none",
                 "paddingVertical" : "none",
-                "text" : "Privacy Policy",
-                "textAlign" : "center",
-                "textColor" : "rgb(106, 114, 130)",
+                "text" : "Who We Are",
+                "textAlign" : "left",
+                "textColor" : "",
                 "textDecoration" : "{}",
                 "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
-                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findock.com/privacy/\"}}}}"
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findockforgibbons.org/about/\"}}}}"
               },
               "definition" : "dxp_base:textBlock",
-              "id" : "569ac4e3-58bd-4af5-a64e-800ee3e0d2c4",
+              "id" : "9ee3da8f-3e64-4cad-9f49-09e0bbf0153d",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
+                "isLinkable" : true,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Our Leadership",
+                "textAlign" : "left",
+                "textColor" : "",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findockforgibbons.org/leadership/\"}}}}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "eb45381a-7c33-4bc6-9ad5-b3142fe8ba6a",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
+                "isLinkable" : true,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Careers",
+                "textAlign" : "left",
+                "textColor" : "",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://www.findockforgibbons.org/careers\"}}}}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "60e79384-0a3f-43cb-8d7e-f90681822922",
               "type" : "component"
             } ],
             "id" : "250c4bdc-c421-4ea1-b7c4-4e86b279712d",
@@ -258,20 +351,88 @@
             "children" : [ {
               "attributes" : {
                 "backgroundColor" : "",
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "About This Site",
+                "textAlign" : "left",
+                "textColor" : "rgb(222, 222, 222)",
+                "textDecoration" : "{\"bold\":true}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "0a9aa86e-4b54-4eda-ae28-e58b43cabce1",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
                 "dxpStyle" : { },
                 "isLinkable" : true,
                 "linkAssistiveText" : "",
                 "paddingHorizontal" : "none",
                 "paddingVertical" : "none",
-                "text" : "Contact",
-                "textAlign" : "center",
-                "textColor" : "rgb(106, 114, 130)",
+                "text" : "Privacy Policy",
+                "textAlign" : "left",
+                "textColor" : "",
                 "textDecoration" : "{}",
                 "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
-                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findock.com/contact/\"}}}}"
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findockforgibbons.org/privacy/\"}}}}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "569ac4e3-58bd-4af5-a64e-800ee3e0d2c4",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
+                "dxpStyle" : { },
+                "isLinkable" : true,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Contact Us",
+                "textAlign" : "left",
+                "textColor" : "",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findockforgibbons.org/contact/\"}}}}"
               },
               "definition" : "dxp_base:textBlock",
               "id" : "bcb19759-68da-4048-9250-8600c4ee56ab",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
+                "isLinkable" : true,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Cookie Settings",
+                "textAlign" : "left",
+                "textColor" : "",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findockforgibbons.org/cookies\"}}}}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "e08965b6-fc2c-4dc7-a20c-25eb37631912",
+              "type" : "component"
+            }, {
+              "attributes" : {
+                "backgroundColor" : "",
+                "isLinkable" : true,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Sitemap",
+                "textAlign" : "left",
+                "textColor" : "",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://findockforgibbons.org/sitemap/\"}}}}"
+              },
+              "definition" : "dxp_base:textBlock",
+              "id" : "48a3d245-6ff3-4b87-829e-6d4807312aea",
               "type" : "component"
             } ],
             "id" : "35048837-3041-4654-8a53-4494894cfded",
@@ -281,6 +442,7 @@
           } ],
           "definition" : "community_layout:section",
           "id" : "2bc685a3-3d35-4ae9-be2d-b5d41b5cc0dc",
+          "scopedBrandingSetId" : "Footer",
           "type" : "component"
         } ],
         "id" : "1a4d195a-9a67-4018-bb28-153b210f43c2",
