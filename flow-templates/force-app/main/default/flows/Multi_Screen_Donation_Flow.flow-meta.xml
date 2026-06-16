@@ -95,6 +95,28 @@
             <targetReference>Details_Screen</targetReference>
         </connector>
         <fields>
+            <name>ProgressStage1</name>
+            <extensionName>c:experienceProgressStages</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
             <name>amountFreqDisplayText</name>
             <fieldText>&lt;h2&gt;Choose an amount&lt;/h2&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
@@ -137,6 +159,28 @@
         <connector>
             <targetReference>Assign_contact</targetReference>
         </connector>
+        <fields>
+            <name>ProgressStage2</name>
+            <extensionName>c:experienceProgressStages</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <numberValue>2.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
         <fields>
             <name>personalDetailsDisplayText</name>
             <fieldText>&lt;h2&gt;Enter personal details&lt;/h2&gt;</fieldText>
@@ -251,6 +295,28 @@
         <allowBack>true</allowBack>
         <allowFinish>false</allowFinish>
         <allowPause>false</allowPause>
+        <fields>
+            <name>ProgressStage3</name>
+            <extensionName>c:experienceProgressStages</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <numberValue>3.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
         <fields>
             <name>payDisplayText</name>
             <fieldText>&lt;h2&gt;Enter payment details&lt;/h2&gt;</fieldText>
@@ -457,12 +523,5 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>cpm__Installment__c</objectType>
-    </variables>
-    <variables>
-        <name>status</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
-        <isOutput>false</isOutput>
     </variables>
 </Flow>
