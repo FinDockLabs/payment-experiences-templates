@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>66.0</apiVersion>
+    <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
         <name>Assign_contact</name>
@@ -29,6 +29,22 @@
             </value>
         </assignmentItems>
         <connector>
+            <targetReference>Assign_custom_installment_fields</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_custom_installment_fields</name>
+        <label>Assign custom installment fields</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>Installment_Record.cpm__Custom_1__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>example</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
             <targetReference>Pay_Screen</targetReference>
         </connector>
     </assignments>
@@ -38,49 +54,15 @@
             <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
         </value>
     </customProperties>
-    <decisions>
-        <name>Status_Decision</name>
-        <label>Status</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Amount_Screen</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>new payment</defaultConnectorLabel>
-        <rules>
-            <name>success</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>status</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>success</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Success_Screen</targetReference>
-            </connector>
-            <label>success</label>
-        </rules>
-        <rules>
-            <name>failure</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>status</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>failure</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Failure_Screen</targetReference>
-            </connector>
-            <label>failure</label>
-        </rules>
-    </decisions>
     <environments>Default</environments>
+    <formulas>
+        <name>IsCurrentUserSysAdmin</name>
+        <dataType>Boolean</dataType>
+        <expression>{!$Profile.Name} = &apos;System Administrator&apos;</expression>
+    </formulas>
     <interviewLabel>Multi Screen Donation Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
+    <isTemplate>true</isTemplate>
     <label>Multi Screen Donation Flow</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -113,6 +95,19 @@
             <targetReference>Details_Screen</targetReference>
         </connector>
         <fields>
+            <name>amountFreqDisplayText</name>
+            <fieldText>&lt;h2&gt;Choose an amount&lt;/h2&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
             <name>amountAndFrequency</name>
             <extensionName>c:amountAndFrequency</extensionName>
             <fieldType>ComponentInstance</fieldType>
@@ -142,6 +137,19 @@
         <connector>
             <targetReference>Assign_contact</targetReference>
         </connector>
+        <fields>
+            <name>personalDetailsDisplayText</name>
+            <fieldText>&lt;h2&gt;Enter personal details&lt;/h2&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
         <fields>
             <name>Details_Screen_Section1</name>
             <fieldType>RegionContainer</fieldType>
@@ -214,6 +222,12 @@
             <name>Email_Input</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -230,16 +244,16 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
-        <name>Failure_Screen</name>
-        <label>Failure Screen</label>
+        <name>Pay_Screen</name>
+        <label>Pay Screen</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowFinish>false</allowFinish>
+        <allowPause>false</allowPause>
         <fields>
-            <name>Failure_Display_Test</name>
-            <fieldText>&lt;p&gt;Uh oh! Something went wrong with your payment.&lt;/p&gt;</fieldText>
+            <name>payDisplayText</name>
+            <fieldText>&lt;h2&gt;Enter payment details&lt;/h2&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -250,17 +264,6 @@
                 </width>
             </styleProperties>
         </fields>
-        <showFooter>false</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
-        <name>Pay_Screen</name>
-        <label>Pay Screen</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
-        <allowPause>false</allowPause>
         <fields>
             <name>Payment_Method_Selector</name>
             <extensionName>cpm:paymentMethodSelector</extensionName>
@@ -269,6 +272,12 @@
                 <name>frequency</name>
                 <value>
                     <elementReference>amountAndFrequency.frequency</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>paymentIntentResponse</name>
+                <value>
+                    <elementReference>Pay_Button.result</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -294,7 +303,7 @@
             <inputParameters>
                 <name>pixConfig</name>
                 <value>
-                    <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!amountAndFrequency.amountOneTime}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;EUR&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
+                    <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!amountAndFrequency.amountOneTime}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;EUR&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!amountAndFrequency.amountRecurring}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;EUR&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;{!amountAndFrequency.frequency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -312,13 +321,13 @@
             <inputParameters>
                 <name>successUrl</name>
                 <value>
-                    <stringValue>/success</stringValue>
+                    <stringValue>https://www.example.com/success</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>failureUrl</name>
                 <value>
-                    <stringValue>/failure</stringValue>
+                    <stringValue>https://www.example.com/failure</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -333,6 +342,24 @@
                     <stringValue>EUR</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>amountRecurring</name>
+                <value>
+                    <elementReference>amountAndFrequency.amountRecurring</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>currencyRecurring</name>
+                <value>
+                    <stringValue>EUR</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>frequencyRecurring</name>
+                <value>
+                    <elementReference>amountAndFrequency.frequency</elementReference>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -345,22 +372,43 @@
                 </width>
             </styleProperties>
         </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
-        <name>Success_Screen</name>
-        <label>Success Screen</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
         <fields>
-            <name>Success_Display_Text</name>
-            <fieldText>&lt;p&gt;Success! Thank you for your donation.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
+            <name>Debug</name>
+            <fieldText>Debug</fieldText>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Debug_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>DebugDisplayText</name>
+                    <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(205, 0, 0);&quot;&gt;{!Pay_Button.result.statusCode}: {!Pay_Button.result.errorMessage}&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(205, 0, 0);&quot;&gt;For more information on failing payments see the Logs object in this org.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>12</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithHeader</regionContainerType>
             <styleProperties>
+                <styleSettings>
+                    <propertyName>--flowruntime-c-section-border-weight</propertyName>
+                    <propertyValue>
+                        <stringValue>1px</stringValue>
+                    </propertyValue>
+                </styleSettings>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
                 </verticalAlignment>
@@ -368,15 +416,29 @@
                     <stringValue>12</stringValue>
                 </width>
             </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>IsCurrentUserSysAdmin</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>Pay_Button.result.errorMessage</leftValueReference>
+                    <operator>NotEqualTo</operator>
+                </conditions>
+            </visibilityRule>
         </fields>
-        <showFooter>false</showFooter>
+        <showFooter>true</showFooter>
         <showHeader>false</showHeader>
     </screens>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Status_Decision</targetReference>
+            <targetReference>Amount_Screen</targetReference>
         </connector>
     </start>
     <status>Draft</status>
@@ -387,6 +449,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>Installment_Record</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>cpm__Installment__c</objectType>
     </variables>
     <variables>
         <name>status</name>
