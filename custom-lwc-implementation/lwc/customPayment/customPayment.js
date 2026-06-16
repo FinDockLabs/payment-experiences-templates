@@ -103,7 +103,9 @@ export default class CustomPayment extends LightningElement {
         return !(amount && Number(amount) > 0);
     }
     get isStep2NextDisabled() {
-        return !(this.firstName && this.lastName && this.email);
+        const inputs = this.template.querySelectorAll('lightning-input');
+        const allInputsValid = [...inputs].every(input => input.checkValidity());
+        return !(this.firstName && this.lastName && this.email) || !allInputsValid;
     }
     handleNextStep() {
         if (this.currentStep < 3) {
@@ -117,6 +119,9 @@ export default class CustomPayment extends LightningElement {
     }
     get isPayButtonDisabled() {
         const amount = this.frequency === 'recurring' ? this.amountRecurring : this.amountOneTime;
+        const inputs = this.template.querySelectorAll('lightning-input');
+        const allInputsValid = [...inputs].every(input => input.checkValidity());
+
         return !(
             this.firstName &&
             this.lastName &&
@@ -124,6 +129,7 @@ export default class CustomPayment extends LightningElement {
             amount &&
             Number(amount) > 0 &&
             this.selectedPaymentMethod
+            && allInputsValid
         );
     }
     _updatePaymentIntentContext() {
