@@ -1,12 +1,16 @@
 import { LightningElement, api } from 'lwc';
+import { labels } from './experienceProgressStagesLabels';
 
 const MAX_STAGE = 3;
 
 export default class ExperienceProgressStages extends LightningElement {
+    labels = labels;
     @api stage1Label = 'Amount';
     @api stage2Label = 'Information';
     @api stage3Label = 'Payment';
     @api currentStage = 1;
+    // Track the live screen reader announcement string literal
+    announcementText = '';
 
     get normalizedCurrentStage() {
         const parsed = Number(this.currentStage);
@@ -18,6 +22,20 @@ export default class ExperienceProgressStages extends LightningElement {
         return Math.min(Math.max(Math.trunc(parsed), 0), MAX_STAGE);
     }
 
+    /* Boolean flags to determine if a checkmark icon should replace the step number */
+    get isStage1Completed() {
+        return this.normalizedCurrentStage > 1;
+    }
+
+    get isStage2Completed() {
+        return this.normalizedCurrentStage > 2;
+    }
+
+    get isStage3Completed() {
+        return this.normalizedCurrentStage > 3;
+    }
+
+    /* Original Circle Class Getters */
     get stage1CircleClass() {
         return this.getCircleClass(1);
     }
@@ -30,6 +48,7 @@ export default class ExperienceProgressStages extends LightningElement {
         return this.getCircleClass(3);
     }
 
+    /* Original Number Class Getters */
     get stage1NumberClass() {
         return this.getNumberClass(1);
     }
@@ -42,12 +61,25 @@ export default class ExperienceProgressStages extends LightningElement {
         return this.getNumberClass(3);
     }
 
+    /* Original Connector Class Getters */
     get connectorOneClass() {
         return this.getConnectorClass(2);
     }
 
     get connectorTwoClass() {
         return this.getConnectorClass(3);
+    }
+
+    renderedCallback() {
+        if (!this.announcementText) {
+            // A short delay ensures the screen reader captures the text change smoothly
+            // eslint-disable-next-line @lwc/lwc/no-async-operation
+            setTimeout(() => {
+                // Dynamically replace the placeholder with the normalized step count
+                this.announcementText = this.labels.ec_sr_progress_stage_announcement
+                    .replace('{0}', String(this.normalizedCurrentStage));
+            }, 250);
+        }
     }
 
     getCircleClass(stageNumber) {
