@@ -8,6 +8,13 @@ This repository is an overview of the templates we offer for building Salesforce
 
 All templates are meant to be a starting point for your own configuration or custom development to fit specific use cases, branding, etc.
 
+Out-of-the-box, all templates are:
+- Accessible and WCAG compliant
+- Fully localizable (language, currency, payment methods, etc.)
+- Configurable to support multi-currency
+- Configurable to support payment methods through FinDock native processing and integrated Payment Service Providers
+- Fully extendable with Salesforce technology and clouds
+
 If you prefer to build a fully custom implementation, on Salesforce or outside of Salesforce, please see our [custom Experience Cloud implementation repository](https://github.com/FinDockLabs/findock-experience-cloud-examples) or our [Payment API documentation](https://docs.findock.com/api/payment-api-v2).
 
 ## Available templates
