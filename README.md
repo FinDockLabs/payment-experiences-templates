@@ -2,7 +2,7 @@
 
 This repository is an overview of the templates we offer for building Salesforce-native digital experiences with [FinDock Payment Experiences.](https://docs.findock.com/docs/july-26/payments/findock-payment-experiences) There are three types of templates:
 
-* **Site template**: a full Experience Cloud site template that that leverages our Flow templates and managed Lighting Web Components (LWCs)   
+* **Site template**: a full Experience Cloud site template that that leverages our Flow templates (deployed separately) and managed Lighting Web Components (LWCs)   
 * **Flow template**: a complete Flow for setting up a payment using our managed LWCs  
 * **LWC template**: LWC template for building digital experiences without Flows
 
@@ -20,14 +20,14 @@ If you prefer to build a fully custom implementation, on Salesforce or outside o
 ## Available templates
 
 **Membership, Subscription, Commerce, etc.**
-- [Checkout flow](https://github.com/FinDockLabs/experience-cloud-flow-template-checkout): a simple Flow template for creating a payment form  
-- [Checkout site](https://github.com/FinDockLabs/experience-cloud-checkout-template): Experience Cloud site template that implements the Checkout flow template
+- [Checkout flow](https://github.com/FinDockLabs/experience-cloud-checkout-flow): a simple Flow template for creating a payment form  
+- [Checkout site](https://github.com/FinDockLabs/experience-cloud-checkout-site): Experience Cloud site template that implements the Checkout flow template
 
 **Fundraising**
-- [Donation flows](https://github.com/FinDockLabs/experience-cloud-flow-templates): single and multi-screen Flow templates for collecting donations in orgs with FinDock as the source of payment data  
-- [Donation flows for Fundraising](https://github.com/FinDockLabs/experience-cloud-flow-templates): single and multi-screen Flow templates for collecting donations in orgs with Fundraising enabled (NPC, EDU)  
-- [Donation site for Fundraising](https://github.com/FinDockLabs/experience-cloud-donation-template): Experience Cloud site template that includes space for a donation flow and additional content for context, for orgs with Fundraising enabled (NPC, EDU)  
-- [Donation flows for NPSP](https://github.com/FinDockLabs/experience-cloud-flow-templates-npsp): single and multi-screen Flow templates for collecting donations in orgs with NPSP
+- [Donation flows for Fundraising](https://github.com/FinDockLabs/experience-cloud-donation-flows-fundraising): Multi-screen Flow template for collecting donations in orgs with Fundraising enabled (NPC, EDU)  
+- [Donation site for Fundraising UK](https://github.com/FinDockLabs/experience-cloud-donation-flows-fundraising-uk): Multi-screen Flow template for collecting donations and Gift Aid in orgs with Fundraising enabled (NPC, EDU)  
+- [Donation flows for NPSP](https://github.com/FinDockLabs/experience-cloud-donation-flows-npsp): single and multi-screen Flow templates for collecting donations in orgs with NPSP
+- [Donation site](https://github.com/FinDockLabs/experience-cloud-donation-site) Experience Cloud site template that implements the Donation flows for Fundraising and NPSP templates
 
 **Any use-case**
 - [LWC](https://github.com/FinDockLabs/experience-cloud-lwc): pro-code template for custom LWCs when you need full code control over layout, validation, navigation, etc. without using Flow. Components integrate with FinDock Payment API and are fully configurable.
