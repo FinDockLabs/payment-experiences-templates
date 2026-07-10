@@ -25,7 +25,7 @@ If you prefer to build a fully custom implementation, on Salesforce or outside o
 
 **Fundraising**
 - [Donation flows for Fundraising](https://github.com/FinDockLabs/experience-cloud-donation-flows-fundraising): Multi-screen Flow template for collecting donations in orgs with Fundraising enabled (NPC, EDU)  
-- [Donation site for Fundraising UK](https://github.com/FinDockLabs/experience-cloud-donation-flows-fundraising-uk): Multi-screen Flow template for collecting donations and Gift Aid in orgs with Fundraising enabled (NPC, EDU)  
+- [Donation flows for Fundraising UK](https://github.com/FinDockLabs/experience-cloud-donation-flows-fundraising-uk): Multi-screen Flow template for collecting donations and Gift Aid in orgs with Fundraising enabled (NPC, EDU)  
 - [Donation flows for NPSP](https://github.com/FinDockLabs/experience-cloud-donation-flows-npsp): single and multi-screen Flow templates for collecting donations in orgs with NPSP
 - [Donation site](https://github.com/FinDockLabs/experience-cloud-donation-site) Experience Cloud site template that implements the Donation flows for Fundraising and NPSP templates
 
