@@ -82,6 +82,10 @@
             <source>This value is invalid</source>
             <target></target>
         </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_option_other_bank" maxwidth="1000" size-unit="char">
+            <source>Other</source>
+            <target></target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
