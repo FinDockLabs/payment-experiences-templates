@@ -33,14 +33,6 @@
       "versionDescription": ""
     },
     {
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
-      "path": "sfdx-source/packages/lwc-procode",
-      "default": false,
-      "package": "FinDock Experiences - Pro-code LWC",
-      "versionDescription": ""
-    },
-    {
       "package": "FinDock Experiences - Checkout Site",
       "path": "sfdx-source/packages/checkout-site",
       "versionName": "ver 0.1",
