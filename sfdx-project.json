@@ -33,14 +33,6 @@
       "versionDescription": ""
     },
     {
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
-      "path": "sfdx-source/packages/lwc-procode",
-      "default": false,
-      "package": "FinDock Experiences - Pro-code LWC",
-      "versionDescription": ""
-    },
-    {
       "package": "FinDock Experiences - Checkout Site",
       "path": "sfdx-source/packages/checkout-site",
       "versionName": "ver 0.1",
@@ -73,6 +65,8 @@
     "FinDock Experiences - Checkout Site@0.1.0-6": "04tP4000001hZoLIAU",
     "FinDock Experiences - Fundraising@0.1.0-5": "04tP4000001ha9JIAQ",
     "FinDock Experiences - NPSP@0.1.0-4": "04tP4000001haAvIAI",
-    "FinDock Experiences - Fundraising UK@0.1.0-4": "04tP4000001haCXIAY"
+    "FinDock Experiences - Fundraising UK@0.1.0-4": "04tP4000001haCXIAY",
+    "FinDock Experiences - Fundraising@0.1.0-6": "04tP4000001iCPtIAM",
+    "FinDock Experiences - Fundraising UK@0.1.0-5": "04tP4000001iCRVIA2"
   }
 }
