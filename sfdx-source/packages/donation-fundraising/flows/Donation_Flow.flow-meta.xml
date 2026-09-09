@@ -8,21 +8,21 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
-            <assignToReference>Contact_Record.FirstName</assignToReference>
+            <assignToReference>Person_Account_Record.FirstName</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>First_Name_Input</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Contact_Record.LastName</assignToReference>
+            <assignToReference>Person_Account_Record.LastName</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Last_Name_Input</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>Contact_Record.Email</assignToReference>
+            <assignToReference>Person_Account_Record.PersonEmail</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Email_Input.value</elementReference>
@@ -750,13 +750,7 @@
             <inputParameters>
                 <name>pixConfig</name>
                 <value>
-                    <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountOneTime}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountRecurring}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;Monthly&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;startDate&quot;:{&quot;name&quot;:&quot;recurringStartDateVar&quot;,&quot;value&quot;:&quot;{!$Flow.CurrentDate}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;packageActions&quot;:{&quot;giftTribute&quot;:{&quot;type&quot;:{&quot;name&quot;:&quot;type&quot;,&quot;value&quot;:&quot;{!TributeType}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;honoreeName&quot;:{&quot;name&quot;:&quot;honoreeName&quot;,&quot;value&quot;:&quot;{!HonoreeName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationChannel&quot;:{&quot;name&quot;:&quot;notificationChannel&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationChannel}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationContactName&quot;:{&quot;name&quot;:&quot;notificationContactName&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationEmail&quot;:{&quot;name&quot;:&quot;notificationEmail&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationEmail.value}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationMessage&quot;:{&quot;name&quot;:&quot;notificationMessage&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationMessage}&quot;,&quot;dataType&quot;:&quot;reference&quot;}}},&quot;giftTributeEnabled&quot;:{&quot;name&quot;:&quot;enabled&quot;,&quot;value&quot;:&quot;{!GiftTributeToggle}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>contact</name>
-                <value>
-                    <elementReference>Contact_Record</elementReference>
+                    <stringValue>{&quot;payer&quot;:{&quot;accountObject&quot;:{&quot;name&quot;:&quot;payerAccountVarName&quot;,&quot;value&quot;:&quot;{!Person_Account_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountOneTime}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountRecurring}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;Monthly&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;startDate&quot;:{&quot;name&quot;:&quot;recurringStartDateVar&quot;,&quot;value&quot;:&quot;{!$Flow.CurrentDate}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;packageActions&quot;:{&quot;giftTribute&quot;:{&quot;type&quot;:{&quot;name&quot;:&quot;type&quot;,&quot;value&quot;:&quot;{!TributeType}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;honoreeName&quot;:{&quot;name&quot;:&quot;honoreeName&quot;,&quot;value&quot;:&quot;{!HonoreeName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationChannel&quot;:{&quot;name&quot;:&quot;notificationChannel&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationChannel}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationContactName&quot;:{&quot;name&quot;:&quot;notificationContactName&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationEmail&quot;:{&quot;name&quot;:&quot;notificationEmail&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationEmail.value}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationMessage&quot;:{&quot;name&quot;:&quot;notificationMessage&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationMessage}&quot;,&quot;dataType&quot;:&quot;reference&quot;}}},&quot;giftTributeEnabled&quot;:{&quot;name&quot;:&quot;enabled&quot;,&quot;value&quot;:&quot;{!GiftTributeToggle}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -855,6 +849,12 @@
                     <elementReference>GiftTributeToggle</elementReference>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>account</name>
+                <value>
+                    <elementReference>Person_Account_Record</elementReference>
+                </value>
+            </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
@@ -938,14 +938,6 @@
     </start>
     <status>Active</status>
     <variables>
-        <name>Contact_Record</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Contact</objectType>
-    </variables>
-    <variables>
         <name>GiftTributesEnabled</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
@@ -962,6 +954,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>cpm__Installment__c</objectType>
+    </variables>
+    <variables>
+        <name>Person_Account_Record</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
     </variables>
     <variables>
         <name>Recurring_Record</name>
