@@ -4,6 +4,10 @@ const { jestConfig } = require('@salesforce/sfdx-lwc-jest/config');
 // sfdx-project.json. The shared pool lives outside them, so map it here.
 const SHARED_LWC = '<rootDir>/sfdx-source/shared/lwc';
 
+// lwc-procode is not a package directory either — it is assembled at build time
+// (see its shared.manifest), so its own c/* modules need mapping too.
+const PROCODE_LWC = '<rootDir>/sfdx-source/packages/lwc-procode/lwc';
+
 module.exports = {
     ...jestConfig,
     moduleNameMapper: {
@@ -16,6 +20,10 @@ module.exports = {
         '^c/currencyPickerConfig$': `${SHARED_LWC}/currencyPickerConfig/currencyPickerConfig`,
         '^c/currencyUtils$': `${SHARED_LWC}/currencyUtils/currencyUtils`,
         '^c/experienceProgressStages$': `${SHARED_LWC}/experienceProgressStages/experienceProgressStages`,
+
+        // Pro-code pool
+        '^c/paymentForm$': `${PROCODE_LWC}/paymentForm/paymentForm`,
+        '^c/paymentSelector$': `${PROCODE_LWC}/paymentSelector/paymentSelector`,
 
         // Stubs in jest-mocks/:
         //   lightning/flowSupport    — Flow-only module, no stub in sfdx-lwc-jest
@@ -41,8 +49,9 @@ module.exports = {
     collectCoverageFrom: [
         ...(jestConfig.collectCoverageFrom ?? []),
         'sfdx-source/shared/lwc/**/*',
-        '!sfdx-source/shared/lwc/**/*.html',
-        '!sfdx-source/shared/lwc/**/*.css',
+        'sfdx-source/packages/lwc-procode/lwc/**/*',
+        '!**/*.html',
+        '!**/*.css',
         '!**/__tests__/**',
     ],
 };
