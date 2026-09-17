@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>CurrencyPickerController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <flowAccesses>
         <enabled>true</enabled>
         <flow>Checkout_Flow</flow>
     </flowAccesses>
     <label>FinDockLabs Checkout Flow Guest Access</label>
-    <description>Guest user access to the template flows. Assign to the site guest user.</description>
+    <description>Guest user access to the template flow and to the Apex class that resolves a checkout GUID. Assign to the site guest user.</description>
 </PermissionSet>

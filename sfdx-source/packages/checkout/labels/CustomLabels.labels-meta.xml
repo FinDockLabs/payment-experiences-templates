@@ -25,4 +25,20 @@
         <shortDescription>Displayed frequency for a recurring payment</shortDescription>
         <value>Monthly</value>
     </labels>
+    <labels>
+        <fullName>ec_checkout_not_found_title</fullName>
+        <categories>FinDock Experience Cloud Component</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Heading shown when a checkout link resolves to no payable record</shortDescription>
+        <value>We couldn&apos;t find this payment</value>
+    </labels>
+    <labels>
+        <fullName>ec_checkout_not_found_message</fullName>
+        <categories>FinDock Experience Cloud Component</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Body shown when a checkout link resolves to no payable record</shortDescription>
+        <value>This payment link is no longer valid, or the payment has already been completed. Please check the link, or contact us if you need help.</value>
+    </labels>
 </CustomLabels>

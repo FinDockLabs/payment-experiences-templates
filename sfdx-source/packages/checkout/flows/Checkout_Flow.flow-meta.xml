@@ -60,6 +60,62 @@
             <targetReference>Pay_Screen</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <description>Reuse the same amount, currency, reference and frequency variables as the new-record branch, so the header, the button label and the Pay Button all read from one place.</description>
+        <name>Assign_existing_record_values</name>
+        <label>Assign existing record values</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>amount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Checkout_Details.amount</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>currency</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Checkout_Details.currencyIsoCode</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>reference</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Checkout_Details.reference</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>frequency</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>oneTime</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Existing_Record_Is_Recurring</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>A recurring checkout shows the schedule's frequency and filters the payment methods to those that support it.</description>
+        <name>Assign_existing_recurring_frequency</name>
+        <label>Assign existing recurring frequency</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>frequency</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>recurring</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Pay_Existing_Screen</targetReference>
+        </connector>
+    </assignments>
     <customProperties>
         <name>ScreenProgressIndicator</name>
         <value>
@@ -84,9 +140,61 @@
                 <operator>NotEqualTo</operator>
             </conditions>
             <connector>
-                <targetReference>Get_Installment</targetReference>
+                <targetReference>Get_Checkout_Details</targetReference>
             </connector>
             <label>Existing record</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>A checkout link can point at a record that was already paid, deleted, or never existed. Answer that before showing a payment screen with nothing on it.</description>
+        <name>Checkout_Record_Found</name>
+        <label>Checkout record found</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Not_Found_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not found</defaultConnectorLabel>
+        <rules>
+            <name>Checkout_Record_Resolved</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Checkout_Details.found</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_existing_record_values</targetReference>
+            </connector>
+            <label>Found</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Existing_Record_Is_Recurring</name>
+        <label>Existing record is recurring</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Pay_Existing_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>One-time</defaultConnectorLabel>
+        <rules>
+            <name>Existing_Record_Recurring</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Checkout_Details.isRecurring</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_existing_recurring_frequency</targetReference>
+            </connector>
+            <label>Recurring</label>
         </rules>
     </decisions>
     <environments>Default</environments>
@@ -103,7 +211,13 @@
     <formulas>
         <name>Frequency_Display_Text_Existing</name>
         <dataType>String</dataType>
-        <expression>IF(ISNULL({!Get_Recurring_Payment.Id}), $Label.ec_frequency_label_one_time, INITCAP(TEXT({!Get_Recurring_Payment.cpm__Frequency__c})))</expression>
+        <expression>IF(NOT({!Get_Checkout_Details.isRecurring}), $Label.ec_frequency_label_one_time, INITCAP(TEXT({!Get_Checkout_Details.frequency})))</expression>
+    </formulas>
+    <formulas>
+        <description>Shows the currency alongside the amount, so a payer on a multi-currency org can see what they are about to be charged in.</description>
+        <name>Amount_Display_Text_Existing</name>
+        <dataType>String</dataType>
+        <expression>CASE({!currency}, &apos;EUR&apos;, &apos;€&apos;, &apos;USD&apos;, &apos;$&apos;, &apos;GBP&apos;, &apos;£&apos;, {!currency} + &apos; &apos;) + TEXT({!amount})</expression>
     </formulas>
     <formulas>
         <name>Is_Current_User_Sys_Admin</name>
@@ -121,11 +235,6 @@
         <dataType>Currency</dataType>
         <expression>IF({!frequency} = &apos;recurring&apos;, {!amount}, null)</expression>
         <scale>2</scale>
-    </formulas>
-    <formulas>
-        <name>Reference_Existing</name>
-        <dataType>String</dataType>
-        <expression>IF(!ISBLANK({!Get_Installment.cpm__Final_Payment_Reference__c}),{!Get_Installment.cpm__Final_Payment_Reference__c}, {!Get_Recurring_Payment.cpm__Final_Payment_Reference__c})</expression>
     </formulas>
     <interviewLabel>Pay flow {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -149,56 +258,31 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
-    <recordLookups>
-        <name>Get_Installment</name>
-        <label>Get Installment</label>
+    <actionCalls>
+        <description>Resolves the Installment or Recurring Payment behind the checkout GUID. Runs in system mode so the guest user needs no access to the payment objects, and returns only the amount, currency and reference the payment screen shows.</description>
+        <name>Get_Checkout_Details</name>
+        <label>Get Checkout Details</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <actionName>CurrencyPickerController</actionName>
+        <actionType>apex</actionType>
         <connector>
-            <targetReference>Get_Recurring_Payment</targetReference>
+            <targetReference>Checkout_Record_Found</targetReference>
         </connector>
         <faultConnector>
             <isGoTo>true</isGoTo>
             <targetReference>Fault_Screen</targetReference>
         </faultConnector>
-        <filterLogic>or</filterLogic>
-        <filters>
-            <field>cpm__GUID__c</field>
-            <operator>EqualTo</operator>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>guids</name>
             <value>
                 <elementReference>id</elementReference>
             </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>cpm__Installment__c</object>
+        </inputParameters>
+        <nameSegment>CurrencyPickerController</nameSegment>
         <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <description>Retrieve the recurring payment record and add it to the payment intent if found.</description>
-        <name>Get_Recurring_Payment</name>
-        <label>Get Recurring Payment</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Pay_Existing_Screen</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Fault_Screen</targetReference>
-        </faultConnector>
-        <filterLogic>or</filterLogic>
-        <filters>
-            <field>cpm__GUID__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>cpm__Recurring_Payment__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
+    </actionCalls>
     <screens>
         <name>Fault_Screen</name>
         <label>Fault Screen</label>
@@ -224,6 +308,31 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
+        <description>Shown when the checkout link points at a record that cannot be paid, instead of an empty payment screen.</description>
+        <name>Not_Found_Screen</name>
+        <label>Not Found Screen</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Not_Found_Text_Display</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;{!$Label.ec_checkout_not_found_title}&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;{!$Label.ec_checkout_not_found_message}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>false</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <name>Pay_Existing_Screen</name>
         <label>Pay Existing Screen</label>
         <locationX>0</locationX>
@@ -233,7 +342,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Display_Header_Existing</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!Reference_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(11, 11, 11); font-size: 48px;&quot;&gt;{!Get_Installment.cpm__Amount_Open__c}{!Get_Recurring_Payment.cpm__Amount__c}&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(240, 238, 238); font-size: 12px;&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!reference}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(11, 11, 11); font-size: 48px;&quot;&gt;{!Amount_Display_Text_Existing}&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(240, 238, 238); font-size: 12px;&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -283,7 +392,7 @@
             <inputParameters>
                 <name>pixConfig</name>
                 <value>
-                    <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection_Existing.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
+                    <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection_Existing.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Checkout_Details.recordId}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;,&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Checkout_Details.recurringId}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -301,13 +410,19 @@
             <inputParameters>
                 <name>installmentId</name>
                 <value>
-                    <elementReference>Get_Installment.Id</elementReference>
+                    <elementReference>Get_Checkout_Details.recordId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>currencyOneTime</name>
+                <value>
+                    <elementReference>currency</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>recurringObjectId</name>
                 <value>
-                    <elementReference>Get_Recurring_Payment.Id</elementReference>
+                    <elementReference>Get_Checkout_Details.recurringId</elementReference>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>

@@ -1,5 +1,6 @@
 # Which of sfdx-source/shared/ is assembled into this package at build time.
 # Values: all | none   (see scripts/create-package-versions.sh)
 #
-# The checkout Flow references no shared component — nothing to assemble.
-none
+# The checkout Flow calls CurrencyPickerController to resolve the record behind a
+# checkout GUID, so the shared pool has to ship with it.
+all
