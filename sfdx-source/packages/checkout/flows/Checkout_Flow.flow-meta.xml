@@ -204,14 +204,10 @@
         <expression>$Label.ec_pay_button_prefix + " " + CASE({!currency}, &apos;EUR&apos;, &apos;€&apos;, &apos;USD&apos;, &apos;$&apos;, &apos;GBP&apos;, &apos;£&apos;, {!currency} + &apos; &apos;) + TEXT({!amount})</expression>
     </formulas>
     <formulas>
+        <description>Frequency shown on both payment screens. Both branches set the frequency variable to the same values, so a new and an existing payment read the same labels.</description>
         <name>Frequency_Display_Text</name>
         <dataType>String</dataType>
-        <expression>if({!frequency}=&apos;oneTime&apos;, $Label.ec_frequency_label_one_time, $Label.ec_frequency_label_monthly)</expression>
-    </formulas>
-    <formulas>
-        <name>Frequency_Display_Text_Existing</name>
-        <dataType>String</dataType>
-        <expression>IF(NOT({!Get_Checkout_Details.isRecurring}), $Label.ec_frequency_label_one_time, INITCAP(TEXT({!Get_Checkout_Details.frequency})))</expression>
+        <expression>IF({!frequency} = &apos;oneTime&apos;, $Label.ec_frequency_label_one_time, $Label.ec_frequency_label_monthly)</expression>
     </formulas>
     <formulas>
         <description>Shows the currency alongside the amount, so a payer on a multi-currency org can see what they are about to be charged in.</description>
@@ -329,7 +325,7 @@
                 </width>
             </styleProperties>
         </fields>
-        <showFooter>false</showFooter>
+        <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
@@ -342,7 +338,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Display_Header_Existing</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!reference}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(11, 11, 11); font-size: 48px;&quot;&gt;{!Amount_Display_Text_Existing}&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(240, 238, 238); font-size: 12px;&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!reference}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(11, 11, 11); font-size: 48px;&quot;&gt;{!Amount_Display_Text_Existing}&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(240, 238, 238); font-size: 12px;&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
