@@ -8,7 +8,7 @@ Version 0.1.0-4
 
 > **Compatibility:** Install only one template variant per org. See the [package compatibility notes](../../../README.md#package-compatibility). Checkout may coexist with another variant.
 
-This template contains Flow templates to help you get started with building digital payment experiences using Experience Cloud and FinDock Payment Experiences. The flow included are designed for Salesforce Fundraising:
+This template contains Flow templates to help you get started with building digital payment experiences using Experience Cloud and FinDock Payment Experiences. The flow included are designed for NPSP:
 Donation flow: Screen flow with a multi step donation process, includes setting Gift Tributes and donor covering fees.
 
 This template is meant to be customized and extended to fit specific use cases and requirements. For other options, see [Templates for FinDock Payment Experiences](https://github.com/FinDockLabs/payment-experiences-templates).
@@ -20,7 +20,7 @@ Collect Gift Aid from UK donors
 
 ## Prerequisites
 - FinDock is installed and configured.
-- FinDock for Fundraising is installed and configured.
+- FinDock for NPSP is installed and configured.
 - At least one payment extension is installed and configured.
 - Digital Experiences is enabled in the org.
 
