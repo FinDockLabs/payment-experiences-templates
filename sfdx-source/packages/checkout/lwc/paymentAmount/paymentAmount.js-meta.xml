@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <description>Displays the Checkout payment amount in its currency and the viewer's locale.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Payment Amount</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="amount" type="String" label="Amount" role="inputOnly"/>
+            <property name="currencyIsoCode" type="String" label="Currency ISO code" role="inputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

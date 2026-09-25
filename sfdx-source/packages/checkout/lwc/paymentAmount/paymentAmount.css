@@ -1,0 +1,7 @@
+.amount {
+    color: var(--lwc-colorTextDefault, #0b0b0b);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+}
