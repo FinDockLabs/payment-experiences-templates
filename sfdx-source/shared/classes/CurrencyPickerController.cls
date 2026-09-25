@@ -10,15 +10,15 @@ public with sharing class CurrencyPickerController {
     public static List<String> getActiveCurrencies() {
         if (!UserInfo.isMultiCurrencyOrganization()) {
             String defaultCurrency = UserInfo.getDefaultCurrency();
-            return String.isNotBlank(defaultCurrency) ? new List<String>{
-                    defaultCurrency
+            return String.isNotBlank(defaultCurrency) ? new List<String> {
+                defaultCurrency
             } : new List<String>();
         }
 
         List<String> codes = new List<String>();
         for (SObject ct : Database.query(
-                'SELECT IsoCode FROM CurrencyType WHERE IsActive = TRUE ORDER BY IsoCode',
-                System.AccessLevel.SYSTEM_MODE)) {
+            'SELECT IsoCode FROM CurrencyType WHERE IsActive = TRUE ORDER BY IsoCode',
+            System.AccessLevel.SYSTEM_MODE)) {
             codes.add((String) ct.get('IsoCode'));
         }
         return codes;

@@ -91,11 +91,6 @@
     </decisions>
     <environments>Default</environments>
     <formulas>
-        <name>Button_Display_Text</name>
-        <dataType>String</dataType>
-        <expression>$Label.ec_pay_button_prefix + " " + CASE({!currency}, &apos;EUR&apos;, &apos;€&apos;, &apos;USD&apos;, &apos;$&apos;, &apos;GBP&apos;, &apos;£&apos;, {!currency} + &apos; &apos;) + TEXT({!amount})</expression>
-    </formulas>
-    <formulas>
         <name>Frequency_Display_Text</name>
         <dataType>String</dataType>
         <expression>if({!frequency}=&apos;oneTime&apos;, $Label.ec_frequency_label_one_time, $Label.ec_frequency_label_monthly)</expression>
@@ -182,7 +177,7 @@
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Pay_Existing_Screen</targetReference>
+            <targetReference>Resolve_Existing_Currency</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Fault_Screen</targetReference>
@@ -199,6 +194,36 @@
         <object>cpm__Recurring_Payment__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <actionCalls>
+        <description>Read the amount and currency of the record already loaded by the flow for display only.</description>
+        <name>Resolve_Existing_Currency</name>
+        <label>Resolve Existing Payment Amount</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>PaymentAmountResolver</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Pay_Existing_Screen</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen</targetReference>
+        </faultConnector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>installment</name>
+            <value>
+                <elementReference>Get_Installment</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>recurringPayment</name>
+            <value>
+                <elementReference>Get_Recurring_Payment</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>PaymentAmountResolver</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <screens>
         <name>Fault_Screen</name>
         <label>Fault Screen</label>
@@ -233,7 +258,46 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Display_Header_Existing</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!Reference_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(11, 11, 11); font-size: 48px;&quot;&gt;{!Get_Installment.cpm__Amount_Open__c}{!Get_Recurring_Payment.cpm__Amount__c}&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(240, 238, 238); font-size: 12px;&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!Reference_Existing}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Existing_Payment_Amount</name>
+            <extensionName>c:paymentAmount</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>amount</name>
+                <value>
+                    <elementReference>Resolve_Existing_Currency.amount</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>currencyIsoCode</name>
+                <value>
+                    <elementReference>Resolve_Existing_Currency.currencyIsoCode</elementReference>
+                </value>
+            </inputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Display_Header_Existing_Bottom</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(240, 238, 238); font-size: 12px;&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -283,13 +347,7 @@
             <inputParameters>
                 <name>pixConfig</name>
                 <value>
-                    <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection_Existing.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>buttonLabel</name>
-                <value>
-                    <elementReference>Button_Display_Text</elementReference>
+                    <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection_Existing.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -308,6 +366,18 @@
                 <name>recurringObjectId</name>
                 <value>
                     <elementReference>Get_Recurring_Payment.Id</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>successUrl</name>
+                <value>
+                    <stringValue>https://www.example.com/success</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>failureUrl</name>
+                <value>
+                    <stringValue>https://www.example.com/failure</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -384,7 +454,46 @@
         <allowPause>true</allowPause>
         <fields>
             <name>Display_Header</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!reference}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;font-size: 48px; color: rgb(11, 11, 11);&quot;&gt;{!amount}&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: rgb(240, 238, 238);&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!reference}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Payment_Amount</name>
+            <extensionName>c:paymentAmount</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>amount</name>
+                <value>
+                    <elementReference>amount</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>currencyIsoCode</name>
+                <value>
+                    <elementReference>currency</elementReference>
+                </value>
+            </inputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Display_Header_New_Bottom</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: rgb(240, 238, 238);&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -435,12 +544,6 @@
                 <name>pixConfig</name>
                 <value>
                     <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!amount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!Recurring_Amount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;{!currency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;monthly&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;startDate&quot;:{&quot;name&quot;:&quot;recurringStartDateVar&quot;,&quot;value&quot;:&quot;{!$Flow.CurrentDate}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>buttonLabel</name>
-                <value>
-                    <elementReference>Button_Display_Text</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
