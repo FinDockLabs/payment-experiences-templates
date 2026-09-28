@@ -1,0 +1,11 @@
+<template>
+    <template if:true={numericAmount}>
+        <div class="amount">
+            <lightning-formatted-number
+                value={numericAmount}
+                format-style="currency"
+                currency-code={currency}>
+            </lightning-formatted-number>
+        </div>
+    </template>
+</template>
