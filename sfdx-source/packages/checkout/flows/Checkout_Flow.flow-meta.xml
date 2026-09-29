@@ -725,7 +725,7 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <description>Currency of the existing Installment or Recurring Payment being paid. Left empty by default, which makes the amount render in the org currency — the only currency a single-currency org has. In a multi-currency org, assign Get_Installment.CurrencyIsoCode or Get_Recurring_Payment.CurrencyIsoCode to this variable after the record lookups. It is deliberately not referenced directly in the screen components, because CurrencyIsoCode does not exist in a single-currency org and would break the deployment of this template there.</description>
+        <description>Currency of the existing Installment or Recurring Payment. Empty by default (org currency). In a multi-currency org, assign CurrencyIsoCode from the record lookup.</description>
         <name>existingRecordCurrency</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
