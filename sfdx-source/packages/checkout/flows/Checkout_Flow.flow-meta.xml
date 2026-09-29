@@ -240,7 +240,7 @@
             </styleProperties>
         </fields>
         <fields>
-            <description>Open amount of the installment being paid, formatted for the viewer&apos;s locale. The currency comes from the existingRecordCurrency variable, which is empty by default and falls back to the org currency — see that variable to enable multi-currency.</description>
+            <description>Open amount of the installment being paid, formatted for the viewer&apos;s locale. The currency comes from the existingRecordCurrency variable, which is empty by default and falls back to the org currency (see that variable to enable multi-currency).</description>
             <name>Installment_Amount</name>
             <extensionName>c:paymentAmount</extensionName>
             <fieldType>ComponentInstance</fieldType>
@@ -276,7 +276,7 @@
             </visibilityRule>
         </fields>
         <fields>
-            <description>Amount of the recurring payment, shown when the checkout is opened for a recurring payment rather than an installment, formatted for the viewer&apos;s locale. The currency comes from the existingRecordCurrency variable, which is empty by default and falls back to the org currency — see that variable to enable multi-currency.</description>
+            <description>Amount of the recurring payment, shown when the checkout is opened for a recurring payment rather than an installment, formatted for the viewer&apos;s locale. The currency comes from the existingRecordCurrency variable, which is empty by default and falls back to the org currency (see that variable to enable multi-currency).</description>
             <name>Recurring_Payment_Amount</name>
             <extensionName>c:paymentAmount</extensionName>
             <fieldType>ComponentInstance</fieldType>
