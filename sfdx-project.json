@@ -52,7 +52,7 @@
   "name": "experience-cloud-templates",
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "67.0",
+  "sourceApiVersion": "68.0",
   "packageAliases": {
     "FinDock Experiences - Fundraising": "0HoP400000002mbKAA",
     "FinDock Experiences - Fundraising UK": "0HoP400000002oDKAQ",
