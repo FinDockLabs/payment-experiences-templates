@@ -25,6 +25,109 @@ afterEach(() => {
     jest.clearAllMocks();
 });
 
+describe('currency editor recovery and Flow resources', () => {
+    beforeEach(() => {
+        getActiveCurrencies.mockReset();
+        getActiveCurrencies.mockResolvedValue(['EUR', 'USD']);
+    });
+
+    it('retains configured options and the default when loading org currencies fails', async () => {
+        getActiveCurrencies.mockRejectedValueOnce(new Error('Service unavailable'));
+        const element = mount([
+            { name: 'allowedCurrencies', value: 'EUR,USD', valueDataType: 'String' },
+            { name: 'defaultCurrency', value: 'USD', valueDataType: 'String' }
+        ]);
+        const changes = jest.fn();
+        element.addEventListener('configuration_editor_input_value_changed', changes);
+        await flush();
+        const list = element.shadowRoot.querySelector('lightning-dual-listbox');
+        expect(list.options.map(option => option.value)).toEqual(['EUR', 'USD']);
+        expect(list.value).toEqual(['EUR', 'USD']);
+        expect(element.shadowRoot.querySelector('lightning-combobox').value).toBe('USD');
+        expect(element.validate()).toEqual([]);
+        expect(changes).not.toHaveBeenCalled();
+    });
+
+    it('keeps local edits when Flow Builder supplies an older inputVariables snapshot', async () => {
+        const element = mount([{ name: 'defaultCurrency', value: 'USD', valueDataType: 'String' }]);
+        await flush();
+        const combo = element.shadowRoot.querySelector('lightning-combobox');
+        combo.dispatchEvent(new CustomEvent('change', { detail: { value: 'EUR' } }));
+        element.inputVariables = [{ name: 'defaultCurrency', value: 'USD', valueDataType: 'String' }];
+        await flush();
+        expect(combo.value).toBe('EUR');
+        expect(element.validate()).toEqual([]);
+    });
+
+    it('normalizes literal currency input from the Flow resource picker and clears validation errors', async () => {
+        const element = mount([{ name: 'defaultCurrency', value: 'payerCurrency', valueDataType: 'reference' }]);
+        await flush();
+        const changes = jest.fn();
+        element.addEventListener('configuration_editor_input_value_changed', changes);
+        const resource = element.shadowRoot.querySelector('cpm-flow-variable-input');
+        resource.dispatchEvent(new CustomEvent('valuechange', {
+            detail: { newValue: 'Euro', newValueDataType: 'String' }
+        }));
+        expect(element.validate()).toEqual([
+            { key: 'defaultCurrency', errorString: '"EURO" is not a valid ISO 4217 currency code (for example, EUR or USD).' }
+        ]);
+        resource.dispatchEvent(new CustomEvent('valuechange', {
+            detail: { newValue: ' eur ', newValueDataType: 'String' }
+        }));
+        await flush();
+        expect(resource.value).toBe('EUR');
+        expect(element.validate()).toEqual([]);
+        expect(element.shadowRoot.querySelector('[role="alert"]')).toBeNull();
+        const event = changes.mock.calls[1][0];
+        expect(event.detail).toEqual({ name: 'defaultCurrency', newValue: 'EUR', newValueDataType: 'String' });
+        expect(event.bubbles).toBe(true);
+        expect(event.composed).toBe(true);
+    });
+
+    it('reports a missing resource after clearing a Flow currency reference', async () => {
+        const element = mount([{ name: 'defaultCurrency', value: 'payerCurrency', valueDataType: 'reference' }]);
+        await flush();
+        element.shadowRoot.querySelector('cpm-flow-variable-input').dispatchEvent(new CustomEvent('valuechange', {
+            detail: { newValue: '', newValueDataType: 'reference' }
+        }));
+        expect(element.validate()).toEqual([
+            { key: 'defaultCurrency', errorString: 'Select the Flow variable that provides the default currency.' }
+        ]);
+    });
+
+    it('replaces a Flow reference with a literal currency when the administrator selects one', async () => {
+        const element = mount([{ name: 'defaultCurrency', value: 'payerCurrency', valueDataType: 'reference' }]);
+        await flush();
+        const changes = jest.fn();
+        element.addEventListener('configuration_editor_input_value_changed', changes);
+        element.shadowRoot.querySelector('lightning-combobox').dispatchEvent(
+            new CustomEvent('change', { detail: { value: 'USD' } })
+        );
+        await flush();
+        expect(element.shadowRoot.querySelector('cpm-flow-variable-input')).toBeNull();
+        expect(element.validate()).toEqual([]);
+        expect(changes.mock.calls[0][0].detail).toEqual({ name: 'defaultCurrency', newValue: 'USD', newValueDataType: 'String' });
+    });
+
+    it('waits for the org response before removing an inactive configured currency', async () => {
+        let resolveCurrencies;
+        getActiveCurrencies.mockReturnValueOnce(new Promise(resolve => { resolveCurrencies = resolve; }));
+        const element = mount([
+            { name: 'allowedCurrencies', value: 'EUR,JPY', valueDataType: 'String' },
+            { name: 'defaultCurrency', value: 'EUR', valueDataType: 'String' }
+        ]);
+        const changes = jest.fn();
+        element.addEventListener('configuration_editor_input_value_changed', changes);
+        expect(element.validate()).toEqual([]);
+        expect(changes).not.toHaveBeenCalled();
+        resolveCurrencies(['EUR', 'USD']);
+        await flush();
+        expect(element.shadowRoot.querySelector('lightning-dual-listbox').value).toEqual(['EUR']);
+        expect(changes.mock.calls[0][0].detail).toEqual({ name: 'allowedCurrencies', newValue: 'EUR', newValueDataType: 'String' });
+        expect(element.validate()).toEqual([]);
+    });
+});
+
 describe('c-currency-picker-cpe', () => {
     it('populates the multi-select options from the org active currencies (Apex)', async () => {
         getActiveCurrencies.mockResolvedValueOnce(['EUR', 'USD', 'GBP']);
