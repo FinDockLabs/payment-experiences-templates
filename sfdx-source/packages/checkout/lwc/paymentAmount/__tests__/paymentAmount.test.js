@@ -22,7 +22,7 @@ function formattedNumber(element) {
 }
 
 afterEach(() => {
-    document.body.innerHTML = '';
+    while (document.body.firstChild) document.body.removeChild(document.body.firstChild);
 });
 
 it('formats as currency, in the viewer locale the platform applies', () => {
@@ -55,4 +55,20 @@ it('renders nothing when the flow passes no amount', () => {
 
 it('renders nothing when the amount has no numeric value', () => {
     expect(formattedNumber(render('', 'EUR'))).toBeNull();
+});
+
+it('renders nothing for a malformed numeric amount', () => {
+    expect(formattedNumber(render('12.34.56', 'EUR'))).toBeNull();
+});
+
+it('updates the displayed amount and currency when Flow changes both inputs', async () => {
+    const element = render('25.50', 'EUR');
+    element.amount = '1000';
+    element.currencyIsoCode = 'JPY';
+    await Promise.resolve();
+    expect(formattedNumber(element).value).toBe(1000);
+    expect(formattedNumber(element).currencyCode).toBe('JPY');
+    element.amount = null;
+    await Promise.resolve();
+    expect(formattedNumber(element)).toBeNull();
 });
