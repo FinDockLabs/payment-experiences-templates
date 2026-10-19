@@ -33,7 +33,7 @@ This template is meant to be customized and extended to fit specific use cases a
 3. Complete the **FinDock Payer** permission set group assignment described in [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup).
 4. Go to the checkout Flow -> Payment Screen -> Payment Method Selection component
    - configure at least some payment methods
-5. Configure the [payment intent](https://docs.findock.com/docs/july-26/payments/pay-button) (add at least a success and failure URLs and verify the mapping matches your use case).
+5. Configure the [payment intent](https://docs.findock.com/docs/payments/building-payment-experiences#using-pay-button-in-flows) (add at least a success and failure URLs and verify the mapping matches your use case).
 6. Activate your flow.
 7. Go to the Experience Cloud Administration -> Preferences -> enable "Allow guest users to access public APIs".
 8. Add the flow to your Experience Cloud site.

@@ -1,6 +1,6 @@
 # Templates for FinDock Payment Experiences
 
-This repository is an overview of the templates we offer for building Salesforce-native digital experiences with [FinDock Payment Experiences.](https://docs.findock.com/docs/july-26/payments/findock-payment-experiences) There are three types of templates:
+This repository is an overview of the templates we offer for building Salesforce-native digital experiences with [FinDock Payment Experiences](https://docs.findock.com/docs/payments/findock-payment-experiences). There are three types of templates:
 
 * **Site template**: a full Experience Cloud site template that that leverages our Flow templates (deployed separately) and managed Lighting Web Components (LWCs)   
 * **Flow template**: a complete Flow for setting up a payment using our managed LWCs  

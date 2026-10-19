@@ -128,7 +128,7 @@ See [Initial payments for recurring payments](https://docs.findock.com/api/initi
 
 The components are built to run on a multilingual Experience Cloud (LWR) site — one site with several languages enabled, not a page per language. Guests pick a language with the standard [Language Selector](https://help.salesforce.com/s/articleView?id=sf.rss_language_picker.htm) (the page reloads translated); authenticated users get their profile language. Don't build a language switcher into the form — rely on the standard component.
 
-**Component text comes from Custom Labels.** The strings our components render come from Custom Labels categorized as `FinDock, Experience Cloud` (and `FinDock, Accessibility` for assistive-text labels) — see `force-app/main/default/labels/CustomLabels.labels-meta.xml` and the `paymentFormLabels.js` registry. The payer-facing strings you set in `paymentMethodConfiguration.js` (`displayLabel`, `redirectInstruction`) can be a **plain string** or a **Custom Label reference** (`labels.<name>`) — use a label when you want the text to follow the site language:
+**Component text comes from Custom Labels.** The strings our components render come from Custom Labels categorized as `FinDock, Experience Cloud` (and `FinDock, Accessibility` for assistive-text labels) — see `labels/CustomLabels.labels-meta.xml` and the `paymentFormLabels.js` registry. The payer-facing strings you set in `paymentMethodConfiguration.js` (`displayLabel`, `redirectInstruction`) can be a **plain string** or a **Custom Label reference** (`labels.<name>`) — use a label when you want the text to follow the site language:
 
 ```js
 import {labels} from './paymentFormLabels';
