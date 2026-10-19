@@ -8,15 +8,15 @@ Version 0.1.0-4
 
 > **Compatibility:** Install only one template variant per org. See the [package compatibility notes](../../../README.md#package-compatibility). Checkout may coexist with another variant.
 
-This template contains Flow templates to help you get started with building digital payment experiences using Experience Cloud and FinDock Payment Experiences. The flow included are designed for NPSP:
-Donation flow: Screen flow with a multi step donation process, includes setting Gift Tributes and donor covering fees.
+This template contains Flow templates to help you get started with building digital payment experiences using Experience Cloud and FinDock Payment Experiences. The flow included is designed for NPSP:
+Donation flow: Screen flow with a multi-step donation process, includes setting Gift Tributes and donor covering fees.
 
 This template is meant to be customized and extended to fit specific use cases and requirements. For other options, see [Templates for FinDock Payment Experiences](https://github.com/FinDockLabs/payment-experiences-templates).
 
 *Key features*
-Collect one-time and recurring donations
-Configurable amounts and frequencies
-Collect Gift Aid from UK donors
+- Collect one-time and recurring donations
+- Configurable amounts and frequencies
+- Collect Gift Aid from UK donors
 
 ## Prerequisites
 - FinDock is installed and configured.
@@ -30,8 +30,8 @@ Collect Gift Aid from UK donors
 2. Assign the **FinDockLabs Donation Flow Guest Access** permission set to your Experience Cloud site guest user.
 3. Complete the **FinDock Payer** permission set group assignment described in [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup).
 4. Go to the donation Flow -> Payment Screen -> Payment Method Selection component
-   - configure at least some payment methods
-5. Configure the [payment intent](https://docs.findock.com/docs/payments/building-payment-experiences#using-pay-button-in-flows) (add at least a success and failure URLs and verify the mapping matches your use case).
+   - configure at least one payment method
+5. Configure the [payment intent](https://docs.findock.com/docs/payments/building-payment-experiences#using-pay-button-in-flows) (add at least success and failure URLs and verify the mapping matches your use case).
 6. Activate your flow.
 7. Go to the Experience Cloud Administration -> Preferences -> enable "Allow guest users to access public APIs".
-7. Add the flow to your Experience Cloud site.
+8. Add the flow to your Experience Cloud site.

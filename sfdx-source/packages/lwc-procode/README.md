@@ -1,6 +1,6 @@
-# Experience Cloud Payment LWC Templates
+# Experience Cloud Payment LWC Template
 
-This template contains building blocks to help you build custom Lightning Web Components (LWC) for digital payment experiences using Experience Cloud and FinDock Payment Experiences. Use this template when you need full control over layout, validation, step, navigation, etc. Your custom LWC leverages the built-in capabilities of FinDock's [Payment Method Selector](https://docs.findock.com/docs/july-26/payments/payment-method-selector) and [Pay Button](https://docs.findock.com/docs/july-26/payments/pay-button) managed LWCs.
+This template contains building blocks to help you build custom Lightning Web Components (LWC) for digital payment experiences using Experience Cloud and FinDock Payment Experiences. Use this template when you need full control over layout, validation, steps, navigation, etc. Your custom LWC leverages the built-in capabilities of FinDock's [Payment Method Selector](https://docs.findock.com/docs/july-26/payments/payment-method-selector) and [Pay Button](https://docs.findock.com/docs/july-26/payments/pay-button) managed LWCs.
 
 This is the code-first alternative to using our managed LWCs directly in Flows. For other options, see [Templates for FinDock Payment Experiences](https://github.com/FinDockLabs/payment-experiences-templates).
 
