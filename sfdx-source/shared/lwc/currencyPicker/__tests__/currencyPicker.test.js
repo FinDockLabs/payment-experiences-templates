@@ -34,6 +34,52 @@ afterEach(() => {
 });
 
 describe('c-currency-picker', () => {
+    it('reports an empty invalid Flow value when the currency service rejects the request', async () => {
+        getActiveCurrencies.mockRejectedValueOnce(new Error('Access denied'));
+        const { element, changes } = mount({ defaultCurrency: 'EUR' });
+        const flow = jest.fn();
+        element.addEventListener('flowattributechange', flow);
+        await flush();
+        expect(changes).toEqual(['']);
+        expect(element.value).toBe('');
+        expect(element.validate()).toEqual({
+            isValid: false,
+            errorMessage: expect.any(String)
+        });
+        expect(flow).toHaveBeenCalledTimes(1);
+        expect(flow.mock.calls[0][0].detail).toEqual({ attributeName: 'value', attributeValue: '' });
+    });
+
+    it('keeps a valid selection when Flow tries to set a currency outside the resolved list', async () => {
+        const { element } = mount({ allowedCurrencies: 'EUR,USD', defaultCurrency: 'EUR' });
+        await flush();
+        element.value = 'JPY';
+        await flush();
+        expect(element.value).toBe('EUR');
+        expect(element.shadowRoot.querySelector('lightning-combobox').value).toBe('EUR');
+    });
+
+    it('ignores corrupt persisted state and resolves the configured default', async () => {
+        sessionStorage.setItem(`cp-state-${window.location.pathname}`, '{broken-json');
+        const { element } = mount({ defaultCurrency: 'USD' });
+        await flush();
+        expect(element.value).toBe('USD');
+        expect(element.validate().isValid).toBe(true);
+    });
+
+    it('still emits the payer selection when session storage is unavailable', async () => {
+        const { element, changes } = mount({ allowedCurrencies: 'EUR,USD', defaultCurrency: 'EUR' });
+        await flush();
+        jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+            throw new Error('Storage denied');
+        });
+        element.shadowRoot.querySelector('lightning-combobox').dispatchEvent(
+            new CustomEvent('change', { detail: { value: 'USD' } })
+        );
+        expect(element.value).toBe('USD');
+        expect(changes).toEqual(['EUR', 'USD']);
+    });
+
     it('renders a combobox with one option per active allowed currency', async () => {
         const { element } = mount({ allowedCurrencies: 'EUR,USD,GBP', defaultCurrency: 'EUR' });
         await flush();
