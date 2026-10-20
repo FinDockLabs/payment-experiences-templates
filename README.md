@@ -63,7 +63,7 @@ Payer-facing content in the templates is driven by four primary sources:
 
 | Source | What it covers | How you translate it |
 | --- | --- | --- |
-| **Custom Labels (LWCs & Messages)** | All component labels (pay button, payment selector, amounts, error messages, progress stages). | Bulk update via the repo's `CustomLabels_template.xlf` file, then import to Translation Workbench. |
+| **Custom Labels (LWCs & Messages)** | All component labels (pay button, payment selector, amounts, error messages, progress stages). | Bulk update via the package's `CustomLabels_template.xlf` file, then import to Translation Workbench. |
 | **Experience Cloud Site Content** | Headers, footers, legal text, page titles, and CMS content. | Experience Builder (Settings → Languages → Export/Import Content) or standard LWR CMS translation. |
 | **Flow Screen Text** | Screen headings, display text, and field labels defined inside template flows. | Translation Workbench → Flow (manual UI translation required; Salesforce rejects Flow imports via XLIFF). |
 | **Picklist Values** | Field values rendered on screens (e.g., recurring payment frequencies). | Translation Workbench → Picklist Value. |

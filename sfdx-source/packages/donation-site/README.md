@@ -18,6 +18,7 @@ The site is meant to be customized and extended to fit the specific use case and
 ## Prerequisites
 - FinDock is installed and configured.
 - At least one payment extension is installed and configured.
+- One of the [Donation Flow templates](../../../README.md#available-templates) is deployed. The site's home page references a flow named `Donation_Flow`; the template deploys without it, but the site cannot be *published* until it exists.
 - Digital Experiences is enabled in the org.
 
 ## Installation
