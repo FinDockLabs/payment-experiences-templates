@@ -25,7 +25,7 @@ If you prefer to build a fully custom implementation, on Salesforce or outside o
 
 **Fundraising**
 - [Donation flows for Fundraising](sfdx-source/packages/donation-fundraising): Single and multi-screen Flow templates for collecting donations in orgs with Fundraising enabled (NPC, EDU)
-- [Donation flows for Fundraising UK](sfdx-source/packages/donation-fundraising-uk): Multi-screen Flow template for collecting donations and Gift Aid in orgs with Fundraising enabled (NPC, EDU)
+- [Donation flow for Fundraising UK](sfdx-source/packages/donation-fundraising-uk): Multi-screen Flow template for collecting donations and Gift Aid in orgs with Fundraising enabled (NPC, EDU)
 - [Donation flow for NPSP](sfdx-source/packages/donation-npsp): Multi-screen Flow template for collecting donations in orgs with NPSP
 - [Donation site](sfdx-source/packages/donation-site): Experience Cloud site template that implements the Donation flows for Fundraising and NPSP templates
 

@@ -1,6 +1,4 @@
 # Experience Cloud Checkout Flow
-
-## Deploy
 <!-- INSTALL_LINK:START -->
 <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001lWVJIA2" target="_blank" rel="noopener noreferrer"><img alt="Install in a production or Developer org" src="https://img.shields.io/badge/Install-Production%20or%20Developer%20org-00A1E0?style=for-the-badge"></a>
 <a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001lWVJIA2" target="_blank" rel="noopener noreferrer"><img alt="Install in a sandbox" src="https://img.shields.io/badge/Install-Sandbox-6B7A8F?style=for-the-badge"></a>
@@ -16,7 +14,7 @@ This template is meant to be customized and extended to fit specific use cases a
 
 *Key features*
 - Collect new one-time payments
-- Set up new recurring donations
+- Set up new recurring payments
 - Pay existing one-time payments
 - Update existing recurring payments
 
