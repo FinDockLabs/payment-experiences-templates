@@ -50,13 +50,24 @@ Example — embedding the standalone selector in a custom LWC:
 </c-payment-selector>
 ```
 
-## Installation
+## Deployment
 
-1. Install the package using the link above.
-2. If the site needs to accept payments from unauthenticated (guest) users, complete the **Experience Cloud & Guest User Setup** steps in [payment-experiences-templates](https://github.com/FinDockLabs/payment-experiences-templates) first — payments will fail at runtime otherwise, even though the page renders correctly. For guest users, also assign the **FinDockLabs Payment Guest Access** permission set.
-3. Run `npm run generate:config -- --org <alias>` to generate `paymentMethodConfiguration.js` from your org's active payment methods, then fill in the `target` field for each entry. See [Payment Method Configuration](#payment-method-configuration) below for details.
-4. Update `SuccessURL` and `FailureURL` in `paymentForm.js` (`_updatePaymentIntentContext`) to point to pages within your Experience Cloud site. These are currently hardcoded (`https://example.com/...`); they will be exposed as `c-payment-form` design properties in a later release so they can be configured in Experience Builder without editing code.
-5. Set the amount, currency, and frequency by editing the `@api` defaults in `paymentForm.js` (see [Configuration Properties](#c-payment-form--configuration-properties)) — they are not exposed in Experience Builder. Then add `c-payment-form` to your Experience Cloud page.
+This template is provided as source code for you to adapt to your use case. Configure the components, then deploy them to your org with your preferred tool.
+
+**Prerequisites**
+- FinDock is installed and configured, with at least one payment extension.
+- Digital Experiences is enabled in the org, and you have an Experience Cloud (LWR) site.
+
+**Configure and deploy**
+1. Clone or download this repository.
+2. Generate `paymentMethodConfiguration.js` from your org's active payment methods and fill in the `target` field for each entry. See [Payment Method Configuration](#payment-method-configuration) below for details.
+3. Fill in `SuccessURL` and `FailureURL` in `paymentForm.js` (`_updatePaymentIntentContext`) with pages within your Experience Cloud site.
+4. Set the amount, currency, and frequency by editing the `@api` defaults in `paymentForm.js` (see [Configuration Properties](#c-payment-form--configuration-properties)) — they are not exposed in Experience Builder.
+5. Deploy the `sfdx-source/packages/lwc-procode` folder to your org. Make sure the `shared` folder (a link to `sfdx-source/shared`) is deployed too: it contains components that `paymentForm` depends on.
+
+**After deployment**
+1. If the site needs to accept payments from unauthenticated (guest) users, complete the [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup) steps — payments will fail at runtime otherwise, even though the page renders correctly. Also assign the **FinDockLabs Payment Guest Access** permission set to the site's guest user.
+2. Add `c-payment-form` to your Experience Cloud page and publish the site.
 
 ## Payment Method Configuration
 
