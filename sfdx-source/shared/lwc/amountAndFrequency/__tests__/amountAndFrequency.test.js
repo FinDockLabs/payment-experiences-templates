@@ -556,3 +556,93 @@ describe('Salesforce Flow validation contract', () => {
         expect(requiredErrorVisible(second)).toBe(false);
     });
 });
+
+// Runtime behavior: currency changes after mount and initial values from payment links.
+function mountWithChanges(props = {}) {
+    const element = createElement('c-amount-and-frequency', { is: AmountAndFrequency });
+    Object.assign(element, { currencyCode: 'EUR', ...props });
+    const changes = [];
+    element.addEventListener('flowattributechange', (event) => changes.push(event.detail));
+    document.body.appendChild(element);
+    return { element, changes };
+}
+
+function resetRuntimeState() {
+    while (document.body.firstChild) document.body.removeChild(document.body.firstChild);
+    sessionStorage.clear();
+    window.history.replaceState({}, '', '/');
+}
+
+describe('runtime currency changes', () => {
+    afterEach(resetRuntimeState);
+
+    it('requires a new amount when a currency change would silently discard fractional units', async () => {
+        const { element, changes } = mountWithChanges();
+        enterCustomAmount(element, '25.50');
+        expect(element.amountOneTime).toBe('25.50');
+        element.currencyCode = 'JPY';
+        await Promise.resolve();
+        expect(element.amountOneTime).toBeNull();
+        expect(element.validate().isValid).toBe(false);
+        expect(element.shadowRoot.querySelector('.custom-amount-input-native').value).toBe('');
+        expect(changes).toContainEqual({ attributeName: 'selectedCurrency', attributeValue: 'JPY' });
+        expect(changes).toContainEqual({ attributeName: 'amountOneTime', attributeValue: null });
+        enterCustomAmount(element, '2500');
+        expect(element.amountOneTime).toBe('2500');
+        expect(element.validate()).toEqual({ isValid: true, errorMessage: null });
+    });
+
+    it('preserves the exact amount when the new currency supports its precision', () => {
+        const { element } = mountWithChanges();
+        enterCustomAmount(element, '25.50');
+        element.currencyCode = 'BHD';
+        expect(element.amountOneTime).toBe('25.50');
+        expect(element.selectedCurrency).toBe('BHD');
+        expect(element.validate().isValid).toBe(true);
+    });
+
+    it('emits no redundant outputs when the same normalized currency is supplied again', () => {
+        const { element, changes } = mountWithChanges();
+        enterCustomAmount(element, '25.50');
+        changes.length = 0;
+        element.currencyCode = ' eur ';
+        expect(changes).toEqual([]);
+        expect(element.amountOneTime).toBe('25.50');
+    });
+});
+
+describe('initial amount and frequency from payment links', () => {
+    afterEach(resetRuntimeState);
+
+    it('selects a matching recurring preset and keeps the one-time output empty', () => {
+        window.history.replaceState({}, '', '/?amount=25&frequency=recurring');
+        const { element } = mountWithChanges({ presetAmountsRecurring: '5,25,50' });
+        expect(element.frequency).toBe('recurring');
+        expect(element.amountRecurring).toBe('25');
+        expect(element.amountOneTime).toBeNull();
+        expect(element.shadowRoot.querySelector('.amount-grid input:checked').value).toBe('25');
+    });
+
+    it('restores a custom link amount at the currency precision', () => {
+        window.history.replaceState({}, '', '/?amount=12.3456');
+        const { element } = mountWithChanges({ currencyCode: 'BHD', presetAmountsOneTime: '10,20' });
+        expect(element.amountOneTime).toBe('12.345');
+        expect(element.shadowRoot.querySelector('.custom-amount-input-native').value).toBe('12.345');
+        expect(element.validate().isValid).toBe(true);
+    });
+
+    it.each(['not-a-number', '-10', '0'])('ignores a non-positive or invalid link amount %s', value => {
+        window.history.replaceState({}, '', `/?amount=${value}`);
+        const { element } = mountWithChanges();
+        expect(element.amountOneTime).toBeNull();
+        expect(element.validate().isValid).toBe(false);
+    });
+
+    it('hides preset choices when the configured list contains no positive amounts', () => {
+        const { element } = mountWithChanges({ presetAmountsOneTime: '0,-1,invalid' });
+        expect(element.shadowRoot.querySelector('.amount-grid')).toBeNull();
+        enterCustomAmount(element, '12.50');
+        expect(element.amountOneTime).toBe('12.50');
+        expect(element.validate().isValid).toBe(true);
+    });
+});
