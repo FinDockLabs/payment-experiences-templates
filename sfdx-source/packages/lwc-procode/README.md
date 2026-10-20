@@ -66,8 +66,9 @@ This template is provided as source code for you to adapt to your use case. Conf
 5. Deploy the `sfdx-source/packages/lwc-procode` folder to your org. Make sure the `shared` folder (a link to `sfdx-source/shared`) is deployed too: it contains components that `paymentForm` depends on.
 
 **After deployment**
-1. If the site needs to accept payments from unauthenticated (guest) users, complete the [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup) steps — payments will fail at runtime otherwise, even though the page renders correctly. Also assign the **FinDockLabs Payment Guest Access** permission set to the site's guest user.
-2. Add `c-payment-form` to your Experience Cloud page and publish the site.
+1. If the site needs to accept payments from unauthenticated (guest) users, complete the [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup) steps — payments will fail at runtime otherwise, even though the page renders correctly.
+2. Assign the **FinDockLabs Payment Guest Access** permission set to your Experience Cloud site guest user.
+3. Add `c-payment-form` to your Experience Cloud page and publish the site.
 
 ## Payment Method Configuration
 
