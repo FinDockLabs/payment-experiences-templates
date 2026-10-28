@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Displays a payment amount in its currency and the viewer's locale, formatted like the FinDock Pay button: as a heading, in a line of text, or in an opt-in checkbox label.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Formatted Amount</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="amount" type="String" label="Amount" role="inputOnly"/>
+            <property name="currencyIsoCode" type="String" label="Currency ISO code" role="inputOnly"
+                description="Optional. Leave empty to use the org currency. In a multi-currency org, pass the payment currency."/>
+            <property name="variant" type="String" label="Variant" role="inputOnly" default="heading"
+                description="heading shows the amount on its own, text shows it in a line such as a total, checkbox shows it in an opt-in label such as a cover fee."/>
+            <property name="label" type="String" label="Label" role="inputOnly"
+                description="Optional text around the amount. Use {0} for the amount, for example Total {0} or Cover fees for this donation (+{0})."/>
+            <property name="value" type="Boolean" label="Checked"
+                description="Checkbox variant only: true when the payer selects the checkbox."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

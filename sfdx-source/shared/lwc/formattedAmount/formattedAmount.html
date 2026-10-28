@@ -1,0 +1,13 @@
+<template>
+    <template lwc:if={hasAmount}>
+        <p lwc:if={isHeading} class="amount-heading">{displayText}</p>
+        <p lwc:elseif={isText} class="amount-text">{displayText}</p>
+        <lightning-input
+            lwc:elseif={isCheckbox}
+            type="checkbox"
+            label={displayText}
+            checked={value}
+            onchange={handleCheckboxChange}>
+        </lightning-input>
+    </template>
+</template>
