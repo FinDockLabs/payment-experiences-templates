@@ -937,6 +937,12 @@
                         </value>
                     </inputParameters>
                     <inputParameters>
+                        <name>label</name>
+                        <value>
+                            <elementReference>$Label.ec_transaction_fee_opt_in</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
                         <name>percentage</name>
                         <value>
                             <stringValue>2.9</stringValue>

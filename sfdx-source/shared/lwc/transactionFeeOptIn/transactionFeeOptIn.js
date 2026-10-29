@@ -3,14 +3,14 @@ import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 import ORG_CURRENCY from '@salesforce/i18n/currency';
 import { formatAmount } from 'c/currencyUtils';
 import { calculateFee } from './feeCalculation';
-import { labels } from './transactionFeeOptInLabels';
 
 /**
  * Cover Transaction Fees
  *
  * Lets the donor add a percentage of the donation to cover transaction fees. The fee is
- * calculated once and shown in the checkbox label, formatted like the FinDock Pay button. Map feeAmount to the Pay button's Transaction Fee Amount and add it to
- * the amounts the Pay button charges, so the donor is charged exactly what the screen shows.
+ * calculated once and shown in the checkbox label, formatted like the FinDock Pay button.
+ * Map feeAmount to the Pay button's Transaction Fee Amount and add it to the amounts the
+ * Pay button charges, so the donor is charged exactly what the screen shows.
  */
 export default class TransactionFeeOptIn extends LightningElement {
     @api amountOneTime;
@@ -55,8 +55,7 @@ export default class TransactionFeeOptIn extends LightningElement {
     }
 
     get checkboxLabel() {
-        const template = this.label || labels.ec_transaction_fee_opt_in;
-        return template.replace('{0}', formatAmount(this.calculation.fee, this.currency));
+        return (this.label ?? '').replace('{0}', formatAmount(this.calculation.fee, this.currency));
     }
 
     handleChange(event) {

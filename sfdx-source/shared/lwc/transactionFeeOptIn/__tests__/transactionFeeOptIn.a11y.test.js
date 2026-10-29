@@ -12,7 +12,7 @@ describe('c-transaction-fee-opt-in WCAG 2.2 AA accessibility', () => {
 
     it.each([false, true])('passes axe scan with the checkbox selected: %p', async (value) => {
         const element = createElement('c-transaction-fee-opt-in', { is: TransactionFeeOptIn });
-        Object.assign(element, { amountOneTime: '20', currencyIsoCode: 'EUR', percentage: '2.9', value });
+        Object.assign(element, { amountOneTime: '20', currencyIsoCode: 'EUR', percentage: '2.9', label: 'Cover fees for this donation (+{0})', value });
         document.body.appendChild(element);
         await Promise.resolve();
         await expect(element).toBeAccessible();

@@ -3,9 +3,9 @@ import TransactionFeeOptIn from 'c/transactionFeeOptIn';
 
 jest.mock('@salesforce/i18n/currency', () => ({ default: 'USD' }), { virtual: true });
 jest.mock('@salesforce/i18n/locale', () => ({ default: 'en-US' }), { virtual: true });
-jest.mock('@salesforce/label/c.ec_transaction_fee_opt_in', () => ({ default: 'Cover fees for this donation (+{0})' }), { virtual: true });
 
-const ONE_TIME = { amountOneTime: '20', currencyIsoCode: 'EUR', percentage: '2.9' };
+const LABEL = 'Cover fees for this donation (+{0})';
+const ONE_TIME = { amountOneTime: '20', currencyIsoCode: 'EUR', percentage: '2.9', label: LABEL };
 
 function render(props) {
     const element = createElement('c-transaction-fee-opt-in', { is: TransactionFeeOptIn });
@@ -30,7 +30,7 @@ afterEach(() => {
 });
 
 describe('checkbox', () => {
-    it('shows the calculated fee in the default label, formatted like the Pay button', () => {
+    it('shows the calculated fee in the label, formatted like the Pay button', () => {
         expect(checkbox(render(ONE_TIME).element).label).toBe('Cover fees for this donation (+€0.58)');
     });
 
@@ -40,7 +40,7 @@ describe('checkbox', () => {
     });
 
     it('calculates the fee from the recurring amount for a monthly donation', () => {
-        const { element } = render({ amountRecurring: '10', currencyIsoCode: 'EUR', percentage: '2.9' });
+        const { element } = render({ amountRecurring: '10', currencyIsoCode: 'EUR', percentage: '2.9', label: LABEL });
         expect(checkbox(element).label).toBe('Cover fees for this donation (+€0.29)');
     });
 

@@ -17,8 +17,9 @@
                 description="The currency the Pay button charges in. Leave empty to use the org currency."/>
             <property name="percentage" type="String" label="Percentage" role="inputOnly" default="2.9"
                 description="Percentage of the donation the donor can add, for example 2.9."/>
-            <property name="label" type="String" label="Checkbox Label" role="inputOnly"
-                description="Optional. Use {0} for the fee. Leave empty for &quot;Cover fees for this donation (+{0})&quot;."/>
+            <property name="label" type="String" label="Checkbox Label" role="inputOnly" required="true"
+                default="Cover fees for this donation (+{0})"
+                description="Use {0} for the fee. To translate it, use a custom label, as the templates do with {!$Label.ec_transaction_fee_opt_in}."/>
             <property name="value" type="Boolean" label="Selected"
                 description="True when the donor selects the checkbox."/>
             <property name="feeAmount" type="String" label="Fee Amount" role="outputOnly"
