@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Lets the donor add a percentage of the donation to cover transaction fees, and shows the fee formatted like the FinDock Pay button.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Cover Transaction Fees</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="amountOneTime" type="String" label="Amount: One-Time" role="inputOnly"
+                description="The one-time donation amount, for example the Amount and Frequency one-time output."/>
+            <property name="amountRecurring" type="String" label="Amount: Recurring" role="inputOnly"
+                description="The recurring donation amount, for example the Amount and Frequency recurring output."/>
+            <property name="currencyIsoCode" type="String" label="Currency ISO Code" role="inputOnly"
+                description="The currency the Pay button charges in. Leave empty to use the org currency."/>
+            <property name="percentage" type="String" label="Percentage" role="inputOnly" default="2.9"
+                description="Percentage of the donation the donor can add, for example 2.9."/>
+            <property name="label" type="String" label="Checkbox Label" role="inputOnly"
+                description="Optional. Use {0} for the fee. Leave empty for &quot;Cover fees for this donation (+{0})&quot;."/>
+            <property name="value" type="Boolean" label="Selected"
+                description="True when the donor selects the checkbox."/>
+            <property name="feeAmount" type="String" label="Fee Amount" role="outputOnly"
+                description="The fee added to the donation: the calculated fee when selected, otherwise 0. Map it to the Pay button's Transaction Fee Amount and add it to the charged amounts."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

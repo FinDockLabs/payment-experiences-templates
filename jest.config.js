@@ -20,7 +20,7 @@ module.exports = {
         '^c/currencyPickerConfig$': `${SHARED_LWC}/currencyPickerConfig/currencyPickerConfig`,
         '^c/currencyUtils$': `${SHARED_LWC}/currencyUtils/currencyUtils`,
         '^c/experienceProgressStages$': `${SHARED_LWC}/experienceProgressStages/experienceProgressStages`,
-        '^c/formattedAmount$': `${SHARED_LWC}/formattedAmount/formattedAmount`,
+        '^c/transactionFeeOptIn$': `${SHARED_LWC}/transactionFeeOptIn/transactionFeeOptIn`,
 
         // Pro-code pool
         '^c/paymentForm$': `${PROCODE_LWC}/paymentForm/paymentForm`,

@@ -98,14 +98,6 @@
             <stringValue>Memorial</stringValue>
         </value>
     </choices>
-    <constants>
-        <description>Percentage of the donation the payer can add to cover transaction fees. Change it here; every other element uses the calculated TransactionFeeOffered.</description>
-        <name>TransactionFeePercentage</name>
-        <dataType>Number</dataType>
-        <value>
-            <numberValue>2.9</numberValue>
-        </value>
-    </constants>
     <customProperties>
         <name>ScreenProgressIndicator</name>
         <value>
@@ -114,44 +106,17 @@
     </customProperties>
     <environments>Default</environments>
     <formulas>
-        <description>Fee offered to the payer: TransactionFeePercentage of the selected donation amount, rounded to cents.</description>
-        <name>TransactionFeeOffered</name>
-        <dataType>Number</dataType>
-        <expression>ROUND(IF(ISBLANK({!amountAndFrequency.amountOneTime}), VALUE({!amountAndFrequency.amountRecurring}), VALUE({!amountAndFrequency.amountOneTime})) * {!TransactionFeePercentage} / 100, 2)</expression>
-        <scale>2</scale>
-    </formulas>
-    <formulas>
-        <description>Fee added to the donation: TransactionFeeOffered when the payer selects the cover fees checkbox, otherwise 0. Passed to the Pay button, which stores it on fdff__DonorCoverAmount__c.</description>
-        <name>TransactionFeeAmount</name>
-        <dataType>Number</dataType>
-        <expression>IF({!CoverFees.value}, {!TransactionFeeOffered}, 0)</expression>
-        <scale>2</scale>
-    </formulas>
-    <formulas>
-        <description>Amount shown on the Total line: the recurring or the one-time final amount.</description>
-        <name>TotalAmount</name>
-        <dataType>Number</dataType>
-        <expression>IF(ISBLANK({!amountAndFrequency.amountOneTime}), {!FinalAmountRecurring}, {!FinalAmountOneTime})</expression>
-        <scale>2</scale>
-    </formulas>
-    <formulas>
-        <description>Total line text; {0} is replaced by the formatted total.</description>
-        <name>TotalLabel</name>
-        <dataType>String</dataType>
-        <expression>IF(ISBLANK({!amountAndFrequency.amountOneTime}), &quot;Total {0}/month&quot;, &quot;Total {0}&quot;)</expression>
-    </formulas>
-    <formulas>
         <description>The final amount taking into account the cover fees checkbox</description>
         <name>FinalAmountOneTime</name>
         <dataType>Number</dataType>
-        <expression>IF(ISBLANK({!amountAndFrequency.amountOneTime}), null, VALUE({!amountAndFrequency.amountOneTime}) + {!TransactionFeeAmount})</expression>
+        <expression>IF(ISBLANK({!amountAndFrequency.amountOneTime}), null, VALUE({!amountAndFrequency.amountOneTime}) + VALUE(BLANKVALUE({!CoverFees.feeAmount}, &quot;0&quot;)))</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
         <description>The final amount taking into account the cover fees checkbox</description>
         <name>FinalAmountRecurring</name>
         <dataType>Number</dataType>
-        <expression>IF(ISBLANK({!amountAndFrequency.amountRecurring}), null, VALUE({!amountAndFrequency.amountRecurring}) + {!TransactionFeeAmount})</expression>
+        <expression>IF(ISBLANK({!amountAndFrequency.amountRecurring}), null, VALUE({!amountAndFrequency.amountRecurring}) + VALUE(BLANKVALUE({!CoverFees.feeAmount}, &quot;0&quot;)))</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
@@ -746,46 +711,6 @@
             </styleProperties>
         </fields>
         <fields>
-            <name>CoverFees</name>
-            <extensionName>c:formattedAmount</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>variant</name>
-                <value>
-                    <stringValue>checkbox</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>label</name>
-                <value>
-                    <stringValue>Cover fees for this donation (+{0})</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>amount</name>
-                <value>
-                    <elementReference>TransactionFeeOffered</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>currencyIsoCode</name>
-                <value>
-                    <elementReference>currencyPicker.value</elementReference>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
             <name>CoverFeesDisplayText</name>
             <fieldText>&lt;p&gt;&lt;em style=&quot;font-size: 12px;&quot;&gt;Add a small amount so 100% of your gift supports the mission.&lt;/em&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
@@ -799,31 +724,31 @@
             </styleProperties>
         </fields>
         <fields>
-            <name>TotalAmountDisplay</name>
-            <extensionName>c:formattedAmount</extensionName>
+            <name>CoverFees</name>
+            <extensionName>c:transactionFeeOptIn</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>variant</name>
+                <name>amountOneTime</name>
                 <value>
-                    <stringValue>text</stringValue>
+                    <elementReference>amountAndFrequency.amountOneTime</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>label</name>
+                <name>amountRecurring</name>
                 <value>
-                    <elementReference>TotalLabel</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>amount</name>
-                <value>
-                    <elementReference>TotalAmount</elementReference>
+                    <elementReference>amountAndFrequency.amountRecurring</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>currencyIsoCode</name>
                 <value>
                     <elementReference>currencyPicker.value</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>percentage</name>
+                <value>
+                    <stringValue>2.9</stringValue>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -849,7 +774,7 @@
             <inputParameters>
                 <name>pixConfig</name>
                 <value>
-                    <stringValue>{&quot;payer&quot;:{&quot;accountObject&quot;:{&quot;name&quot;:&quot;payerAccountVarName&quot;,&quot;value&quot;:&quot;{!Person_Account_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountOneTime}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;salesforceFields&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentObjectVar&quot;,&quot;value&quot;:&quot;{!Installment_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountRecurring}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;Monthly&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;startDate&quot;:{&quot;name&quot;:&quot;recurringStartDateVar&quot;,&quot;value&quot;:&quot;{!$Flow.CurrentDate}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurringSObject&quot;:{&quot;name&quot;:&quot;recurringObjectVar&quot;,&quot;value&quot;:&quot;{!Recurring_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;packageActions&quot;:{&quot;giftTribute&quot;:{&quot;type&quot;:{&quot;name&quot;:&quot;type&quot;,&quot;value&quot;:&quot;{!TributeType}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;honoreeName&quot;:{&quot;name&quot;:&quot;honoreeName&quot;,&quot;value&quot;:&quot;{!HonoreeName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationChannel&quot;:{&quot;name&quot;:&quot;notificationChannel&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationChannel}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationContactName&quot;:{&quot;name&quot;:&quot;notificationContactName&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationEmail&quot;:{&quot;name&quot;:&quot;notificationEmail&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationEmail.value}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationMessage&quot;:{&quot;name&quot;:&quot;notificationMessage&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationMessage}&quot;,&quot;dataType&quot;:&quot;reference&quot;}}},&quot;giftTributeEnabled&quot;:{&quot;name&quot;:&quot;enabled&quot;,&quot;value&quot;:&quot;{!GiftTributeToggle}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;transactionFee&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;transactionFeeAmount&quot;,&quot;value&quot;:&quot;{!TransactionFeeAmount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;installmentField&quot;:{&quot;value&quot;:&quot;fdff__DonorCoverAmount__c&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;recurringField&quot;:{&quot;value&quot;:&quot;fdff__DonorCoverAmount__c&quot;,&quot;valueDataType&quot;:&quot;String&quot;}},&quot;settings&quot;:{&quot;sourceConnector&quot;:{&quot;name&quot;:&quot;sourceConnector&quot;,&quot;value&quot;:&quot;FinDock-for-Fundraising&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}}</stringValue>
+                    <stringValue>{&quot;payer&quot;:{&quot;accountObject&quot;:{&quot;name&quot;:&quot;payerAccountVarName&quot;,&quot;value&quot;:&quot;{!Person_Account_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selector.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountOneTime}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;salesforceFields&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentObjectVar&quot;,&quot;value&quot;:&quot;{!Installment_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!FinalAmountRecurring}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;{!currencyPicker.value}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;Monthly&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;startDate&quot;:{&quot;name&quot;:&quot;recurringStartDateVar&quot;,&quot;value&quot;:&quot;{!$Flow.CurrentDate}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurringSObject&quot;:{&quot;name&quot;:&quot;recurringObjectVar&quot;,&quot;value&quot;:&quot;{!Recurring_Record}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;packageActions&quot;:{&quot;giftTribute&quot;:{&quot;type&quot;:{&quot;name&quot;:&quot;type&quot;,&quot;value&quot;:&quot;{!TributeType}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;honoreeName&quot;:{&quot;name&quot;:&quot;honoreeName&quot;,&quot;value&quot;:&quot;{!HonoreeName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationChannel&quot;:{&quot;name&quot;:&quot;notificationChannel&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationChannel}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationContactName&quot;:{&quot;name&quot;:&quot;notificationContactName&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationName}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationEmail&quot;:{&quot;name&quot;:&quot;notificationEmail&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationEmail.value}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;notificationMessage&quot;:{&quot;name&quot;:&quot;notificationMessage&quot;,&quot;value&quot;:&quot;{!GiftTributeNotificationMessage}&quot;,&quot;dataType&quot;:&quot;reference&quot;}}},&quot;giftTributeEnabled&quot;:{&quot;name&quot;:&quot;enabled&quot;,&quot;value&quot;:&quot;{!GiftTributeToggle}&quot;,&quot;dataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;transactionFee&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;transactionFeeAmount&quot;,&quot;value&quot;:&quot;{!CoverFees.feeAmount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;installmentField&quot;:{&quot;value&quot;:&quot;fdff__DonorCoverAmount__c&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;recurringField&quot;:{&quot;value&quot;:&quot;fdff__DonorCoverAmount__c&quot;,&quot;valueDataType&quot;:&quot;String&quot;}},&quot;settings&quot;:{&quot;sourceConnector&quot;:{&quot;name&quot;:&quot;sourceConnector&quot;,&quot;value&quot;:&quot;FinDock-for-Fundraising&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}}</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -957,7 +882,7 @@
             <inputParameters>
                 <name>transactionFeeAmount</name>
                 <value>
-                    <elementReference>TransactionFeeAmount</elementReference>
+                    <elementReference>CoverFees.feeAmount</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
