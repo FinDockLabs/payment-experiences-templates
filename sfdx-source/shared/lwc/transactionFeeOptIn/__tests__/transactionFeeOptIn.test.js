@@ -101,3 +101,29 @@ describe('addedFee', () => {
         expect(lastAddedFee(published)).toBe('0.58');
     });
 });
+
+describe('fee contract', () => {
+    it.each(['0,58', '€0.58', '1,234.56', '-0.58', ' '])(
+        'rejects malformed fee %p instead of changing it into another amount', (fee) => {
+            const { element, published } = render({ ...PROPS, value: true, fee });
+            expect(checkbox(element)).toBeNull();
+            expect(lastAddedFee(published)).toBe('0');
+        }
+    );
+
+    it.each([['JPY', '3', '¥3'], ['KWD', '0.725', 'KWD']])(
+        'shows and publishes the same fee for %s', (currencyIsoCode, fee, display) => {
+            const { element, published } = render({ ...PROPS, currencyIsoCode, fee, value: true });
+            expect(checkbox(element).label).toContain(display);
+            expect(lastAddedFee(published)).toBe(fee);
+        }
+    );
+
+    it.each([['JPY', '2.90'], ['EUR', '0.001']])(
+        'does not offer a fee with more decimals than %s has', (currencyIsoCode, fee) => {
+            const { element, published } = render({ ...PROPS, currencyIsoCode, fee, value: true });
+            expect(checkbox(element)).toBeNull();
+            expect(lastAddedFee(published)).toBe('0');
+        }
+    );
+});

@@ -1,7 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 import ORG_CURRENCY from '@salesforce/i18n/currency';
-import { formatAmount } from 'c/currencyUtils';
+import { currencyDecimals, formatAmount } from 'c/currencyUtils';
 
 /**
  * Cover Transaction Fees
@@ -28,16 +28,22 @@ export default class TransactionFeeOptIn extends LightningElement {
         this.publishAddedFee();
     }
 
+    get currency() {
+        return this.currencyIsoCode || ORG_CURRENCY;
+    }
+
     get feeNumber() {
-        if (this.fee == null || this.fee === '') {
-            return null;
-        }
-        const num = Number(String(this.fee).replace(/[^0-9.-]/g, ''));
-        return Number.isNaN(num) ? null : num;
+        // Flow passes a plain decimal with a dot. Anything else is rejected rather than
+        // reinterpreted, so "0,58" never becomes 58.
+        const raw = String(this.fee ?? '').trim();
+        return /^\d+(\.\d+)?$/.test(raw) ? Number(raw) : null;
     }
 
     get hasFee() {
-        return this.feeNumber > 0;
+        const fee = this.feeNumber;
+        // Offer only a fee the currency can show exactly (e.g. no 2.90 in JPY), so the donor is
+        // never charged an amount other than the one in the label. The flow owns the rounding.
+        return fee > 0 && Number(fee.toFixed(currencyDecimals(this.currency))) === fee;
     }
 
     get isSelected() {
@@ -45,7 +51,7 @@ export default class TransactionFeeOptIn extends LightningElement {
     }
 
     get checkboxLabel() {
-        const formattedFee = formatAmount(this.feeNumber, this.currencyIsoCode || ORG_CURRENCY);
+        const formattedFee = formatAmount(this.feeNumber, this.currency);
         return (this.label ?? '').replace('{0}', formattedFee);
     }
 

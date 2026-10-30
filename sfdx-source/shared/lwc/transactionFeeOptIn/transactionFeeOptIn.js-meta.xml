@@ -10,10 +10,10 @@
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
             <property name="fee" type="String" label="Fee" role="inputOnly" required="true"
-                description="The fee the donor can add, usually a formula, for example a percentage of the selected amount rounded to cents."/>
+                description="The fee the donor can add, usually a formula, for example a percentage of the selected amount rounded to the currency's decimals. A fee with more decimals than the currency has is not offered."/>
             <property name="currencyIsoCode" type="String" label="Currency ISO Code" role="inputOnly"
                 description="The currency the Pay button charges in. Leave empty to use the org currency."/>
-            <property name="label" type="String" label="Checkbox Label" role="inputOnly" required="true"
+            <property name="label" type="String" label="Label" role="inputOnly" required="true"
                 default="Cover fees for this donation (+{0})"
                 description="Use {0} for the fee. To translate it, use a custom label, as the templates do with {!$Label.ec_transaction_fee_opt_in}."/>
             <property name="helpText" type="String" label="Help Text" role="inputOnly"
