@@ -50,6 +50,22 @@
             <source>Select a preset donation amount</source>
             <target></target>
         </trans-unit>
+        <trans-unit id="CustomLabel.ec_label_amount_in_currency" maxwidth="1000" size-unit="char">
+            <source>Amount in {0}</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.ec_label_amount_required" maxwidth="1000" size-unit="char">
+            <source>Please select or enter an amount</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.ec_transaction_fee_help_text" maxwidth="1000" size-unit="char">
+            <source>Add a small amount so 100% of your gift supports the mission.</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.ec_transaction_fee_opt_in" maxwidth="1000" size-unit="char">
+            <source>Cover fees for this donation (+{0})</source>
+            <target></target>
+        </trans-unit>
         <trans-unit id="CustomLabel.cpm__ec_pay_button_label" maxwidth="1000" size-unit="char">
             <source>Pay</source>
             <target></target>

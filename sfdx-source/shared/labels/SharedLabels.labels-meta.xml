@@ -130,4 +130,21 @@
         </shortDescription>
         <value>Amount in {0}</value>
     </labels>
+    <!-- Cover Transaction Fees -->
+    <labels>
+        <fullName>ec_transaction_fee_opt_in</fullName>
+        <categories>FinDock Experience Cloud Component</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Default transaction fee checkbox label ({0} = formatted fee)</shortDescription>
+        <value>Cover fees for this donation (+{0})</value>
+    </labels>
+    <labels>
+        <fullName>ec_transaction_fee_help_text</fullName>
+        <categories>FinDock Experience Cloud Component</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text under the transaction fee checkbox</shortDescription>
+        <value>Add a small amount so 100% of your gift supports the mission.</value>
+    </labels>
 </CustomLabels>

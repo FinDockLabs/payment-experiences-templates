@@ -1,8 +1,25 @@
 import {
     currencyDecimals,
     currencySymbolInfo,
+    formatAmount,
     sanitizeAmountInput
 } from 'c/currencyUtils';
+
+describe('formatAmount', () => {
+    it('shows the narrow symbol and the decimal places of the currency', () => {
+        expect(formatAmount(167, 'EUR', 'en-US')).toBe('€167.00');
+        expect(formatAmount(4000, 'JPY', 'en-US')).toBe('¥4,000');
+        expect(formatAmount(500, 'KWD', 'en-US')).toBe('KWD\u00a0500.000');
+    });
+
+    it('follows the locale for separators and symbol position', () => {
+        expect(formatAmount(1234.5, 'EUR', 'de-DE')).toBe('1.234,50\u00a0€');
+    });
+
+    it('falls back to the plain number for an invalid currency', () => {
+        expect(formatAmount(25.5, 'NOTACODE', 'en-US')).toBe('25.5');
+    });
+});
 
 describe('currencyDecimals', () => {
     it('returns 2 for standard minor-unit currencies', () => {
