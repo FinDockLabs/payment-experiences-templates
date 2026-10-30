@@ -9,8 +9,8 @@
       "versionDescription": ""
     },
     {
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
+      "versionName": "ver 0.2",
+      "versionNumber": "0.2.0.NEXT",
       "path": "sfdx-source/packages/donation-fundraising-uk",
       "default": true,
       "package": "FinDock Experiences - Fundraising UK",
