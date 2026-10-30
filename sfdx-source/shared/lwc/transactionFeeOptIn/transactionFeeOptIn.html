@@ -1,9 +1,11 @@
 <template>
-    <lightning-input
-        lwc:if={hasFee}
-        type="checkbox"
-        label={checkboxLabel}
-        checked={isSelected}
-        onchange={handleChange}>
-    </lightning-input>
+    <template lwc:if={hasFee}>
+        <lightning-input
+            type="checkbox"
+            label={checkboxLabel}
+            checked={isSelected}
+            onchange={handleChange}>
+        </lightning-input>
+        <p lwc:if={helpText} class="help-text">{helpText}</p>
+    </template>
 </template>

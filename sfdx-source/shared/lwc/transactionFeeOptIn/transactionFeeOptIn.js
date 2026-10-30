@@ -2,52 +2,42 @@ import { LightningElement, api } from 'lwc';
 import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 import ORG_CURRENCY from '@salesforce/i18n/currency';
 import { formatAmount } from 'c/currencyUtils';
-import { calculateFee } from './feeCalculation';
 
 /**
  * Cover Transaction Fees
  *
- * Lets the donor add a percentage of the donation to cover transaction fees. The fee is
- * calculated once and shown in the checkbox label, formatted like the FinDock Pay button.
- * Map feeAmount to the Pay button's Transaction Fee Amount and add it to the amounts the
- * Pay button charges, so the donor is charged exactly what the screen shows.
+ * Lets the donor add a transaction fee to the donation. The flow calculates the fee, for example
+ * as a percentage of the amount; the component shows it in the checkbox label, formatted like the
+ * FinDock Pay button, and returns it as addedFee once the donor opts in. Add addedFee to the
+ * amounts and map it to the Pay button's Transaction Fee Amount, so the donor is charged exactly
+ * the fee shown.
  */
 export default class TransactionFeeOptIn extends LightningElement {
-    @api amountOneTime;
-    @api amountRecurring;
+    @api fee;
     @api currencyIsoCode;
-    @api percentage;
     // Checkbox label; {0} is replaced by the formatted fee.
     @api label;
+    @api helpText;
     @api value = false;
-    @api feeAmount;
+    @api addedFee;
 
-    _publishedFeeAmount;
+    _publishedAddedFee;
 
     renderedCallback() {
-        // Every input change re-renders the label, so this keeps feeAmount current.
-        this.publishFeeAmount();
+        // A new fee or selection re-renders the label or the checkbox, so this keeps addedFee current.
+        this.publishAddedFee();
     }
 
-    get currency() {
-        return this.currencyIsoCode || ORG_CURRENCY;
-    }
-
-    get isRecurring() {
-        return this.isBlank(this.amountOneTime) && !this.isBlank(this.amountRecurring);
-    }
-
-    // The selected donation amount; the flow sets only the one of the chosen frequency.
-    get baseAmount() {
-        return this.toNumber(this.isRecurring ? this.amountRecurring : this.amountOneTime);
-    }
-
-    get calculation() {
-        return calculateFee(this.baseAmount, this.toNumber(this.percentage), this.currency);
+    get feeNumber() {
+        if (this.fee == null || this.fee === '') {
+            return null;
+        }
+        const num = Number(String(this.fee).replace(/[^0-9.-]/g, ''));
+        return Number.isNaN(num) ? null : num;
     }
 
     get hasFee() {
-        return this.calculation != null;
+        return this.feeNumber > 0;
     }
 
     get isSelected() {
@@ -55,7 +45,8 @@ export default class TransactionFeeOptIn extends LightningElement {
     }
 
     get checkboxLabel() {
-        return (this.label ?? '').replace('{0}', formatAmount(this.calculation.fee, this.currency));
+        const formattedFee = formatAmount(this.feeNumber, this.currencyIsoCode || ORG_CURRENCY);
+        return (this.label ?? '').replace('{0}', formattedFee);
     }
 
     handleChange(event) {
@@ -64,24 +55,12 @@ export default class TransactionFeeOptIn extends LightningElement {
     }
 
     // Publishes only on change, because renderedCallback runs after every render.
-    publishFeeAmount() {
-        const feeAmount = String(this.isSelected ? this.calculation.fee : 0);
-        if (feeAmount === this._publishedFeeAmount) {
+    publishAddedFee() {
+        const addedFee = String(this.isSelected ? this.feeNumber : 0);
+        if (addedFee === this._publishedAddedFee) {
             return;
         }
-        this._publishedFeeAmount = feeAmount;
-        this.dispatchEvent(new FlowAttributeChangeEvent('feeAmount', feeAmount));
-    }
-
-    isBlank(value) {
-        return value == null || value === '';
-    }
-
-    toNumber(value) {
-        if (this.isBlank(value)) {
-            return null;
-        }
-        const num = Number(String(value).replace(/[^0-9.-]/g, ''));
-        return Number.isNaN(num) ? null : num;
+        this._publishedAddedFee = addedFee;
+        this.dispatchEvent(new FlowAttributeChangeEvent('addedFee', addedFee));
     }
 }
