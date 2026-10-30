@@ -19,8 +19,8 @@
             <property name="helpText" type="String" label="Help Text" role="inputOnly"
                 default="Add a small amount so 100% of your gift supports the mission."
                 description="Optional text under the checkbox. To translate it, use a custom label, as the templates do with {!$Label.ec_transaction_fee_help_text}."/>
-            <property name="value" type="Boolean" label="Selected"
-                description="True when the donor selects the checkbox."/>
+            <property name="value" type="Boolean" label="Fee Selected"
+                description="True when the donor selects the checkbox. Input and output, so the choice is kept when the donor goes Back and Next. Do not pre-select it: pre-ticked extra payments are not allowed in the EU and UK."/>
             <property name="addedFee" type="String" label="Added Fee" role="outputOnly"
                 description="The fee when the donor selects the checkbox, otherwise 0. Add it to the charged amounts and map it to the Pay button's Transaction Fee Amount."/>
         </targetConfig>
