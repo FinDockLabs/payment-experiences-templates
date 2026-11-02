@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Lets the donor add a transaction fee calculated by the flow, and shows it formatted like the FinDock Pay button.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Cover Transaction Fees</masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="fee" type="String" label="Fee" role="inputOnly" required="true"
+                description="The fee the donor can add, usually a formula, for example a percentage of the selected amount rounded to the currency's decimals. A fee with more decimals than the currency has is not offered."/>
+            <property name="currencyIsoCode" type="String" label="Currency ISO Code" role="inputOnly"
+                description="The currency the Pay button charges in. Leave empty to use the org currency."/>
+            <property name="label" type="String" label="Label" role="inputOnly" required="true"
+                default="Cover fees for this donation (+{0})"
+                description="Use {0} for the fee. To translate it, use a custom label, as the templates do with {!$Label.ec_transaction_fee_opt_in}."/>
+            <property name="helpText" type="String" label="Help Text" role="inputOnly"
+                default="Add a small amount so 100% of your gift supports the mission."
+                description="Optional text under the checkbox. To translate it, use a custom label, as the templates do with {!$Label.ec_transaction_fee_help_text}."/>
+            <property name="value" type="Boolean" label="Fee Selected"
+                description="True when the donor selects the checkbox. Input and output, so the choice is kept when the donor goes Back and Next. Do not pre-select it: pre-ticked extra payments are not allowed in the EU and UK."/>
+            <property name="addedFee" type="String" label="Added Fee" role="outputOnly"
+                description="The fee when the donor selects the checkbox, otherwise 0. Add it to the charged amounts and map it to the Pay button's Transaction Fee Amount."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

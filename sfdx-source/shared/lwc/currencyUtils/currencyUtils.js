@@ -51,6 +51,23 @@ export function currencyDecimals(code, locale = 'en-US') {
 }
 
 /**
+ * Format an amount in its currency for the viewer's locale:
+ * narrow symbol and the currency's own decimal places (e.g. "€167.00", "¥4,000", "KWD 500.000").
+ * Falls back to the plain number when the currency code is invalid.
+ */
+export function formatAmount(amount, code, locale = currencyLocale()) {
+    try {
+        return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: code,
+            currencyDisplay: 'narrowSymbol'
+        }).format(amount);
+    } catch {
+        return String(amount);
+    }
+}
+
+/**
  * Narrow currency symbol and its position relative to the amount, e.g. EUR in en-US -> "€"/prefix,
  * SEK in sv-SE -> "kr"/suffix. Returns an empty prefix symbol when no code is given so callers can
  * render nothing rather than a placeholder currency.
