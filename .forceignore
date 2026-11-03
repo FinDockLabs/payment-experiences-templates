@@ -12,7 +12,5 @@
 **/graphql.config.yml
 # translation templates (manual Translation Workbench import, not deployable metadata)
 **/translations/*.xlf
-# build-control file: tells the build which shared components to assemble in
-**/shared.manifest
 # developer docs — not metadata, should not land in the customer org
 **/README.md
