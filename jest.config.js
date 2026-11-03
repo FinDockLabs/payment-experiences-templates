@@ -4,8 +4,8 @@ const { jestConfig } = require('@salesforce/sfdx-lwc-jest/config');
 // sfdx-project.json. The shared pool lives outside them, so map it here.
 const SHARED_LWC = '<rootDir>/sfdx-source/shared/lwc';
 
-// lwc-procode is not a package directory either — it is assembled at build time
-// (see its shared.manifest), so its own c/* modules need mapping too.
+// lwc-procode is not a package directory either — it ships as source only, so its
+// own c/* modules need mapping too.
 const PROCODE_LWC = '<rootDir>/sfdx-source/packages/lwc-procode/lwc';
 
 module.exports = {
