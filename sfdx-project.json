@@ -1,32 +1,32 @@
 {
   "packageDirectories": [
     {
-      "versionName": "ver 0.2",
-      "versionNumber": "0.2.0.NEXT",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/donation-fundraising",
       "default": false,
       "package": "FinDock Experiences - Fundraising",
       "versionDescription": ""
     },
     {
-      "versionName": "ver 0.2",
-      "versionNumber": "0.2.0.NEXT",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/donation-fundraising-uk",
       "default": true,
       "package": "FinDock Experiences - Fundraising UK",
       "versionDescription": ""
     },
     {
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/donation-npsp",
       "default": false,
       "package": "FinDock Experiences - NPSP",
       "versionDescription": ""
     },
     {
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/checkout",
       "default": false,
       "package": "FinDock Experiences - Checkout",
@@ -35,15 +35,15 @@
     {
       "package": "FinDock Experiences - Checkout Site",
       "path": "sfdx-source/packages/checkout-site",
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
       "default": false,
       "versionDescription": ""
     },
     {
       "package": "FinDock Experiences - Donation Site",
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/donation-site",
       "default": false,
       "versionDescription": ""
