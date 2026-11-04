@@ -50,8 +50,8 @@
     },
     {
       "package": "FinDock Experiences - Lightning Out Flow",
-      "versionName": "ver 0.1",
-      "versionNumber": "0.1.0.NEXT",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/lightning-out-flow",
       "default": false,
       "versionDescription": ""
