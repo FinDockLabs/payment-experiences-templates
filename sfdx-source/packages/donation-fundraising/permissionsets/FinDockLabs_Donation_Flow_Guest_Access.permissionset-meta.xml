@@ -4,6 +4,10 @@
         <apexClass>CurrencyPickerController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>UserAgentInfo</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <flowAccesses>
         <enabled>true</enabled>
         <flow>Contact_Assignment</flow>
@@ -17,5 +21,5 @@
         <flow>One_Screen_Donation_Flow</flow>
     </flowAccesses>
     <label>FinDockLabs Donation Flow Guest Access</label>
-    <description>Guest user access to the template flows and the CurrencyPickerController Apex class. Assign to the site guest user.</description>
+    <description>Guest user access to the template flows and the CurrencyPickerController and UserAgentInfo Apex classes. Assign to the site guest user.</description>
 </PermissionSet>

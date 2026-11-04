@@ -1,0 +1,18 @@
+<template>
+    <!--
+        flow-api-name: API name of the screen flow to run. It comes from the public flowApiName
+        property, which Lightning Out exposes as the flow-api-name attribute on the host website:
+            <c-lightning-out-flow-container flow-api-name="Donation_Flow"></c-lightning-out-flow-container>
+        It can also be set from website JavaScript with setAttribute, or as a Custom Property
+        in Lightning Out 2.0 App Manager ({ "flow-api-name": "Donation_Flow" }).
+        Other values from the website reach the flow the same way: add an @api property to this
+        component, then pass it to the flow with flow-input-variables.
+        Docs: TODO add docs link
+
+        onstatuschange: reports the height once each new screen has rendered (auto-sizing).
+    -->
+    <lightning-flow
+        flow-api-name={flowApiName}
+        onstatuschange={handleStatusChange}>
+    </lightning-flow>
+</template>

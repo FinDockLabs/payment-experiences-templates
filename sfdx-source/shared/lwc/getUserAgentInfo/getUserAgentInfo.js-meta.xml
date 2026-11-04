@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Flow action that returns the payer's browser, operating system, device and locale, or empty values if the browser doesn't provide them. Store the result in a variable of the Apex-defined type UserAgentInfo and use it to personalise or branch the flow.</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Get User Agent Info</masterLabel>
+    <targets>
+        <target>lightning__FlowAction</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowAction">
+            <property name="userAgentInfo" type="apex://UserAgentInfo" label="User Agent Info" description="Payer&apos;s browser, operating system, device and locale. Store it in a variable of the Apex-defined type UserAgentInfo." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
