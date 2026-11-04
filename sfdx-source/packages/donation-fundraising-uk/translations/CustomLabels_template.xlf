@@ -106,6 +106,62 @@
             <source>Other</source>
             <target></target>
         </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_billing_address_heading" maxwidth="1000" size-unit="char">
+            <source>Billing Address</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_loading_address" maxwidth="1000" size-unit="char">
+            <source>Loading billing address</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_holder_name" maxwidth="1000" size-unit="char">
+            <source>Billing Name</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_address_line_1" maxwidth="1000" size-unit="char">
+            <source>Address Line 1</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_address_line_2" maxwidth="1000" size-unit="char">
+            <source>Address Line 2</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_street" maxwidth="1000" size-unit="char">
+            <source>Street</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_house_number" maxwidth="1000" size-unit="char">
+            <source>House Number</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_house_number_addition" maxwidth="1000" size-unit="char">
+            <source>Addition</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_postal_code" maxwidth="1000" size-unit="char">
+            <source>Postal Code</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_city" maxwidth="1000" size-unit="char">
+            <source>City</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_state" maxwidth="1000" size-unit="char">
+            <source>State / Province</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_avs_label_country" maxwidth="1000" size-unit="char">
+            <source>Country</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ac_avs_state_infotext" maxwidth="1000" size-unit="char">
+            <source>Enter 2-letter state abbreviation.</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ac_avs_country_infotext" maxwidth="1000" size-unit="char">
+            <source>Enter 2-letter country code.</source>
+            <target></target>
+        </trans-unit>
         </body>
     </file>
 </xliff>
