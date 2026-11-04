@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <description>Hosts a screen flow so it can be exposed outside Salesforce through Lightning Out</description>
+    <isExposed>true</isExposed>
+    <masterLabel>Lightning Out Flow Container</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+    </targets>
+</LightningComponentBundle>
