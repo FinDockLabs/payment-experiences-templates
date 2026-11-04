@@ -34,7 +34,7 @@ If you prefer to build a fully custom implementation, on Salesforce or outside o
 
 ## Package compatibility
 
-Template packages that include shared components are mutually exclusive, so install only one such variant per org. Checkout is the exception and can coexist with another variant because it contains no shared components.
+Template packages include the same shared components, so they are mutually exclusive: install only one variant per org.
 
 
 ## Experience Cloud & Guest User Setup

@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Gets the payer&apos;s browser, operating system, device and locale and stores them in userAgentInfo. Values are empty if the browser doesn&apos;t provide them.</description>
+        <name>Get_User_Agent_Info</name>
+        <label>Get User Agent Info</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>c:getUserAgentInfo</actionName>
+        <actionType>lwcComponent</actionType>
+        <connector>
+            <targetReference>Is_HNW_person</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <nameSegment>c:getUserAgentInfo</nameSegment>
+        <offset>0</offset>
+        <outputParameters>
+            <assignToReference>userAgentInfo</assignToReference>
+            <name>userAgentInfo</name>
+        </outputParameters>
+    </actionCalls>
     <apiVersion>68.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
@@ -112,6 +131,32 @@
             <numberValue>2.9</numberValue>
         </value>
     </constants>
+    <decisions>
+        <description>Example of branching on userAgentInfo: Yes when the payer uses an Apple device. Both branches are empty and continue the same way. Add elements to a branch to tailor the flow.</description>
+        <name>Is_HNW_person</name>
+        <label>Is HNW person?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Enable_Gift_Tributes</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>userAgentInfo.osVendor</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Apple</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Enable_Gift_Tributes</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
     <environments>Default</environments>
     <formulas>
         <description>Fee the donor can add: TransactionFeePercentage of the selected amount, rounded to cents. Change this formula for a fixed or a minimum fee.</description>
@@ -989,7 +1034,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Enable_Gift_Tributes</targetReference>
+            <targetReference>Get_User_Agent_Info</targetReference>
         </connector>
     </start>
     <status>Active</status>
@@ -1026,5 +1071,14 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>GiftCommitment</objectType>
+    </variables>
+    <variables>
+        <description>Payer&apos;s browser, operating system, device and locale. Values are empty if the browser doesn&apos;t provide them.</description>
+        <name>userAgentInfo</name>
+        <apexClass>UserAgentInfo</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
 </Flow>
