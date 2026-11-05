@@ -1,7 +1,5 @@
 import { LightningElement, api } from 'lwc';
 
-// ----- Patterns -----
-
 // Checked in order, first match wins: Edge and Opera user agents also contain "Chrome",
 // and Chrome's also contains "Safari". The capture group is the version.
 const BROWSER_PATTERNS = [
@@ -26,15 +24,10 @@ const MOBILE_PATTERN = /Mobi|Android|iPhone/i;
 const ANDROID_MODEL_PATTERN = /Android [\d.]+; ([^;)]+?)(?: Build\/[^;)]*)?\)/;
 const REDUCED_ANDROID_MODEL = 'K';
 
-// ----- Vendors by the browser and OS names above -----
-
 const BROWSER_VENDORS = { Edge: 'Microsoft', Opera: 'Opera', Firefox: 'Mozilla', Chrome: 'Google', Safari: 'Apple' };
 const OS_VENDORS = { Windows: 'Microsoft', iOS: 'Apple', Android: 'Google', macOS: 'Apple' };
 const APPLE_DEVICE_MODELS = ['iPhone', 'iPad', 'Mac'];
 
-// ----- Helpers -----
-
-// Returns the name and version of the first matching pattern, or "Unknown" if none matches
 const findFirstMatch = (userAgent, patternsByName) => {
     for (const [name, pattern] of patternsByName) {
         const match = userAgent.match(pattern);
@@ -45,7 +38,6 @@ const findFirstMatch = (userAgent, patternsByName) => {
     return { name: 'Unknown', version: '' };
 };
 
-// Returns "iPhone", "iPad", "Mac" or the Android model, or an empty string if the user agent doesn't name it
 const findDeviceModel = (userAgent, osName, isIpad) => {
     if (/iPhone/.test(userAgent)) {
         return 'iPhone';
@@ -60,15 +52,6 @@ const findDeviceModel = (userAgent, osName, isIpad) => {
     return androidModel && androidModel !== REDUCED_ANDROID_MODEL ? androidModel : '';
 };
 
-// ----- Parser -----
-
-/**
- * Parses browser, OS and device details from a user agent string.
- * Returns empty values if the user agent is unavailable, so the flow still receives the variable.
- *
- * @param {string} userAgent navigator.userAgent
- * @param {number} maxTouchPoints navigator.maxTouchPoints, used to tell an iPad from a Mac
- */
 const parseUserAgent = (userAgent, maxTouchPoints) => {
     if (!userAgent) {
         return {
@@ -113,21 +96,14 @@ const parseUserAgent = (userAgent, maxTouchPoints) => {
     };
 };
 
-/**
- * Screen flow local action (Action element → Get User Agent Info).
- * Reads the payer's browser, OS and device details from navigator.userAgent, plus the browser locale,
- * and returns them to the flow as one Apex-defined UserAgentInfo value. Runs in the browser, with no Apex call.
- * If the user agent is unavailable the fields are empty, so the action never stops the flow.
- */
+// Flow local action: runs in the browser, with no Apex call
 export default class GetUserAgentInfo extends LightningElement {
-    // Browser, OS, device and locale details; keys match the @AuraEnabled fields of the UserAgentInfo Apex class
+    // Keys must match the @AuraEnabled fields of the UserAgentInfo Apex class
     @api userAgentInfo;
 
-    // Called by the flow when it runs this component as a local action
     @api invoke() {
         this.userAgentInfo = {
             ...parseUserAgent(navigator.userAgent ?? '', navigator.maxTouchPoints ?? 0),
-            // Browser's preferred language as a BCP 47 tag, e.g. "en-US"
             locale: navigator.language ?? ''
         };
     }

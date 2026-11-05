@@ -20,6 +20,7 @@ module.exports = {
         '^c/currencyPickerConfig$': `${SHARED_LWC}/currencyPickerConfig/currencyPickerConfig`,
         '^c/currencyUtils$': `${SHARED_LWC}/currencyUtils/currencyUtils`,
         '^c/experienceProgressStages$': `${SHARED_LWC}/experienceProgressStages/experienceProgressStages`,
+        '^c/getUserAgentInfo$': `${SHARED_LWC}/getUserAgentInfo/getUserAgentInfo`,
         '^c/transactionFeeOptIn$': `${SHARED_LWC}/transactionFeeOptIn/transactionFeeOptIn`,
 
         // Pro-code pool
