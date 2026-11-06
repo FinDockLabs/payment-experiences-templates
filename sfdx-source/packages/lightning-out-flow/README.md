@@ -28,7 +28,3 @@ The container sends its height to the website as a `flow:height` message; this s
 - The iframe fills `<c-lightning-out-flow-container>`, so setting the container's height sizes the iframe.
 
 Don't put `flex: 1` or a height `transition` on `c-lightning-out-flow-container`. `flex: 1` overrides the height the script sets, and a transition makes a scrollbar flash each time the flow grows.
-
-## Passing parameters to the flow
-
-You can find the different ways to pass values to the flow in: add DOCS link later.
