@@ -1,4 +1,10 @@
 # Lightning Out Flow
+<!-- INSTALL_LINK:START -->
+<a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001qWknIAE" target="_blank" rel="noopener noreferrer"><img alt="Install in a production or Developer org" src="https://img.shields.io/badge/Install-Production%20or%20Developer%20org-00A1E0?style=for-the-badge"></a>
+<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001qWknIAE" target="_blank" rel="noopener noreferrer"><img alt="Install in a sandbox" src="https://img.shields.io/badge/Install-Sandbox-6B7A8F?style=for-the-badge"></a>
+
+Version 1.0.0-1
+<!-- INSTALL_LINK:END -->
 
 Runs a screen flow on an external website through Lightning Out 2.0.
 
@@ -28,7 +34,3 @@ The container sends its height to the website as a `flow:height` message; this s
 - The iframe fills `<c-lightning-out-flow-container>`, so setting the container's height sizes the iframe.
 
 Don't put `flex: 1` or a height `transition` on `c-lightning-out-flow-container`. `flex: 1` overrides the height the script sets, and a transition makes a scrollbar flash each time the flow grows.
-
-## Passing parameters to the flow
-
-You can find the different ways to pass values to the flow in: add DOCS link later.
