@@ -31,6 +31,7 @@ If you prefer to build a fully custom implementation, on Salesforce or outside o
 
 **Any use-case**
 - [LWC](sfdx-source/packages/lwc-procode): pro-code template for custom LWCs when you need full code control over layout, validation, navigation, etc. without using Flow. Components integrate with FinDock Payment API and are fully configurable.
+- [Lightning Out flow](sfdx-source/packages/lightning-out-flow): container component for running any screen flow (including the Donation and Checkout flow templates) on an external website through Lightning Out 2.0, with automatic iframe sizing
 
 ## Package compatibility
 
