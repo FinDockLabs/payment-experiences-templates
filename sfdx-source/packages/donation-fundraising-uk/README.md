@@ -6,7 +6,7 @@
 Version 1.0.0-1
 <!-- INSTALL_LINK:END -->
 
-> **Compatibility:** Install only one template variant per org. See the [package compatibility notes](../../../README.md#package-compatibility). Checkout may coexist with another variant.
+> **Compatibility:** Install only one template variant per org. See the [package compatibility notes](../../../README.md#package-compatibility).
 
 This template contains a Flow template to help you get started with building digital payment experiences using Experience Cloud and FinDock Payment Experiences. The flow included is designed for Salesforce Fundraising:
 Donation flow: Screen flow with a multi-step donation process, includes setting Gift Tributes and donor covering fees.

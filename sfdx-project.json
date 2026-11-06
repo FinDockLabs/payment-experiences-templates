@@ -47,6 +47,14 @@
       "path": "sfdx-source/packages/donation-site",
       "default": false,
       "versionDescription": ""
+    },
+    {
+      "package": "FinDock Experiences - Lightning Out Flow",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "sfdx-source/packages/lightning-out-flow",
+      "default": false,
+      "versionDescription": ""
     }
   ],
   "name": "experience-cloud-templates",

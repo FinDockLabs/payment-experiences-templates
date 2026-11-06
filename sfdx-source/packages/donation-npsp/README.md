@@ -6,7 +6,7 @@
 Version 0.1.0-4
 <!-- INSTALL_LINK:END -->
 
-> **Compatibility:** Install only one template variant per org. See the [package compatibility notes](../../../README.md#package-compatibility). Checkout may coexist with another variant.
+> **Compatibility:** Install only one template variant per org. See the [package compatibility notes](../../../README.md#package-compatibility).
 
 This template contains a Flow template to help you get started with building digital payment experiences using Experience Cloud and FinDock Payment Experiences. The flow included is designed for NPSP:
 Donation flow: Screen flow with a multi-step donation process, includes Gift Aid and donor covering fees.
