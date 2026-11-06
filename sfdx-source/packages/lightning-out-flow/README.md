@@ -1,4 +1,6 @@
 # Lightning Out Flow
+<!-- INSTALL_LINK:START -->
+<!-- INSTALL_LINK:END -->
 
 Runs a screen flow on an external website through Lightning Out 2.0.
 
