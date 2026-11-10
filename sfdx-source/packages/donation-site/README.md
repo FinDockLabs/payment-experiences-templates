@@ -27,6 +27,24 @@ The site is meant to be customized and extended to fit the specific use case and
 3. Customize the page in the Experience Cloud builder.
 4. Publish the Experience Cloud site.
 
-The installation will ask you to approve external.findock.com as a trusted site. This site is used to host assets for the site such as icons and pictures.
+The installation will ask you to approve three trusted sites: external.findock.com (icons and pictures), and fonts.googleapis.com and fonts.gstatic.com (the site's web fonts).
 
 > The site itself is not part of this package. `Network` and `CustomSite` are deliberately excluded in `.forceignore` because they embed the creating user's email address and the org subdomain, which are not portable between orgs. This is why the site has to be created before the template is deployed.
+
+
+## Styling
+
+The design reads the Experience Builder **Theme** panel, so you can rebrand without editing CSS:
+
+| Theme panel setting | Drives |
+|---|---|
+| Brand colour | Buttons, selected states, step indicator, and the light tints derived from it |
+| Background | Page background and header |
+| Text colours | Body copy and captions |
+| Fonts | Body and heading fonts |
+| Button and form element radius | Pills, tiles and fields |
+
+- Layout and component overrides live in the `canopyStyles` static resource, loaded from the page's Head Markup.
+- The accent colour, which has no Theme panel setting, is one `:root` line in Head Markup.
+- Replace the logo and images in the static resources, or point the components at your own files.
+- See [Payment Experiences styling](https://docs.findock.com/docs/november-26/payments/payment-experiences-styling) for the styling hooks.

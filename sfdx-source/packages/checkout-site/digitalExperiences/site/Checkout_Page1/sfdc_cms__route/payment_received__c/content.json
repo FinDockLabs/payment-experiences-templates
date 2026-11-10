@@ -1,0 +1,12 @@
+{
+  "type": "sfdc_cms__route",
+  "title": "Payment received",
+  "contentBody": {
+    "activeViewId": "paymentReceived",
+    "configurationTags": [],
+    "pageAccess": "UseParent",
+    "routeType": "custom-payment-received",
+    "urlPrefix": "payment-received"
+  },
+  "urlName": "payment-received"
+}

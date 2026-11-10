@@ -12,7 +12,7 @@
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
-            "maxContentWidth" : "600px",
+            "maxContentWidth" : "1280px",
             "sectionColumnGutterWidth" : "0rem",
             "sectionConfig" : "{\"UUID\":\"eb41cf54-ff6b-4048-96e3-bfcaba81c149\",\"columns\":[{\"UUID\":\"b50fc26e-10ef-4331-b764-59d2232e5ba8\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
             "sectionMinHeight" : "",
@@ -32,20 +32,6 @@
               "children" : [ {
                 "children" : [ {
                   "attributes" : {
-                    "alignment" : "center",
-                    "fit" : "contain",
-                    "height" : 350,
-                    "imageInfo" : "{\"imageInfoV1\":{\"url\":\"https://external.findock.com/experience-cloud/icons/checkout.svg\",\"altText\":\"\",\"contentKey\":\"\",\"contentType\":null}}",
-                    "overlayColor" : "",
-                    "position" : "center center",
-                    "width" : 8
-                  },
-                  "customCssClasses" : "checkout-icon",
-                  "definition" : "dxp_base:image",
-                  "id" : "1f81057a-cc43-4173-a5c3-c33818dfb0cc",
-                  "type" : "component"
-                }, {
-                  "attributes" : {
                     "flowArguments" : "[{\"label\":\"id\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"id\",\"type\":\"String\",\"value\":\"{!GUID}\"}]",
                     "flowName" : "{\"flowName\":\"Checkout_Flow\",\"flowLabel\":\"Checkout Flow\"}"
                   },
@@ -53,24 +39,15 @@
                   "definition" : "dxp_flow:flow",
                   "id" : "0b5b868f-4990-4b43-a6d8-3f5286d2c096",
                   "type" : "component"
-                }, {
-                  "attributes" : {
-                    "imageInfos" : "",
-                    "richTextValue" : "<p style=\"margin-top:.5rem;text-align:center;font-size: var(--dxp-s-body-small-font-size, var(--dxp-g-font-size-2));\">\n<img src=\"https://external.findock.com/experience-cloud/icons/lock.svg\" style=\"display: inline-block; margin-top: -4px\" />\n    Secure Payments\n</p>"
-                  },
-                  "definition" : "community_builder:htmlEditor",
-                  "id" : "701c3120-6566-410a-b6a8-2e9f32d4aefd",
-                  "type" : "component"
                 } ],
                 "id" : "b58e0a6b-96bb-4bcf-91f2-ec258016dc34",
                 "name" : "col1",
                 "title" : "Column 1",
                 "type" : "region"
               } ],
-              "customCssClasses" : "main",
+              "customCssClasses" : "checkout",
               "definition" : "dxp_layout:columns",
               "id" : "37abf562-48dd-4b14-8c3e-70b3c69e204e",
-              "scopedBrandingSetId" : "Content",
               "type" : "component"
             } ],
             "id" : "b50fc26e-10ef-4331-b764-59d2232e5ba8",

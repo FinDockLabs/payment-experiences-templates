@@ -1,0 +1,138 @@
+{
+  "type": "sfdc_cms__view",
+  "title": "Payment received",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "1.5rem",
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "600px",
+                "sectionColumnGutterWidth": "0rem",
+                "sectionConfig": "{\"UUID\":\"a8160d11-a68d-45c8-b492-d47027d259c9\",\"columns\":[{\"UUID\":\"52092f52-fd33-4eb6-aa58-b32988223dbe\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Payment received",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+                      },
+                      "customCssClasses": "success-title",
+                      "definition": "dxp_base:textBlock",
+                      "id": "3c949b7d-eebc-4af5-9c86-df5b5c05e905",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Thank you. Your payment has been received and is being processed.",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}"
+                      },
+                      "customCssClasses": "success-message",
+                      "definition": "dxp_base:textBlock",
+                      "id": "4370715d-df43-4b22-b3c4-508f98c2510f",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "A confirmation is on its way to your inbox.",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"body-small\",\"headingTag\":\"p\",\"enableOverride\":false}"
+                      },
+                      "customCssClasses": "success-note",
+                      "definition": "dxp_base:textBlock",
+                      "id": "06eca5fe-807b-44a9-acf8-58edfac041f0",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "isLinkable": true,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Back to checkout",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"body-regular\",\"headingTag\":\"p\",\"enableOverride\":false}",
+                        "url": "{\"linkInfo\":{\"pageReference\":{\"type\":\"comm__namedPage\",\"attributes\":{\"name\":\"Home\"}}}}"
+                      },
+                      "customCssClasses": "back-link",
+                      "definition": "dxp_base:textBlock",
+                      "id": "0c55cfe8-818f-4839-b274-e2e70e7876c0",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "52092f52-fd33-4eb6-aa58-b32988223dbe",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "customCssClasses": "success-page",
+              "definition": "community_layout:section",
+              "id": "a8160d11-a68d-45c8-b492-d47027d259c9",
+              "type": "component"
+            }
+          ],
+          "id": "74bff002-f1a2-4d1e-9bed-6ba15c8dc18d",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "pageTitle": "Payment received",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "ca9043e8-14be-4f0a-ad65-7ccde7c15a25",
+              "type": "component"
+            }
+          ],
+          "id": "7a4ceb2a-e309-4ff9-bce1-804d746ddb12",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "d7212572-b3c2-48ed-bc1d-2b0970f754d0",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "69XzUe66d6QJoqQq8w3osOfIofhW1t",
+    "viewType": "custom-payment-received"
+  },
+  "urlName": "payment-received"
+}
