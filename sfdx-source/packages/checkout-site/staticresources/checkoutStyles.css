@@ -1,0 +1,412 @@
+/*
+ * Checkout site: FinDock look (IBM Plex Sans, navy ink, pale-blue page with soft glows, summary and payment split by a line).
+ * Brand and how to restyle: standalone/findock-gibbons/DESIGN.md.
+ *
+ * Colours, fonts and corner rounding come from the Experience Cloud theme (Experience Builder > Theme)
+ * through its --dxp-* styling hooks, so a rebrand happens in the Theme panel, not in this file.
+ * The two background glows have no theme setting; they're set in the site's Head Markup:
+ *   <style>:root { --checkout-glow-1: #FF8A4C; --checkout-glow-2: #8282FC; }</style>
+ */
+
+/*
+ * Brand tokens, derived from the theme. Defined on c-invoice-pay-flow as well as :root so the Lightning Out embed
+ * resolves them against the hooks it sets on itself (bottom of this file), not against the Lightning Out site's theme.
+ */
+:root,
+c-invoice-pay-flow {
+    --checkout-navy: var(--dxp-g-root-contrast, #1B2A5B);
+    --checkout-brand: var(--dxp-g-brand, #1B2A5B);
+    --checkout-slate: var(--dxp-g-root-contrast-1, #3A4A6B);
+    --checkout-caption: var(--dxp-g-root-contrast-2, #5A6680);
+    --checkout-tint: var(--dxp-g-root, #F1F8FF);
+    --checkout-font: var(--dxp-s-html-font-family, sans-serif);
+    --checkout-radius: var(--dxp-s-button-radius-border, 12px);
+    --checkout-glow-1: #FF8A4C;
+    --checkout-glow-2: #8282FC;
+    --checkout-success: #1E8A55;
+    /* Lines and shadows mixed from the text colour, so they follow a theme change. */
+    --checkout-border: color-mix(in srgb, var(--checkout-navy) 10%, transparent);
+    --checkout-border-strong: color-mix(in srgb, var(--checkout-navy) 18%, transparent);
+    --checkout-field-border: color-mix(in srgb, var(--checkout-navy) 30%, #FFFFFF);
+    --checkout-shadow: 0 4px 24px color-mix(in srgb, var(--checkout-navy) 8%, transparent);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html,
+body {
+    background: var(--checkout-tint);
+    font-family: var(--checkout-font);
+    color: var(--checkout-navy);
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Brand glows behind the content */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    z-index: 0;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+body::before {
+    left: -220px;
+    top: 140px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--checkout-glow-1) 90%, transparent) 0%, transparent 70%);
+}
+
+body::after {
+    right: -240px;
+    bottom: -180px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--checkout-glow-2) 90%, transparent) 0%, transparent 70%);
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+/* The theme layout pads its header slot by 12px; pull the bar out to the viewport edges. */
+.site-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid color-mix(in srgb, var(--checkout-navy) 8%, transparent);
+    margin: -12px -12px 0;
+    padding: 18px 24px;
+}
+
+/* Logo mark before the brand name; resolves to the gibbonsLogo static resource next to this file. */
+.brand-name p::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    vertical-align: middle;
+    background: url("gibbonsLogo") center / contain no-repeat;
+}
+
+.brand-name,
+.brand-name a {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--checkout-navy);
+    text-decoration: none;
+}
+
+/* Secondary link under the brand name, aligned with the text after the 32px mark + 10px gap */
+.brand-link p {
+    margin: -6px 0 0 42px;
+    font-size: 13px;
+    color: var(--checkout-slate);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+}
+
+.brand-link p:hover {
+    color: var(--checkout-navy);
+}
+
+.secure-badge {
+    color: var(--checkout-slate);
+    font-size: 14px;
+}
+
+.secure-badge p::before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: -3px;
+    background: url("https://external.findock.com/experience-cloud/icons/lock.svg") center / contain no-repeat;
+}
+
+/* Footer */
+.site-footer {
+    padding: 24px;
+}
+
+.footer-note {
+    color: var(--checkout-caption);
+    font-size: 13px;
+}
+
+/*
+ * Checkout page body. Flow uses synthetic shadow DOM, so these selectors reach its sections.
+ * The Pay screens use one section: summary column (7/12) and payment column (5/12).
+ */
+.checkout {
+    padding: 56px 24px 48px;
+    background: transparent;
+}
+
+/* The whole form is one white card; everything inside it, fields and their states included, stays white. */
+:is(.checkout, c-invoice-pay-flow) flowruntime-flow {
+    display: block;
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: var(--checkout-shadow);
+    padding: 40px;
+
+    --dxp-g-root: #FFFFFF;
+    --dxp-g-neutral-3: var(--checkout-field-border);
+    --dxp-s-form-element-color-border: var(--checkout-field-border);
+    --dxp-s-form-element-color-background: #FFFFFF;
+    --dxp-s-form-element-color-background-focus: #FFFFFF;
+    --slds-c-input-color-background: #FFFFFF;
+    --slds-c-input-color-background-focus: #FFFFFF;
+    --slds-c-select-color-background: #FFFFFF;
+    --slds-c-textarea-color-background: #FFFFFF;
+    --slds-c-radio-color-background: #FFFFFF;
+    --slds-c-checkbox-color-background: #FFFFFF;
+}
+
+:is(.checkout, c-invoice-pay-flow) flowruntime-progress-indicator {
+    display: none;
+}
+
+/* dxp-styles.css centres the dots with auto margins, which needs a block box. */
+:is(.checkout, c-invoice-pay-flow) flowruntime-spinner-lwc {
+    display: block;
+    margin: 6em auto;
+}
+
+/* Give the payment side the larger share so card fields have room (the flow says 7/5). */
+:is(.checkout, c-invoice-pay-flow) .flowruntime-section-column.slds-medium-size_7-of-12 {
+    padding: 8px 48px 0 0 !important;
+}
+
+:is(.checkout, c-invoice-pay-flow) .flowruntime-section-column.slds-medium-size_5-of-12 {
+    border-left: 1px solid var(--checkout-border);
+    padding: 8px 0 0 48px !important;
+}
+
+@media (min-width: 48em) {
+    :is(.checkout, c-invoice-pay-flow) .flowruntime-section-column.slds-medium-size_7-of-12 {
+        width: 42% !important;
+    }
+
+    :is(.checkout, c-invoice-pay-flow) .flowruntime-section-column.slds-medium-size_5-of-12 {
+        width: 58% !important;
+    }
+}
+
+/* The selector indents a method's fields 40px on both sides; keep the left indent only. */
+:is(.checkout, c-invoice-pay-flow) .payment-option .expanded-content-inner {
+    padding: 0 8px 0 40px !important;
+}
+
+/* Invoice details: a line between each label/value row */
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_7-of-12 .flowruntime-column:nth-child(2) {
+    margin-top: 24px;
+}
+
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_7-of-12 .flowruntime-column:nth-child(2) p:first-child {
+    padding-bottom: 12px;
+}
+
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_7-of-12 .flowruntime-column:nth-child(2) p + p {
+    border-top: 1px solid var(--checkout-border);
+    margin: 0;
+    padding: 12px 0;
+}
+
+/* "Download invoice" link at the end of the details (placeholder for the demo) */
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_7-of-12 .flowruntime-column:nth-child(2) p:has(> a) {
+    border-top: 0;
+    padding-top: 4px;
+}
+
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_7-of-12 .flowruntime-column:nth-child(2) p > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--checkout-navy);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_7-of-12 .flowruntime-column:nth-child(2) p > a::before {
+    content: "\2193";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 1px solid var(--checkout-border);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* Title: the flow sets 34px inline (fits a phone); scale it up per breakpoint. */
+:is(.checkout, c-invoice-pay-flow) span[style*="font-size: 34px"] {
+    font-size: 44px !important;
+    line-height: 1.1 !important;
+}
+
+/* Payment method rows: white with a soft border */
+:is(.checkout, c-invoice-pay-flow) .payment-option,
+:is(.checkout, c-invoice-pay-flow) .payment-option:hover,
+:is(.checkout, c-invoice-pay-flow) .payment-option:focus-within {
+    background: #FFFFFF !important;
+    border-color: var(--checkout-border-strong) !important;
+}
+
+:is(.checkout, c-invoice-pay-flow) .payment-option .method-name {
+    color: var(--checkout-navy);
+    font-weight: 500;
+}
+
+:is(.checkout, c-invoice-pay-flow) .payment-option.payment-option-selected {
+    border-color: var(--checkout-brand) !important;
+}
+
+@media (max-width: 767px) {
+    .checkout {
+        padding: 24px 12px;
+    }
+
+    :is(.checkout, c-invoice-pay-flow) flowruntime-flow {
+        border-radius: 20px;
+        padding: 24px 20px;
+    }
+
+    :is(.checkout, c-invoice-pay-flow) .flowruntime-section-column.slds-medium-size_7-of-12 {
+        padding: 0 !important;
+    }
+
+    :is(.checkout, c-invoice-pay-flow) .flowruntime-section-column.slds-medium-size_5-of-12 {
+        border-left: 0;
+        border-top: 1px solid var(--checkout-border);
+        margin-top: 24px;
+        padding: 24px 0 0 !important;
+    }
+
+    :is(.checkout, c-invoice-pay-flow) span[style*="font-size: 34px"] {
+        font-size: 32px !important;
+    }
+}
+
+/* Success page */
+.success-page {
+    padding: 72px 24px;
+}
+
+.success-page .success-title {
+    margin-top: 56px;
+    padding-top: 112px;
+    position: relative;
+}
+
+.success-page .success-title::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    border-radius: 50%;
+    background: var(--checkout-success);
+    box-shadow: 0 0 0 24px color-mix(in srgb, var(--checkout-glow-1) 12%, transparent), 0 0 80px 40px color-mix(in srgb, var(--checkout-glow-1) 18%, transparent);
+}
+
+.success-page .success-title::after {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 30px;
+    height: 16px;
+    margin-left: -15px;
+    border-left: 4px solid #FFFFFF;
+    border-bottom: 4px solid #FFFFFF;
+    transform: rotate(-45deg);
+}
+
+.success-page .success-title h1 {
+    font-size: 44px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--checkout-navy);
+}
+
+.success-page .success-message {
+    font-size: 18px;
+    color: var(--checkout-slate);
+}
+
+.success-page .success-note {
+    color: var(--checkout-slate);
+}
+
+.success-page .back-link {
+    text-align: center;
+    margin-top: 8px;
+}
+
+.success-page .back-link p {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+    min-height: 52px;
+    padding: 0 28px !important;
+    border-radius: var(--checkout-radius);
+    border: 1px solid color-mix(in srgb, var(--checkout-navy) 20%, transparent);
+    background: #FFFFFF;
+    font-weight: 600;
+    color: var(--checkout-navy);
+    cursor: pointer;
+}
+
+.success-page .back-link p:hover {
+    background: var(--checkout-tint);
+}
+
+/*
+ * Lightning Out: the same checkout rendered by c-invoice-pay-flow inside the embedding site's iframe.
+ * Lightning Out doesn't load the checkout site's theme (the Lightning Out site keeps the template's light-grey
+ * text), so the embed sets the checkout values of the theme hooks itself.
+ */
+c-invoice-pay-flow {
+    --dxp-g-brand: #1B2A5B;
+    --dxp-g-brand-contrast: #FFFFFF;
+    --dxp-g-root-contrast: #1B2A5B;
+    --dxp-g-root-contrast-1: #3A4A6B;
+    --dxp-g-root-contrast-2: #5A6680;
+    --dxp-s-html-font-family: "IBM Plex Sans", Inter, "Helvetica Neue", Arial, sans-serif;
+    --dxp-g-root-font-family: var(--dxp-s-html-font-family);
+    --dxp-s-text-heading-font-family: var(--dxp-s-html-font-family);
+    --dxp-s-button-font-family: var(--dxp-s-html-font-family);
+    --dxp-s-form-element-text-font-family: var(--dxp-s-html-font-family);
+    --slds-g-font-family: var(--dxp-s-html-font-family);
+    --lwc-fontFamily: var(--dxp-s-html-font-family);
+    --dxp-s-body-text-color: var(--checkout-navy);
+    --dxp-s-text-heading-color: var(--checkout-navy);
+    --dxp-s-form-element-label-color: var(--checkout-navy);
+    --dxp-s-form-element-text-color: var(--checkout-navy);
+    color: var(--checkout-navy);
+    font-family: var(--checkout-font);
+}
+
+c-invoice-pay-flow .pay-flow {
+    padding: 16px;
+}
