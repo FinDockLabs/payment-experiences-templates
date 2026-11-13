@@ -10,6 +10,7 @@
  *   font-size: 20px / 18px          section headings and the total
  *   color: rgb(92, 98, 112)         a summary row: label left, amount right (Subtotal, VAT)
  *   color: rgb(26, 29, 37)          an order line: name and detail left, amount right
+ *   font-size: 14px                 a note under the total (VAT, renewal, questions)
  * Keep those when you edit the flow's texts (for example to make the order lines dynamic).
  */
 
@@ -229,10 +230,14 @@ body {
     font-size: 26px !important;
 }
 
-/* Questions line */
+/* Notes under the total (VAT, renewal, questions): the first one 12px below the total, the rest close together */
 :is(.checkout, c-invoice-pay-flow) .slds-medium-size_5-of-12 p:has(> span[style*="font-size: 14px"]) {
-    margin-top: 24px;
+    margin-top: 12px;
     line-height: 1.5;
+}
+
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_5-of-12 p:has(> span[style*="font-size: 14px"]) + p:has(> span[style*="font-size: 14px"]) {
+    margin-top: 16px;
 }
 
 /* Payment method rows: white with a soft border, brand border when selected */
