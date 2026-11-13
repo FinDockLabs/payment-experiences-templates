@@ -105,6 +105,12 @@ body {
     display: none;
 }
 
+/* Loading: only FinDock's grey dots, not the blue SLDS spinner as well. FinDock hides the blue one only under
+   a .flow container, which the Lightning Out embed doesn't have. */
+:is(.paylink, c-pay-link-flow) .slds-spinner {
+    display: none !important;
+}
+
 :is(.paylink, c-pay-link-flow) flowruntime-spinner-lwc {
     display: block;
     margin: 4em auto;
@@ -384,6 +390,10 @@ c-pay-link-flow {
     --slds-g-font-family: var(--dxp-s-html-font-family);
     --lwc-fontFamily: var(--dxp-s-html-font-family);
     --dxp-s-button-radius-border: 10px;
+    --dxp-s-button-color: var(--dxp-g-brand);
+    --dxp-s-button-color-hover: color-mix(in srgb, var(--dxp-g-brand) 85%, #FFFFFF);
+    --dxp-s-button-color-contrast: var(--dxp-g-brand-contrast);
+    --slds-g-color-brand-base-60: var(--dxp-g-brand);
     --dxp-s-body-text-color: var(--paylink-ink);
     --dxp-s-text-heading-color: var(--paylink-ink);
     --dxp-s-form-element-label-color: var(--paylink-ink);
