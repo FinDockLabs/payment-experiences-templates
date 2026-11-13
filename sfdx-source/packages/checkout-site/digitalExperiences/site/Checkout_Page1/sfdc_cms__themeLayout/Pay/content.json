@@ -31,11 +31,11 @@
                         "linkAssistiveText": "",
                         "paddingHorizontal": "none",
                         "paddingVertical": "none",
-                        "text": "FinDock Gibbons",
+                        "text": "Your company",
                         "textAlign": "left",
                         "textDecoration": "{}",
                         "textDisplayInfo": "{\"textStyle\":\"heading-small\",\"headingTag\":\"p\",\"enableOverride\":false}",
-                        "url": "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://www.findockforgibbons.org/\"}}}}"
+                        "url": "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://www.example.com/\"}}}}"
                       },
                       "definition": "dxp_base:textBlock",
                       "id": "5ed83701-597f-4609-827f-a7338b61f0d9",
@@ -111,7 +111,7 @@
                         "linkAssistiveText": "",
                         "paddingHorizontal": "none",
                         "paddingVertical": "none",
-                        "text": "© 2026 FinDock Gibbons · Payments powered by FinDock",
+                        "text": "© 2026 Your company · Payments powered by FinDock",
                         "textAlign": "center",
                         "textDecoration": "{}",
                         "textDisplayInfo": "{\"textStyle\":\"body-small\",\"headingTag\":\"p\",\"enableOverride\":false}"

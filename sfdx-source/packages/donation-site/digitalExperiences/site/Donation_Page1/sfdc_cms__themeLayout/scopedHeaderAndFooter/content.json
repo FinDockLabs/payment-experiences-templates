@@ -18,37 +18,146 @@
                 "componentSpacerSize": "",
                 "dxpStyle": {},
                 "layoutDirectionDesktop": "row",
-                "layoutDirectionMobile": "column",
-                "layoutDirectionTablet": "column",
+                "layoutDirectionMobile": "row",
+                "layoutDirectionTablet": "row",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "0rem",
-                "sectionConfig": "{\"UUID\":\"ba3129cf-d05b-492c-9437-55af19efdda7\",\"columns\":[{\"UUID\":\"439f9b60-4034-48b4-ab4e-eb1f1d8f01f5\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+                "sectionConfig": "{\"UUID\": \"ed2b28ef-1a7e-42e9-8f0d-444a6042ba5c\", \"columns\": [{\"UUID\": \"62ed5a1c-429e-4695-a2f4-bbae2b70e925\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"0677233c-86ab-4fc9-b8f0-efb8be8b1f97\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"8\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
-                "sectionVerticalAlign": "flex-start"
+                "sectionVerticalAlign": "center"
               },
+              "definition": "community_layout:section",
+              "id": "ed2b28ef-1a7e-42e9-8f0d-444a6042ba5c",
+              "type": "component",
+              "customCssClasses": "cgt-header",
               "children": [
                 {
                   "children": [
                     {
                       "attributes": {
+                        "backgroundColor": "",
                         "dxpStyle": {},
-                        "imageInfos": "",
-                        "richTextValue": "<div class=\"cgt-header\"><a class=\"cgt-brand\" href=\"./\"><img src=\"/canopy/sfsites/c/resource/canopyLogoLight\" alt=\"\" aria-hidden=\"true\">Canopy Gibbon Trust</a><span class=\"cgt-surface\" title=\"This page is an Experience Cloud site in Salesforce\">Experience Cloud site</span><nav class=\"cgt-nav\" aria-label=\"Main\"><a href=\"./#work\">Our work</a><a href=\"./#work\">Meet the gibbons</a><a href=\"./#faq\">Questions</a><a href=\"./#about\">About us</a><a class=\"cgt-button cgt-button-sun\" href=\"./#donate\">Donate</a></nav></div>"
+                        "isLinkable": true,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Canopy Gibbon Trust",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-small\", \"headingTag\": \"p\", \"enableOverride\": false}",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"comm__namedPage\", \"attributes\": {\"name\": \"Home\"}}}}"
                       },
-                      "definition": "community_builder:htmlEditor",
-                      "id": "60b5438e-14e7-4fe2-946f-18aac008f9ad",
-                      "type": "component"
+                      "definition": "dxp_base:textBlock",
+                      "id": "b5f1b5c0-d087-407a-a3b1-342e32a2b501",
+                      "type": "component",
+                      "customCssClasses": "cgt-brand"
                     }
                   ],
-                  "id": "439f9b60-4034-48b4-ab4e-eb1f1d8f01f5",
+                  "id": "62ed5a1c-429e-4695-a2f4-bbae2b70e925",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": true,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Our work",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"standard__webPage\", \"attributes\": {\"url\": \"./#work\"}}}}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "1f5e10e7-307b-4ec3-9ac6-0f6bf66ff32f",
+                      "type": "component",
+                      "customCssClasses": "cgt-nav-link"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": true,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Meet the gibbons",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"standard__webPage\", \"attributes\": {\"url\": \"./#work\"}}}}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "68ad1956-68ed-4cf1-89ca-21e4302f2de6",
+                      "type": "component",
+                      "customCssClasses": "cgt-nav-link"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": true,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Questions",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"standard__webPage\", \"attributes\": {\"url\": \"./#faq\"}}}}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "e92277a1-470a-4b4a-9fda-6b3310728697",
+                      "type": "component",
+                      "customCssClasses": "cgt-nav-link"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": true,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "About us",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"standard__webPage\", \"attributes\": {\"url\": \"./#about\"}}}}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "8afed052-2737-4fef-bd8c-0a9e424fa9b0",
+                      "type": "component",
+                      "customCssClasses": "cgt-nav-link"
+                    },
+                    {
+                      "attributes": {
+                        "alignment": "left",
+                        "dxpStyle": {},
+                        "size": "standard",
+                        "stretch": "standard",
+                        "text": "Donate",
+                        "type": "primary",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"standard__webPage\", \"attributes\": {\"url\": \"./#donate\"}}}}"
+                      },
+                      "definition": "dxp_base:button",
+                      "id": "c1e1a894-aff3-40c1-aefd-09844b2f69a4",
+                      "type": "component",
+                      "customCssClasses": "cgt-button-sun cgt-header-donate"
+                    }
+                  ],
+                  "id": "0677233c-86ab-4fc9-b8f0-efb8be8b1f97",
+                  "name": "col2",
+                  "title": "Column 2",
+                  "type": "region"
                 }
-              ],
-              "definition": "community_layout:section",
-              "id": "ba3129cf-d05b-492c-9437-55af19efdda7",
-              "type": "component"
+              ]
             }
           ],
           "id": "337c4db6-c02c-4f33-93cb-959d0157c3ad",
@@ -61,18 +170,22 @@
             {
               "attributes": {
                 "backgroundImageConfig": "",
-                "backgroundImageOverlay": "rgb(0, 0, 0)",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
                 "componentSpacerSize": "0rem",
                 "dxpStyle": {},
                 "layoutDirectionDesktop": "row",
                 "layoutDirectionMobile": "column",
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
-                "sectionColumnGutterWidth": "1rem",
-                "sectionConfig": "{\"UUID\": \"2bc685a3-3d35-4ae9-be2d-b5d41b5cc0dc\", \"columns\": [{\"UUID\": \"25e08013-18f1-4aeb-a0df-fbadd98cd58e\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionColumnGutterWidth": "2rem",
+                "sectionConfig": "{\"UUID\": \"ac9261a4-3574-4a05-80ff-cbf0c8422e77\", \"columns\": [{\"UUID\": \"cd7a0907-4894-471b-9f6a-182b02259f15\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"dd736171-04b6-43fd-ac55-d3ee619e1505\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"57f599ce-5416-4a1f-a2a4-986b10d11c18\", \"columnName\": \"Column 3\", \"columnKey\": \"col3\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
+              "definition": "community_layout:section",
+              "id": "ac9261a4-3574-4a05-80ff-cbf0c8422e77",
+              "type": "component",
+              "customCssClasses": "cgt-footer",
               "children": [
                 {
                   "children": [
@@ -80,23 +193,185 @@
                       "attributes": {
                         "dxpStyle": {},
                         "imageInfos": "",
-                        "richTextValue": "<div class=\"cgt-footer\" id=\"about\"><div class=\"cgt-footer-cols\"><div><span class=\"cgt-footer-name\">Canopy Gibbon Trust</span><span>Registered charity [number]<br>[Street address, city]</span></div><div><strong>Give</strong><a href=\"./#donate\">Donate once</a><a href=\"./#donate\">Give monthly</a><a href=\"mailto:hello@canopygibbons.example?subject=Cancel%20my%20monthly%20gift\">Cancel a monthly gift</a></div><div><strong>Help</strong><a href=\"mailto:hello@canopygibbons.example\">hello@canopygibbons.example</a><a href=\"./#about\">Privacy</a><a href=\"./#about\">Terms</a></div></div><div class=\"cgt-footer-bottom\"><p>© 2026 Canopy Gibbon Trust · A fictional charity for a FinDock demo. Please don't donate real money.</p><p>Donation form: Salesforce Experience Cloud site · processed by FinDock</p></div></div>"
+                        "richTextValue": "<span id=\"about\" class=\"cgt-anchor\"></span>"
                       },
                       "definition": "community_builder:htmlEditor",
-                      "id": "79876efd-efb5-4938-b57c-5fdbbc633c8f",
+                      "id": "b60f5fb9-d984-488a-8dba-9524650e5ee6",
                       "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Canopy Gibbon Trust",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-small\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "72b497be-f579-4641-816b-cd84abce3294",
+                      "type": "component",
+                      "customCssClasses": "cgt-footer-name"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Registered charity [number]",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "31cf0197-7be1-47f9-897b-c6892e848fdf",
+                      "type": "component",
+                      "customCssClasses": "cgt-footer-note"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "[Street address, city]",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "22ac4092-dcd0-4ca0-8f49-b48794abecb8",
+                      "type": "component",
+                      "customCssClasses": "cgt-footer-note"
                     }
                   ],
-                  "id": "25e08013-18f1-4aeb-a0df-fbadd98cd58e",
+                  "id": "cd7a0907-4894-471b-9f6a-182b02259f15",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "imageInfos": "",
+                        "richTextValue": "<p><strong>Give</strong></p><p><a href=\"./#donate\">Donate once</a></p><p><a href=\"./#donate\">Give monthly</a></p><p><a href=\"mailto:hello@canopygibbons.example?subject=Cancel%20my%20monthly%20gift\">Cancel a monthly gift</a></p>"
+                      },
+                      "definition": "community_builder:richTextEditor",
+                      "id": "ffbdcc9a-570a-4f8f-acee-411b969429c3",
+                      "type": "component",
+                      "customCssClasses": "cgt-footer-links"
+                    }
+                  ],
+                  "id": "dd736171-04b6-43fd-ac55-d3ee619e1505",
+                  "name": "col2",
+                  "title": "Column 2",
+                  "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "imageInfos": "",
+                        "richTextValue": "<p><strong>Help</strong></p><p><a href=\"mailto:hello@canopygibbons.example\">hello@canopygibbons.example</a></p><p><a href=\"./#about\">Privacy</a></p><p><a href=\"./#about\">Terms</a></p>"
+                      },
+                      "definition": "community_builder:richTextEditor",
+                      "id": "eef7711d-700f-4e2c-a48a-f94beee51281",
+                      "type": "component",
+                      "customCssClasses": "cgt-footer-links"
+                    }
+                  ],
+                  "id": "57f599ce-5416-4a1f-a2a4-986b10d11c18",
+                  "name": "col3",
+                  "title": "Column 3",
+                  "type": "region"
                 }
-              ],
+              ]
+            },
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "0rem",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "2rem",
+                "sectionConfig": "{\"UUID\": \"c990064d-07bb-4884-832e-01cf805bd09b\", \"columns\": [{\"UUID\": \"ad3ea925-68af-4837-aa76-15afcd3540a5\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"8\", \"seedComponents\": []}, {\"UUID\": \"62ef7ad6-7906-4527-b88e-778f4772080c\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
               "definition": "community_layout:section",
-              "id": "2bc685a3-3d35-4ae9-be2d-b5d41b5cc0dc",
-              "scopedBrandingSetId": "Footer",
-              "type": "component"
+              "id": "c990064d-07bb-4884-832e-01cf805bd09b",
+              "type": "component",
+              "customCssClasses": "cgt-footer-bottom",
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "© 2026 Canopy Gibbon Trust · A fictional charity for a FinDock demo. All donations are tests: no real money is taken.",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-small\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "17c321c3-54b7-4b57-b88a-28a9f09907b1",
+                      "type": "component",
+                      "customCssClasses": "cgt-footer-small"
+                    }
+                  ],
+                  "id": "ad3ea925-68af-4837-aa76-15afcd3540a5",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Donation form: Salesforce Experience Cloud site · processed by FinDock",
+                        "textAlign": "right",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-small\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "62861fc2-5094-4867-b1e6-0e890bdde490",
+                      "type": "component",
+                      "customCssClasses": "cgt-footer-small"
+                    }
+                  ],
+                  "id": "62ef7ad6-7906-4527-b88e-778f4772080c",
+                  "name": "col2",
+                  "title": "Column 2",
+                  "type": "region"
+                }
+              ]
             }
           ],
           "id": "1a4d195a-9a67-4018-bb28-153b210f43c2",

@@ -26,13 +26,21 @@
                   "children": [
                     {
                       "attributes": {
+                        "backgroundColor": "",
                         "dxpStyle": {},
-                        "imageInfos": "",
-                        "richTextValue": "<div class=\"cgt-result\"><div class=\"cgt-result-icon \" aria-hidden=\"true\">✓</div></div>"
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "✓",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
-                      "definition": "community_builder:htmlEditor",
-                      "id": "ea5c8c13-d59d-4749-8180-1f360d12fa30",
-                      "type": "component"
+                      "definition": "dxp_base:textBlock",
+                      "id": "d95fc770-8b26-4be0-9b3e-a87f9d7bdbf4",
+                      "type": "component",
+                      "customCssClasses": "cgt-result-icon"
                     },
                     {
                       "attributes": {
@@ -49,17 +57,41 @@
                       },
                       "definition": "dxp_base:textBlock",
                       "id": "8107cb50-01cc-4bdd-a8b0-2bd72734722a",
-                      "type": "component"
+                      "type": "component",
+                      "customCssClasses": "cgt-result-title"
                     },
                     {
                       "attributes": {
+                        "backgroundColor": "",
                         "dxpStyle": {},
-                        "imageInfos": "",
-                        "richTextValue": "<div class=\"cgt-result\"><p>Your donation is set up. A confirmation is on its way to your inbox. You are now one of the people keeping gibbons in the wild.</p><a class=\"cgt-button\" href=\"./\">Back to the home page</a></div>"
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Your donation is set up. A confirmation is on its way to your inbox. You are now one of the people keeping gibbons in the wild.",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
-                      "definition": "community_builder:htmlEditor",
-                      "id": "72e1da1e-2beb-4db5-b4dc-56d6e3c356f5",
-                      "type": "component"
+                      "definition": "dxp_base:textBlock",
+                      "id": "ecf09673-bf52-444c-8b6a-8988863ab9e9",
+                      "type": "component",
+                      "customCssClasses": "cgt-result-text"
+                    },
+                    {
+                      "attributes": {
+                        "alignment": "center",
+                        "dxpStyle": {},
+                        "size": "standard",
+                        "stretch": "standard",
+                        "text": "Back to the home page",
+                        "type": "primary",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"comm__namedPage\", \"attributes\": {\"name\": \"Home\"}}}}"
+                      },
+                      "definition": "dxp_base:button",
+                      "id": "8ae07ae1-8be5-403c-af04-9f3c05af14e6",
+                      "type": "component",
+                      "customCssClasses": "cgt-result-button"
                     }
                   ],
                   "id": "244945e6-fc94-4120-865a-26f394464e21",
@@ -70,7 +102,8 @@
               ],
               "definition": "community_layout:section",
               "id": "caba14f1-1fc2-4179-8335-da8f10b0ee95",
-              "type": "component"
+              "type": "component",
+              "customCssClasses": "cgt-result"
             }
           ],
           "id": "edff90a3-5ddb-4125-a491-399c09f2bffd",

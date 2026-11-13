@@ -17,6 +17,18 @@ The site is meant to be customized and extended to fit the specific use case and
 - Update existing recurring payments
 
 
+## Preview
+
+![The checkout: payment on the left, a plain-text order summary on the right (shown above the payment on a phone).](../../../docs/images/checkout-site.png)
+
+The checkout: payment on the left, a plain-text order summary on the right (shown above the payment on a phone).
+
+### Brand
+
+![The neutral brand the checkout and Pay Link templates share. Swap the logo, the brand colour and the font for your own.](../../../docs/images/brand-checkout-pay-link.png)
+
+The neutral brand the checkout and Pay Link templates share. Swap the logo, the brand colour and the font for your own.
+
 ## Prerequisites
 - FinDock is installed and configured.
 - FinDock is the source of payments data ([FinDock Standalone](https://docs.findock.com/docs/source-connectors/findock-standalone)).

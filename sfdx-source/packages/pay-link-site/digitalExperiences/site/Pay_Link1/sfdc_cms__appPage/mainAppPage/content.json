@@ -1,0 +1,12 @@
+{
+  "type": "sfdc_cms__appPage",
+  "title": "main",
+  "contentBody": {
+    "currentThemeId": "Build_Your_Own_LWR",
+    "headMarkup": "<title>Secure payment</title>\n\n<!-- branding stylesheets -->\n\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part1.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part2.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part3.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/slds/salesforce-lightning-design-system-part4.css?{ versionKey }\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-site-spacing-styling-hooks.min.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-styling-hooks.min.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/assets/styles/dxp-slds-extensions.min.css?{ versionKey }\" />\n\n\n\n<!-- branding stylesheets-->\n\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700\" />\n<link rel=\"stylesheet\" href=\"{ basePath }/sfsites/c/resource/findockAssets/dxp-styles.css?{ versionKey }\" />\n<link rel=\"stylesheet\" href=\"{ styles/styles.css }\" />\n<link rel=\"stylesheet\" href=\"{ styles/print.css }\" media=\"print\"/>\n<link rel=\"stylesheet\" href=\"{ basePath }/sfsites/c/resource/payLinkStyles?{ versionKey }\" />",
+    "isLockerServiceEnabled": true,
+    "isRelaxedCSPLevel": false,
+    "templateName": "talon-template-byo"
+  },
+  "urlName": "main"
+}
