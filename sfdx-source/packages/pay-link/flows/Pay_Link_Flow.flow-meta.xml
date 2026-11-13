@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Has_Id</name>
+        <label>Has an id?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Not_Found_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No id</defaultConnectorLabel>
+        <rules>
+            <name>Id_Given</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>id</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Installment</targetReference>
+            </connector>
+            <label>Id given</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Installment_State</name>
+        <label>Record state</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Pay_Screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Open</defaultConnectorLabel>
+        <rules>
+            <name>Not_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Is_Found</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Not_Found_Screen</targetReference>
+            </connector>
+            <label>Not found</label>
+        </rules>
+        <rules>
+            <name>Paid</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Is_Paid</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Paid_Screen</targetReference>
+            </connector>
+            <label>Paid</label>
+        </rules>
+    </decisions>
+    <description>Pays one installment from a link (an invoice or a payment link), or changes the payment method of a recurring payment. One card with the amount, a short summary and the FinDock payment methods. Collected installments show a paid confirmation instead.</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Installment amount with currency symbol, for the paid screen.</description>
+        <name>Amount_Paid_Text</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Currency_Code},&quot;EUR&quot;,&quot;€&quot;,&quot;USD&quot;,&quot;$&quot;,&quot;GBP&quot;,&quot;£&quot;,&quot;CHF&quot;,&quot;CHF &quot;,&quot;SEK&quot;,&quot;SEK &quot;,&quot;NOK&quot;,&quot;NOK &quot;,&quot;DKK&quot;,&quot;DKK &quot;,{!Currency_Code} &amp; &quot; &quot;) &amp; IF(FLOOR(BLANKVALUE({!Get_Installment.cpm__Amount__c}, 0)) >= 1000, TEXT(FLOOR(FLOOR(BLANKVALUE({!Get_Installment.cpm__Amount__c}, 0))/1000)) &amp; &quot;,&quot; &amp; RIGHT(&quot;00&quot; &amp; TEXT(MOD(FLOOR(BLANKVALUE({!Get_Installment.cpm__Amount__c}, 0)),1000)),3), TEXT(FLOOR(BLANKVALUE({!Get_Installment.cpm__Amount__c}, 0)))) &amp; &quot;.&quot; &amp; RIGHT(&quot;0&quot; &amp; TEXT(ROUND(MOD(BLANKVALUE({!Get_Installment.cpm__Amount__c}, 0)*100,100),0)),2)</expression>
+    </formulas>
+    <formulas>
+        <description>Open amount (or the recurring amount) with currency symbol, e.g. €1,250.00.</description>
+        <name>Amount_Text</name>
+        <dataType>String</dataType>
+        <expression>CASE({!Currency_Code},&quot;EUR&quot;,&quot;€&quot;,&quot;USD&quot;,&quot;$&quot;,&quot;GBP&quot;,&quot;£&quot;,&quot;CHF&quot;,&quot;CHF &quot;,&quot;SEK&quot;,&quot;SEK &quot;,&quot;NOK&quot;,&quot;NOK &quot;,&quot;DKK&quot;,&quot;DKK &quot;,{!Currency_Code} &amp; &quot; &quot;) &amp; IF(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)) >= 1000, TEXT(FLOOR(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0))/1000)) &amp; &quot;,&quot; &amp; RIGHT(&quot;00&quot; &amp; TEXT(MOD(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)),1000)),3), TEXT(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)))) &amp; &quot;.&quot; &amp; RIGHT(&quot;0&quot; &amp; TEXT(ROUND(MOD(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)*100,100),0)),2)</expression>
+    </formulas>
+    <formulas>
+        <name>Currency_Code</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Recurring}, TEXT({!Get_Recurring_Payment.CurrencyIsoCode}), TEXT({!Get_Installment.CurrencyIsoCode}))</expression>
+    </formulas>
+    <formulas>
+        <name>Current_Method</name>
+        <dataType>String</dataType>
+        <expression>TEXT({!Get_Recurring_Payment.cpm__Payment_Method__c})</expression>
+    </formulas>
+    <formulas>
+        <description>Line under the amount: the due date, or the frequency and next payment for a recurring payment.</description>
+        <name>Due_Text</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Recurring}, TEXT({!Get_Recurring_Payment.cpm__Frequency__c}) &amp; IF(ISBLANK({!Get_Recurring_Payment.cpm__Next_Collection_Date__c}), &quot;&quot;, &quot; · next payment &quot; &amp; TEXT(DAY({!Get_Recurring_Payment.cpm__Next_Collection_Date__c})) &amp; &quot; &quot; &amp; CASE(MONTH({!Get_Recurring_Payment.cpm__Next_Collection_Date__c}),1,&quot;January&quot;,2,&quot;February&quot;,3,&quot;March&quot;,4,&quot;April&quot;,5,&quot;May&quot;,6,&quot;June&quot;,7,&quot;July&quot;,8,&quot;August&quot;,9,&quot;September&quot;,10,&quot;October&quot;,11,&quot;November&quot;,12,&quot;December&quot;,&quot;&quot;) &amp; &quot; &quot; &amp; TEXT(YEAR({!Get_Recurring_Payment.cpm__Next_Collection_Date__c}))), IF(ISBLANK({!Get_Installment.cpm__Due_Date__c}), &quot;&quot;, &quot;Due &quot; &amp; TEXT(DAY({!Get_Installment.cpm__Due_Date__c})) &amp; &quot; &quot; &amp; CASE(MONTH({!Get_Installment.cpm__Due_Date__c}),1,&quot;January&quot;,2,&quot;February&quot;,3,&quot;March&quot;,4,&quot;April&quot;,5,&quot;May&quot;,6,&quot;June&quot;,7,&quot;July&quot;,8,&quot;August&quot;,9,&quot;September&quot;,10,&quot;October&quot;,11,&quot;November&quot;,12,&quot;December&quot;,&quot;&quot;) &amp; &quot; &quot; &amp; TEXT(YEAR({!Get_Installment.cpm__Due_Date__c}))))</expression>
+    </formulas>
+    <formulas>
+        <description>Who is asking for the payment. Set merchantName in the site to override the org name.</description>
+        <name>From_Name</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!merchantName}, {!$Organization.Name})</expression>
+    </formulas>
+    <formulas>
+        <name>Has_Invoice_Url</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISBLANK({!invoiceUrl}))</expression>
+    </formulas>
+    <formulas>
+        <name>Show_Memo</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(NOT({!Is_Recurring}), NOT(ISBLANK({!Memo})))</expression>
+    </formulas>
+    <formulas>
+        <name>Is_Current_User_Sys_Admin</name>
+        <dataType>Boolean</dataType>
+        <expression>{!$Profile.Name} = &apos;System Administrator&apos;</expression>
+    </formulas>
+    <formulas>
+        <description>Invoice (default) shows To, From and Invoice rows and the PDF; link shows From and For.</description>
+        <name>Is_Invoice</name>
+        <dataType>Boolean</dataType>
+        <expression>LOWER(BLANKVALUE({!type}, &quot;invoice&quot;)) &lt;&gt; &quot;link&quot;</expression>
+    </formulas>
+    <formulas>
+        <name>Is_Found</name>
+        <dataType>Boolean</dataType>
+        <expression>OR(NOT(ISBLANK({!Get_Installment.Id})), NOT(ISBLANK({!Get_Recurring_Payment.Id})))</expression>
+    </formulas>
+    <formulas>
+        <description>The id belongs to a recurring payment: the page updates its payment method instead of collecting a payment.</description>
+        <name>Is_Recurring</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(ISBLANK({!Get_Installment.Id}), NOT(ISBLANK({!Get_Recurring_Payment.Id})))</expression>
+    </formulas>
+    <formulas>
+        <name>Is_Overdue</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(NOT({!Is_Recurring}), NOT(ISBLANK({!Get_Installment.cpm__Due_Date__c})), {!Get_Installment.cpm__Due_Date__c} &lt; {!$Flow.CurrentDate})</expression>
+    </formulas>
+    <formulas>
+        <description>Collected installments show the paid screen instead of the payment methods.</description>
+        <name>Is_Paid</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(NOT({!Is_Recurring}), OR(TEXT({!Get_Installment.cpm__Status__c}) = &quot;Collected&quot;, BLANKVALUE({!Get_Installment.cpm__Amount_Open__c}, 0) &lt;= 0))</expression>
+    </formulas>
+    <formulas>
+        <name>Memo</name>
+        <dataType>String</dataType>
+        <expression>{!Get_Installment.cpm__Bank_Statement_Description__c}</expression>
+    </formulas>
+    <formulas>
+        <description>Which summary rows to show: invoice, link or recurring.</description>
+        <name>Mode</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Recurring}, &quot;recurring&quot;, IF({!Is_Invoice}, &quot;invoice&quot;, &quot;link&quot;))</expression>
+    </formulas>
+    <formulas>
+        <name>Selector_Frequency</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Recurring}, &quot;recurring&quot;, &quot;oneTime&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Memo_Label</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Invoice}, &quot;Memo&quot;, &quot;For&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Paid_Text</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!Get_Installment.cpm__Last_Paid_Date__c}), &quot;&quot;, &quot;Paid &quot; &amp; TEXT(DAY({!Get_Installment.cpm__Last_Paid_Date__c})) &amp; &quot; &quot; &amp; CASE(MONTH({!Get_Installment.cpm__Last_Paid_Date__c}),1,&quot;January&quot;,2,&quot;February&quot;,3,&quot;March&quot;,4,&quot;April&quot;,5,&quot;May&quot;,6,&quot;June&quot;,7,&quot;July&quot;,8,&quot;August&quot;,9,&quot;September&quot;,10,&quot;October&quot;,11,&quot;November&quot;,12,&quot;December&quot;,&quot;&quot;) &amp; &quot; &quot; &amp; TEXT(YEAR({!Get_Installment.cpm__Last_Paid_Date__c})))</expression>
+    </formulas>
+    <formulas>
+        <name>Paid_Title</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Invoice}, &quot;Invoice paid&quot;, &quot;Payment received&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Payer_Name</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Recurring}, TRIM({!Get_Recurring_Payment.cpm__Contact__r.FirstName} &amp; &quot; &quot; &amp; {!Get_Recurring_Payment.cpm__Contact__r.LastName}) &amp; IF(ISBLANK({!Get_Recurring_Payment.cpm__Account__r.Name}), &quot;&quot;, &quot;, &quot; &amp; {!Get_Recurring_Payment.cpm__Account__r.Name}), TRIM({!Get_Installment.cpm__Contact__r.FirstName} &amp; &quot; &quot; &amp; {!Get_Installment.cpm__Contact__r.LastName}) &amp; IF(ISBLANK({!Get_Installment.cpm__Account__r.Name}), &quot;&quot;, &quot;, &quot; &amp; {!Get_Installment.cpm__Account__r.Name}))</expression>
+    </formulas>
+    <formulas>
+        <name>Reference</name>
+        <dataType>String</dataType>
+        <expression>IF({!Is_Recurring}, BLANKVALUE({!Get_Recurring_Payment.cpm__Final_Payment_Reference__c}, {!Get_Recurring_Payment.Name}), BLANKVALUE({!Get_Installment.cpm__Final_Payment_Reference__c}, {!Get_Installment.Name}))</expression>
+    </formulas>
+    <interviewLabel>Pay link {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
+    <label>Pay Link Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>The installment the link points to, by its GUID.</description>
+        <name>Get_Installment</name>
+        <label>Get Installment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Recurring_Payment</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>cpm__GUID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cpm__Installment__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>The recurring payment the link points to, when the id is not an installment's.</description>
+        <name>Get_Recurring_Payment</name>
+        <label>Get Recurring Payment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Installment_State</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Fault_Screen</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>cpm__GUID__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>cpm__Recurring_Payment__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <screens>
+        <name>Fault_Screen</name>
+        <label>Fault Screen</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+            <fields>
+                <name>Fault_Text</name>
+                <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;Something went wrong&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;We could not load this payment. Please try again later.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+            </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Not_Found_Screen</name>
+        <label>Not Found Screen</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+            <fields>
+                <name>Not_Found_Text</name>
+                <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;This payment link is not valid&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;The link may be incomplete or no longer in use. Please check the link in your email or contact {!From_Name}.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+            </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Paid_Screen</name>
+        <label>Paid Screen</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+            <fields>
+                <name>Paid_Header</name>
+                <fieldText>&lt;p&gt;&lt;span style="font-size: 44px;"&gt;&lt;strong&gt;{!Amount_Paid_Text}&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;{!Paid_Text} &lt;span style="background-color: rgb(230, 244, 236); color: rgb(30, 107, 69);"&gt;Paid&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+            </fields>
+            <fields>
+                <name>Paid_Invoice_Document</name>
+                <fieldText>&lt;p&gt;&lt;a href="{!invoiceUrl}" target="_blank" rel="noopener"&gt;Download invoice (PDF)&lt;/a&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>invoice</stringValue>
+                        </rightValue>
+                    </conditions>
+                    <conditions>
+                        <leftValueReference>Has_Invoice_Url</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Paid_Invoice_Rows</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;To&lt;/span&gt;{!Payer_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Invoice&lt;/span&gt;{!Reference}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>invoice</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Paid_Link_Rows</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>link</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Paid_Recurring_Rows</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;To&lt;/span&gt;{!Payer_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Reference&lt;/span&gt;{!Reference}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Paying by&lt;/span&gt;{!Current_Method}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>recurring</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Paid_Memo_Row</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;{!Memo_Label}&lt;/span&gt;{!Memo}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Show_Memo</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Paid_Confirmation</name>
+                <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;{!Paid_Title}&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Thank you. Nothing more to pay. Questions? Contact {!From_Name}.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+            </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>Pay_Screen</name>
+        <label>Pay Screen</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+            <fields>
+                <name>Pay_Header</name>
+                <fieldText>&lt;p&gt;&lt;span style="font-size: 44px;"&gt;&lt;strong&gt;{!Amount_Text}&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;{!Due_Text}&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Is_Overdue</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>false</booleanValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Header_Overdue</name>
+                <fieldText>&lt;p&gt;&lt;span style="font-size: 44px;"&gt;&lt;strong&gt;{!Amount_Text}&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;{!Due_Text} &lt;span style="background-color: rgb(253, 236, 234); color: rgb(163, 39, 27);"&gt;Overdue&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Is_Overdue</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Invoice_Document</name>
+                <fieldText>&lt;p&gt;&lt;a href="{!invoiceUrl}" target="_blank" rel="noopener"&gt;Download invoice (PDF)&lt;/a&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>invoice</stringValue>
+                        </rightValue>
+                    </conditions>
+                    <conditions>
+                        <leftValueReference>Has_Invoice_Url</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Invoice_Rows</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;To&lt;/span&gt;{!Payer_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Invoice&lt;/span&gt;{!Reference}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>invoice</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Link_Rows</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>link</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Recurring_Rows</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;To&lt;/span&gt;{!Payer_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Reference&lt;/span&gt;{!Reference}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Paying by&lt;/span&gt;{!Current_Method}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>recurring</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Memo_Row</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;{!Memo_Label}&lt;/span&gt;{!Memo}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Show_Memo</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Recurring_Intro</name>
+                <fieldText>&lt;p&gt;&lt;span style="font-size: 16px;"&gt;&lt;strong&gt;Choose a new payment method&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Future payments of {!Amount_Text} will be collected with the method you choose.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>recurring</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Payment_Method_Selection</name>
+                <extensionName>cpm:paymentMethodSelector</extensionName>
+                <fieldType>ComponentInstance</fieldType>
+                <inputParameters>
+                    <name>frequency</name>
+                    <value>
+                        <elementReference>Selector_Frequency</elementReference>
+                    </value>
+                </inputParameters>
+                <inputParameters>
+                    <name>paymentIntentResponse</name>
+                    <value>
+                        <elementReference>Pay_Button.result</elementReference>
+                    </value>
+                </inputParameters>
+
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>true</isRequired>
+                <storeOutputAutomatically>true</storeOutputAutomatically>
+            </fields>
+            <fields>
+                <name>Pay_Button</name>
+                <dataTypeMappings>
+                    <typeName>recurringType</typeName>
+                    <typeValue>cpm__Recurring_Payment__c</typeValue>
+                </dataTypeMappings>
+                <extensionName>cpm:payButton</extensionName>
+                <fieldType>ComponentInstance</fieldType>
+                <inputParameters>
+                    <name>pixConfig</name>
+                    <value>
+                        <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;{!successUrl}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;{!failureUrl}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
+                    </value>
+                </inputParameters>
+                <inputParameters>
+                    <name>paymentMethodContext</name>
+                    <value>
+                        <elementReference>Payment_Method_Selection.context</elementReference>
+                    </value>
+                </inputParameters>
+                <inputParameters>
+                    <name>installmentId</name>
+                    <value>
+                        <elementReference>Get_Installment.Id</elementReference>
+                    </value>
+                </inputParameters>
+                <inputParameters>
+                    <name>recurringObjectId</name>
+                    <value>
+                        <elementReference>Get_Recurring_Payment.Id</elementReference>
+                    </value>
+                </inputParameters>
+                <inputParameters>
+                    <name>successUrl</name>
+                    <value>
+                        <elementReference>successUrl</elementReference>
+                    </value>
+                </inputParameters>
+                <inputParameters>
+                    <name>failureUrl</name>
+                    <value>
+                        <elementReference>failureUrl</elementReference>
+                    </value>
+                </inputParameters>
+                <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                <isRequired>true</isRequired>
+                <storeOutputAutomatically>true</storeOutputAutomatically>
+            </fields>
+            <fields>
+                <name>Pay_Trust</name>
+                <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 13px; color: rgb(91, 98, 112);"&gt;Secure payment · Powered by FinDock&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+            </fields>
+        <fields>
+            <name>Pay_Debug</name>
+            <fieldText>Debug</fieldText>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Pay_Debug_Column1</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Pay_Debug_Text</name>
+                    <fieldText>&lt;p&gt;&lt;em&gt;Only visible to System Administrators.&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(169, 0, 0);"&gt;{!Pay_Button.result.statusCode} - {!Pay_Button.result.errorMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>12</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithHeader</regionContainerType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Is_Current_User_Sys_Admin</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+        </fields>
+        <showFooter>false</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Has_Id</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Where the payer returns after a failed or cancelled payment. Defaults to the processor's own page.</description>
+        <name>failureUrl</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>GUID (cpm__GUID__c) of the installment to pay, or of the recurring payment whose payment method to change. Pass it in the link, e.g. ?id=...</description>
+        <name>id</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Optional link to the invoice PDF, shown as a document thumbnail in invoice mode.</description>
+        <name>invoiceUrl</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Name shown as From. Defaults to the org name.</description>
+        <name>merchantName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Where the payer lands after a successful payment, e.g. the site's payment-received page.</description>
+        <name>successUrl</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>invoice (default) or link.</description>
+        <name>type</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

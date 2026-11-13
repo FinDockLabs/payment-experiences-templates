@@ -75,117 +75,112 @@ c-donation-flow {
     --slds-g-color-brand-base-60: var(--cgt-forest);
 }
 
+
 /*
- * Page layout, same structure as the Netlify page: forest header with nav, forest hero with the donation card,
- * then "From rescue to release" cards, a quote band, the FAQ and the footer. Sections carry cgt-* classes
- * (customCssClasses in Experience Builder); rich-text blocks inside them carry the content classes.
+ * Page layout. Every block is a standard Experience Builder component (Section, Text Block, Button, Rich Text,
+ * Image, Flow) with a cgt-* class in its "CSS class" property; the rules below key off those classes.
+ * To change a text, a link or a button, select the component in Experience Builder and edit its properties.
+ *
+ * Sections: full-width coloured bands with the content in a 1152px column.
  */
-.cgt-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
+:is(.cgt-header, .cgt-hero, .cgt-section-work, .cgt-cards, .cgt-section-quote, .cgt-section-faq, .cgt-footer, .cgt-footer-bottom) {
+    display: block;
+    padding-left: max(24px, calc((100% - 1152px) / 2)) !important;
+    padding-right: max(24px, calc((100% - 1152px) / 2)) !important;
 }
-.cgt-button {
+.cgt-anchor {
+    display: block;
+    position: relative;
+    top: -120px;
+}
+
+/* Text blocks: the classes set the type, the theme sets the font families and colours. */
+:is(.cgt-hero-title, .cgt-section-title, .cgt-card-title, .cgt-quote, .cgt-brand, .cgt-footer-name) :is(h1, h2, h3, p) {
+    font-family: var(--cgt-display) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em;
+}
+
+/* Buttons: pills in the brand colour; .cgt-button-sun in the accent colour. */
+:is(.cgt-header-donate, .cgt-quote-button, .cgt-result-button) :is(a, button) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 54px;
     padding: 0 30px;
-    border-radius: var(--cgt-pill);
+    border-radius: var(--cgt-pill) !important;
     background: var(--cgt-forest) !important;
+    border-color: var(--cgt-forest) !important;
     color: var(--cgt-on-forest) !important;
-    font-weight: 700;
+    font-weight: 700 !important;
     text-decoration: none !important;
 }
-.cgt-button:hover {
+:is(.cgt-header-donate, .cgt-quote-button, .cgt-result-button) :is(a, button):hover {
     background: var(--cgt-leaf) !important;
+    border-color: var(--cgt-leaf) !important;
 }
-.cgt-button-sun,
-.cgt-button-sun:hover {
+.cgt-button-sun :is(a, button),
+.cgt-button-sun :is(a, button):hover {
     background: var(--cgt-sun) !important;
+    border-color: var(--cgt-sun) !important;
     color: var(--cgt-on-sun) !important;
 }
-.cgt-tag {
-    display: inline-block;
-    align-self: flex-start;
-    padding: 6px 14px;
-    border-radius: var(--cgt-pill);
-    background: var(--cgt-sun);
-    color: var(--cgt-on-sun);
-    font-size: 14px;
-    font-weight: 700;
-}
-.cgt-eyebrow {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--cgt-leaf);
-}
 
-/* Header (theme layout): logo, surface badge, nav, Donate. */
+/* Header (theme layout): logo and name on the left, links and Donate on the right. */
 .cgt-header {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 12px 24px;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
     min-height: 80px;
     box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px 16px;
 }
-.cgt-brand {
-    display: flex;
+/* Columns sit next to a spacer element, so "~" (not "+") finds the second column. */
+.cgt-header community_layout-column ~ community_layout-column .column-content {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px 28px !important;
+}
+.cgt-header community_layout-column ~ community_layout-column .column-content > * {
+    width: auto !important;
+    flex: none !important;
+    margin: 0 !important;
+}
+/* No component spacing in the header, so the links line up with the middle of the Donate button. */
+.cgt-header :is(.cgt-brand, .cgt-nav-link, .cgt-header-donate) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+.cgt-brand :is(p, h1, h2, h3) {
+    display: flex !important;
     align-items: center;
     gap: 12px;
-    font-family: var(--cgt-display);
-    font-weight: 800;
-    font-size: 23px;
+    margin: 0;
+    font-size: 23px !important;
     color: var(--cgt-on-forest) !important;
-    text-decoration: none !important;
 }
-.cgt-brand img {
+/* The logo is the canopyLogoLight static resource; replace that file to change it. */
+.cgt-brand :is(p, h1, h2, h3)::before {
+    content: "";
+    display: inline-block !important;
+    flex: none;
     width: 44px;
     height: 44px;
     border-radius: 11px;
+    background: url("canopyLogoLight") center / contain no-repeat;
 }
-.cgt-nav {
-    margin-left: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 28px;
-    font-weight: 600;
-}
-.cgt-nav a:not(.cgt-button) {
+.cgt-nav-link :is(p, h1, h2, h3) {
+    margin: 0;
+    font-weight: 600 !important;
     color: var(--cgt-on-forest) !important;
-    text-decoration: none !important;
 }
-.cgt-nav a:not(.cgt-button):hover {
+.cgt-nav-link a:hover :is(p, h1, h2, h3),
+.cgt-nav-link:hover :is(p, h1, h2, h3) {
     color: var(--cgt-dawn) !important;
 }
-.cgt-nav .cgt-button {
+.cgt-header-donate :is(a, button) {
     min-height: 46px;
     padding: 0 24px;
-}
-/* Which surface this page is: Experience Cloud site or Lightning Out embed on another website. */
-.cgt-surface {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 12px;
-    border-radius: var(--cgt-pill);
-    border: 1px solid color-mix(in srgb, var(--cgt-on-forest) 35%, transparent);
-    color: var(--cgt-on-forest);
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-.cgt-surface::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--cgt-sun);
 }
 
 /* Hero: forest band with the copy and photo on the left, the donation card on the right, a wave at the bottom. */
@@ -193,7 +188,8 @@ c-donation-flow {
     position: relative;
     background: var(--cgt-forest);
     color: var(--cgt-on-forest);
-    padding: 32px max(24px, calc((100% - 1152px) / 2)) 120px !important;
+    padding-top: 32px !important;
+    padding-bottom: 120px !important;
 }
 .cgt-hero::after {
     content: "";
@@ -207,26 +203,28 @@ c-donation-flow {
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 80 L0 46 C120 10 220 60 340 34 C470 6 560 58 700 36 C840 14 930 62 1070 34 C1200 8 1320 52 1440 30 L1440 80 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
     pointer-events: none;
 }
-.cgt-hero-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+.cgt-tag :is(p, h1, h2, h3) {
+    display: inline-block !important;
+    margin: 0 0 24px;
+    padding: 6px 14px !important;
+    border-radius: var(--cgt-pill) !important;
+    background: var(--cgt-sun) !important;
+    color: var(--cgt-on-sun) !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
 }
-.cgt-hero-copy h1 {
-    margin: 0;
-    font-family: var(--cgt-display);
-    font-weight: 800;
-    font-size: clamp(44px, 6vw, 68px);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--cgt-on-forest);
+.cgt-hero-title :is(h1, h2, p) {
+    margin: 0 0 24px;
+    font-size: clamp(44px, 6vw, 68px) !important;
+    line-height: 1 !important;
+    color: var(--cgt-on-forest) !important;
 }
-.cgt-hero-copy p {
+.cgt-hero-text :is(p, h1, h2, h3) {
     margin: 0;
-    font-size: 20px;
-    line-height: 1.55;
+    font-size: 20px !important;
+    line-height: 1.55 !important;
     max-width: 500px;
-    color: color-mix(in srgb, var(--cgt-on-forest) 82%, var(--cgt-forest));
+    color: color-mix(in srgb, var(--cgt-on-forest) 82%, var(--cgt-forest)) !important;
 }
 .cgt-hero-photo,
 .cgt-hero-photo img {
@@ -254,71 +252,34 @@ c-donation-flow {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
-/*
- * Phones: the theme header stays fixed at the top, so keep it to one compact row (logo, surface, Donate)
- * and drop the hero photo, like the Netlify page.
- */
-@media (max-width: 767px) {
-    .cgt-header {
-        flex-wrap: nowrap;
-        min-height: 64px;
-        padding: 10px 16px;
-        gap: 10px;
-    }
-    .cgt-nav {
-        flex-wrap: nowrap;
-    }
-    .cgt-brand {
-        font-size: 0;
-        gap: 0;
-    }
-    .cgt-brand img {
-        width: 40px;
-        height: 40px;
-    }
-    .cgt-nav a:not(.cgt-button) {
-        display: none;
-    }
-    .cgt-nav .cgt-button {
-        min-height: 42px;
-        padding: 0 20px;
-    }
-    .cgt-hero {
-        padding: 32px 16px 96px !important;
-    }
-    .cgt-hero-photo {
-        display: none;
-    }
-}
-
-/* Where your gift goes */
+/* Where your gift goes: the heading section, then three cards (one per column of the cgt-cards section). */
 .cgt-section-work {
-    padding: 80px 0 96px !important;
     background: #FFFFFF;
+    padding-top: 80px !important;
+    padding-bottom: 44px !important;
 }
-.cgt-section-head {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 640px;
-    margin-bottom: 44px;
+.cgt-eyebrow :is(p, h1, h2, h3) {
+    margin: 0 0 12px;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--cgt-leaf) !important;
 }
-.cgt-section-head h2,
-.cgt-faq-inner h2 {
+.cgt-section-title :is(h1, h2, p) {
     margin: 0;
-    font-family: var(--cgt-display);
-    font-weight: 800;
-    font-size: clamp(36px, 4.5vw, 48px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    color: var(--cgt-forest);
+    font-size: clamp(36px, 4.5vw, 48px) !important;
+    line-height: 1.05 !important;
+    color: var(--cgt-forest) !important;
 }
 .cgt-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+    background: #FFFFFF;
+    padding-bottom: 96px !important;
 }
-.cgt-card {
+.cgt-cards community_layout-column {
+    align-self: stretch;
+}
+.cgt-cards community_layout-column .column-content {
+    height: 100%;
+    box-sizing: border-box;
     background: var(--cgt-mist);
     border-radius: 28px;
     padding: 32px;
@@ -326,149 +287,221 @@ c-donation-flow {
     flex-direction: column;
     gap: 14px;
 }
-.cgt-card h3 {
+.cgt-card-title :is(h1, h2, h3, p) {
     margin: 0;
-    font-family: var(--cgt-display);
-    font-weight: 800;
-    font-size: 24px;
-    color: var(--cgt-forest);
+    font-size: 24px !important;
+    color: var(--cgt-forest) !important;
 }
-.cgt-card p {
-    margin: 0;
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--cgt-body);
-}
-.cgt-card-icon {
+/* Card icons: static resources canopyIconRescue, canopyIconForest and canopyIconRelease. */
+.cgt-card-title :is(h1, h2, h3, p)::before {
+    content: "";
+    display: block;
     width: 60px;
     height: 60px;
+    margin-bottom: 14px;
     border-radius: 0 30px 0 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--cgt-icon-bg) var(--cgt-icon) center / 28px no-repeat;
 }
-.cgt-card-icon img {
-    width: 28px;
-    height: 28px;
+.cgt-icon-rescue { --cgt-icon: url("canopyIconRescue"); --cgt-icon-bg: var(--cgt-sun); }
+.cgt-icon-forest { --cgt-icon: url("canopyIconForest"); --cgt-icon-bg: var(--cgt-leaf); }
+.cgt-icon-release { --cgt-icon: url("canopyIconRelease"); --cgt-icon-bg: var(--cgt-forest); }
+.cgt-card-text :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 17px !important;
+    line-height: 1.55 !important;
+    color: var(--cgt-body) !important;
 }
-.cgt-icon-sun { background: var(--cgt-sun); }
-.cgt-icon-leaf { background: var(--cgt-leaf); }
-.cgt-icon-forest { background: var(--cgt-forest); }
 
 /* Quote band */
+.cgt-section-quote .columns-content {
+    align-items: center !important;
+}
 .cgt-section-quote {
     background: var(--cgt-dawn);
-    padding: 80px 0 !important;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
 }
-.cgt-quote-inner {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    align-items: center;
-    justify-content: space-between;
-}
-.cgt-quote-inner blockquote {
-    margin: 0;
-    flex: 1 1 520px;
-    min-width: 0;
-}
-.cgt-quote-inner blockquote p {
+.cgt-quote :is(p, h1, h2, h3) {
     margin: 0 0 16px;
-    font-family: var(--cgt-display);
-    font-weight: 800;
-    font-size: clamp(28px, 3.2vw, 36px);
-    line-height: 1.2;
-    color: var(--cgt-forest);
+    font-size: clamp(28px, 3.2vw, 36px) !important;
+    line-height: 1.2 !important;
+    color: var(--cgt-forest) !important;
 }
-.cgt-quote-inner cite {
-    font-style: normal;
-    font-size: 17px;
-    color: var(--cgt-on-dawn);
+.cgt-quote-name :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 17px !important;
+    color: var(--cgt-on-dawn) !important;
 }
 
-/* FAQ */
+/* FAQ: one Rich Text block, a heading per question. */
 .cgt-section-faq {
     background: #FFFFFF;
-    padding: 96px 0 !important;
+    padding-top: 96px !important;
+    padding-bottom: 96px !important;
 }
-.cgt-faq-inner {
+.cgt-section-faq community_layout-column .column-content {
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
 }
-.cgt-faq-inner h2 {
-    font-size: 40px;
-    margin-bottom: 12px;
+.cgt-section-faq .cgt-section-title :is(h1, h2, p) {
+    font-size: 40px !important;
+    margin-bottom: 28px;
 }
-.cgt-faq-inner details {
+.cgt-faq h3 {
+    margin: 16px 0 0 !important;
+    padding: 20px 24px 0 !important;
+    border-radius: 20px 20px 0 0;
     background: var(--cgt-mist);
-    border-radius: 20px;
-    padding: 20px 24px;
-}
-.cgt-faq-inner summary {
-    cursor: pointer;
+    font-family: var(--cgt-sans);
     font-size: 18px;
     font-weight: 700;
     color: var(--cgt-forest);
 }
-.cgt-faq-inner details p {
-    margin: 12px 0 0;
+.cgt-faq h3 + p {
+    margin: 0 !important;
+    padding: 12px 24px 20px !important;
+    border-radius: 0 0 20px 20px;
+    background: var(--cgt-mist);
     font-size: 17px;
     line-height: 1.55;
     color: var(--cgt-body);
 }
 
 /* Footer (theme layout; the Footer colour set gives it the forest background). */
+.cgt-footer,
+.cgt-footer-bottom {
+    background: var(--cgt-forest) !important;
+}
 .cgt-footer {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 56px 24px 32px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    padding-top: 56px !important;
+    padding-bottom: 24px !important;
     font-size: 15px;
     color: var(--cgt-moss);
 }
-.cgt-footer-cols {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
-}
-.cgt-footer-cols > div {
+.cgt-footer community_layout-column .column-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-.cgt-footer-cols strong,
-.cgt-footer-name {
-    color: #FFFFFF;
+.cgt-footer-name :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 21px !important;
+    color: #FFFFFF !important;
 }
-.cgt-footer-name {
-    font-family: var(--cgt-display);
-    font-weight: 800;
-    font-size: 21px;
-}
-.cgt-footer a {
+.cgt-footer-note :is(p, h1, h2, h3),
+.cgt-footer-small :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 15px !important;
     color: var(--cgt-moss) !important;
 }
-.cgt-footer a:hover {
+.cgt-footer-links p {
+    margin: 0 0 10px !important;
+    font-size: 15px;
+    color: var(--cgt-moss);
+}
+.cgt-footer-links strong {
+    color: #FFFFFF;
+}
+.cgt-footer-links a {
+    color: var(--cgt-moss) !important;
+}
+.cgt-footer-links a:hover {
     color: #FFFFFF !important;
 }
 .cgt-footer-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 12px;
-    padding-top: 20px;
-    border-top: 1px solid color-mix(in srgb, var(--cgt-moss) 25%, transparent);
-    font-size: 14px;
+    padding-bottom: 32px !important;
 }
-.cgt-footer-bottom p {
-    margin: 0;
+/* One line above the small print, as wide as the content */
+.cgt-footer-bottom .columns-content {
+    border-top: 1px solid color-mix(in srgb, var(--cgt-moss) 25%, transparent);
+    padding-top: 20px;
+}
+.cgt-footer-small :is(p, h1, h2, h3) {
+    font-size: 14px !important;
+}
+
+/* Thank-you and failure pages */
+.cgt-result {
+    padding-top: 56px !important;
+    padding-bottom: 72px !important;
+}
+.cgt-result community_layout-column .column-content {
+    max-width: 640px;
+    margin: 0 auto;
+    align-items: center !important;
+    gap: 1rem;
+    text-align: center;
+}
+.cgt-result-icon :is(p, h1, h2, h3) {
+    width: 96px !important;
+    height: 96px !important;
+    margin: 0 auto !important;
+    border-radius: 0 48px 0 48px !important;
+    background: var(--cgt-sun) !important;
+    color: var(--cgt-on-sun) !important;
+    font-size: 44px !important;
+    font-weight: 800 !important;
+    line-height: 96px !important;
+    text-align: center !important;
+}
+.cgt-result-icon.cgt-failed :is(p, h1, h2, h3) {
+    background: var(--cgt-moss) !important;
+    color: var(--cgt-forest) !important;
+}
+.cgt-result-title :is(p, h1, h2, h3) {
+    font-family: var(--cgt-display) !important;
+    font-weight: 800 !important;
+    color: var(--cgt-forest) !important;
+}
+.cgt-result-text :is(p, h1, h2, h3) {
+    margin: 0 auto;
+    font-size: 1.15rem !important;
+    line-height: 1.55 !important;
+    color: var(--cgt-body) !important;
+    max-width: 34rem;
+}
+
+/*
+ * Phones: the theme header stays fixed at the top, so keep it to one compact row (logo and Donate)
+ * and drop the hero photo, like the Netlify page.
+ */
+@media (max-width: 767px) {
+    :is(.cgt-header, .cgt-hero, .cgt-section-work, .cgt-cards, .cgt-section-quote, .cgt-section-faq, .cgt-footer, .cgt-footer-bottom) {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    .cgt-header {
+        min-height: 64px;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .cgt-brand :is(p, h1, h2, h3) {
+        font-size: 0 !important;
+        gap: 0;
+    }
+    .cgt-brand :is(p, h1, h2, h3)::before {
+        width: 40px;
+        height: 40px;
+    }
+    .cgt-nav-link {
+        display: none !important;
+    }
+    .cgt-header-donate :is(a, button) {
+        min-height: 42px;
+        padding: 0 20px;
+    }
+    .cgt-hero {
+        padding-bottom: 96px !important;
+    }
+    .cgt-hero-photo {
+        display: none;
+    }
+    .cgt-cards community_layout-column ~ community_layout-column {
+        margin-top: 16px;
+    }
+    .cgt-quote-button {
+        --dxp-c-l-button-alignment: left;
+    }
 }
 
 /* The flow is the donation card. */
@@ -597,48 +630,6 @@ c-donation-flow flowruntime-navigation-bar.slds-card__footer {
     border-color: var(--cgt-sun);
     color: var(--cgt-on-sun);
     width: 100%;
-}
-
-/* Thank-you and failure pages. */
-.cgt-result {
-    padding-top: 56px;
-    text-align: center;
-    display: grid;
-    justify-items: center;
-    gap: 1rem;
-}
-.cgt-result-icon {
-    width: 96px;
-    height: 96px;
-    border-radius: 0 48px 0 48px;
-    background: var(--cgt-sun);
-    color: var(--cgt-on-sun);
-    font-size: 44px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.cgt-result-icon.cgt-failed {
-    background: var(--cgt-moss);
-    color: var(--cgt-forest);
-}
-.cgt-result p {
-    font-size: 1.15rem;
-    line-height: 1.55;
-    color: var(--cgt-body);
-    max-width: 34rem;
-}
-.cgt-button {
-    display: inline-flex;
-    align-items: center;
-    min-height: 54px;
-    padding: 0 30px;
-    border-radius: var(--cgt-pill);
-    background: var(--cgt-forest);
-    color: var(--cgt-on-forest) !important;
-    font-weight: 700;
-    text-decoration: none !important;
 }
 
 /*

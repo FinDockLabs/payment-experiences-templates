@@ -1,0 +1,136 @@
+{
+  "type": "sfdc_cms__themeLayout",
+  "title": "Scoped Header and Footer",
+  "contentBody": {
+    "component": {
+      "attributes": {},
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "0rem",
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "row",
+                "layoutDirectionTablet": "row",
+                "maxContentWidth": "1280px",
+                "sectionColumnGutterWidth": "1rem",
+                "sectionConfig": "{\"UUID\":\"a7a81700-32e1-4660-92d5-cd5c5f38d776\",\"columns\":[{\"UUID\":\"72ac400e-50ee-4b20-b8b6-88c61078636d\",\"columnName\":\"headerBrand\",\"columnKey\":\"headerBrand\",\"columnWidth\":\"8\",\"seedComponents\":null},{\"UUID\":\"2a91f425-070a-4b3a-9fa4-27b787054662\",\"columnName\":\"headerSecure\",\"columnKey\":\"headerSecure\",\"columnWidth\":\"4\",\"seedComponents\":null}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "center"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "isLinkable": true,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Your company",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"heading-small\",\"headingTag\":\"p\",\"enableOverride\":false}",
+                        "url": "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://www.example.com/\"}}}}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "5ed83701-597f-4609-827f-a7338b61f0d9",
+                      "type": "component",
+                      "customCssClasses": "brand-name"
+                    }
+                  ],
+                  "id": "72ac400e-50ee-4b20-b8b6-88c61078636d",
+                  "name": "headerBrand",
+                  "title": "Theme Header",
+                  "type": "region"
+                },
+                {
+                  "children": [],
+                  "id": "2a91f425-070a-4b3a-9fa4-27b787054662",
+                  "name": "headerSecure",
+                  "title": "Theme Header",
+                  "type": "region"
+                }
+              ],
+              "customCssClasses": "site-header",
+              "definition": "community_layout:section",
+              "id": "a7a81700-32e1-4660-92d5-cd5c5f38d776",
+              "type": "component"
+            }
+          ],
+          "id": "56bdf4bc-b731-4ad5-84c3-79179fc104b6",
+          "name": "header",
+          "title": "Theme Header",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "0rem",
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "row",
+                "layoutDirectionTablet": "row",
+                "maxContentWidth": "1280px",
+                "sectionColumnGutterWidth": "1rem",
+                "sectionConfig": "{\"UUID\":\"fcc211df-1041-4f3c-a0c4-7db574adc9a0\",\"columns\":[{\"UUID\":\"c2244dce-0c35-4fb9-8a27-41651649fcc9\",\"columnName\":\"footerSection\",\"columnKey\":\"footerSection\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "center"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Payments powered by FinDock",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"body-small\",\"headingTag\":\"p\",\"enableOverride\":false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "d9238f82-c67a-4d84-bcfb-71a005bbe674",
+                      "type": "component",
+                      "customCssClasses": "footer-note"
+                    }
+                  ],
+                  "id": "c2244dce-0c35-4fb9-8a27-41651649fcc9",
+                  "name": "footerSection",
+                  "title": "Theme Footer",
+                  "type": "region"
+                }
+              ],
+              "customCssClasses": "site-footer",
+              "definition": "community_layout:section",
+              "id": "fcc211df-1041-4f3c-a0c4-7db574adc9a0",
+              "type": "component"
+            }
+          ],
+          "id": "100ecead-1094-4daa-9d3b-28a1397d5e32",
+          "name": "footer",
+          "title": "Theme Footer",
+          "type": "region"
+        },
+        {
+          "id": "e24e98e9-7dc3-4a08-a6d8-585e287b866a",
+          "name": "default",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:simpleThemeLayout",
+      "id": "d206fd43-ea0a-46df-9163-f13a2fbf5677",
+      "type": "component"
+    }
+  },
+  "urlName": "scoped-header-and-footer"
+}

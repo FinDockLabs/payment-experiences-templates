@@ -55,6 +55,22 @@
       "path": "sfdx-source/packages/lightning-out-flow",
       "default": false,
       "versionDescription": ""
+    },
+    {
+      "package": "FinDock Experiences - Pay Link Flow",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "sfdx-source/packages/pay-link",
+      "default": false,
+      "versionDescription": ""
+    },
+    {
+      "package": "FinDock Experiences - Pay Link Site",
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "sfdx-source/packages/pay-link-site",
+      "default": false,
+      "versionDescription": ""
     }
   ],
   "name": "experience-cloud-templates",

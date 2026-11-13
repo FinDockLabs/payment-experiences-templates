@@ -26,13 +26,21 @@
                   "children": [
                     {
                       "attributes": {
+                        "backgroundColor": "",
                         "dxpStyle": {},
-                        "imageInfos": "",
-                        "richTextValue": "<div class=\"cgt-result\"><div class=\"cgt-result-icon cgt-failed\" aria-hidden=\"true\">!</div></div>"
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "!",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
-                      "definition": "community_builder:htmlEditor",
-                      "id": "fa4340ec-1966-4df6-b369-448a76d4fe3a",
-                      "type": "component"
+                      "definition": "dxp_base:textBlock",
+                      "id": "766bee45-74ec-4906-8fa0-10e7afe9b260",
+                      "type": "component",
+                      "customCssClasses": "cgt-result-icon cgt-failed"
                     },
                     {
                       "attributes": {
@@ -49,17 +57,41 @@
                       },
                       "definition": "dxp_base:textBlock",
                       "id": "559e417a-d3b0-490f-8e76-ec2fbc752873",
-                      "type": "component"
+                      "type": "component",
+                      "customCssClasses": "cgt-result-title"
                     },
                     {
                       "attributes": {
+                        "backgroundColor": "",
                         "dxpStyle": {},
-                        "imageInfos": "",
-                        "richTextValue": "<div class=\"cgt-result\"><p>Nothing was charged. Please try again, or choose another payment method.</p><a class=\"cgt-button\" href=\"./\">Try again</a></div>"
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Nothing was charged. Please try again, or choose another payment method.",
+                        "textAlign": "center",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
-                      "definition": "community_builder:htmlEditor",
-                      "id": "b3fd0ccb-04eb-4a2b-b60d-bab7ec8072d7",
-                      "type": "component"
+                      "definition": "dxp_base:textBlock",
+                      "id": "380e6bf9-2eee-4c2b-8640-128153b2768f",
+                      "type": "component",
+                      "customCssClasses": "cgt-result-text"
+                    },
+                    {
+                      "attributes": {
+                        "alignment": "center",
+                        "dxpStyle": {},
+                        "size": "standard",
+                        "stretch": "standard",
+                        "text": "Try again",
+                        "type": "primary",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"comm__namedPage\", \"attributes\": {\"name\": \"Home\"}}}}"
+                      },
+                      "definition": "dxp_base:button",
+                      "id": "0c6fcabd-5436-4d44-9a40-b6c3c35dced5",
+                      "type": "component",
+                      "customCssClasses": "cgt-result-button"
                     }
                   ],
                   "id": "cb5a0354-8de4-48b7-814b-b7b2a1f73be2",
@@ -70,7 +102,8 @@
               ],
               "definition": "community_layout:section",
               "id": "450f706e-6af5-4774-9017-8f0fce1909e6",
-              "type": "component"
+              "type": "component",
+              "customCssClasses": "cgt-result"
             }
           ],
           "id": "ccbe784e-9b37-4ff6-8b82-573467bba196",
