@@ -50,8 +50,9 @@ Every block is a standard Experience Builder component, so text, links and butto
 
 | On the page | Component | CSS class |
 |---|---|---|
-| Logo and name, header links | Text Block (with a link) | `cgt-brand`, `cgt-nav-link` |
-| Donate, Give monthly, Back to the home page | Button | `cgt-header-donate`, `cgt-quote-button`, `cgt-result-button` |
+| Logo and name | Text Block (links to Home) | `cgt-brand` |
+| Header links | Rich Text (links to `#work`, `#faq`, `#about`) | `cgt-nav` |
+| Donate, Give monthly, Back to the home page | Button (links to Home, where the form is) | `cgt-header-donate`, `cgt-quote-button`, `cgt-result-button` |
 | Appeal tag, heading and intro | Text Block | `cgt-tag`, `cgt-hero-title`, `cgt-hero-text` |
 | Photo | Image | `cgt-hero-photo` |
 | Donation form | Flow (`Donation_Flow`) | `donate` |
@@ -65,6 +66,8 @@ component. The card icons and the logo come from the `canopyIcon*` and `canopyLo
 
 The in-page links (`#donate`, `#work`, `#faq`, `#about`) point at four small HTML Editor blocks that only hold an anchor,
 because components can't carry an id. Leave those in place, or remove a header link together with its anchor.
+Text Blocks and Buttons only link to a full URL or a site page, not to an anchor, which is why the header links are a
+Rich Text block and the buttons link to Home.
 
 ## Styling
 

@@ -17,12 +17,12 @@
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "3.5rem",
-                "sectionConfig": "{\"UUID\": \"2ddd84a2-fd7b-4fcb-a88f-9665a51470b4\", \"columns\": [{\"UUID\": \"a52254e7-dbfb-431d-8c2a-eaf26835fdd3\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"6\", \"seedComponents\": []}, {\"UUID\": \"84a935ae-8ec5-4dba-b0e1-3a1c40abfb31\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"6\", \"seedComponents\": []}]}",
+                "sectionConfig": "{\"UUID\": \"818bc1a9-c851-4b32-a5af-1ca5bf724078\", \"columns\": [{\"UUID\": \"f5a0f4ac-5169-4cf3-bd5a-65209840d423\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"6\", \"seedComponents\": []}, {\"UUID\": \"0bbe6489-9ffa-4f87-a317-df00a5e49291\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"6\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
               "definition": "community_layout:section",
-              "id": "2ddd84a2-fd7b-4fcb-a88f-9665a51470b4",
+              "id": "818bc1a9-c851-4b32-a5af-1ca5bf724078",
               "type": "component",
               "customCssClasses": "cgt-hero",
               "children": [
@@ -35,7 +35,7 @@
                         "richTextValue": "<span id=\"donate\" class=\"cgt-anchor\"></span>"
                       },
                       "definition": "community_builder:htmlEditor",
-                      "id": "42714175-333a-4bb4-8164-1673201cbafa",
+                      "id": "019c48d8-15fd-407e-9786-71e9c47c4c05",
                       "type": "component"
                     },
                     {
@@ -52,7 +52,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-small\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "36ac7150-f2df-4222-9edb-67c2e1faf1e7",
+                      "id": "cda4ed84-9ff7-4abe-8aee-99cced59936b",
                       "type": "component",
                       "customCssClasses": "cgt-tag"
                     },
@@ -70,7 +70,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"h1\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "9920b01a-606b-4fb4-962e-4a886ae947e5",
+                      "id": "42500cd8-41e2-4aef-997e-edd327d6c50c",
                       "type": "component",
                       "customCssClasses": "cgt-hero-title"
                     },
@@ -88,7 +88,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "0022c5cc-0559-45d0-9f2d-bbbb67ad45ec",
+                      "id": "1d4f6a57-2585-46a6-9a02-3d7716f83254",
                       "type": "component",
                       "customCssClasses": "cgt-hero-text"
                     },
@@ -109,7 +109,7 @@
                       "type": "component"
                     }
                   ],
-                  "id": "a52254e7-dbfb-431d-8c2a-eaf26835fdd3",
+                  "id": "f5a0f4ac-5169-4cf3-bd5a-65209840d423",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
@@ -127,7 +127,7 @@
                       "type": "component"
                     }
                   ],
-                  "id": "84a935ae-8ec5-4dba-b0e1-3a1c40abfb31",
+                  "id": "0bbe6489-9ffa-4f87-a317-df00a5e49291",
                   "name": "col2",
                   "title": "Column 2",
                   "type": "region"
@@ -145,12 +145,12 @@
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "0rem",
-                "sectionConfig": "{\"UUID\": \"9db90186-e848-4310-ae64-b4eae6589af5\", \"columns\": [{\"UUID\": \"b774a80f-b655-4b77-af5f-67e43b3d7df3\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionConfig": "{\"UUID\": \"625d5375-5ba5-4788-9238-a1ab6446d51d\", \"columns\": [{\"UUID\": \"6303454b-fbdc-4e01-ad6b-ee81be74e15d\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
               "definition": "community_layout:section",
-              "id": "9db90186-e848-4310-ae64-b4eae6589af5",
+              "id": "625d5375-5ba5-4788-9238-a1ab6446d51d",
               "type": "component",
               "customCssClasses": "cgt-section-work",
               "children": [
@@ -163,7 +163,7 @@
                         "richTextValue": "<span id=\"work\" class=\"cgt-anchor\"></span>"
                       },
                       "definition": "community_builder:htmlEditor",
-                      "id": "c0b943d7-da96-428d-8a72-9d325d6f8bf4",
+                      "id": "9af6b323-d3a8-4d3d-b14f-b9e373a27f0c",
                       "type": "component"
                     },
                     {
@@ -180,7 +180,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-small\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "c9f344c6-bc62-40b7-8d55-57349e7c70c4",
+                      "id": "5ddf7db9-b540-4fc6-9443-970fb70c7c55",
                       "type": "component",
                       "customCssClasses": "cgt-eyebrow"
                     },
@@ -198,12 +198,12 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"h2\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "0179e52b-71b6-415a-95bd-0fab781edb43",
+                      "id": "b3f5591f-b52e-4de4-b0a7-f9fb9b547613",
                       "type": "component",
                       "customCssClasses": "cgt-section-title"
                     }
                   ],
-                  "id": "b774a80f-b655-4b77-af5f-67e43b3d7df3",
+                  "id": "6303454b-fbdc-4e01-ad6b-ee81be74e15d",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
@@ -221,12 +221,12 @@
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "1.5rem",
-                "sectionConfig": "{\"UUID\": \"3cffe118-3d5e-42dd-b93f-c0ba25d5f354\", \"columns\": [{\"UUID\": \"157d5307-193a-42d1-b56a-b0b8c432a646\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"c092567f-0304-413f-b4c9-1cf1bf727723\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"58590a1a-e88c-418d-954c-ea70b4cdd116\", \"columnName\": \"Column 3\", \"columnKey\": \"col3\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
+                "sectionConfig": "{\"UUID\": \"7fdaf8dd-3f9a-43ba-a215-bd288e35b929\", \"columns\": [{\"UUID\": \"832a390a-6860-4f97-82a0-6d07135622b5\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"b39ab943-26a0-4053-93bc-d3e39ff76392\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"f93236cd-47f4-401e-8b5c-9682f102310b\", \"columnName\": \"Column 3\", \"columnKey\": \"col3\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
               "definition": "community_layout:section",
-              "id": "3cffe118-3d5e-42dd-b93f-c0ba25d5f354",
+              "id": "7fdaf8dd-3f9a-43ba-a215-bd288e35b929",
               "type": "component",
               "customCssClasses": "cgt-cards",
               "children": [
@@ -246,7 +246,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "fce0a827-3818-4ab3-9b9e-0151cd4299c0",
+                      "id": "72ed1937-49c9-433b-ab86-0d445949851c",
                       "type": "component",
                       "customCssClasses": "cgt-card-title cgt-icon-rescue"
                     },
@@ -264,12 +264,12 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "942db183-3481-4779-8f8f-efd3185a5047",
+                      "id": "ad20ec38-11b9-409e-adce-2595308affc6",
                       "type": "component",
                       "customCssClasses": "cgt-card-text"
                     }
                   ],
-                  "id": "157d5307-193a-42d1-b56a-b0b8c432a646",
+                  "id": "832a390a-6860-4f97-82a0-6d07135622b5",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
@@ -290,7 +290,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "13583f16-3c78-4f15-8f92-eccb9cfbd4b0",
+                      "id": "84894c61-bb16-4e0b-84f0-5a32b9f254dd",
                       "type": "component",
                       "customCssClasses": "cgt-card-title cgt-icon-forest"
                     },
@@ -308,12 +308,12 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "3c315797-af4c-44d0-a4cb-1a10fe4064f5",
+                      "id": "6ef41e8e-04de-4d89-84e8-def18a5719da",
                       "type": "component",
                       "customCssClasses": "cgt-card-text"
                     }
                   ],
-                  "id": "c092567f-0304-413f-b4c9-1cf1bf727723",
+                  "id": "b39ab943-26a0-4053-93bc-d3e39ff76392",
                   "name": "col2",
                   "title": "Column 2",
                   "type": "region"
@@ -334,7 +334,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "20c74e15-10c6-4714-a149-452f4fb1493d",
+                      "id": "40de93df-9299-4c7d-bdfd-8eb58dd6be11",
                       "type": "component",
                       "customCssClasses": "cgt-card-title cgt-icon-release"
                     },
@@ -352,12 +352,12 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "55bbf0f7-a332-4e88-be1e-ffd34ae80263",
+                      "id": "ded94fb8-314e-430f-8807-f0740492a545",
                       "type": "component",
                       "customCssClasses": "cgt-card-text"
                     }
                   ],
-                  "id": "58590a1a-e88c-418d-954c-ea70b4cdd116",
+                  "id": "f93236cd-47f4-401e-8b5c-9682f102310b",
                   "name": "col3",
                   "title": "Column 3",
                   "type": "region"
@@ -375,12 +375,12 @@
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "2.5rem",
-                "sectionConfig": "{\"UUID\": \"04585695-4ab5-41f3-b1ab-b8d4fbfc7a7b\", \"columns\": [{\"UUID\": \"df06d94d-834d-4800-a957-8030c3206b83\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"8\", \"seedComponents\": []}, {\"UUID\": \"165c5a09-b300-4b48-9391-58b5b3c75ff1\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
+                "sectionConfig": "{\"UUID\": \"c84be40c-caf5-4dd4-ba3e-e583da94698f\", \"columns\": [{\"UUID\": \"9de2bfe8-761c-4e95-bd2b-14fdafcdfdfd\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"8\", \"seedComponents\": []}, {\"UUID\": \"8a95d18f-b1be-4497-bbbb-1feb95a626e9\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
               "definition": "community_layout:section",
-              "id": "04585695-4ab5-41f3-b1ab-b8d4fbfc7a7b",
+              "id": "c84be40c-caf5-4dd4-ba3e-e583da94698f",
               "type": "component",
               "customCssClasses": "cgt-section-quote",
               "children": [
@@ -400,7 +400,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "5ebfcbe6-4f58-4895-8ccd-b896a8a2b08d",
+                      "id": "7feb37cc-6fc1-42a6-9f98-ecb6b57b2a33",
                       "type": "component",
                       "customCssClasses": "cgt-quote"
                     },
@@ -418,12 +418,12 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "72b2de7a-5636-49a7-ab0f-cfa81fa3fc36",
+                      "id": "3f7113b1-a3a5-4074-a71b-0bf967c513d6",
                       "type": "component",
                       "customCssClasses": "cgt-quote-name"
                     }
                   ],
-                  "id": "df06d94d-834d-4800-a957-8030c3206b83",
+                  "id": "9de2bfe8-761c-4e95-bd2b-14fdafcdfdfd",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
@@ -438,15 +438,15 @@
                         "stretch": "standard",
                         "text": "Give monthly",
                         "type": "primary",
-                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"standard__webPage\", \"attributes\": {\"url\": \"./#donate\"}}}}"
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"comm__namedPage\", \"attributes\": {\"name\": \"Home\"}}}}"
                       },
                       "definition": "dxp_base:button",
-                      "id": "1ef87596-b241-47b1-8b2e-ac1118a10925",
+                      "id": "4059aee5-e81d-4da5-8896-dec14c5bbd16",
                       "type": "component",
                       "customCssClasses": "cgt-quote-button"
                     }
                   ],
-                  "id": "165c5a09-b300-4b48-9391-58b5b3c75ff1",
+                  "id": "8a95d18f-b1be-4497-bbbb-1feb95a626e9",
                   "name": "col2",
                   "title": "Column 2",
                   "type": "region"
@@ -464,12 +464,12 @@
                 "layoutDirectionTablet": "column",
                 "maxContentWidth": "",
                 "sectionColumnGutterWidth": "0rem",
-                "sectionConfig": "{\"UUID\": \"9d798d39-6600-4b8e-9c1f-a359ea644a9f\", \"columns\": [{\"UUID\": \"1f9f7597-239b-4f9c-a083-c18af116b5a1\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionConfig": "{\"UUID\": \"ec722fa2-5177-400f-9751-1e5968fe253a\", \"columns\": [{\"UUID\": \"925da617-a93b-45d4-9454-216cab7fc28c\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
                 "sectionMinHeight": "",
                 "sectionVerticalAlign": "flex-start"
               },
               "definition": "community_layout:section",
-              "id": "9d798d39-6600-4b8e-9c1f-a359ea644a9f",
+              "id": "ec722fa2-5177-400f-9751-1e5968fe253a",
               "type": "component",
               "customCssClasses": "cgt-section-faq",
               "children": [
@@ -482,7 +482,7 @@
                         "richTextValue": "<span id=\"faq\" class=\"cgt-anchor\"></span>"
                       },
                       "definition": "community_builder:htmlEditor",
-                      "id": "4940ea9a-0535-48b7-b1a7-9906c243d3ba",
+                      "id": "a24c1e8a-2a0c-43ac-b2d9-be7bedaaf1cb",
                       "type": "component"
                     },
                     {
@@ -499,7 +499,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"h2\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "69bee5c0-ecd6-4035-9050-f15f8b4b69b0",
+                      "id": "944d0be6-f4c0-4917-a23b-a9b541cf5300",
                       "type": "component",
                       "customCssClasses": "cgt-section-title"
                     },
@@ -510,12 +510,12 @@
                         "richTextValue": "<h3>Can I change or stop my monthly gift?</h3><p>Yes, at any time. Email us or use the link in your confirmation email.</p><h3>Is my donation tax-deductible?</h3><p>[Tax status and registration details.]</p><h3>How is my payment handled?</h3><p>Payments are encrypted and processed by FinDock in our Salesforce. We never see or store your card details.</p>"
                       },
                       "definition": "community_builder:richTextEditor",
-                      "id": "fed0165d-7d5c-45bd-9739-971d4fbe39c6",
+                      "id": "2e197daa-bd14-4cba-944d-cc624e5e49a2",
                       "type": "component",
                       "customCssClasses": "cgt-faq"
                     }
                   ],
-                  "id": "1f9f7597-239b-4f9c-a083-c18af116b5a1",
+                  "id": "925da617-a93b-45d4-9454-216cab7fc28c",
                   "name": "col1",
                   "title": "Column 1",
                   "type": "region"
