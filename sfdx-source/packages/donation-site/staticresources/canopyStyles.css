@@ -88,10 +88,12 @@ c-donation-flow {
     padding-left: max(24px, calc((100% - 1152px) / 2)) !important;
     padding-right: max(24px, calc((100% - 1152px) / 2)) !important;
 }
+/* In-page links (#donate, #work, #faq, #about) stop below the sticky header instead of behind it. */
+html {
+    scroll-padding-top: 96px;
+}
 .cgt-anchor {
     display: block;
-    position: relative;
-    top: -120px;
 }
 
 /* Text blocks: the classes set the type, the theme sets the font families and colours. */
@@ -147,7 +149,7 @@ c-donation-flow {
     margin: 0 !important;
 }
 /* No component spacing in the header, so the links line up with the middle of the Donate button. */
-.cgt-header :is(.cgt-brand, .cgt-nav-link, .cgt-header-donate) {
+.cgt-header :is(.cgt-brand, .cgt-nav, .cgt-header-donate) {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
@@ -169,13 +171,20 @@ c-donation-flow {
     border-radius: 11px;
     background: url("canopyLogoLight") center / contain no-repeat;
 }
-.cgt-nav-link :is(p, h1, h2, h3) {
-    margin: 0;
-    font-weight: 600 !important;
-    color: var(--cgt-on-forest) !important;
+/* Header links: one Rich Text block, so editors change the links in the normal text editor. */
+.cgt-nav p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 28px;
+    margin: 0 !important;
 }
-.cgt-nav-link a:hover :is(p, h1, h2, h3),
-.cgt-nav-link:hover :is(p, h1, h2, h3) {
+.cgt-nav a {
+    color: var(--cgt-on-forest) !important;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+.cgt-nav a:hover {
     color: var(--cgt-dawn) !important;
 }
 .cgt-header-donate :is(a, button) {
@@ -483,7 +492,7 @@ c-donation-flow {
         width: 40px;
         height: 40px;
     }
-    .cgt-nav-link {
+    .cgt-nav {
         display: none !important;
     }
     .cgt-header-donate :is(a, button) {

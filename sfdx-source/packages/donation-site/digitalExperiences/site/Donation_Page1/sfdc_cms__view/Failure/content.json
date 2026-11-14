@@ -38,7 +38,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "766bee45-74ec-4906-8fa0-10e7afe9b260",
+                      "id": "3709dc10-fa2d-4def-b661-8164c9fcbad7",
                       "type": "component",
                       "customCssClasses": "cgt-result-icon cgt-failed"
                     },
@@ -50,13 +50,13 @@
                         "linkAssistiveText": "",
                         "paddingHorizontal": "none",
                         "paddingVertical": "none",
-                        "text": "Your payment didn't go through",
+                        "text": "!",
                         "textAlign": "center",
                         "textDecoration": "{}",
-                        "textDisplayInfo": "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "559e417a-d3b0-490f-8e76-ec2fbc752873",
+                      "id": "766bee45-74ec-4906-8fa0-10e7afe9b260",
                       "type": "component",
                       "customCssClasses": "cgt-result-title"
                     },
@@ -74,7 +74,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "380e6bf9-2eee-4c2b-8640-128153b2768f",
+                      "id": "438fde1b-3430-4672-be83-3b587e6dc520",
                       "type": "component",
                       "customCssClasses": "cgt-result-text"
                     },
@@ -89,7 +89,7 @@
                         "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"comm__namedPage\", \"attributes\": {\"name\": \"Home\"}}}}"
                       },
                       "definition": "dxp_base:button",
-                      "id": "0c6fcabd-5436-4d44-9a40-b6c3c35dced5",
+                      "id": "2ca2700d-6225-4c8b-b458-e0abcdbf0079",
                       "type": "component",
                       "customCssClasses": "cgt-result-button"
                     }

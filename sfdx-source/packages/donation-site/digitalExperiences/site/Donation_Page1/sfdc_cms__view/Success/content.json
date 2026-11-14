@@ -38,7 +38,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "d95fc770-8b26-4be0-9b3e-a87f9d7bdbf4",
+                      "id": "820f046a-5b3a-48bb-a74c-16385603a671",
                       "type": "component",
                       "customCssClasses": "cgt-result-icon"
                     },
@@ -50,13 +50,13 @@
                         "linkAssistiveText": "",
                         "paddingHorizontal": "none",
                         "paddingVertical": "none",
-                        "text": "Thank you for your gift",
+                        "text": "✓",
                         "textAlign": "center",
                         "textDecoration": "{}",
-                        "textDisplayInfo": "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "8107cb50-01cc-4bdd-a8b0-2bd72734722a",
+                      "id": "d95fc770-8b26-4be0-9b3e-a87f9d7bdbf4",
                       "type": "component",
                       "customCssClasses": "cgt-result-title"
                     },
@@ -74,7 +74,7 @@
                         "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
-                      "id": "ecf09673-bf52-444c-8b6a-8988863ab9e9",
+                      "id": "4fc785ee-7a7a-4f61-adb6-b64ce8b7defd",
                       "type": "component",
                       "customCssClasses": "cgt-result-text"
                     },
@@ -89,7 +89,7 @@
                         "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"comm__namedPage\", \"attributes\": {\"name\": \"Home\"}}}}"
                       },
                       "definition": "dxp_base:button",
-                      "id": "8ae07ae1-8be5-403c-af04-9f3c05af14e6",
+                      "id": "d263aa2b-c004-40ea-868a-b60bce2a4202",
                       "type": "component",
                       "customCssClasses": "cgt-result-button"
                     }
