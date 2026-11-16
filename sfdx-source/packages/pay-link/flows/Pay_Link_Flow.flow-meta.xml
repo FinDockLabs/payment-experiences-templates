@@ -70,6 +70,18 @@
     <description>Pays one installment from a link (an invoice or a payment link), or changes the payment method of a recurring payment. One card with the amount, a short summary and the FinDock payment methods. Collected installments show a paid confirmation instead.</description>
     <environments>Default</environments>
     <formulas>
+        <description>Where the payer goes after a successful payment: the successUrl input if the page passes one (the Lightning Out examples do), else https://www.example.com/success. Replace the example URL with your own page.</description>
+        <name>Success_URL</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!successUrl}, &quot;https://www.example.com/success&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>Where the payer goes after a failed or cancelled payment: the failureUrl input if the page passes one (the Lightning Out examples do), else https://www.example.com/failure. Replace the example URL with your own page.</description>
+        <name>Failure_URL</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!failureUrl}, &quot;https://www.example.com/failure&quot;)</expression>
+    </formulas>
+    <formulas>
         <description>Installment amount with currency symbol, for the paid screen.</description>
         <name>Amount_Paid_Text</name>
         <dataType>String</dataType>
@@ -562,7 +574,7 @@
                 <inputParameters>
                     <name>pixConfig</name>
                     <value>
-                        <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
+                        <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;{!Success_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;{!Failure_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
                     </value>
                 </inputParameters>
                 <inputParameters>
@@ -586,13 +598,13 @@
                 <inputParameters>
                     <name>successUrl</name>
                     <value>
-                        <stringValue>https://www.example.com/success</stringValue>
+                        <elementReference>Success_URL</elementReference>
                     </value>
                 </inputParameters>
                 <inputParameters>
                     <name>failureUrl</name>
                     <value>
-                        <stringValue>https://www.example.com/failure</stringValue>
+                        <elementReference>Failure_URL</elementReference>
                     </value>
                 </inputParameters>
                 <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -675,6 +687,22 @@
     <variables>
         <description>invoice (default) or link.</description>
         <name>type</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Optional full URL where the payer goes after a successful payment. Passed by embeds such as Lightning Out; without it the flow uses https://www.example.com/success.</description>
+        <name>successUrl</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Optional full URL where the payer goes after a failed or cancelled payment. Passed by embeds such as Lightning Out; without it the flow uses https://www.example.com/failure.</description>
+        <name>failureUrl</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
