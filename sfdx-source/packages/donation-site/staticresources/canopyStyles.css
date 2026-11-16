@@ -617,12 +617,12 @@ c-donation-flow flowruntime-navigation-bar.slds-card__footer {
     border-radius: var(--cgt-pill);
 }
 
-/* Payment methods: selected row in moss. */
+/* Payment methods: the selected row in a pale tint of the brand colour, so its white fields stand out. */
 :is(.donate, c-donation-flow) .payment-option {
     border-radius: 16px;
 }
 :is(.donate, c-donation-flow) .payment-option.payment-option-selected {
-    background: var(--cgt-moss);
+    background: color-mix(in srgb, var(--cgt-forest) 5%, #FFFFFF);
     border-color: var(--cgt-forest);
 }
 
@@ -655,4 +655,329 @@ html {
 .community_byo-scoped-header-and-footer__foot.community_byo-scoped-header-and-footer__foot,
 .community_byo-scoped-header-and-footer__footer-content.community_byo-scoped-header-and-footer__footer-content.community_byo-scoped-header-and-footer__footer-content {
     background: #FFFFFF;
+}
+
+/* ===== Payment Link page =====
+ * /paylink?id=<installment GUID>: one white card for an invoice, a payment link or a recurring payment's method,
+ * in the Canopy header and footer. The rules come from the Payment Link site template (payLinkStyles) and are
+ * scoped to the page body section, which carries the paylink class.
+ */
+.paylink {
+    --paylink-ink: var(--cgt-forest);
+    --paylink-brand: var(--cgt-forest);
+    --paylink-caption: var(--cgt-muted);
+    --paylink-font: var(--cgt-sans);
+    --paylink-line: color-mix(in srgb, var(--paylink-ink) 12%, transparent);
+    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 28%, #FFFFFF);
+    font-family: var(--paylink-font);
+    color: var(--paylink-ink);
+}
+
+/* Page body */
+.paylink {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 56px 24px 72px;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+/* The flow is the one white card. Fields inside stay white. */
+.paylink flowruntime-flow {
+    position: relative;
+    display: block;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--paylink-ink) 8%, transparent);
+    padding: 32px 40px;
+
+    --dxp-g-root: #FFFFFF;
+    --dxp-g-neutral-3: var(--paylink-field-border);
+    --dxp-s-form-element-color-border: var(--paylink-field-border);
+    --dxp-s-form-element-color-background: #FFFFFF;
+    --dxp-s-form-element-color-background-focus: #FFFFFF;
+    --slds-c-input-color-background: #FFFFFF;
+    --slds-c-select-color-background: #FFFFFF;
+}
+
+.paylink flowruntime-progress-indicator {
+    display: none;
+}
+
+/* Loading: only FinDock's grey dots, not the blue SLDS spinner as well. FinDock hides the blue one only under
+   a .flow container, which the Lightning Out embed doesn't have. */
+.paylink .slds-spinner {
+    display: none !important;
+}
+
+.paylink flowruntime-spinner-lwc {
+    display: block;
+    margin: 4em auto;
+}
+
+.paylink lightning-formatted-rich-text p {
+    margin: 0;
+}
+
+/* Amount */
+.paylink span[style*="font-size: 44px"] {
+    display: inline-block;
+    font-size: 44px !important;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+}
+
+/* Due / paid line and the status badge after it */
+.paylink span[style*="background-color: rgb(253, 236, 234)"],
+.paylink span[style*="background-color: rgb(230, 244, 236)"] {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    margin-left: 8px;
+    padding: 0 8px;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    vertical-align: 1px;
+}
+
+/* Summary rows: label column + value column */
+.paylink p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    column-gap: 16px;
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+/* The first row sits 24px under the due line */
+.paylink flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) {
+    margin-top: 14px;
+}
+
+/* No extra space under a field of rows, so rows keep one rhythm across fields */
+.paylink flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) .slds-m-bottom_x-small {
+    margin-bottom: 0 !important;
+}
+
+/* Rows split over several fields (e.g. Memo, shown only when set) continue at the normal row spacing */
+.paylink flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) ~ flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) {
+    margin-top: 0;
+}
+
+/* Invoice PDF: a small document thumbnail in the card's top-right corner */
+.paylink a[href*=".pdf"],
+.paylink a[href*="/resource/"] {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    width: 76px;
+    height: 96px;
+    border-radius: 6px;
+    background:
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 14px / 22px 4px no-repeat,
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 28px / 70% 4px no-repeat,
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 40px / 82% 4px no-repeat,
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 78px / 70% 4px no-repeat,
+        #FFFFFF;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--paylink-ink) 10%, transparent);
+    font-size: 0;
+    color: transparent;
+}
+
+.paylink a[href*=".pdf"]::after,
+.paylink a[href*="/resource/"]::after {
+    content: "\2193";
+    position: absolute;
+    right: -8px;
+    bottom: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px color-mix(in srgb, var(--paylink-ink) 18%, transparent);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    color: var(--paylink-ink);
+}
+
+.paylink a[href*=".pdf"]:hover,
+.paylink a[href*="/resource/"]:hover {
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--paylink-ink) 14%, transparent);
+}
+
+/* The line between the summary and the payment part */
+.paylink cpm-payment-method-selector,
+.paylink flowruntime-screen-field:has(cpm-payment-method-selector) {
+    display: block;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--paylink-line);
+}
+
+.paylink flowruntime-screen-field:has(cpm-payment-method-selector) cpm-payment-method-selector {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+/* Recurring: the "Choose a new payment method" intro sits under the line, above the methods */
+.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) {
+    display: block;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--paylink-line);
+}
+
+.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) p + p {
+    margin-top: 4px;
+}
+
+.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) ~ flowruntime-screen-field:has(cpm-payment-method-selector) {
+    margin-top: 16px;
+    padding-top: 0;
+    border-top: 0;
+}
+
+/* Paid confirmation under the summary gets the same line */
+.paylink p:has(> span[style*="font-size: 22px"]) {
+    margin-top: 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--paylink-line);
+}
+
+.paylink flowruntime-flow:has(p > span[style*="font-size: 44px"]) p:has(> span[style*="font-size: 22px"]) + p,
+.paylink p:has(> span[style*="font-size: 22px"]) + p {
+    margin-top: 8px;
+}
+
+/* Not found / error screens have no summary above them: no line */
+.paylink flowruntime-flow:not(:has(span[style*="font-size: 44px"])) p:has(> span[style*="font-size: 22px"]) {
+    margin-top: 0;
+    padding-top: 8px;
+    border-top: 0;
+}
+
+/* Payment method rows */
+.paylink .payment-option,
+.paylink .payment-option:hover,
+.paylink .payment-option:focus-within {
+    background: #FFFFFF !important;
+}
+
+.paylink .payment-option.payment-option-selected {
+    border-color: var(--paylink-brand) !important;
+}
+
+.paylink .payment-option .expanded-content-inner {
+    padding: 0 8px 0 40px !important;
+}
+
+@media (max-width: 767px) {
+    .paylink {
+        padding: 12px 12px;
+    }
+
+    .paylink flowruntime-flow {
+        padding: 24px 20px;
+    }
+
+    .paylink span[style*="font-size: 44px"] {
+        font-size: 36px !important;
+    }
+
+    .paylink a[href*=".pdf"],
+    .paylink a[href*="/resource/"] {
+        top: 24px;
+        right: 20px;
+        width: 56px;
+        height: 72px;
+    }
+
+    .paylink p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) {
+        grid-template-columns: 56px 1fr;
+    }
+}
+
+/*
+ * Canopy styling, the same as the donation form on the home page: the card on a forest-green band that runs on
+ * from the header, the donation card's corners and shadow, the display font for the amount, a pale brand tint
+ * for the selected method, pill buttons and the pay button in the accent colour.
+ */
+html:has(.paylink),
+body:has(.paylink) {
+    background: linear-gradient(to bottom, var(--cgt-forest) 0, var(--cgt-forest) 260px, var(--cgt-mist) 260px) no-repeat, var(--cgt-mist);
+}
+.paylink {
+    --slds-g-color-neutral-base-95: var(--cgt-moss);
+    --dxp-s-form-element-color-background-active: var(--cgt-moss);
+    --dxp-s-form-element-text-color: var(--cgt-forest);
+}
+.paylink flowruntime-flow {
+    border-radius: 28px;
+    box-shadow: 0 10px 40px var(--cgt-shadow);
+    padding: 2.25rem 2.5rem;
+    color: var(--cgt-body);
+}
+.paylink span[style*="font-size: 44px"] {
+    font-family: var(--cgt-display) !important;
+    font-weight: 800 !important;
+    color: var(--cgt-forest) !important;
+    letter-spacing: -0.02em;
+}
+.paylink p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) span:not(:first-child) {
+    color: var(--cgt-forest) !important;
+}
+.paylink .slds-spinner {
+    display: none;
+}
+.paylink flowruntime-spinner-lwc {
+    display: block;
+    margin: 10em auto;
+}
+.paylink .stage-progress.stage-progress {
+    --stage-active-color: var(--cgt-forest);
+    --stage-inactive-color: var(--cgt-moss);
+    --stage-inactive-number-color: var(--cgt-muted);
+}
+.paylink h2 {
+    font-family: var(--cgt-display);
+    color: var(--cgt-forest);
+}
+.paylink .payment-option {
+    border-radius: 16px;
+}
+.paylink .payment-option.payment-option-selected {
+    background: color-mix(in srgb, var(--cgt-forest) 5%, #FFFFFF) !important;
+    border-color: var(--cgt-forest) !important;
+}
+.paylink .slds-button {
+    border-radius: var(--cgt-pill);
+    font-weight: 700;
+    min-height: 3rem;
+    padding-inline: 2rem;
+}
+.paylink cpm-pay-button .slds-button_brand,
+.paylink cpm-pay-button button {
+    background: var(--cgt-sun);
+    border-color: var(--cgt-sun);
+    color: var(--cgt-on-sun);
+    width: 100%;
+}
+.paylink a[href*=".pdf"],
+.paylink a[href*="/resource/"] {
+    border-color: var(--cgt-line);
+}
+@media (max-width: 767px) {
+    html:has(.paylink),
+    body:has(.paylink) {
+        background: linear-gradient(to bottom, var(--cgt-forest) 0, var(--cgt-forest) 180px, var(--cgt-mist) 180px) no-repeat, var(--cgt-mist);
+    }
+    .paylink flowruntime-flow {
+        padding: 1.5rem 1.25rem;
+    }
 }

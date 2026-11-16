@@ -119,7 +119,7 @@
                     {
                       "attributes": {
                         "dxpStyle": {},
-                        "flowName": "{\"flowName\":\"Donation_Flow\",\"flowLabel\":\"Donation Flow\"}"
+                        "flowName": "{\"flowName\":\"Donation_Flow\",\"flowLabel\":\"FinDock Donation Flow\"}"
                       },
                       "customCssClasses": "flow donate",
                       "definition": "dxp_flow:flow",

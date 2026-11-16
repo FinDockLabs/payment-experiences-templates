@@ -57,7 +57,7 @@
       "versionDescription": ""
     },
     {
-      "package": "FinDock Experiences - Pay Link Flow",
+      "package": "FinDock Experiences - Payment Link Flow",
       "versionName": "January '27",
       "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/pay-link",
@@ -65,12 +65,20 @@
       "versionDescription": ""
     },
     {
-      "package": "FinDock Experiences - Pay Link Site",
+      "package": "FinDock Experiences - Payment Link Site",
       "versionName": "January '27",
       "versionNumber": "1.0.0.NEXT",
       "path": "sfdx-source/packages/pay-link-site",
       "default": false,
       "versionDescription": ""
+    },
+    {
+      "package": "FinDock Experiences - Payment Pages Site",
+      "versionName": "January '27",
+      "path": "sfdx-source/packages/payments-site",
+      "default": false,
+      "versionDescription": "",
+      "versionNumber": "1.0.0.NEXT"
     }
   ],
   "name": "experience-cloud-templates",

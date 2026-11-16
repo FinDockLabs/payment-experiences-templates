@@ -33,7 +33,7 @@
                 "children" : [ {
                   "attributes" : {
                     "flowArguments" : "[{\"label\":\"id\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"id\",\"type\":\"String\",\"value\":\"{!GUID}\"}]",
-                    "flowName" : "{\"flowName\":\"Checkout_Flow\",\"flowLabel\":\"Checkout Flow\"}"
+                    "flowName" : "{\"flowName\":\"Checkout_Flow\",\"flowLabel\":\"FinDock Checkout Flow\"}"
                   },
                   "customCssClasses" : "flow",
                   "definition" : "dxp_flow:flow",

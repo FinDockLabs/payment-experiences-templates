@@ -15,8 +15,11 @@ This template is meant to be customized and extended to fit specific use cases a
 *Key features*
 - Collect new one-time payments
 - Set up new recurring payments
-- Pay existing one-time payments
-- Update existing recurring payments
+
+The flow only takes new payments. To pay an existing installment or update a recurring payment's method, use the [Payment Link Flow](../pay-link/).
+
+## Order details
+The flow shows example order details. The element **Placeholder: get order details** fills `amount`, `currency`, `reference`, `frequency` and the payer's `Contact` with example values, and the Pay screen's order summary lists example order lines. Replace that element with a Get Records element that reads the order to pay, for example the standard Order object (Orders must be enabled in Setup), an Opportunity or your own object. The flow's optional `id` input variable (`?id=` in the page URL) is there to find that record. Give the site guest user read access to the object and fields you read.
 
 ## Prerequisites
 - FinDock is installed and configured.
@@ -27,7 +30,7 @@ This template is meant to be customized and extended to fit specific use cases a
 
 ## Installation
 1. Install the package using the link above.
-2. Assign the **FinDockLabs Checkout Flow Guest Access** permission set to your Experience Cloud site guest user.
+2. Assign the **FinDockLabs Checkout Flow Guest Access** permission set to your Experience Cloud site guest user. Also assign it to internal users who open the site while signed in to Salesforce: the flow only runs for users with access, so they see an access error instead of the form.
 3. Complete the **FinDock Payer** permission set group assignment described in [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup).
 4. Go to the checkout Flow -> Payment Screen -> Payment Method Selection component
    - configure at least one payment method

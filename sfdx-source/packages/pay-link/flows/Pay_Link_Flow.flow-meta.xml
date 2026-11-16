@@ -187,9 +187,9 @@
         <dataType>String</dataType>
         <expression>IF({!Is_Recurring}, BLANKVALUE({!Get_Recurring_Payment.cpm__Final_Payment_Reference__c}, {!Get_Recurring_Payment.Name}), BLANKVALUE({!Get_Installment.cpm__Final_Payment_Reference__c}, {!Get_Installment.Name}))</expression>
     </formulas>
-    <interviewLabel>Pay link {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel>Payment link {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
-    <label>Pay Link Flow</label>
+    <label>FinDock Payment Link Flow</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -235,9 +235,9 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <description>The recurring payment the link points to, when the id is not an installment's.</description>
+        <description>PLACEHOLDER. Reads a FinDock Recurring Payment by its GUID. If your recurring gifts are on another object, change this element&apos;s object and GUID filter (NPSP: Recurring Donation, npsp4hub__GUID__c; Nonprofit Cloud: Gift Commitment, fdff__GUID__c), update the formulas and texts that use its fields, and set the Pay Button&apos;s recurring object type to the same object. See the README.</description>
         <name>Get_Recurring_Payment</name>
-        <label>Get Recurring Payment</label>
+        <label>Placeholder: get recurring record</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
@@ -562,7 +562,7 @@
                 <inputParameters>
                     <name>pixConfig</name>
                     <value>
-                        <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;{!successUrl}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;{!failureUrl}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
+                        <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
                     </value>
                 </inputParameters>
                 <inputParameters>
@@ -586,13 +586,13 @@
                 <inputParameters>
                     <name>successUrl</name>
                     <value>
-                        <elementReference>successUrl</elementReference>
+                        <stringValue>https://www.example.com/success</stringValue>
                     </value>
                 </inputParameters>
                 <inputParameters>
                     <name>failureUrl</name>
                     <value>
-                        <elementReference>failureUrl</elementReference>
+                        <stringValue>https://www.example.com/failure</stringValue>
                     </value>
                 </inputParameters>
                 <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -649,14 +649,6 @@
     </start>
     <status>Active</status>
     <variables>
-        <description>Where the payer returns after a failed or cancelled payment. Defaults to the processor's own page.</description>
-        <name>failureUrl</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
         <description>GUID (cpm__GUID__c) of the installment to pay, or of the recurring payment whose payment method to change. Pass it in the link, e.g. ?id=...</description>
         <name>id</name>
         <dataType>String</dataType>
@@ -675,14 +667,6 @@
     <variables>
         <description>Name shown as From. Defaults to the org name.</description>
         <name>merchantName</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>true</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <description>Where the payer lands after a successful payment, e.g. the site's payment-received page.</description>
-        <name>successUrl</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>

@@ -28,7 +28,7 @@ This template is meant to be customized and extended to fit specific use cases a
 
 ## Installation
 1. Install the package using the link above.
-2. Assign the **FinDockLabs Donation Flow Guest Access** permission set to your Experience Cloud site guest user.
+2. Assign the **FinDockLabs Donation Flow Guest Access** permission set to your Experience Cloud site guest user. Also assign it to internal users who open the site while signed in to Salesforce: the flow only runs for users with access, so they see an access error instead of the form.
 3. Complete the **FinDock Payer** permission set group assignment described in [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup).
 4. Go to the donation Flow -> Payment Screen -> Payment Method Selection component
    - configure at least one payment method

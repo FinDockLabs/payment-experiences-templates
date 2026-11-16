@@ -2,5 +2,5 @@
 <StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
     <cacheControl>Public</cacheControl>
     <contentType>image/svg+xml</contentType>
-    <description>Placeholder logo shown next to the company name in the Pay Link site header. Replace it with your own logo (SVG or PNG, square).</description>
+    <description>Placeholder logo shown next to the company name in the Payment Link site header. Replace it with your own logo (SVG or PNG, square).</description>
 </StaticResource>

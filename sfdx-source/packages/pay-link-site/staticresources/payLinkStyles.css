@@ -1,10 +1,10 @@
 /*
- * Pay link site: a neutral, single-card page for paying an invoice or a payment link.
+ * Payment link site: a neutral, single-card page for paying an invoice or a payment link.
  * Light-grey page, the merchant above one white card: amount, a short summary, a line, then the payment methods.
  *
  * Colours, fonts and corner rounding come from the Experience Cloud theme (Experience Builder > Theme)
  * through its --dxp-* styling hooks, so a rebrand happens in the Theme panel, not in this file.
- * The Pay Link Flow marks row labels (rgb(92, 98, 112)) and badges with inline colours; the selectors below key off those.
+ * The Payment Link Flow marks row labels (rgb(92, 98, 112)) and badges with inline colours; the selectors below key off those.
  *
  * The same file styles the Lightning Out embed (c-pay-link-flow, which loads it itself): the embedding website
  * draws the page and the merchant name, the frame holds the card.
@@ -366,8 +366,8 @@ body {
 }
 
 /*
- * Lightning Out: the pay link rendered by c-pay-link-flow in the embedding website's iframe. Lightning Out
- * doesn't load the Pay Link site's theme, so the embed sets the theme hooks itself, and the frame is
+ * Lightning Out: the payment link rendered by c-pay-link-flow in the embedding website's iframe. Lightning Out
+ * doesn't load the Payment Link site's theme, so the embed sets the theme hooks itself, and the frame is
  * transparent so the website's page colour shows around the card.
  */
 html:has(c-pay-link-flow),

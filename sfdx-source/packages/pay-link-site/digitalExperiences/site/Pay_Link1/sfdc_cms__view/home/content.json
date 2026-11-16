@@ -39,7 +39,7 @@
                             {
                               "attributes": {
                                 "flowArguments": "[{\"label\":\"id\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"id\",\"type\":\"String\",\"value\":\"{!id}\"},{\"label\":\"type\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"type\",\"type\":\"String\",\"value\":\"{!type}\"},{\"label\":\"invoiceUrl\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"invoiceUrl\",\"type\":\"String\",\"value\":\"{!invoice}\"}]",
-                                "flowName": "{\"flowName\":\"Pay_Link_Flow\",\"flowLabel\":\"Pay Link Flow\"}"
+                                "flowName": "{\"flowName\":\"Pay_Link_Flow\",\"flowLabel\":\"FinDock Payment Link Flow\"}"
                               },
                               "customCssClasses": "flow",
                               "definition": "dxp_flow:flow",
