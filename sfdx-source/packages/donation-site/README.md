@@ -23,7 +23,7 @@ The site is meant to be customized and extended to fit the specific use case and
 | Payment Link | `/<prefix>/paylink?id=<installment GUID>` | [Payment Link Flow](../pay-link/): one card for an invoice, a payment link or a recurring payment's method |
 | Success, Failure | `/<prefix>/success`, `/<prefix>/failure` | The donation flow's result pages |
 
-The Payment Link page takes the same parameters as the [Payment Link site](../pay-link-site/) (`&type=link`, `&invoice=<PDF url>`) and sits in the site's header and footer.
+The Payment Link page takes the same parameters as the one on the [checkout site](../checkout-site/) (`&type=link`, `&invoice=<PDF url>`) and sits in the site's header and footer.
 
 > After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/success` and `/failure`; see step 5 of the [Payment Link Flow installation](../pay-link/#installation).
 

@@ -6,15 +6,30 @@
 Version 0.1.0-6
 <!-- INSTALL_LINK:END -->
 
-This Experience Cloud site template serves as a starting point for building a checkout page using Experience Cloud and FinDock. The site is a simple single page that uses the [Checkout Flow](../checkout/).
+This Experience Cloud site template serves as a starting point for building a checkout using Experience Cloud and FinDock. It has two pages that share the header, footer, logo, theme and one style sheet:
+
+| Page | URL | Flow |
+|---|---|---|
+| Checkout (Home) | `/<prefix>/` | [Checkout Flow](../checkout/): payment on the left, the order summary on the right |
+| Payment Link | `/<prefix>/paylink?id=<GUID>` | [Payment Link Flow](../pay-link/): one card for an invoice, a payment link or a recurring payment's method |
+| Payment received | `/<prefix>/payment-received` | The checkout's thank-you page |
+
+Payment Link URLs take these parameters:
+
+```
+https://<your-domain>.my.site.com/<prefix>/paylink?id=<installment GUID>
+https://<your-domain>.my.site.com/<prefix>/paylink?id=<installment GUID>&type=link
+https://<your-domain>.my.site.com/<prefix>/paylink?id=<installment GUID>&invoice=<PDF url>
+https://<your-domain>.my.site.com/<prefix>/paylink?id=<recurring payment GUID>
+```
 
 The site is meant to be customized and extended to fit the specific use case and requirements of your site. For other options, see [the main Experience Cloud repository](../../../README.md).
 
 *Key features*
 - Collect new one-time payments
 - Set up new recurring payments
-- Pay existing one-time payments
-- Update existing recurring payments
+- Pay existing one-time payments through a payment link (Payment Link page)
+- Update the payment method of existing recurring payments (Payment Link page)
 
 
 ## Preview
@@ -33,14 +48,18 @@ The neutral brand the checkout and Payment Link templates share. Swap the logo, 
 - FinDock is installed and configured.
 - FinDock is the source of payments data ([FinDock Standalone](https://docs.findock.com/docs/source-connectors/findock-standalone)).
 - At least one payment extension is installed and configured.
-- The [Checkout Flow](../checkout/) is deployed. The site's home page references a flow named `Checkout_Flow`; the template deploys without it, but the site cannot be *published* until it exists.
+- The [Checkout Flow](../checkout/) and the [Payment Link Flow](../pay-link/) are deployed. The site's pages reference flows named `Checkout_Flow` and `Pay_Link_Flow`; the template deploys without them, but the site cannot be *published* until they exist.
 - Digital Experiences is enabled in the org.
 
 ## Installation
 1. Create a new Experience Cloud site with the *Build your own (LWR)* option and name it `Checkout Page`. The name must match exactly — the site's `DigitalExperienceConfig` resolves the site by that label.
 2. Press the button above to install the site template to your org.
-3. Customize the page in the Experience Cloud builder.
-4. Publish the Experience Cloud site.
+3. Assign these to the site guest user: the `FinDockLabs Checkout Flow Guest Access` and `FinDockLabs Payment Link Flow Guest Access` permission sets and the `FinDock Payer` permission set group. Assign the two permission sets to internal users who open the site while signed in to Salesforce too, or they see an access error instead of the flow.
+4. In Administration › Preferences, enable **Allow guest users to access public APIs** (the Payment Link page returns a 401 without it).
+5. Customize the pages in the Experience Cloud builder.
+6. Publish the Experience Cloud site.
+
+> After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/payment-received`; see step 5 of the [Payment Link Flow installation](../pay-link/#installation).
 
 The installation will ask you to approve three trusted sites: external.findock.com (icons and pictures), and fonts.googleapis.com and fonts.gstatic.com (the site's web fonts).
 
@@ -59,7 +78,8 @@ The design reads the Experience Builder **Theme** panel, so you can rebrand with
 | Fonts | Body and heading fonts |
 | Button and form element radius | Pills, tiles and fields |
 
-- Layout and component overrides live in the `checkoutStyles` static resource, loaded from the page's Head Markup.
+- Layout and component overrides live in the `checkoutStyles` static resource, loaded from the site's Head Markup. Its first part styles the shared header and footer and the checkout; the Payment Link part is scoped with `body:has(.paylink)`. The Payment Link page keeps a light-grey background behind its card.
+- Both pages use the checkout's page layout (header with the logo and "Secure checkout", footer). Theme layouts can't be created by a metadata deploy, so the Payment Link page doesn't get a layout of its own.
 - The two background glow colours, which have no Theme panel setting, are one `:root` line in Head Markup.
 - Replace the logo and images in the static resources, or point the components at your own files.
 - See [Payment Experiences styling](https://docs.findock.com/docs/november-26/payments/payment-experiences-styling) for the styling hooks.

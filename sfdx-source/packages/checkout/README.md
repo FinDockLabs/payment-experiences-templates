@@ -18,6 +18,10 @@ This template is meant to be customized and extended to fit specific use cases a
 
 The flow only takes new payments. To pay an existing installment or update a recurring payment's method, use the [Payment Link Flow](../pay-link/).
 
+## Success and failure URLs
+
+FinDock needs a success and a failure URL for every payment. The flow uses `https://www.example.com/success` and `https://www.example.com/failure` unless the page passes the optional `successUrl` and `failureUrl` inputs (the Lightning Out embed does). Replace the example URLs in the `Success_URL` and `Failure_URL` formulas with your own pages, e.g. the checkout site's `https://<your-domain>.my.site.com/<prefix>/payment-received`.
+
 ## Order details
 The flow shows example order details. The element **Placeholder: get order details** fills `amount`, `currency`, `reference`, `frequency` and the payer's `Contact` with example values, and the Pay screen's order summary lists example order lines. Replace that element with a Get Records element that reads the order to pay, for example the standard Order object (Orders must be enabled in Setup), an Opportunity or your own object. The flow's optional `id` input variable (`?id=` in the page URL) is there to find that record. Give the site guest user read access to the object and fields you read.
 
