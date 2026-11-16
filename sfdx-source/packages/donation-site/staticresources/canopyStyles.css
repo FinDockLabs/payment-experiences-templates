@@ -659,7 +659,7 @@ html {
 
 /* ===== Payment Link page =====
  * /paylink?id=<installment GUID>: one white card for an invoice, a payment link or a recurring payment's method,
- * in the Canopy header and footer. The rules come from the Payment Link site template (payLinkStyles) and are
+ * in the Canopy header and footer. The rules come from the checkout site template's Payment Link part (checkoutStyles) and are
  * scoped to the page body section, which carries the paylink class.
  */
 .paylink {
