@@ -56,3 +56,10 @@ In Flow Builder:
 3. Assign the `FinDockLabs Payment Link Flow Guest Access` permission set and the `FinDock Payer` permission set group to the site guest user. Also assign the permission set to internal users who open the site while signed in to Salesforce: the flow only runs for users with access, so they see an access error instead of the card.
 4. For recurring payment links: create a guest user sharing rule on your recurring object (Recurring Payment by default, see [Recurring object](#recurring-object); Setup › Sharing Settings) that shares records with the site's guest user, read only, e.g. for records where GUID is not blank. FinDock looks the recurring payment up as the guest user, and guests never see records through the organization-wide defaults; without the rule, changing the payment method fails with "Recurring record for the given Id/GUID could not be found". Installments don't need a rule.
 5. Set the success and failure URLs. FinDock needs both for every payment, and the template ships with `https://www.example.com/success` and `https://www.example.com/failure`. In Flow Builder, open the `Success_URL` and `Failure_URL` formulas and replace the example URLs with your own pages, e.g. `https://<your-domain>.my.site.com/<prefix>/success` and `.../failure`.
+
+## Lightning Out
+
+To run the flow on another website through Lightning Out 2.0, add these components to your Lightning Out app, besides the [Lightning Out flow container](../lightning-out-flow/) (`c-lightning-out-flow-container`) or your own wrapper. Lightning Out only loads components that are on the app's list: a missing one stops the flow with an unhandled fault. Publish the Lightning Out site after changing the list.
+
+- `cpm-pay-button`
+- `cpm-payment-method-selector`
