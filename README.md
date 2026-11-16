@@ -14,6 +14,7 @@ Out-of-the-box, all templates are:
 - Configurable to support multi-currency
 - Configurable to support payment methods through FinDock native processing and integrated Payment Service Providers
 - Fully extendable with Salesforce technology and clouds
+- Aware of the payer's browser, operating system, device and locale through the Get User Agent Info flow action
 
 If you prefer to build a fully custom implementation, on Salesforce or outside of Salesforce, please see our [custom Experience Cloud implementation repository](https://github.com/FinDockLabs/findock-experience-cloud-examples) or our [Payment API documentation](https://docs.findock.com/api/payment-api-v2).
 
