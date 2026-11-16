@@ -35,3 +35,14 @@ This template is meant to be customized and extended to fit specific use cases a
 6. Activate your flow.
 7. Go to the Experience Cloud Administration -> Preferences -> enable "Allow guest users to access public APIs".
 8. Add the flow to your Experience Cloud site.
+
+## Lightning Out
+
+To run the flow on another website through Lightning Out 2.0, add these components to your Lightning Out app, besides the [Lightning Out flow container](../lightning-out-flow/) (`c-lightning-out-flow-container`) or your own wrapper. Lightning Out only loads components that are on the app's list: a missing one stops the flow with an unhandled fault. Publish the Lightning Out site after changing the list.
+
+- `c-amount-and-frequency`
+- `c-currency-picker`
+- `c-experience-progress-stages`
+- `c-get-user-agent-info`
+- `cpm-pay-button`
+- `cpm-payment-method-selector`
