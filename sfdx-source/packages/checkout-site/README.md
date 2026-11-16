@@ -25,9 +25,9 @@ The checkout: payment on the left, a plain-text order summary on the right (show
 
 ### Brand
 
-![The neutral brand the checkout and Pay Link templates share. Swap the logo, the brand colour and the font for your own.](../../../docs/images/brand-checkout-pay-link.png)
+![The neutral brand the checkout and Payment Link templates share. Swap the logo, the brand colour and the font for your own.](../../../docs/images/brand-checkout-pay-link.png)
 
-The neutral brand the checkout and Pay Link templates share. Swap the logo, the brand colour and the font for your own.
+The neutral brand the checkout and Payment Link templates share. Swap the logo, the brand colour and the font for your own.
 
 ## Prerequisites
 - FinDock is installed and configured.

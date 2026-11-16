@@ -22,6 +22,7 @@ If you prefer to build a fully custom implementation, on Salesforce or outside o
 **Membership, Subscription, Commerce, etc.**
 - [Checkout flow](sfdx-source/packages/checkout): a simple Flow template for creating a payment form
 - [Checkout site](sfdx-source/packages/checkout-site): Experience Cloud site template that implements the Checkout flow template
+- [Payment Pages site](sfdx-source/packages/payments-site): one Experience Cloud site with a checkout page and a Payment Link page, sharing one theme and style sheet
 
 **Fundraising**
 - [Donation flows for Fundraising](sfdx-source/packages/donation-fundraising): Single and multi-screen Flow templates for collecting donations in orgs with Fundraising enabled (NPC, EDU)

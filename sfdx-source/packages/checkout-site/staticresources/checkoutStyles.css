@@ -133,6 +133,42 @@ body {
     margin: 0;
 }
 
+/*
+ * No gaps above or below the page: the summary's grey column runs from the header line to the footer line.
+ * The theme header and footer, the page section, the flow body and the summary column each add a little space
+ * by default, and so does the site's hidden SEO component under the page. The footer follows the page instead
+ * of being pushed to the bottom of a tall window, so no white band opens up under the grey column.
+ */
+body:has(.checkout) header:has(.site-header) {
+    padding-bottom: 0 !important;
+}
+
+body:has(.checkout) footer:has(.site-footer) {
+    padding-top: 0 !important;
+}
+
+main:has(.checkout) {
+    flex: 0 0 auto !important;
+}
+
+community_layout-section:has(.checkout) {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.checkout .flowruntimeBody {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.checkout .flowruntime-section-column.slds-medium-size_5-of-12 {
+    margin-bottom: 0 !important;
+}
+
+main:has(.checkout) community_layout-hidden-region .component-wrapper-spacer {
+    margin-bottom: 0 !important;
+}
+
 /* Payment column (7/12): content right-aligned towards the summary, max 600px */
 :is(.checkout, c-invoice-pay-flow) .flowruntime-section-column.slds-medium-size_7-of-12 {
     padding: 48px 56px 40px 24px !important;

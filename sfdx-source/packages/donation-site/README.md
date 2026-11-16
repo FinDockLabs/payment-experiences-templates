@@ -13,6 +13,19 @@ The site is meant to be customized and extended to fit the specific use case and
 *Key features*
 - Collect new one-time payments
 - Set up new recurring donations
+- A Payment Link page where supporters pay an invoice or change the payment method of a recurring gift, in the same brand
+
+## Pages
+
+| Page | URL | Flow |
+|---|---|---|
+| Donation page (Home) | `/<prefix>/` | One of the [Donation Flows](../../../README.md#available-templates) |
+| Payment Link | `/<prefix>/paylink?id=<installment GUID>` | [Payment Link Flow](../pay-link/): one card for an invoice, a payment link or a recurring payment's method |
+| Success, Failure | `/<prefix>/success`, `/<prefix>/failure` | The donation flow's result pages |
+
+The Payment Link page takes the same parameters as the [Payment Link site](../pay-link-site/) (`&type=link`, `&invoice=<PDF url>`) and sits in the site's header and footer.
+
+> After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/success` and `/failure`; see step 5 of the [Payment Link Flow installation](../pay-link/#installation).
 
 
 ## Preview
@@ -31,13 +44,16 @@ The Canopy Gibbon Trust example brand: logo, colours, fonts and components. Repl
 - FinDock is installed and configured.
 - At least one payment extension is installed and configured.
 - One of the [Donation Flow templates](../../../README.md#available-templates) is deployed. The site's home page references a flow named `Donation_Flow`; the template deploys without it, but the site cannot be *published* until it exists.
+- The [Payment Link Flow](../pay-link/) is deployed, for the Payment Link page. As with the donation flow, the site deploys without it but can't be published until it exists.
 - Digital Experiences is enabled in the org.
 
 ## Installation
 1. Create a new Experience Cloud site with the *Build your own (LWR)* option and name it `Donation Page`.
 2. Press the button above to install the site template to your org.
-3. Customize the page in the Experience Cloud builder.
-4. Publish the Experience Cloud site.
+3. Assign these to the site guest user: the `FinDockLabs Donation Flow Guest Access` and `FinDockLabs Payment Link Flow Guest Access` permission sets and the `FinDock Payer` permission set group. Assign the two permission sets to internal users who open the site while signed in to Salesforce too, or they see an access error instead of the flow.
+4. In Administration › Preferences, enable **Allow guest users to access public APIs** (the Payment Link page returns a 401 without it).
+5. Customize the page in the Experience Cloud builder.
+6. Publish the Experience Cloud site.
 
 The installation will ask you to approve three trusted sites: external.findock.com (icons and pictures), and fonts.googleapis.com and fonts.gstatic.com (the site's web fonts).
 
@@ -82,6 +98,7 @@ The design reads the Experience Builder **Theme** panel, so you can rebrand with
 | Button and form element radius | Pills, tiles and fields |
 
 - Layout and component overrides live in the `canopyStyles` static resource, loaded from the page's Head Markup.
+- The Payment Link page's card comes from the last part of `canopyStyles`, scoped with the `paylink` class on the page's section. It uses the same styling as the donation form: the card on a band in the brand colour, the donation card's corners and shadow, the heading font for the amount, a pale brand tint for the selected method, pill buttons and the accent pay button.
 - The accent colour, which has no Theme panel setting, is one `:root` line in Head Markup.
 - Replace the logo and images in the static resources, or point the components at your own files.
 - See [Payment Experiences styling](https://docs.findock.com/docs/november-26/payments/payment-experiences-styling) for the styling hooks.

@@ -1,6 +1,6 @@
-# Experience Cloud Pay Link Site Template
+# Experience Cloud Payment Link Site Template
 
-A neutral, single-card page for paying an invoice or a payment link, built on the [Pay Link Flow](../pay-link/). The merchant name sits above one white card: the amount and due date, a short summary, a line, then the payment methods and the Pay button.
+A neutral, single-card page for paying an invoice or a payment link, built on the [Payment Link Flow](../pay-link/). The merchant name sits above one white card: the amount and due date, a short summary, a line, then the payment methods and the Pay button.
 
 Links look like this:
 
@@ -13,24 +13,24 @@ https://<your-domain>.my.site.com/paylink/?id=<installment GUID>&invoice=<PDF ur
 
 ## Preview
 
-![An invoice in the Pay Link site: the amount, a short summary and the payment methods in one card.](../../../docs/images/pay-link-site.png)
+![An invoice in the Payment Link site: the amount, a short summary and the payment methods in one card.](../../../docs/images/pay-link-site.png)
 
-An invoice in the Pay Link site: the amount, a short summary and the payment methods in one card.
+An invoice in the Payment Link site: the amount, a short summary and the payment methods in one card.
 
 ### Brand
 
-![The neutral brand the checkout and Pay Link templates share. Swap the logo, the brand colour and the font for your own.](../../../docs/images/brand-checkout-pay-link.png)
+![The neutral brand the checkout and Payment Link templates share. Swap the logo, the brand colour and the font for your own.](../../../docs/images/brand-checkout-pay-link.png)
 
-The neutral brand the checkout and Pay Link templates share. Swap the logo, the brand colour and the font for your own.
+The neutral brand the checkout and Payment Link templates share. Swap the logo, the brand colour and the font for your own.
 
 ## Prerequisites
 - FinDock is installed and configured, with at least one payment extension.
-- The [Pay Link Flow](../pay-link/) is deployed.
+- The [Payment Link Flow](../pay-link/) is deployed.
 - Digital Experiences is enabled in the org.
 
 
 ## Installation
-1. Create a new Experience Cloud site with the *Build your own (LWR)* option, named `Pay Link`, with URL `paylink`. The name must match exactly.
+1. Create a new Experience Cloud site with the *Build your own (LWR)* option, named `Pay Link`, with URL `paylink`. The name must match exactly: the site's metadata (`Pay_Link1`) is tied to it, so it keeps the template's original name.
 2. Deploy this package.
 3. In Experience Builder, set the merchant name in the header and footer, and check the theme.
 4. Assign the guest permissions listed in the flow's README to the site guest user, and allow guest access to the site.

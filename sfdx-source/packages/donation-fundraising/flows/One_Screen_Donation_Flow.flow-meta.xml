@@ -16,7 +16,7 @@
     </formulas>
     <interviewLabel>One Screen {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
-    <label>One Screen Donation Flow</label>
+    <label>FinDock One Screen Donation Flow</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
