@@ -12,6 +12,19 @@ Lightning Out 2.0 embeds Lightning web components, not flows. The flow container
 
 The container works with any screen flow: the FinDock donation and checkout flow templates, or a flow you build yourself.
 
+## Lightning Out app components
+
+Lightning Out only loads components that are on your Lightning Out app's list, including the ones a flow uses inside it. Add the container (`c-lightning-out-flow-container`) and the components of the flow you embed, then publish the Lightning Out site. A missing component stops the flow with an unhandled fault.
+
+| Flow | Components to add |
+|---|---|
+| [Checkout Flow](../checkout/#lightning-out) | `c-get-user-agent-info`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Payment Link Flow](../pay-link/#lightning-out) | `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Donation Flow for NPSP](../donation-npsp/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `c-experience-progress-stages`, `c-get-user-agent-info`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Donation Flow for Fundraising](../donation-fundraising/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `c-experience-progress-stages`, `c-get-user-agent-info`, `c-transaction-fee-opt-in`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [One Screen Donation Flow](../donation-fundraising/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Donation Flow for Fundraising UK](../donation-fundraising-uk/#lightning-out) | `c-amount-and-frequency`, `c-experience-progress-stages`, `c-get-user-agent-info`, `c-transaction-fee-opt-in`, `cpm-pay-button`, `cpm-payment-method-selector` |
+
 ## Website: auto-sizing the flow
 
 The container sends its height to the website as a `flow:height` message; this script applies it. Add it to the website page, after the Lightning Out markup:
