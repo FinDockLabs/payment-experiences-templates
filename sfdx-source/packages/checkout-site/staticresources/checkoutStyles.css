@@ -144,8 +144,13 @@ body {
     margin: 6em auto;
 }
 
-:is(.checkout, c-invoice-pay-flow) lightning-formatted-rich-text p {
+:is(.checkout, c-invoice-pay-flow) lightning-formatted-rich-text :is(p, h2) {
     margin: 0;
+}
+
+:is(.checkout, c-invoice-pay-flow) lightning-formatted-rich-text h2 {
+    font: inherit;
+    color: inherit;
 }
 
 /*
@@ -215,13 +220,13 @@ main:has(.checkout) community_layout-hidden-region .component-wrapper-spacer {
 }
 
 /* "Payment" heading */
-:is(.checkout, c-invoice-pay-flow) p:has(> span[style*="font-size: 20px"]) {
+:is(.checkout, c-invoice-pay-flow) h2:has(> span[style*="font-size: 20px"]) {
     margin-top: 32px;
     margin-bottom: 12px;
 }
 
 /* Order summary heading */
-:is(.checkout, c-invoice-pay-flow) .slds-medium-size_5-of-12 p:first-child:has(> span[style*="font-size: 18px"]) {
+:is(.checkout, c-invoice-pay-flow) .slds-medium-size_5-of-12 h2:first-child:has(> span[style*="font-size: 18px"]) {
     margin-bottom: 24px;
 }
 
@@ -499,8 +504,13 @@ body:has(.paylink) .footer-note {
     margin: 4em auto;
 }
 
-:is(.paylink, c-pay-link-flow) lightning-formatted-rich-text p {
+:is(.paylink, c-pay-link-flow) lightning-formatted-rich-text :is(p, h2) {
     margin: 0;
+}
+
+:is(.paylink, c-pay-link-flow) lightning-formatted-rich-text h2 {
+    font: inherit;
+    color: inherit;
 }
 
 /* Amount */
@@ -617,7 +627,7 @@ body:has(.paylink) .footer-note {
     border-top: 1px solid var(--paylink-line);
 }
 
-:is(.paylink, c-pay-link-flow) flowruntime-screen-field:has(span[style*="font-size: 16px"]) p + p {
+:is(.paylink, c-pay-link-flow) flowruntime-screen-field:has(span[style*="font-size: 16px"]) h2 + p {
     margin-top: 4px;
 }
 
@@ -628,19 +638,19 @@ body:has(.paylink) .footer-note {
 }
 
 /* Paid confirmation under the summary gets the same line */
-:is(.paylink, c-pay-link-flow) p:has(> span[style*="font-size: 22px"]) {
+:is(.paylink, c-pay-link-flow) h2:has(> span[style*="font-size: 22px"]) {
     margin-top: 24px;
     padding-top: 28px;
     border-top: 1px solid var(--paylink-line);
 }
 
-:is(.paylink, c-pay-link-flow) flowruntime-flow:has(p > span[style*="font-size: 44px"]) p:has(> span[style*="font-size: 22px"]) + p,
-:is(.paylink, c-pay-link-flow) p:has(> span[style*="font-size: 22px"]) + p {
+:is(.paylink, c-pay-link-flow) flowruntime-flow:has(p > span[style*="font-size: 44px"]) h2:has(> span[style*="font-size: 22px"]) + p,
+:is(.paylink, c-pay-link-flow) h2:has(> span[style*="font-size: 22px"]) + p {
     margin-top: 8px;
 }
 
 /* Not found / error screens have no summary above them: no line */
-:is(.paylink, c-pay-link-flow) flowruntime-flow:not(:has(span[style*="font-size: 44px"])) p:has(> span[style*="font-size: 22px"]) {
+:is(.paylink, c-pay-link-flow) flowruntime-flow:not(:has(span[style*="font-size: 44px"])) h2:has(> span[style*="font-size: 22px"]) {
     margin-top: 0;
     padding-top: 8px;
     border-top: 0;

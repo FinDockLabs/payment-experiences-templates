@@ -53,7 +53,7 @@
                         "text": "✓",
                         "textAlign": "center",
                         "textDecoration": "{}",
-                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"h1\", \"enableOverride\": false}"
                       },
                       "definition": "dxp_base:textBlock",
                       "id": "d95fc770-8b26-4be0-9b3e-a87f9d7bdbf4",
