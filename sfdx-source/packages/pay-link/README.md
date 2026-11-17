@@ -8,7 +8,7 @@ A screen flow for links to an existing FinDock record: pay an invoice or a payme
 - Payment link mode: From and For
 - Overdue badge when the due date has passed
 - Collected installments show a paid confirmation instead of the payment methods, so an old link stays safe to open
-- Recurring mode: when the id belongs to a recurring payment, the payer picks a new payment method for future payments (like FinDock PayLinks)
+- Recurring mode: when the id belongs to a recurring payment, the card shows its amount, frequency, From and its payment reference (if any), and the payer picks a new payment method for future payments (like FinDock PayLinks)
 - An unknown or missing id shows a "not valid" message
 
 The flow looks the id up as an installment and as a recurring payment, then shows one of three screens: pay, paid or not valid. The pay screen covers invoices, payment links and recurring payments with formulas instead of extra branches.
@@ -28,9 +28,9 @@ Recurring mode: the payer picks a new payment method for future payments.
 
 The same flow on the [donation site](../donation-site/), in its brand.
 
-![The flow in Flow Builder: find the installment or the recurring record by its GUID, then show the pay, paid or not-found screen.](../../../docs/images/builder-payment-link-flow.png)
+![The flow in Flow Builder: find the installment or the recurring record by its GUID, copy the recurring record's fields into neutral variables, then show the pay, paid or not-found screen.](../../../docs/images/builder-payment-link-flow.png)
 
-The flow in Flow Builder: find the installment or the recurring record by its GUID, then show the pay, paid or not-found screen.
+The flow in Flow Builder: find the installment or the recurring record by its GUID, copy the recurring record's fields into neutral variables, then show the pay, paid or not-found screen.
 
 ## Prerequisites
 - FinDock is installed and configured, with at least one payment extension.
@@ -47,26 +47,30 @@ The flow in Flow Builder: find the installment or the recurring record by its GU
 | `merchantName` | Name shown as From. Defaults to the org name. |
 | `successUrl`, `failureUrl` | Optional full URLs where the payer goes after a successful or a failed payment. Embeds such as Lightning Out pass their own; without them the flow uses the example URLs below. |
 
-For an installment, the amount is its open amount, the memo its bank statement description, and the payer its contact (and account, if set). For a recurring payment, the page shows its amount, frequency, next collection date and current payment method.
+For an installment, the amount is its open amount, the memo its bank statement description, and the payer its contact (and account, if set). For a recurring payment, the page shows its amount and frequency, From, and Reference when the record has a payment reference.
 
 The pay button reads "Pay" in every mode.
 
 
 ## Recurring object
 
-The flow finds the recurring record in the element **Placeholder: get recurring record**. It reads a FinDock Recurring Payment, which every FinDock org has, so the template always deploys. If your recurring gifts are on another object, change it to match your data model:
+Two neighbouring elements are the only parts of the flow that know which object holds recurring payments:
 
-| Data model | Object | GUID field | Amount, frequency and payment method |
+- **Placeholder: get recurring record** finds the record by its GUID. It reads a FinDock Recurring Payment, which every FinDock org has, so the template always deploys.
+- **Placeholder: map recurring fields** copies that record's fields into the `recurring*` variables. Every screen, formula and the Pay Button read those variables, never the record.
+
+If your recurring gifts are on another object, change those two elements to match your data model:
+
+| Variable | FinDock (default): Recurring Payment | NPSP: Recurring Donation | Nonprofit Cloud: Gift Commitment |
 |---|---|---|---|
-| FinDock (default) | Recurring Payment (`cpm__Recurring_Payment__c`) | `cpm__GUID__c` | On the record (`cpm__Amount__c`, `cpm__Frequency__c`, `cpm__Payment_Method__c`) |
-| NPSP | Recurring Donation (`npe03__Recurring_Donation__c`) | `npsp4hub__GUID__c` | On the record (`npe03__Amount__c`, `npsp4hub__Payment_Method__c`) |
-| Nonprofit Cloud | Gift Commitment (`GiftCommitment`) | `fdff__GUID__c` | On its current schedule (`CurrentGiftCmtScheduleId`): add a second Get Records for the Gift Commitment Schedule |
+| Lookup object · GUID field | `cpm__Recurring_Payment__c` · `cpm__GUID__c` | `npe03__Recurring_Donation__c` · `npsp4hub__GUID__c` | `GiftCommitment` · `fdff__GUID__c`, then a second Get Records for its current schedule (`CurrentGiftCmtScheduleId`), which holds the amount, frequency and reference |
+| `recurringId` | `Id` | `Id` | `Id` (of the Gift Commitment) |
+| `recurringAmount` | `cpm__Amount__c` | `npe03__Amount__c` | schedule `TransactionAmount` |
+| `recurringCurrency` | `CurrencyIsoCode` | `CurrencyIsoCode` | `CurrencyIsoCode` |
+| `recurringFrequency` | `cpm__Frequency__c` | `npe03__Installment_Period__c` | schedule `TransactionPeriod` |
+| `recurringReference` (the Reference row is hidden when empty) | `cpm__Final_Payment_Reference__c` | `npsp4hub__Final_Payment_Reference__c` | schedule `fdff__Final_Payment_Reference__c` |
 
-In Flow Builder:
-1. In **Placeholder: get recurring record**, change the object and the GUID filter.
-2. Update the formulas and screen texts that use its fields (amount, currency, frequency, next payment date, current payment method, payer, reference).
-3. Select the **Pay Button** on the Pay screen and set its recurring object type to the same object.
-4. Create the guest user sharing rule (installation step 4) on that object.
+Then select the **Pay Button** on the Pay screen and set its recurring object type to the same object, and create the guest user sharing rule (installation step 4) on that object.
 
 ## Installation
 1. Deploy this package.
