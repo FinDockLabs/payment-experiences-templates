@@ -21,6 +21,21 @@
           "children" : [ {
             "children" : [ {
               "attributes" : {
+                "isLinkable" : false,
+                "linkAssistiveText" : "",
+                "paddingHorizontal" : "none",
+                "paddingVertical" : "none",
+                "text" : "Secure checkout",
+                "textAlign" : "left",
+                "textDecoration" : "{}",
+                "textDisplayInfo" : "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+              },
+              "customCssClasses" : "slds-assistive-text",
+              "definition" : "dxp_base:textBlock",
+              "id" : "84bae8b0-8699-46dd-957d-e8f432a69f07",
+              "type" : "component"
+            }, {
+              "attributes" : {
                 "columnGutterWidth" : "",
                 "columnMinHeight" : "20rem",
                 "columnVerticalAlign" : "flex-start",

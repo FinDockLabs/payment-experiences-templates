@@ -328,7 +328,7 @@
         <allowPause>false</allowPause>
             <fields>
                 <name>Fault_Text</name>
-                <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;Something went wrong&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;We could not load this payment. Please try again later.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldText>&lt;h2 style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;Something went wrong&lt;/strong&gt;&lt;/span&gt;&lt;/h2&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;We could not load this payment. Please try again later.&lt;/span&gt;&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
             </fields>
         <showFooter>false</showFooter>
@@ -344,7 +344,7 @@
         <allowPause>false</allowPause>
             <fields>
                 <name>Not_Found_Text</name>
-                <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;This payment link is not valid&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;The link may be incomplete or no longer in use. Please check the link in your email or contact {!From_Name}.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldText>&lt;h2 style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;This payment link is not valid&lt;/strong&gt;&lt;/span&gt;&lt;/h2&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;The link may be incomplete or no longer in use. Please check the link in your email or contact {!From_Name}.&lt;/span&gt;&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
             </fields>
         <showFooter>false</showFooter>
@@ -469,7 +469,7 @@
             </fields>
             <fields>
                 <name>Paid_Confirmation</name>
-                <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;{!Paid_Title}&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Thank you. Nothing more to pay. Questions? Contact {!From_Name}.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldText>&lt;h2 style="text-align: center;"&gt;&lt;span style="font-size: 22px;"&gt;&lt;strong&gt;{!Paid_Title}&lt;/strong&gt;&lt;/span&gt;&lt;/h2&gt;&lt;p style="text-align: center;"&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Thank you. Nothing more to pay. Questions? Contact {!From_Name}.&lt;/span&gt;&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
             </fields>
         <showFooter>false</showFooter>
@@ -619,7 +619,7 @@
             </fields>
             <fields>
                 <name>Pay_Recurring_Intro</name>
-                <fieldText>&lt;p&gt;&lt;span style="font-size: 16px;"&gt;&lt;strong&gt;Choose a new payment method&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Future payments of {!Amount_Text} will be collected with the method you choose.&lt;/span&gt;&lt;/p&gt;</fieldText>
+                <fieldText>&lt;h2&gt;&lt;span style="font-size: 16px;"&gt;&lt;strong&gt;Choose a new payment method&lt;/strong&gt;&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Future payments of {!Amount_Text} will be collected with the method you choose.&lt;/span&gt;&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
                 <visibilityRule>
                     <conditionLogic>and</conditionLogic>
