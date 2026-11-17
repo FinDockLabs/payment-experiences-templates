@@ -2,6 +2,51 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>68.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>PLACEHOLDER. Copies the fields of the recurring record found by Placeholder: get recurring record into the recurring* variables that the screens and formulas show. When you change that lookup to another object (NPSP Recurring Donation, Nonprofit Cloud Gift Commitment), change the fields here; nothing else in the flow reads the record. See the README.</description>
+        <name>Map_Recurring_Fields</name>
+        <label>Placeholder: map recurring fields</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>recurringId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Recurring_Payment.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>recurringAmount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Recurring_Payment.cpm__Amount__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>recurringCurrency</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Recurring_Payment.CurrencyIsoCode</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>recurringFrequency</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Recurring_Payment.cpm__Frequency__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>recurringReference</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Recurring_Payment.cpm__Final_Payment_Reference__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Installment_State</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>Has_Id</name>
         <label>Has an id?</label>
@@ -70,6 +115,12 @@
     <description>Pays one installment from a link (an invoice or a payment link), or changes the payment method of a recurring payment. One card with the amount, a short summary and the FinDock payment methods. Collected installments show a paid confirmation instead.</description>
     <environments>Default</environments>
     <formulas>
+        <description>The record has a payment reference to show. Hides the recurring Reference row when it is empty.</description>
+        <name>Has_Reference</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(ISBLANK({!Reference}))</expression>
+    </formulas>
+    <formulas>
         <description>Where the payer goes after a successful payment: the successUrl input if the page passes one (the Lightning Out examples do), else https://www.example.com/success. Replace the example URL with your own page.</description>
         <name>Success_URL</name>
         <dataType>String</dataType>
@@ -91,23 +142,18 @@
         <description>Open amount (or the recurring amount) with currency symbol, e.g. €1,250.00.</description>
         <name>Amount_Text</name>
         <dataType>String</dataType>
-        <expression>CASE({!Currency_Code},&quot;EUR&quot;,&quot;€&quot;,&quot;USD&quot;,&quot;$&quot;,&quot;GBP&quot;,&quot;£&quot;,&quot;CHF&quot;,&quot;CHF &quot;,&quot;SEK&quot;,&quot;SEK &quot;,&quot;NOK&quot;,&quot;NOK &quot;,&quot;DKK&quot;,&quot;DKK &quot;,{!Currency_Code} &amp; &quot; &quot;) &amp; IF(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)) >= 1000, TEXT(FLOOR(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0))/1000)) &amp; &quot;,&quot; &amp; RIGHT(&quot;00&quot; &amp; TEXT(MOD(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)),1000)),3), TEXT(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)))) &amp; &quot;.&quot; &amp; RIGHT(&quot;0&quot; &amp; TEXT(ROUND(MOD(BLANKVALUE(IF({!Is_Recurring}, {!Get_Recurring_Payment.cpm__Amount__c}, {!Get_Installment.cpm__Amount_Open__c}), 0)*100,100),0)),2)</expression>
+        <expression>CASE({!Currency_Code},&quot;EUR&quot;,&quot;€&quot;,&quot;USD&quot;,&quot;$&quot;,&quot;GBP&quot;,&quot;£&quot;,&quot;CHF&quot;,&quot;CHF &quot;,&quot;SEK&quot;,&quot;SEK &quot;,&quot;NOK&quot;,&quot;NOK &quot;,&quot;DKK&quot;,&quot;DKK &quot;,{!Currency_Code} &amp; &quot; &quot;) &amp; IF(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!recurringAmount}, {!Get_Installment.cpm__Amount_Open__c}), 0)) >= 1000, TEXT(FLOOR(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!recurringAmount}, {!Get_Installment.cpm__Amount_Open__c}), 0))/1000)) &amp; &quot;,&quot; &amp; RIGHT(&quot;00&quot; &amp; TEXT(MOD(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!recurringAmount}, {!Get_Installment.cpm__Amount_Open__c}), 0)),1000)),3), TEXT(FLOOR(BLANKVALUE(IF({!Is_Recurring}, {!recurringAmount}, {!Get_Installment.cpm__Amount_Open__c}), 0)))) &amp; &quot;.&quot; &amp; RIGHT(&quot;0&quot; &amp; TEXT(ROUND(MOD(BLANKVALUE(IF({!Is_Recurring}, {!recurringAmount}, {!Get_Installment.cpm__Amount_Open__c}), 0)*100,100),0)),2)</expression>
     </formulas>
     <formulas>
         <name>Currency_Code</name>
         <dataType>String</dataType>
-        <expression>IF({!Is_Recurring}, TEXT({!Get_Recurring_Payment.CurrencyIsoCode}), TEXT({!Get_Installment.CurrencyIsoCode}))</expression>
+        <expression>IF({!Is_Recurring}, {!recurringCurrency}, TEXT({!Get_Installment.CurrencyIsoCode}))</expression>
     </formulas>
     <formulas>
-        <name>Current_Method</name>
-        <dataType>String</dataType>
-        <expression>TEXT({!Get_Recurring_Payment.cpm__Payment_Method__c})</expression>
-    </formulas>
-    <formulas>
-        <description>Line under the amount: the due date, or the frequency and next payment for a recurring payment.</description>
+        <description>Line under the amount: the due date, or the frequency for a recurring payment.</description>
         <name>Due_Text</name>
         <dataType>String</dataType>
-        <expression>IF({!Is_Recurring}, TEXT({!Get_Recurring_Payment.cpm__Frequency__c}) &amp; IF(ISBLANK({!Get_Recurring_Payment.cpm__Next_Collection_Date__c}), &quot;&quot;, &quot; · next payment &quot; &amp; TEXT(DAY({!Get_Recurring_Payment.cpm__Next_Collection_Date__c})) &amp; &quot; &quot; &amp; CASE(MONTH({!Get_Recurring_Payment.cpm__Next_Collection_Date__c}),1,&quot;January&quot;,2,&quot;February&quot;,3,&quot;March&quot;,4,&quot;April&quot;,5,&quot;May&quot;,6,&quot;June&quot;,7,&quot;July&quot;,8,&quot;August&quot;,9,&quot;September&quot;,10,&quot;October&quot;,11,&quot;November&quot;,12,&quot;December&quot;,&quot;&quot;) &amp; &quot; &quot; &amp; TEXT(YEAR({!Get_Recurring_Payment.cpm__Next_Collection_Date__c}))), IF(ISBLANK({!Get_Installment.cpm__Due_Date__c}), &quot;&quot;, &quot;Due &quot; &amp; TEXT(DAY({!Get_Installment.cpm__Due_Date__c})) &amp; &quot; &quot; &amp; CASE(MONTH({!Get_Installment.cpm__Due_Date__c}),1,&quot;January&quot;,2,&quot;February&quot;,3,&quot;March&quot;,4,&quot;April&quot;,5,&quot;May&quot;,6,&quot;June&quot;,7,&quot;July&quot;,8,&quot;August&quot;,9,&quot;September&quot;,10,&quot;October&quot;,11,&quot;November&quot;,12,&quot;December&quot;,&quot;&quot;) &amp; &quot; &quot; &amp; TEXT(YEAR({!Get_Installment.cpm__Due_Date__c}))))</expression>
+        <expression>IF({!Is_Recurring}, {!recurringFrequency}, IF(ISBLANK({!Get_Installment.cpm__Due_Date__c}), &quot;&quot;, &quot;Due &quot; &amp; TEXT(DAY({!Get_Installment.cpm__Due_Date__c})) &amp; &quot; &quot; &amp; CASE(MONTH({!Get_Installment.cpm__Due_Date__c}),1,&quot;January&quot;,2,&quot;February&quot;,3,&quot;March&quot;,4,&quot;April&quot;,5,&quot;May&quot;,6,&quot;June&quot;,7,&quot;July&quot;,8,&quot;August&quot;,9,&quot;September&quot;,10,&quot;October&quot;,11,&quot;November&quot;,12,&quot;December&quot;,&quot;&quot;) &amp; &quot; &quot; &amp; TEXT(YEAR({!Get_Installment.cpm__Due_Date__c}))))</expression>
     </formulas>
     <formulas>
         <description>Who is asking for the payment. Set merchantName in the site to override the org name.</description>
@@ -139,13 +185,13 @@
     <formulas>
         <name>Is_Found</name>
         <dataType>Boolean</dataType>
-        <expression>OR(NOT(ISBLANK({!Get_Installment.Id})), NOT(ISBLANK({!Get_Recurring_Payment.Id})))</expression>
+        <expression>OR(NOT(ISBLANK({!Get_Installment.Id})), NOT(ISBLANK({!recurringId})))</expression>
     </formulas>
     <formulas>
         <description>The id belongs to a recurring payment: the page updates its payment method instead of collecting a payment.</description>
         <name>Is_Recurring</name>
         <dataType>Boolean</dataType>
-        <expression>AND(ISBLANK({!Get_Installment.Id}), NOT(ISBLANK({!Get_Recurring_Payment.Id})))</expression>
+        <expression>AND(ISBLANK({!Get_Installment.Id}), NOT(ISBLANK({!recurringId})))</expression>
     </formulas>
     <formulas>
         <name>Is_Overdue</name>
@@ -192,12 +238,12 @@
     <formulas>
         <name>Payer_Name</name>
         <dataType>String</dataType>
-        <expression>IF({!Is_Recurring}, TRIM({!Get_Recurring_Payment.cpm__Contact__r.FirstName} &amp; &quot; &quot; &amp; {!Get_Recurring_Payment.cpm__Contact__r.LastName}) &amp; IF(ISBLANK({!Get_Recurring_Payment.cpm__Account__r.Name}), &quot;&quot;, &quot;, &quot; &amp; {!Get_Recurring_Payment.cpm__Account__r.Name}), TRIM({!Get_Installment.cpm__Contact__r.FirstName} &amp; &quot; &quot; &amp; {!Get_Installment.cpm__Contact__r.LastName}) &amp; IF(ISBLANK({!Get_Installment.cpm__Account__r.Name}), &quot;&quot;, &quot;, &quot; &amp; {!Get_Installment.cpm__Account__r.Name}))</expression>
+        <expression>TRIM({!Get_Installment.cpm__Contact__r.FirstName} &amp; &quot; &quot; &amp; {!Get_Installment.cpm__Contact__r.LastName}) &amp; IF(ISBLANK({!Get_Installment.cpm__Account__r.Name}), &quot;&quot;, &quot;, &quot; &amp; {!Get_Installment.cpm__Account__r.Name})</expression>
     </formulas>
     <formulas>
         <name>Reference</name>
         <dataType>String</dataType>
-        <expression>IF({!Is_Recurring}, BLANKVALUE({!Get_Recurring_Payment.cpm__Final_Payment_Reference__c}, {!Get_Recurring_Payment.Name}), BLANKVALUE({!Get_Installment.cpm__Final_Payment_Reference__c}, {!Get_Installment.Name}))</expression>
+        <expression>IF({!Is_Recurring}, {!recurringReference}, BLANKVALUE({!Get_Installment.cpm__Final_Payment_Reference__c}, {!Get_Installment.Name}))</expression>
     </formulas>
     <interviewLabel>Payment link {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
@@ -247,14 +293,14 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <description>PLACEHOLDER. Reads a FinDock Recurring Payment by its GUID. If your recurring gifts are on another object, change this element&apos;s object and GUID filter (NPSP: Recurring Donation, npsp4hub__GUID__c; Nonprofit Cloud: Gift Commitment, fdff__GUID__c), update the formulas and texts that use its fields, and set the Pay Button&apos;s recurring object type to the same object. See the README.</description>
+        <description>PLACEHOLDER. Reads a FinDock Recurring Payment by its GUID. If your recurring gifts are on another object, change this element&apos;s object and GUID filter (NPSP: Recurring Donation, npsp4hub__GUID__c; Nonprofit Cloud: Gift Commitment, fdff__GUID__c), change the fields in Placeholder: map recurring fields, and set the Pay Button&apos;s recurring object type to the same object. See the README.</description>
         <name>Get_Recurring_Payment</name>
         <label>Placeholder: get recurring record</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Installment_State</targetReference>
+            <targetReference>Map_Recurring_Fields</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Fault_Screen</targetReference>
@@ -371,7 +417,7 @@
             </fields>
             <fields>
                 <name>Paid_Recurring_Rows</name>
-                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;To&lt;/span&gt;{!Payer_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Reference&lt;/span&gt;{!Reference}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Paying by&lt;/span&gt;{!Current_Method}&lt;/p&gt;</fieldText>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
                 <visibilityRule>
                     <conditionLogic>and</conditionLogic>
@@ -380,6 +426,28 @@
                         <operator>EqualTo</operator>
                         <rightValue>
                             <stringValue>recurring</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Paid_Recurring_Reference_Row</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Reference&lt;/span&gt;{!Reference}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>recurring</stringValue>
+                        </rightValue>
+                    </conditions>
+                    <conditions>
+                        <leftValueReference>Has_Reference</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
                         </rightValue>
                     </conditions>
                 </visibilityRule>
@@ -499,7 +567,7 @@
             </fields>
             <fields>
                 <name>Pay_Recurring_Rows</name>
-                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;To&lt;/span&gt;{!Payer_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Reference&lt;/span&gt;{!Reference}&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Paying by&lt;/span&gt;{!Current_Method}&lt;/p&gt;</fieldText>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
                 <visibilityRule>
                     <conditionLogic>and</conditionLogic>
@@ -508,6 +576,28 @@
                         <operator>EqualTo</operator>
                         <rightValue>
                             <stringValue>recurring</stringValue>
+                        </rightValue>
+                    </conditions>
+                </visibilityRule>
+            </fields>
+            <fields>
+                <name>Pay_Recurring_Reference_Row</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Reference&lt;/span&gt;{!Reference}&lt;/p&gt;</fieldText>
+                <fieldType>DisplayText</fieldType>
+                <visibilityRule>
+                    <conditionLogic>and</conditionLogic>
+                    <conditions>
+                        <leftValueReference>Mode</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <stringValue>recurring</stringValue>
+                        </rightValue>
+                    </conditions>
+                    <conditions>
+                        <leftValueReference>Has_Reference</leftValueReference>
+                        <operator>EqualTo</operator>
+                        <rightValue>
+                            <booleanValue>true</booleanValue>
                         </rightValue>
                     </conditions>
                 </visibilityRule>
@@ -574,7 +664,7 @@
                 <inputParameters>
                     <name>pixConfig</name>
                     <value>
-                        <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;{!Success_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;{!Failure_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
+                        <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!recurringId}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;{!Success_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;{!Failure_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
                     </value>
                 </inputParameters>
                 <inputParameters>
@@ -592,7 +682,7 @@
                 <inputParameters>
                     <name>recurringObjectId</name>
                     <value>
-                        <elementReference>Get_Recurring_Payment.Id</elementReference>
+                        <elementReference>recurringId</elementReference>
                     </value>
                 </inputParameters>
                 <inputParameters>
@@ -706,6 +796,47 @@
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Id of the recurring record. Empty when the link is not for a recurring record. Set by Placeholder: map recurring fields.</description>
+        <name>recurringId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Amount of each recurring payment. Set by Placeholder: map recurring fields.</description>
+        <name>recurringAmount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <description>Currency code, e.g. EUR. Set by Placeholder: map recurring fields.</description>
+        <name>recurringCurrency</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Frequency as shown to the payer, e.g. Monthly. Set by Placeholder: map recurring fields.</description>
+        <name>recurringFrequency</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Payment reference shown as Reference. Set by Placeholder: map recurring fields.</description>
+        <name>recurringReference</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>
