@@ -22,6 +22,22 @@
               },
               "children": [
                 {
+                  "attributes": {
+                    "isLinkable": false,
+                    "linkAssistiveText": "",
+                    "paddingHorizontal": "none",
+                    "paddingVertical": "none",
+                    "text": "Secure payment",
+                    "textAlign": "left",
+                    "textDecoration": "{}",
+                    "textDisplayInfo": "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+                  },
+                  "customCssClasses": "slds-assistive-text",
+                  "definition": "dxp_base:textBlock",
+                  "id": "bedad3c0-d322-4bf9-93f8-6c06e556276b",
+                  "type": "component"
+                },
+                {
                   "children": [
                     {
                       "attributes": {

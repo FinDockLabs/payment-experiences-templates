@@ -715,8 +715,13 @@ html {
     margin: 4em auto;
 }
 
-.paylink lightning-formatted-rich-text p {
+.paylink lightning-formatted-rich-text :is(p, h2) {
     margin: 0;
+}
+
+.paylink lightning-formatted-rich-text h2 {
+    font: inherit;
+    color: inherit;
 }
 
 /* Amount */
@@ -833,7 +838,7 @@ html {
     border-top: 1px solid var(--paylink-line);
 }
 
-.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) p + p {
+.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) h2 + p {
     margin-top: 4px;
 }
 
@@ -844,19 +849,19 @@ html {
 }
 
 /* Paid confirmation under the summary gets the same line */
-.paylink p:has(> span[style*="font-size: 22px"]) {
+.paylink h2:has(> span[style*="font-size: 22px"]) {
     margin-top: 24px;
     padding-top: 28px;
     border-top: 1px solid var(--paylink-line);
 }
 
-.paylink flowruntime-flow:has(p > span[style*="font-size: 44px"]) p:has(> span[style*="font-size: 22px"]) + p,
-.paylink p:has(> span[style*="font-size: 22px"]) + p {
+.paylink flowruntime-flow:has(p > span[style*="font-size: 44px"]) h2:has(> span[style*="font-size: 22px"]) + p,
+.paylink h2:has(> span[style*="font-size: 22px"]) + p {
     margin-top: 8px;
 }
 
 /* Not found / error screens have no summary above them: no line */
-.paylink flowruntime-flow:not(:has(span[style*="font-size: 44px"])) p:has(> span[style*="font-size: 22px"]) {
+.paylink flowruntime-flow:not(:has(span[style*="font-size: 44px"])) h2:has(> span[style*="font-size: 22px"]) {
     margin-top: 0;
     padding-top: 8px;
     border-top: 0;
