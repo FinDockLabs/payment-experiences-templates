@@ -125,14 +125,6 @@ body {
 :is(.checkout, c-invoice-pay-flow) flowruntime-flow {
     display: block;
     background: var(--dxp-g-root, #FFFFFF);
-
-    --dxp-g-root: #FFFFFF;
-    --dxp-g-neutral-3: var(--checkout-field-border);
-    --dxp-s-form-element-color-border: var(--checkout-field-border);
-    --dxp-s-form-element-color-background: #FFFFFF;
-    --dxp-s-form-element-color-background-focus: #FFFFFF;
-    --slds-c-input-color-background: #FFFFFF;
-    --slds-c-select-color-background: #FFFFFF;
 }
 
 :is(.checkout, c-invoice-pay-flow) flowruntime-progress-indicator {
@@ -479,14 +471,6 @@ body:has(.paylink) .footer-note {
     border-radius: 12px;
     box-shadow: 0 1px 3px color-mix(in srgb, var(--paylink-ink) 8%, transparent);
     padding: 32px 40px;
-
-    --dxp-g-root: #FFFFFF;
-    --dxp-g-neutral-3: var(--paylink-field-border);
-    --dxp-s-form-element-color-border: var(--paylink-field-border);
-    --dxp-s-form-element-color-background: #FFFFFF;
-    --dxp-s-form-element-color-background-focus: #FFFFFF;
-    --slds-c-input-color-background: #FFFFFF;
-    --slds-c-select-color-background: #FFFFFF;
 }
 
 :is(.paylink, c-pay-link-flow) flowruntime-progress-indicator {
@@ -710,6 +694,13 @@ c-invoice-pay-flow {
     --dxp-g-brand-contrast: #FFFFFF;
     --dxp-g-root-contrast: #1A1D24;
     --dxp-g-root-contrast-2: #5B6270;
+    --dxp-g-root: #FFFFFF;
+    --dxp-g-neutral-3: var(--checkout-field-border);
+    --dxp-s-form-element-color-border: var(--checkout-field-border);
+    --dxp-s-form-element-color-background: #FFFFFF;
+    --dxp-s-form-element-color-background-focus: #FFFFFF;
+    --slds-c-input-color-background: #FFFFFF;
+    --slds-c-select-color-background: #FFFFFF;
     --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --dxp-g-root-font-family: var(--dxp-s-html-font-family);
     --dxp-s-text-heading-font-family: var(--dxp-s-html-font-family);
@@ -754,6 +745,13 @@ c-pay-link-flow {
     --dxp-s-button-color-hover: color-mix(in srgb, var(--dxp-g-brand) 85%, #FFFFFF);
     --dxp-s-button-color-contrast: var(--dxp-g-brand-contrast);
     --slds-g-color-brand-base-60: var(--dxp-g-brand);
+    --dxp-g-root: #FFFFFF;
+    --dxp-g-neutral-3: var(--paylink-field-border);
+    --dxp-s-form-element-color-border: var(--paylink-field-border);
+    --dxp-s-form-element-color-background: #FFFFFF;
+    --dxp-s-form-element-color-background-focus: #FFFFFF;
+    --slds-c-input-color-background: #FFFFFF;
+    --slds-c-select-color-background: #FFFFFF;
     --dxp-s-body-text-color: var(--paylink-ink);
     --dxp-s-text-heading-color: var(--paylink-ink);
     --dxp-s-form-element-label-color: var(--paylink-ink);

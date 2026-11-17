@@ -690,14 +690,6 @@ html {
     border-radius: 12px;
     box-shadow: 0 1px 3px color-mix(in srgb, var(--paylink-ink) 8%, transparent);
     padding: 32px 40px;
-
-    --dxp-g-root: #FFFFFF;
-    --dxp-g-neutral-3: var(--paylink-field-border);
-    --dxp-s-form-element-color-border: var(--paylink-field-border);
-    --dxp-s-form-element-color-background: #FFFFFF;
-    --dxp-s-form-element-color-background-focus: #FFFFFF;
-    --slds-c-input-color-background: #FFFFFF;
-    --slds-c-select-color-background: #FFFFFF;
 }
 
 .paylink flowruntime-progress-indicator {
