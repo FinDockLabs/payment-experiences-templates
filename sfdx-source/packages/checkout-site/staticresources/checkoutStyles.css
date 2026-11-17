@@ -523,7 +523,7 @@ body:has(.paylink) .footer-note {
 /* Summary rows: label column + value column */
 :is(.paylink, c-pay-link-flow) p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) {
     display: grid;
-    grid-template-columns: 72px 1fr;
+    grid-template-columns: 88px 1fr;
     column-gap: 16px;
     margin-top: 10px;
     font-size: 15px;
@@ -540,7 +540,7 @@ body:has(.paylink) .footer-note {
     margin-bottom: 0 !important;
 }
 
-/* Rows split over several fields (e.g. Memo, shown only when set) continue at the normal row spacing */
+/* Rows split over several fields (e.g. Description, shown only when set) continue at the normal row spacing */
 :is(.paylink, c-pay-link-flow) flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) ~ flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) {
     margin-top: 0;
 }
@@ -681,7 +681,7 @@ body:has(.paylink) .footer-note {
     }
 
     :is(.paylink, c-pay-link-flow) p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) {
-        grid-template-columns: 56px 1fr;
+        grid-template-columns: 80px 1fr;
     }
 }
 
