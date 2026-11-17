@@ -38,11 +38,15 @@ The site is meant to be customized and extended to fit the specific use case and
 
 The checkout: payment on the left, a plain-text order summary on the right (shown above the payment on a phone).
 
+![The Payment Link page: one card for an invoice, in the same brand. The page's own light-grey background sets it apart from the checkout.](../../../docs/images/checkout-payment-link.png)
+
+The Payment Link page: one card for an invoice, in the same brand. The page's own light-grey background sets it apart from the checkout.
+
 ### Brand
 
-![The neutral brand the checkout and Payment Link templates share. Swap the logo, the brand colour and the font for your own.](../../../docs/images/brand-checkout-pay-link.png)
+![The neutral brand of the checkout and Payment Link pages. Swap the logo, the brand colour and the font for your own.](../../../docs/images/brand-checkout-pay-link.png)
 
-The neutral brand the checkout and Payment Link templates share. Swap the logo, the brand colour and the font for your own.
+The neutral brand of the checkout and Payment Link pages. Swap the logo, the brand colour and the font for your own.
 
 ## Prerequisites
 - FinDock is installed and configured.
@@ -61,7 +65,7 @@ The neutral brand the checkout and Payment Link templates share. Swap the logo, 
 
 > After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/payment-received`; see step 5 of the [Payment Link Flow installation](../pay-link/#installation).
 
-The installation will ask you to approve three trusted sites: external.findock.com (icons and pictures), and fonts.googleapis.com and fonts.gstatic.com (the site's web fonts).
+The installation will ask you to approve one trusted site: external.findock.com (icons and pictures).
 
 > The site itself is not part of this package. `Network` and `CustomSite` are deliberately excluded in `.forceignore` because they embed the creating user's email address and the org subdomain, which are not portable between orgs. This is why the site has to be created before the template is deployed.
 
@@ -75,7 +79,7 @@ The design reads the Experience Builder **Theme** panel, so you can rebrand with
 | Brand colour | Buttons, selected states, step indicator, and the light tints derived from it |
 | Background | Page background and header |
 | Text colours | Body copy and captions |
-| Fonts | Body and heading fonts |
+| Fonts | Not used: the site uses the device's own interface font (San Francisco on Apple devices, Segoe UI on Windows, Roboto on Android), set at the top of `checkoutStyles`, so nothing is downloaded. To use a web font, put it first in that list and approve its domain as a trusted site. |
 | Button and form element radius | Pills, tiles and fields |
 
 - Layout and component overrides live in the `checkoutStyles` static resource, loaded from the site's Head Markup. Its first part styles the shared header and footer and the checkout; the Payment Link part is scoped with `body:has(.paylink)`. The Payment Link page keeps a light-grey background behind its card.

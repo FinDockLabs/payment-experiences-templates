@@ -19,6 +19,20 @@ This template is meant to be customized and extended to fit specific use cases a
 - Collect one-time and recurring donations
 - Configurable amounts and frequencies
 
+## Preview
+
+![The donation flow on the [donation site](../donation-site/), styled as the fictional Canopy Gibbon Trust.](../../../docs/images/donation-site.png)
+
+The donation flow on the [donation site](../donation-site/), styled as the fictional Canopy Gibbon Trust.
+
+![The Donation Flow in Flow Builder: the payer's browser details, an example decision, gift tributes, the amount and details screens, the assignments for the contact, installment and gift commitment, and the Pay screen.](../../../docs/images/builder-donation-flow-fundraising.png)
+
+The Donation Flow in Flow Builder: the payer's browser details, an example decision, gift tributes, the amount and details screens, the assignments for the contact, installment and gift commitment, and the Pay screen.
+
+![The One Screen Donation Flow in Flow Builder: everything on one Pay screen.](../../../docs/images/builder-one-screen-donation-flow.png)
+
+The One Screen Donation Flow in Flow Builder: everything on one Pay screen.
+
 ## Prerequisites
 - FinDock is installed and configured.
 - FinDock for Fundraising is installed and configured.

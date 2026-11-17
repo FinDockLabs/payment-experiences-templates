@@ -34,6 +34,10 @@ The Payment Link page takes the same parameters as the one on the [checkout site
 
 The donation page, styled as the fictional Canopy Gibbon Trust.
 
+![The Payment Link page in the Canopy Gibbon Trust brand: the same card as on the checkout site, in the donation form's styling.](../../../docs/images/donation-payment-link.png)
+
+The Payment Link page in the Canopy Gibbon Trust brand: the same card as on the checkout site, in the donation form's styling.
+
 ### Brand
 
 ![The Canopy Gibbon Trust example brand: logo, colours, fonts and components. Replace them with your own.](../../../docs/images/brand-canopy-gibbon-trust.png)
