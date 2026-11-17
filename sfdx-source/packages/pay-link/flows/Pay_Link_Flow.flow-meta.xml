@@ -3,7 +3,7 @@
     <apiVersion>68.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
-        <description>PLACEHOLDER. Copies the fields of the recurring record found by Placeholder: get recurring record into the recurring* variables that the screens and formulas show. When you change that lookup to another object (NPSP Recurring Donation, Nonprofit Cloud Gift Commitment), change the fields here; nothing else in the flow reads the record. See the README.</description>
+        <description>PLACEHOLDER. Copies the fields of the recurring record found by Placeholder: get recurring record into the recurring* variables that the screens and formulas show. When you change that lookup to another object (NPSP Recurring Donation, Nonprofit Cloud Gift Commitment), change the fields here; nothing else in the flow reads the record. Also sets currency, the currency the amounts are shown in: the example uses EUR. In a single-currency org set your org currency; in a multi-currency org assign IF({!Is_Recurring}, TEXT({!Get_Recurring_Payment.CurrencyIsoCode}), TEXT({!Get_Installment.CurrencyIsoCode})). The template doesn&apos;t read CurrencyIsoCode because that field only exists in multi-currency orgs. See the README.</description>
         <name>Map_Recurring_Fields</name>
         <label>Placeholder: map recurring fields</label>
         <locationX>0</locationX>
@@ -23,10 +23,10 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>recurringCurrency</assignToReference>
+            <assignToReference>currency</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_Recurring_Payment.CurrencyIsoCode</elementReference>
+                <stringValue>EUR</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -147,7 +147,7 @@
     <formulas>
         <name>Currency_Code</name>
         <dataType>String</dataType>
-        <expression>IF({!Is_Recurring}, {!recurringCurrency}, TEXT({!Get_Installment.CurrencyIsoCode}))</expression>
+        <expression>{!currency}</expression>
     </formulas>
     <formulas>
         <description>Line under the amount: the due date, or the frequency for a recurring payment.</description>
@@ -816,8 +816,8 @@
         <scale>2</scale>
     </variables>
     <variables>
-        <description>Currency code, e.g. EUR. Set by Placeholder: map recurring fields.</description>
-        <name>recurringCurrency</name>
+        <description>Currency code the amounts are shown in, e.g. EUR. Set by Placeholder: map recurring fields.</description>
+        <name>currency</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
