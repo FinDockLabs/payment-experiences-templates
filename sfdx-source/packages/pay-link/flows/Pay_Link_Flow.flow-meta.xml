@@ -43,6 +43,13 @@
                 <elementReference>Get_Recurring_Payment.cpm__Final_Payment_Reference__c</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>recurringDescription</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Recurring_Payment.cpm__Bank_Statement_Description__c</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Installment_State</targetReference>
         </connector>
@@ -167,9 +174,10 @@
         <expression>NOT(ISBLANK({!invoiceUrl}))</expression>
     </formulas>
     <formulas>
-        <name>Show_Memo</name>
+        <description>Hides the Description row when there is no bank statement description.</description>
+        <name>Show_Description</name>
         <dataType>Boolean</dataType>
-        <expression>AND(NOT({!Is_Recurring}), NOT(ISBLANK({!Memo})))</expression>
+        <expression>NOT(ISBLANK({!Description}))</expression>
     </formulas>
     <formulas>
         <name>Is_Current_User_Sys_Admin</name>
@@ -205,9 +213,10 @@
         <expression>AND(NOT({!Is_Recurring}), OR(TEXT({!Get_Installment.cpm__Status__c}) = &quot;Collected&quot;, BLANKVALUE({!Get_Installment.cpm__Amount_Open__c}, 0) &lt;= 0))</expression>
     </formulas>
     <formulas>
-        <name>Memo</name>
+        <description>Bank statement description of the installment or the recurring record, shown as Description.</description>
+        <name>Description</name>
         <dataType>String</dataType>
-        <expression>{!Get_Installment.cpm__Bank_Statement_Description__c}</expression>
+        <expression>IF({!Is_Recurring}, {!recurringDescription}, {!Get_Installment.cpm__Bank_Statement_Description__c})</expression>
     </formulas>
     <formulas>
         <description>Which summary rows to show: invoice, link or recurring.</description>
@@ -219,11 +228,6 @@
         <name>Selector_Frequency</name>
         <dataType>String</dataType>
         <expression>IF({!Is_Recurring}, &quot;recurring&quot;, &quot;oneTime&quot;)</expression>
-    </formulas>
-    <formulas>
-        <name>Memo_Label</name>
-        <dataType>String</dataType>
-        <expression>IF({!Is_Invoice}, &quot;Memo&quot;, &quot;For&quot;)</expression>
     </formulas>
     <formulas>
         <name>Paid_Text</name>
@@ -453,13 +457,13 @@
                 </visibilityRule>
             </fields>
             <fields>
-                <name>Paid_Memo_Row</name>
-                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;{!Memo_Label}&lt;/span&gt;{!Memo}&lt;/p&gt;</fieldText>
+                <name>Paid_Description_Row</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Description&lt;/span&gt;{!Description}&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
                 <visibilityRule>
                     <conditionLogic>and</conditionLogic>
                     <conditions>
-                        <leftValueReference>Show_Memo</leftValueReference>
+                        <leftValueReference>Show_Description</leftValueReference>
                         <operator>EqualTo</operator>
                         <rightValue>
                             <booleanValue>true</booleanValue>
@@ -603,13 +607,13 @@
                 </visibilityRule>
             </fields>
             <fields>
-                <name>Pay_Memo_Row</name>
-                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;{!Memo_Label}&lt;/span&gt;{!Memo}&lt;/p&gt;</fieldText>
+                <name>Pay_Description_Row</name>
+                <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;Description&lt;/span&gt;{!Description}&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
                 <visibilityRule>
                     <conditionLogic>and</conditionLogic>
                     <conditions>
-                        <leftValueReference>Show_Memo</leftValueReference>
+                        <leftValueReference>Show_Description</leftValueReference>
                         <operator>EqualTo</operator>
                         <rightValue>
                             <booleanValue>true</booleanValue>
@@ -834,6 +838,14 @@
     <variables>
         <description>Payment reference shown as Reference. Set by Placeholder: map recurring fields.</description>
         <name>recurringReference</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Bank statement description, shown as Description. Set by Placeholder: map recurring fields.</description>
+        <name>recurringDescription</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
