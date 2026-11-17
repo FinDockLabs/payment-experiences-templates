@@ -25,6 +25,16 @@ FinDock needs a success and a failure URL for every payment. The flow uses `http
 ## Order details
 The flow shows example order details. The element **Placeholder: get order details** fills `amount`, `currency`, `reference`, `frequency` and the payer's `Contact` with example values, and the Pay screen's order summary lists example order lines. Replace that element with a Get Records element that reads the order to pay, for example the standard Order object (Orders must be enabled in Setup), an Opportunity or your own object. The flow's optional `id` input variable (`?id=` in the page URL) is there to find that record. Give the site guest user read access to the object and fields you read.
 
+## Preview
+
+![The Checkout Flow on the [checkout site](../checkout-site/): payment on the left, the order summary on the right.](../../../docs/images/checkout-site.png)
+
+The Checkout Flow on the [checkout site](../checkout-site/): payment on the left, the order summary on the right.
+
+![The flow in Flow Builder: get the payer's browser details, the placeholder for the order details, and one Pay screen.](../../../docs/images/builder-checkout-flow.png)
+
+The flow in Flow Builder: get the payer's browser details, the placeholder for the order details, and one Pay screen.
+
 ## Prerequisites
 - FinDock is installed and configured.
 - FinDock is the source of payments data ([FinDock Standalone](https://docs.findock.com/docs/source-connectors/findock-standalone)).

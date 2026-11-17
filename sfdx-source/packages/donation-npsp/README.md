@@ -18,6 +18,16 @@ This template is meant to be customized and extended to fit specific use cases a
 - Configurable amounts and frequencies
 - Collect Gift Aid from UK donors
 
+## Preview
+
+![The donation flow on the [donation site](../donation-site/), styled as the fictional Canopy Gibbon Trust.](../../../docs/images/donation-site.png)
+
+The donation flow on the [donation site](../donation-site/), styled as the fictional Canopy Gibbon Trust.
+
+![The flow in Flow Builder: the payer's browser details, an example decision, the amount and details screens, the assignments for the contact, installment and recurring donation, and the Pay screen.](../../../docs/images/builder-donation-flow-npsp.png)
+
+The flow in Flow Builder: the payer's browser details, an example decision, the amount and details screens, the assignments for the contact, installment and recurring donation, and the Pay screen.
+
 ## Prerequisites
 - FinDock is installed and configured.
 - FinDock for NPSP is installed and configured.

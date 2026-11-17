@@ -18,6 +18,16 @@ This template is meant to be customized and extended to fit specific use cases a
 - Configurable amounts and frequencies
 - Collect Gift Aid from UK donors
 
+## Preview
+
+![The donation flow on the [donation site](../donation-site/), styled as the fictional Canopy Gibbon Trust.](../../../docs/images/donation-site.png)
+
+The donation flow on the [donation site](../donation-site/), styled as the fictional Canopy Gibbon Trust.
+
+![The flow in Flow Builder: the same steps as the Fundraising donation flow; the Gift Aid declaration is on the Pay screen.](../../../docs/images/builder-donation-flow-fundraising-uk.png)
+
+The flow in Flow Builder: the same steps as the Fundraising donation flow; the Gift Aid declaration is on the Pay screen.
+
 ## Prerequisites
 - FinDock is installed and configured.
 - FinDock for Fundraising is installed and configured.

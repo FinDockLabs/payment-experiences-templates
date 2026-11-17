@@ -6,9 +6,9 @@
     "definitionName": "talon-template-byo:branding",
     "values": {
       "BackgroundColor": "#FFFFFF",
-      "BaseFont": "IBM Plex Sans",
+      "BaseFont": "system-ui",
       "BaseFontSize": "1rem",
-      "BodyFont": "IBM Plex Sans",
+      "BodyFont": "system-ui",
       "BodyFontSize": "1rem",
       "BodyFontStyle": "normal",
       "BodyFontWeight": "400",
