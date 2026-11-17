@@ -59,7 +59,7 @@ The Canopy Gibbon Trust example brand: logo, colours, fonts and components. Repl
 5. Customize the page in the Experience Cloud builder.
 6. Publish the Experience Cloud site.
 
-The installation will ask you to approve three trusted sites: external.findock.com (icons and pictures), and fonts.googleapis.com and fonts.gstatic.com (the site's web fonts).
+The installation will ask you to approve one trusted site: external.findock.com (icons and pictures).
 
 > The site itself is not part of this package. `Network` and `CustomSite` are deliberately excluded in `.forceignore` because they embed the creating user's email address and the org subdomain, which are not portable between orgs. This is why the site has to be created before the template is deployed.
 
@@ -98,7 +98,7 @@ The design reads the Experience Builder **Theme** panel, so you can rebrand with
 | Brand colour | Buttons, selected states, step indicator, and the light tints derived from it |
 | Background | Page background and header |
 | Text colours | Body copy and captions |
-| Fonts | Body and heading fonts |
+| Fonts | Not used: the site uses the device's own interface font (San Francisco on Apple devices, Segoe UI on Windows, Roboto on Android), set at the top of `canopyStyles`, so nothing is downloaded. To use a web font, put it first in that list and approve its domain as a trusted site. |
 | Button and form element radius | Pills, tiles and fields |
 
 - Layout and component overrides live in the `canopyStyles` static resource, loaded from the page's Head Markup.
