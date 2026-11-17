@@ -4,11 +4,12 @@ A screen flow for links to an existing FinDock record: pay an invoice or a payme
 
 *Key features*
 - Pay an existing one-time installment, found by its GUID
-- Invoice mode: To, From, Invoice number and Memo, with an optional invoice PDF
-- Payment link mode: From and For
+- Invoice mode: To, From, Invoice number and Description, with an optional invoice PDF
+- Payment link mode: From and Description
+- Description is the record's bank statement description; the row is hidden when it is empty
 - Overdue badge when the due date has passed
 - Collected installments show a paid confirmation instead of the payment methods, so an old link stays safe to open
-- Recurring mode: when the id belongs to a recurring payment, the card shows its amount, frequency, From and its payment reference (if any), and the payer picks a new payment method for future payments (like FinDock PayLinks)
+- Recurring mode: when the id belongs to a recurring payment, the card shows its amount, frequency, From, its payment reference and description (if any), and the payer picks a new payment method for future payments (like FinDock PayLinks)
 - An unknown or missing id shows a "not valid" message
 
 The flow looks the id up as an installment and as a recurring payment, then shows one of three screens: pay, paid or not valid. The pay screen covers invoices, payment links and recurring payments with formulas instead of extra branches.
@@ -68,6 +69,7 @@ If your recurring gifts are on another object, change those two elements to matc
 | `recurringAmount` | `cpm__Amount__c` | `npe03__Amount__c` | schedule `TransactionAmount` |
 | `recurringFrequency` | `cpm__Frequency__c` | `npe03__Installment_Period__c` | schedule `TransactionPeriod` |
 | `recurringReference` (the Reference row is hidden when empty) | `cpm__Final_Payment_Reference__c` | `npsp4hub__Final_Payment_Reference__c` | schedule `fdff__Final_Payment_Reference__c` |
+| `recurringDescription` (the Description row is hidden when empty) | `cpm__Bank_Statement_Description__c` | `npsp4hub__Bank_Statement_Description__c` | schedule `fdff__Bank_Statement_Description__c` |
 
 Then select the **Pay Button** on the Pay screen and set its recurring object type to the same object, and create the guest user sharing rule (installation step 4) on that object.
 
