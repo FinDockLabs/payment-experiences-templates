@@ -36,16 +36,16 @@ c-invoice-pay-flow {
     --checkout-brand: var(--dxp-g-brand, #1B2A5B);
     --checkout-caption: var(--dxp-g-root-contrast-2, #5B6270);
     --checkout-font: var(--dxp-s-html-font-family, sans-serif);
-    --checkout-summary: #F7F8FA;
+    --checkout-summary: color-mix(in srgb, var(--checkout-ink) 3%, var(--dxp-g-root, #FFFFFF));
     --checkout-line: color-mix(in srgb, var(--checkout-ink) 12%, transparent);
     --checkout-row-border: color-mix(in srgb, var(--checkout-ink) 18%, transparent);
-    --checkout-field-border: color-mix(in srgb, var(--checkout-ink) 28%, #FFFFFF);
+    --checkout-field-border: color-mix(in srgb, var(--checkout-ink) 28%, var(--dxp-g-root, #FFFFFF));
 }
 
 html,
 body {
     min-height: 100%;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     font-family: var(--checkout-font);
     color: var(--checkout-ink);
 }
@@ -56,7 +56,7 @@ body {
 
 /* Header: a plain white bar */
 .site-header {
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     border-bottom: 1px solid var(--checkout-line);
     margin: -12px -12px 0;
     padding: 18px 24px;
@@ -124,7 +124,7 @@ body {
 
 :is(.checkout, c-invoice-pay-flow) flowruntime-flow {
     display: block;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
 
     --dxp-g-root: #FFFFFF;
     --dxp-g-neutral-3: var(--checkout-field-border);
@@ -295,7 +295,7 @@ main:has(.checkout) community_layout-hidden-region .component-wrapper-spacer {
 :is(.checkout, c-invoice-pay-flow) .payment-option,
 :is(.checkout, c-invoice-pay-flow) .payment-option:hover,
 :is(.checkout, c-invoice-pay-flow) .payment-option:focus-within {
-    background: #FFFFFF !important;
+    background: var(--dxp-g-root, #FFFFFF) !important;
     border-color: var(--checkout-row-border) !important;
 }
 
@@ -349,7 +349,7 @@ main:has(.checkout) community_layout-hidden-region .component-wrapper-spacer {
     height: 56px;
     margin-left: -28px;
     border-radius: 50%;
-    background: #E6F4EC;
+    background: color-mix(in srgb, #1E8A55 12%, var(--dxp-g-root, #FFFFFF));
 }
 
 .success-page .success-title::after {
@@ -391,7 +391,7 @@ main:has(.checkout) community_layout-hidden-region .component-wrapper-spacer {
     padding: 0 24px !important;
     border-radius: var(--dxp-s-button-radius-border, 10px);
     border: 1px solid var(--checkout-row-border);
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     font-weight: 600;
     color: var(--checkout-ink);
     cursor: pointer;
@@ -406,10 +406,10 @@ c-pay-link-flow {
     --paylink-ink: var(--dxp-g-root-contrast, #1A1D24);
     --paylink-brand: var(--dxp-g-brand, #1B2A5B);
     --paylink-caption: var(--dxp-g-root-contrast-2, #5B6270);
-    --paylink-page: #F5F6F8; /* light grey behind the card; the theme background (white) is the checkout page */
+    --paylink-page: color-mix(in srgb, var(--paylink-ink) 4%, var(--dxp-g-root, #FFFFFF)); /* light grey behind the card; the theme background (white) is the checkout page */
     --paylink-font: var(--dxp-s-html-font-family, sans-serif);
     --paylink-line: color-mix(in srgb, var(--paylink-ink) 12%, transparent);
-    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 28%, #FFFFFF);
+    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 28%, var(--dxp-g-root, #FFFFFF));
 }
 
 html:has(.paylink),
@@ -470,7 +470,7 @@ body:has(.paylink) .footer-note {
 :is(.paylink, c-pay-link-flow) flowruntime-flow {
     position: relative;
     display: block;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     border-radius: 12px;
     box-shadow: 0 1px 3px color-mix(in srgb, var(--paylink-ink) 8%, transparent);
     padding: 32px 40px;
@@ -565,7 +565,7 @@ body:has(.paylink) .footer-note {
         linear-gradient(#E3E6EA, #E3E6EA) 10px 28px / 70% 4px no-repeat,
         linear-gradient(#E3E6EA, #E3E6EA) 10px 40px / 82% 4px no-repeat,
         linear-gradient(#E3E6EA, #E3E6EA) 10px 78px / 70% 4px no-repeat,
-        #FFFFFF;
+        var(--dxp-g-root, #FFFFFF);
     box-shadow: 0 2px 8px color-mix(in srgb, var(--paylink-ink) 10%, transparent);
     font-size: 0;
     color: transparent;
@@ -580,7 +580,7 @@ body:has(.paylink) .footer-note {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     box-shadow: 0 1px 4px color-mix(in srgb, var(--paylink-ink) 18%, transparent);
     font-size: 14px;
     font-weight: 700;
@@ -650,7 +650,7 @@ body:has(.paylink) .footer-note {
 :is(.paylink, c-pay-link-flow) .payment-option,
 :is(.paylink, c-pay-link-flow) .payment-option:hover,
 :is(.paylink, c-pay-link-flow) .payment-option:focus-within {
-    background: #FFFFFF !important;
+    background: var(--dxp-g-root, #FFFFFF) !important;
 }
 
 :is(.paylink, c-pay-link-flow) .payment-option.payment-option-selected {

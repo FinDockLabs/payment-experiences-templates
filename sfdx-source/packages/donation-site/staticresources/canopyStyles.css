@@ -18,7 +18,7 @@ c-donation-flow {
     --cgt-forest: var(--dxp-g-brand, #1E4634);
     --cgt-on-forest: var(--dxp-g-brand-contrast, #FFFFFF);
     --cgt-leaf: var(--dxp-g-brand-1, var(--cgt-forest));
-    --cgt-mist: color-mix(in srgb, var(--cgt-leaf) 6%, #FFFFFF);
+    --cgt-mist: color-mix(in srgb, var(--cgt-leaf) 6%, var(--dxp-g-root, #FFFFFF));
     --cgt-body: var(--dxp-g-root-contrast-1, #3F5A4C);
     --cgt-muted: var(--dxp-g-root-contrast-2, #587063);
     --cgt-line: var(--dxp-s-form-element-color-border, rgba(30, 70, 52, 0.24));
@@ -28,8 +28,8 @@ c-donation-flow {
     --cgt-sun: var(--cgt-accent, #F28C38);
     --cgt-on-sun: var(--cgt-accent-contrast, #1E2A22);
     /* Tints mixed from the brand and accent colours, so they follow a theme change. */
-    --cgt-moss: color-mix(in srgb, var(--cgt-leaf) 14%, #FFFFFF);
-    --cgt-dawn: color-mix(in srgb, var(--cgt-sun) 18%, #FFFFFF);
+    --cgt-moss: color-mix(in srgb, var(--cgt-leaf) 14%, var(--dxp-g-root, #FFFFFF));
+    --cgt-dawn: color-mix(in srgb, var(--cgt-sun) 18%, var(--dxp-g-root, #FFFFFF));
     --cgt-on-dawn: color-mix(in srgb, var(--cgt-sun) 55%, #000000);
     --cgt-shadow: color-mix(in srgb, var(--cgt-forest) 10%, transparent);
 }
@@ -207,7 +207,7 @@ html {
     right: 0;
     bottom: -1px;
     height: 80px;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 80 L0 46 C120 10 220 60 340 34 C470 6 560 58 700 36 C840 14 930 62 1070 34 C1200 8 1320 52 1440 30 L1440 80 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 80 L0 46 C120 10 220 60 340 34 C470 6 560 58 700 36 C840 14 930 62 1070 34 C1200 8 1320 52 1440 30 L1440 80 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
     pointer-events: none;
@@ -263,7 +263,7 @@ html {
 
 /* Where your gift goes: the heading section, then three cards (one per column of the cgt-cards section). */
 .cgt-section-work {
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     padding-top: 80px !important;
     padding-bottom: 44px !important;
 }
@@ -280,7 +280,7 @@ html {
     color: var(--cgt-forest) !important;
 }
 .cgt-cards {
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     padding-bottom: 96px !important;
 }
 .cgt-cards community_layout-column {
@@ -344,7 +344,7 @@ html {
 
 /* FAQ: one Rich Text block, a heading per question. */
 .cgt-section-faq {
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     padding-top: 96px !important;
     padding-bottom: 96px !important;
 }
@@ -516,7 +516,7 @@ html {
 /* The flow is the donation card. */
 :is(.donate, c-donation-flow) flowruntime-flow {
     display: block;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     border-radius: 28px;
     box-shadow: 0 10px 40px var(--cgt-shadow);
     padding: 1.5rem 2rem;
@@ -622,7 +622,7 @@ c-donation-flow flowruntime-navigation-bar.slds-card__footer {
     border-radius: 16px;
 }
 :is(.donate, c-donation-flow) .payment-option.payment-option-selected {
-    background: color-mix(in srgb, var(--cgt-forest) 5%, #FFFFFF);
+    background: color-mix(in srgb, var(--cgt-forest) 5%, var(--dxp-g-root, #FFFFFF));
     border-color: var(--cgt-forest);
 }
 
@@ -654,7 +654,7 @@ html {
 }
 .community_byo-scoped-header-and-footer__foot.community_byo-scoped-header-and-footer__foot,
 .community_byo-scoped-header-and-footer__footer-content.community_byo-scoped-header-and-footer__footer-content.community_byo-scoped-header-and-footer__footer-content {
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
 }
 
 /* ===== Payment Link page =====
@@ -668,7 +668,7 @@ html {
     --paylink-caption: var(--cgt-muted);
     --paylink-font: var(--cgt-sans);
     --paylink-line: color-mix(in srgb, var(--paylink-ink) 12%, transparent);
-    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 28%, #FFFFFF);
+    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 28%, var(--dxp-g-root, #FFFFFF));
     font-family: var(--paylink-font);
     color: var(--paylink-ink);
 }
@@ -686,7 +686,7 @@ html {
 .paylink flowruntime-flow {
     position: relative;
     display: block;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     border-radius: 12px;
     box-shadow: 0 1px 3px color-mix(in srgb, var(--paylink-ink) 8%, transparent);
     padding: 32px 40px;
@@ -781,7 +781,7 @@ html {
         linear-gradient(#E3E6EA, #E3E6EA) 10px 28px / 70% 4px no-repeat,
         linear-gradient(#E3E6EA, #E3E6EA) 10px 40px / 82% 4px no-repeat,
         linear-gradient(#E3E6EA, #E3E6EA) 10px 78px / 70% 4px no-repeat,
-        #FFFFFF;
+        var(--dxp-g-root, #FFFFFF);
     box-shadow: 0 2px 8px color-mix(in srgb, var(--paylink-ink) 10%, transparent);
     font-size: 0;
     color: transparent;
@@ -796,7 +796,7 @@ html {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #FFFFFF;
+    background: var(--dxp-g-root, #FFFFFF);
     box-shadow: 0 1px 4px color-mix(in srgb, var(--paylink-ink) 18%, transparent);
     font-size: 14px;
     font-weight: 700;
@@ -866,7 +866,7 @@ html {
 .paylink .payment-option,
 .paylink .payment-option:hover,
 .paylink .payment-option:focus-within {
-    background: #FFFFFF !important;
+    background: var(--dxp-g-root, #FFFFFF) !important;
 }
 
 .paylink .payment-option.payment-option-selected {
@@ -952,7 +952,7 @@ body:has(.paylink) {
     border-radius: 16px;
 }
 .paylink .payment-option.payment-option-selected {
-    background: color-mix(in srgb, var(--cgt-forest) 5%, #FFFFFF) !important;
+    background: color-mix(in srgb, var(--cgt-forest) 5%, var(--dxp-g-root, #FFFFFF)) !important;
     border-color: var(--cgt-forest) !important;
 }
 .paylink .slds-button {
