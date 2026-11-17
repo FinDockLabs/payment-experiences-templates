@@ -28,6 +28,10 @@ The donation flow on the [donation site](../donation-site/), styled as the ficti
 
 The flow in Flow Builder: the same steps as the Fundraising donation flow; the Gift Aid declaration is on the Pay screen.
 
+## Success and failure URLs
+
+FinDock needs a success and a failure URL for every payment. The flow uses `https://www.example.com/success` and `https://www.example.com/failure` unless the page passes the optional `successUrl` and `failureUrl` inputs (the Lightning Out embed does). Replace the example URLs in the `Success_URL` and `Failure_URL` formulas with your own pages, e.g. the donation site's `https://<your-domain>.my.site.com/<prefix>/success` and `/failure`.
+
 ## Prerequisites
 - FinDock is installed and configured.
 - FinDock for Fundraising is installed and configured.
