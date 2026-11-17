@@ -65,7 +65,7 @@
       "DropdownTextHoverColor": "var(--dxp-g-neutral-contrast)",
       "FormElementBackgroundColor": "var(--dxp-g-root)",
       "FormElementBackgroundFocusColor": "var(--dxp-s-form-element-color-background)",
-      "FormElementBorderColor": "var(--dxp-g-neutral-3)",
+      "FormElementBorderColor": "#868B95",
       "FormElementBorderFocusColor": "var(--dxp-g-brand)",
       "FormElementBorderRadius": "8px",
       "FormElementBorderWidth": "1px",
