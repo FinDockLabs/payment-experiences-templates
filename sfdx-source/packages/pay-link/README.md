@@ -66,18 +66,20 @@ If your recurring gifts are on another object, change those two elements to matc
 | Lookup object · GUID field | `cpm__Recurring_Payment__c` · `cpm__GUID__c` | `npe03__Recurring_Donation__c` · `npsp4hub__GUID__c` | `GiftCommitment` · `fdff__GUID__c`, then a second Get Records for its current schedule (`CurrentGiftCmtScheduleId`), which holds the amount, frequency and reference |
 | `recurringId` | `Id` | `Id` | `Id` (of the Gift Commitment) |
 | `recurringAmount` | `cpm__Amount__c` | `npe03__Amount__c` | schedule `TransactionAmount` |
-| `recurringCurrency` | `CurrencyIsoCode` | `CurrencyIsoCode` | `CurrencyIsoCode` |
 | `recurringFrequency` | `cpm__Frequency__c` | `npe03__Installment_Period__c` | schedule `TransactionPeriod` |
 | `recurringReference` (the Reference row is hidden when empty) | `cpm__Final_Payment_Reference__c` | `npsp4hub__Final_Payment_Reference__c` | schedule `fdff__Final_Payment_Reference__c` |
 
 Then select the **Pay Button** on the Pay screen and set its recurring object type to the same object, and create the guest user sharing rule (installation step 4) on that object.
+
+**Placeholder: map recurring fields** also sets `currency`, the currency the amounts are shown in (example `EUR`). Set your org currency, or in a multi-currency org the records' `CurrencyIsoCode` (see the element's description).
 
 ## Installation
 1. Deploy this package.
 2. Open the flow in Flow Builder, select the **Payment Method Selector** on the Pay screen and choose the payment methods to offer (one-time and recurring). The template ships without this list because it depends on your payment extensions; without it the selector shows an error.
 3. Assign the `FinDockLabs Payment Link Flow Guest Access` permission set and the `FinDock Payer` permission set group to the site guest user. Also assign the permission set to internal users who open the site while signed in to Salesforce: the flow only runs for users with access, so they see an access error instead of the card.
 4. For recurring payment links: create a guest user sharing rule on your recurring object (Recurring Payment by default, see [Recurring object](#recurring-object); Setup › Sharing Settings) that shares records with the site's guest user, read only, e.g. for records where GUID is not blank. FinDock looks the recurring payment up as the guest user, and guests never see records through the organization-wide defaults; without the rule, changing the payment method fails with "Recurring record for the given Id/GUID could not be found". Installments don't need a rule.
-5. Set the success and failure URLs. FinDock needs both for every payment, and the template ships with `https://www.example.com/success` and `https://www.example.com/failure`. In Flow Builder, open the `Success_URL` and `Failure_URL` formulas and replace the example URLs with your own pages, e.g. `https://<your-domain>.my.site.com/<prefix>/success` and `.../failure`.
+5. Set `currency` in **Placeholder: map recurring fields** to your org currency (see [Recurring object](#recurring-object)).
+6. Set the success and failure URLs. FinDock needs both for every payment, and the template ships with `https://www.example.com/success` and `https://www.example.com/failure`. In Flow Builder, open the `Success_URL` and `Failure_URL` formulas and replace the example URLs with your own pages, e.g. `https://<your-domain>.my.site.com/<prefix>/success` and `.../failure`.
 
 ## Lightning Out
 
