@@ -22,23 +22,23 @@
               },
               "children": [
                 {
-                  "attributes": {
-                    "isLinkable": false,
-                    "linkAssistiveText": "",
-                    "paddingHorizontal": "none",
-                    "paddingVertical": "none",
-                    "text": "Secure payment",
-                    "textAlign": "left",
-                    "textDecoration": "{}",
-                    "textDisplayInfo": "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
-                  },
-                  "customCssClasses": "slds-assistive-text",
-                  "definition": "dxp_base:textBlock",
-                  "id": "f4ea345c-9566-4f08-8fb2-7a26b1664ad3",
-                  "type": "component"
-                },
-                {
                   "children": [
+                    {
+                      "attributes": {
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Secure payment",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+                      },
+                      "customCssClasses": "slds-assistive-text",
+                      "definition": "dxp_base:textBlock",
+                      "id": "6f0bf0e2-156c-4316-8e50-cfe7af0cc476",
+                      "type": "component"
+                    },
                     {
                       "attributes": {
                         "columnGutterWidth": "",
