@@ -10,6 +10,16 @@
  */
 
 /*
+ * Font: the device's own interface font (San Francisco on Apple devices, Segoe UI on Windows, Roboto on Android),
+ * so nothing is downloaded. The Theme panel's font fields take a single name, so the full list is set here and
+ * overrides them. To use a web font, put it first in this list and add its domain as a trusted site.
+ */
+html:root {
+    --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --dxp-g-root-font-family: var(--dxp-s-html-font-family);
+}
+
+/*
  * Brand tokens, derived from the theme. Defined on c-donation-flow as well as :root so the Lightning Out
  * embed resolves them against the hooks it sets on itself (below), not against the Lightning Out site's theme.
  */
@@ -49,8 +59,8 @@ c-donation-flow {
     --dxp-g-root-contrast: #1E4634;
     --dxp-g-root-contrast-1: #3F5A4C;
     --dxp-g-root-contrast-2: #587063;
-    --dxp-s-html-font-family: Figtree, 'Helvetica Neue', Arial, sans-serif;
-    --dxp-s-text-heading-large-font-family: 'Bricolage Grotesque', Figtree, sans-serif;
+    --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --dxp-s-text-heading-large-font-family: var(--dxp-s-html-font-family);
     --dxp-g-root-font-family: var(--cgt-sans);
     --dxp-s-text-heading-font-family: var(--cgt-display);
     --dxp-s-button-font-family: var(--cgt-sans);
