@@ -19,6 +19,16 @@
  * Keep those when you edit the flow's texts (for example to make the order lines dynamic).
  */
 
+/*
+ * Font: the device's own interface font (San Francisco on Apple devices, Segoe UI on Windows, Roboto on Android),
+ * so nothing is downloaded. The Theme panel's font fields take a single name, so the full list is set here and
+ * overrides them. To use a web font, put it first in this list and add its domain as a trusted site.
+ */
+html:root {
+    --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --dxp-g-root-font-family: var(--dxp-s-html-font-family);
+}
+
 /* Brand tokens, derived from the theme. Also on c-invoice-pay-flow for the Lightning Out embed (bottom of this file). */
 :root,
 c-invoice-pay-flow {
@@ -690,7 +700,7 @@ c-invoice-pay-flow {
     --dxp-g-brand-contrast: #FFFFFF;
     --dxp-g-root-contrast: #1A1D24;
     --dxp-g-root-contrast-2: #5B6270;
-    --dxp-s-html-font-family: "IBM Plex Sans", Inter, "Helvetica Neue", Arial, sans-serif;
+    --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --dxp-g-root-font-family: var(--dxp-s-html-font-family);
     --dxp-s-text-heading-font-family: var(--dxp-s-html-font-family);
     --dxp-s-button-font-family: var(--dxp-s-html-font-family);
@@ -722,7 +732,7 @@ c-pay-link-flow {
     --dxp-g-brand-contrast: #FFFFFF;
     --dxp-g-root-contrast: #1A1D24;
     --dxp-g-root-contrast-2: #5B6270;
-    --dxp-s-html-font-family: "IBM Plex Sans", Inter, "Helvetica Neue", Arial, sans-serif;
+    --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --dxp-g-root-font-family: var(--dxp-s-html-font-family);
     --dxp-s-text-heading-font-family: var(--dxp-s-html-font-family);
     --dxp-s-button-font-family: var(--dxp-s-html-font-family);

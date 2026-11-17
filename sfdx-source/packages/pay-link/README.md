@@ -14,6 +14,24 @@ A screen flow for links to an existing FinDock record: pay an invoice or a payme
 The flow looks the id up as an installment and as a recurring payment, then shows one of three screens: pay, paid or not valid. The pay screen covers invoices, payment links and recurring payments with formulas instead of extra branches.
 
 
+## Preview
+
+![Invoice mode on the [checkout site](../checkout-site/): the amount, a short summary and the payment methods in one card.](../../../docs/images/checkout-payment-link.png)
+
+Invoice mode on the [checkout site](../checkout-site/): the amount, a short summary and the payment methods in one card.
+
+![Recurring mode: the payer picks a new payment method for future payments.](../../../docs/images/checkout-payment-link-recurring.png)
+
+Recurring mode: the payer picks a new payment method for future payments.
+
+![The same flow on the [donation site](../donation-site/), in its brand.](../../../docs/images/donation-payment-link.png)
+
+The same flow on the [donation site](../donation-site/), in its brand.
+
+![The flow in Flow Builder: find the installment or the recurring record by its GUID, then show the pay, paid or not-found screen.](../../../docs/images/builder-payment-link-flow.png)
+
+The flow in Flow Builder: find the installment or the recurring record by its GUID, then show the pay, paid or not-found screen.
+
 ## Prerequisites
 - FinDock is installed and configured, with at least one payment extension.
 - The installments you link to have a GUID (`cpm__GUID__c`).
