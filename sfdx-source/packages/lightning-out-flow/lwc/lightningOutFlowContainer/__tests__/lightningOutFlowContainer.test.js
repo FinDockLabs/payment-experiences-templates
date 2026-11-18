@@ -21,9 +21,10 @@ class ResizeObserverMock {
 let bodyHeight;
 let postMessage;
 
-function render() {
+function render(properties = {}) {
     const element = createElement('c-lightning-out-flow-container', { is: LightningOutFlowContainer });
     element.flowApiName = 'Donation_Flow';
+    Object.assign(element, properties);
     document.body.appendChild(element);
     return element;
 }
@@ -61,6 +62,27 @@ describe('flow', () => {
     it('runs the flow named by flow-api-name', () => {
         const element = render();
         expect(element.shadowRoot.querySelector('lightning-flow').flowApiName).toBe('Donation_Flow');
+    });
+
+    it('passes the success and failure URLs to the flow', () => {
+        const element = render({
+            successUrl: 'https://www.example.org/thank-you',
+            failureUrl: 'https://www.example.org/try-again'
+        });
+        expect(element.shadowRoot.querySelector('lightning-flow').flowInputVariables).toEqual([
+            { name: 'successUrl', type: 'String', value: 'https://www.example.org/thank-you' },
+            { name: 'failureUrl', type: 'String', value: 'https://www.example.org/try-again' }
+        ]);
+    });
+
+    it('passes only the URLs that are set, so flows without these inputs still start', () => {
+        const withSuccessUrl = render({ successUrl: 'https://www.example.org/thank-you' });
+        expect(withSuccessUrl.shadowRoot.querySelector('lightning-flow').flowInputVariables).toEqual([
+            { name: 'successUrl', type: 'String', value: 'https://www.example.org/thank-you' }
+        ]);
+
+        const withoutUrls = render();
+        expect(withoutUrls.shadowRoot.querySelector('lightning-flow').flowInputVariables).toEqual([]);
     });
 });
 
