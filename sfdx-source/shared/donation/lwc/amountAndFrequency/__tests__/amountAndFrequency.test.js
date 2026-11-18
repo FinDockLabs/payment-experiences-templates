@@ -656,6 +656,40 @@ describe('runtime currency changes', () => {
     });
 });
 
+describe('only the frequencies the form offers', () => {
+    afterEach(resetRuntimeState);
+
+    // Monthly only, as the config editor saves it
+    const MONTHLY_ONLY = {
+        freq1Value: 'recurring', freq2Value: 'recurring', showFrequencyToggle: false,
+        defaultFrequency: 'recurring', presetAmountsOneTime: '25,50', presetAmountsRecurring: '5,10'
+    };
+    const presetValues = (element) => Array.from(
+        element.shadowRoot.querySelectorAll('input[name^="preset-"]')).map((input) => input.value);
+
+    it('shows the recurring presets when one-time is turned off', () => {
+        const { element } = mountWithChanges(MONTHLY_ONLY);
+        expect(element.frequency).toBe('recurring');
+        expect(presetValues(element)).toEqual(['5', '10']);
+    });
+
+    it('ignores a one-time frequency restored from an earlier visit', () => {
+        sessionStorage.setItem('af-state-/', JSON.stringify({ frequency: 'oneTime', selectedPreset: 25 }));
+        const { element } = mountWithChanges(MONTHLY_ONLY);
+        expect(element.frequency).toBe('recurring');
+        expect(presetValues(element)).toEqual(['5', '10']);
+        expect(element.amountOneTime).toBeNull();
+    });
+
+    it('ignores a frequency in the link that the form does not offer', () => {
+        window.history.replaceState({}, '', '/?frequency=oneTime&amount=10');
+        const { element } = mountWithChanges(MONTHLY_ONLY);
+        expect(element.frequency).toBe('recurring');
+        expect(element.amountRecurring).toBe('10');
+        expect(element.amountOneTime).toBeNull();
+    });
+});
+
 describe('initial amount and frequency from payment links', () => {
     afterEach(resetRuntimeState);
 

@@ -366,6 +366,7 @@ export default class AmountAndFrequency extends LightningElement {
             this._frequency = this.defaultFrequency;
         }
         this._restoreState();
+        this._frequency = this._offeredFrequency(this._frequency);
         this._applyQueryParams();
 
         if (this._customAmount !== '') {
@@ -464,6 +465,13 @@ export default class AmountAndFrequency extends LightningElement {
         }
     }
 
+    _offeredFrequency(value) {
+        // The config editor marks an unused second frequency as 'none'
+        const offered = [this.freq1Value, this.freq2Value].filter((v) => v && v !== 'none');
+        if (offered.includes(value)) return value;
+        return offered.includes(this.defaultFrequency) ? this.defaultFrequency : this.freq1Value;
+    }
+
     _resolveActivePresets() {
         const raw = this._frequency === this.freq2Value
             ? this.presetAmountsRecurring
@@ -553,7 +561,7 @@ export default class AmountAndFrequency extends LightningElement {
             const qAmount    = params.get('amount');
             const qFrequency = params.get('frequency');
 
-            if (qFrequency) this._frequency = qFrequency;
+            if (qFrequency) this._frequency = this._offeredFrequency(qFrequency);
 
             if (qAmount) {
                 const num    = Number(qAmount);
