@@ -165,7 +165,7 @@
                 <fieldType>Region</fieldType>
                 <fields>
                     <name>Pay_Title</name>
-                    <fieldText>&lt;h2&gt;&lt;span style="font-size: 32px;"&gt;&lt;strong&gt;Checkout&lt;/strong&gt;&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Order {!reference} · {!Frequency_Display_Text} payment&lt;/span&gt;&lt;/p&gt;</fieldText>
+                    <fieldText>&lt;h1&gt;&lt;span style="font-size: 32px;"&gt;&lt;strong&gt;Checkout&lt;/strong&gt;&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Order {!reference} · {!Frequency_Display_Text} payment&lt;/span&gt;&lt;/p&gt;</fieldText>
                     <fieldType>DisplayText</fieldType>
                 </fields>
                 <fields>

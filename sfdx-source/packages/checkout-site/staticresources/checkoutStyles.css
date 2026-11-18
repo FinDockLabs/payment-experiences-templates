@@ -136,11 +136,11 @@ body {
     margin: 6em auto;
 }
 
-:is(.checkout, c-invoice-pay-flow) lightning-formatted-rich-text :is(p, h2) {
+:is(.checkout, c-invoice-pay-flow) lightning-formatted-rich-text :is(p, h1, h2) {
     margin: 0;
 }
 
-:is(.checkout, c-invoice-pay-flow) lightning-formatted-rich-text h2 {
+:is(.checkout, c-invoice-pay-flow) lightning-formatted-rich-text :is(h1, h2) {
     font: inherit;
     color: inherit;
 }
