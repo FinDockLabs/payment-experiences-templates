@@ -534,6 +534,47 @@ describe('Salesforce Flow validation contract', () => {
         expect(element.validate()).toEqual({ isValid: true, errorMessage: null });
     });
 
+    function selectFrequency(element, value) {
+        const input = element.shadowRoot.querySelector(`input[value="${value}"]`);
+        input.checked = true;
+        input.dispatchEvent(new CustomEvent('change', { bubbles: true, composed: true }));
+    }
+
+    it('does not show the required error when switching to a frequency without an amount', async () => {
+        const element = createAmountComponent();
+        element.showFrequencyToggle = true;
+        await Promise.resolve();
+        selectPreset(element, '50');
+        await Promise.resolve();
+
+        selectFrequency(element, 'recurring');
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(false);
+        // Still invalid, so Flow blocks Next and reportValidity() shows the error then
+        expect(element.validate().isValid).toBe(false);
+
+        element.reportValidity();
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(true);
+    });
+
+    it('clears a shown required error when switching to a frequency that has an amount', async () => {
+        const element = createAmountComponent();
+        element.showFrequencyToggle = true;
+        await Promise.resolve();
+        selectPreset(element, '50');
+        await Promise.resolve();
+        selectFrequency(element, 'recurring');
+        await Promise.resolve();
+        element.reportValidity();
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(true);
+
+        selectFrequency(element, 'oneTime');
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(false);
+    });
+
     it('keeps the selected frequency across a remount without persisting errors', async () => {
         const first = createAmountComponent();
         first.showFrequencyToggle = true;

@@ -380,9 +380,10 @@ export default class AmountAndFrequency extends LightningElement {
     }
 
     handleFrequencyChange(event) {
-        this._hasUserInteracted = true;
         this._frequency = event.target.value;
-        this._updateRenderedInternalError();
+        if (this._internalErrorToRender) {
+            this._internalErrorToRender = this._getInternalErrorMessageIfInvalid();
+        }
         this._dispatchChange();
     }
 
