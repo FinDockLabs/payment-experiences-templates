@@ -39,7 +39,7 @@ c-invoice-pay-flow {
     --checkout-summary: color-mix(in srgb, var(--checkout-ink) 3%, var(--dxp-g-root, #FFFFFF));
     --checkout-line: color-mix(in srgb, var(--checkout-ink) 12%, transparent);
     --checkout-row-border: color-mix(in srgb, var(--checkout-ink) 18%, transparent);
-    --checkout-field-border: color-mix(in srgb, var(--checkout-ink) 28%, var(--dxp-g-root, #FFFFFF));
+    --checkout-field-border: color-mix(in srgb, var(--checkout-ink) 50%, var(--dxp-g-root, #FFFFFF)); /* 3:1 on the background (WCAG 1.4.11) */
 }
 
 html,
@@ -79,15 +79,6 @@ body {
     margin-right: 10px;
     vertical-align: middle;
     background: url("checkoutLogo") center / contain no-repeat;
-}
-
-.brand-link p {
-    margin: -4px 0 0;
-    font-size: 13px;
-    color: var(--checkout-caption);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    cursor: pointer;
 }
 
 .secure-badge {
@@ -406,7 +397,7 @@ c-pay-link-flow {
     --paylink-page: color-mix(in srgb, var(--paylink-ink) 4%, var(--dxp-g-root, #FFFFFF)); /* light grey behind the card; the theme background (white) is the checkout page */
     --paylink-font: var(--dxp-s-html-font-family, sans-serif);
     --paylink-line: color-mix(in srgb, var(--paylink-ink) 12%, transparent);
-    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 28%, var(--dxp-g-root, #FFFFFF));
+    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 50%, var(--dxp-g-root, #FFFFFF)); /* 3:1 on the background (WCAG 1.4.11) */
 }
 
 html:has(.paylink),
@@ -702,8 +693,9 @@ c-invoice-pay-flow {
     --dxp-g-root-contrast: #1A1D24;
     --dxp-g-root-contrast-2: #5B6270;
     --dxp-g-root: #FFFFFF;
-    --dxp-g-neutral-3: var(--checkout-field-border);
+    --dxp-g-neutral-3: var(--checkout-caption);
     --dxp-s-form-element-color-border: var(--checkout-field-border);
+    --dxp-s-form-checkbox-color-border: var(--checkout-field-border);
     --dxp-s-form-element-color-background: #FFFFFF;
     --dxp-s-form-element-color-background-focus: #FFFFFF;
     --slds-c-input-color-background: #FFFFFF;
@@ -753,8 +745,9 @@ c-pay-link-flow {
     --dxp-s-button-color-contrast: var(--dxp-g-brand-contrast);
     --slds-g-color-brand-base-60: var(--dxp-g-brand);
     --dxp-g-root: #FFFFFF;
-    --dxp-g-neutral-3: var(--paylink-field-border);
+    --dxp-g-neutral-3: var(--paylink-caption);
     --dxp-s-form-element-color-border: var(--paylink-field-border);
+    --dxp-s-form-checkbox-color-border: var(--paylink-field-border);
     --dxp-s-form-element-color-background: #FFFFFF;
     --dxp-s-form-element-color-background-focus: #FFFFFF;
     --slds-c-input-color-background: #FFFFFF;

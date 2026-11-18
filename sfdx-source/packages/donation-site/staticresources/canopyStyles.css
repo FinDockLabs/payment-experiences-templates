@@ -31,7 +31,7 @@ c-donation-flow {
     --cgt-mist: color-mix(in srgb, var(--cgt-leaf) 6%, var(--dxp-g-root, #FFFFFF));
     --cgt-body: var(--dxp-g-root-contrast-1, #3F5A4C);
     --cgt-muted: var(--dxp-g-root-contrast-2, #587063);
-    --cgt-line: var(--dxp-s-form-element-color-border, rgba(30, 70, 52, 0.24));
+    --cgt-line: var(--dxp-s-form-element-color-border, #789085);
     --cgt-display: var(--dxp-s-text-heading-large-font-family, var(--dxp-s-html-font-family, sans-serif));
     --cgt-sans: var(--dxp-s-html-font-family, sans-serif);
     --cgt-pill: var(--dxp-s-button-radius-border, 999px);
@@ -80,7 +80,9 @@ c-donation-flow {
     --dxp-s-form-element-radius-border: 14px;
     --dxp-s-form-element-width-border: 2px;
     --dxp-s-form-element-color-background: #FFFFFF;
-    --dxp-s-form-element-color-border: rgba(30, 70, 52, 0.24);
+    /* 60% forest on white: 3:1 against the field and the page (WCAG 1.4.11) */
+    --dxp-s-form-element-color-border: color-mix(in srgb, var(--cgt-forest) 60%, #FFFFFF);
+    --dxp-s-form-checkbox-color-border: var(--dxp-s-form-element-color-border);
     --dxp-s-form-element-color-border-focus: var(--cgt-forest);
     --slds-g-color-brand-base-60: var(--cgt-forest);
 }
@@ -678,7 +680,6 @@ html {
     --paylink-caption: var(--cgt-muted);
     --paylink-font: var(--cgt-sans);
     --paylink-line: color-mix(in srgb, var(--paylink-ink) 12%, transparent);
-    --paylink-field-border: color-mix(in srgb, var(--paylink-ink) 28%, var(--dxp-g-root, #FFFFFF));
     font-family: var(--paylink-font);
     color: var(--paylink-ink);
 }
