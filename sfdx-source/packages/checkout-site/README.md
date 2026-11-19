@@ -1,9 +1,9 @@
 # Experience Cloud Checkout Site Template
 <!-- INSTALL_LINK:START -->
 <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001hZoLIAU" target="_blank" rel="noopener noreferrer"><img alt="Install in a production or Developer org" src="https://img.shields.io/badge/Install-Production%20or%20Developer%20org-00A1E0?style=for-the-badge"></a>
-<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001hZoLIAU" target="_blank" rel="noopener noreferrer"><img alt="Install in a sandbox" src="https://img.shields.io/badge/Install-Sandbox-6B7A8F?style=for-the-badge"></a>
+<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001sg9lIAA" target="_blank" rel="noopener noreferrer"><img alt="Install in a sandbox" src="https://img.shields.io/badge/Install-Sandbox-6B7A8F?style=for-the-badge"></a>
 
-Version 0.1.0-6
+Version 0.1.0-6 (production) · 1.0.0-3 (sandbox)
 <!-- INSTALL_LINK:END -->
 
 This Experience Cloud site template serves as a starting point for building a checkout using Experience Cloud and FinDock. It has two pages that share the header, footer, logo, theme and one style sheet:
@@ -51,7 +51,7 @@ The neutral brand of the checkout and Payment Link pages. Swap the logo, the bra
 ## Prerequisites
 - FinDock is installed and configured.
 - FinDock is the source of payments data ([FinDock Standalone](https://docs.findock.com/docs/source-connectors/findock-standalone)).
-- At least one payment extension is installed and configured.
+- At least one [payment extension](https://docs.findock.com/docs/payment-processors) is installed and configured.
 - The [Checkout Flow](../checkout/) and the [Payment Link Flow](../payment-link/) are deployed. The site's pages reference flows named `Checkout_Flow` and `Payment_Link_Flow`; the template deploys without them, but the site cannot be *published* until they exist.
 - Digital Experiences is enabled in the org.
 
@@ -65,7 +65,7 @@ The neutral brand of the checkout and Payment Link pages. Swap the logo, the bra
 
 > After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/payment-received`; see step 5 of the [Payment Link Flow installation](../payment-link/#installation).
 
-The installation will ask you to approve one trusted site: external.findock.com (icons and pictures).
+The installation asks you to approve external.findock.com as a trusted site. This site is used to host assets for the checkout site such as icons and pictures.
 
 > The site itself is not part of this package. `Network` and `CustomSite` are deliberately excluded in `.forceignore` because they embed the creating user's email address and the org subdomain, which are not portable between orgs. This is why the site has to be created before the template is deployed.
 
