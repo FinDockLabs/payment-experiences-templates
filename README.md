@@ -9,12 +9,12 @@ This repository is an overview of the templates we offer for building Salesforce
 All templates are meant to be a starting point for your own configuration or custom development to fit specific use cases, branding, etc.
 
 Out-of-the-box, all templates are:
-- Accessible and WCAG compliant
-- Fully localizable (language, currency, payment methods, etc.)
+- WCAG compliant
+- Fully localizable (language, currency, etc.)
 - Configurable to support multi-currency
 - Configurable to support payment methods through FinDock native processing and integrated Payment Service Providers
-- Fully extendable with Salesforce technology and clouds
-- Aware of the payer's browser, operating system, device and locale through the Get User Agent Info flow action
+- Fully extendable with Salesforce tools and technology
+- Aware of the payer's browser, operating system, device and locale through the Flow action Get User Agent Info
 
 If you prefer to build a fully custom implementation, on Salesforce or outside of Salesforce, please see our [custom Experience Cloud implementation repository](https://github.com/FinDockLabs/findock-experience-cloud-examples) or our [Payment API documentation](https://docs.findock.com/api/payment-api-v2).
 
@@ -22,11 +22,12 @@ If you prefer to build a fully custom implementation, on Salesforce or outside o
 
 **Membership, Subscription, Commerce, etc.**
 - [Checkout flow](sfdx-source/packages/checkout): a simple Flow template for creating a payment form
-- [Checkout site](sfdx-source/packages/checkout-site): Experience Cloud site template that implements the Checkout flow template
+- [Checkout site](sfdx-source/packages/checkout-site): Experience Cloud site template with a checkout page (Checkout flow) and a Payment Link page (Payment Link flow)
+- [Payment Link flow](sfdx-source/packages/payment-link): a Flow template for links to an existing payment: pay an invoice or a payment link, or change a recurring payment's method. Used by the checkout and donation sites
 
 **Fundraising**
 - [Donation flows for Fundraising](sfdx-source/packages/donation-fundraising): Single and multi-screen Flow templates for collecting donations in orgs with Fundraising enabled (NPC, EDU)
-- [Donation flow for Fundraising UK](sfdx-source/packages/donation-fundraising-uk): Multi-screen Flow template for collecting donations and Gift Aid in orgs with Fundraising enabled (NPC, EDU)
+- [Donation flow for Fundraising UK](sfdx-source/packages/donation-fundraising-uk): Multi-screen Flow template for collecting donations with Gift Aid in orgs with Fundraising enabled (NPC, EDU)
 - [Donation flow for NPSP](sfdx-source/packages/donation-npsp): Multi-screen Flow template for collecting donations in orgs with NPSP
 - [Donation site](sfdx-source/packages/donation-site): Experience Cloud site template that implements the Donation flows for Fundraising and NPSP templates
 
@@ -41,19 +42,19 @@ Template packages include the same shared components, so they are mutually exclu
 
 ## Experience Cloud & Guest User Setup
 
-The steps below apply to every payment template in this project family — Flow-based or LWC-based — for any page that needs to accept payments from unauthenticated (guest) users. The Flow and LWC template READMEs link back here instead of repeating these steps.
+The steps below apply to every template — Flow-based or LWC-based — for any page that needs to accept payments from unauthenticated (guest) users.
 
 1. Follow [these instructions](https://help.salesforce.com/s/articleView?id=experience.rss_flow_guestuser.htm&type=5) to set up Guest User access for your Experience Cloud site.
 2. The **FinDock Payer** permission set group must be assigned to the site's Guest User.
 3. Go to Experience Cloud Administration → Preferences → enable **Allow guest users to access public APIs**.
 
-Install the template package before deploying the site bundle — the site embeds the flow, which renders the shared components.
+Install the template package before deploying the site bundle — the site embeds the Flow, which renders the shared components.
 
 If any of these are missing, guest-user payments will fail at runtime even though the page renders correctly.
 
 ## Localizing FinDock Payment Experiences
 
-The out-of-the-box FinDock Experience Cloud templates (donation flows, checkout flows, and pro-code payment forms) are built to be fully localizable. Every text string shown to a payer originates from a translatable source, while currencies and numbers are automatically formatted according to the payer's locale.
+The out-of-the-box FinDock Experience Cloud templates are built to be fully localizable. Every text string shown to a payer originates from a translatable source, while currencies and numbers are automatically formatted according to the payer's locale.
 
 This guide is for administrators, business consultants, and Salesforce developers deploying FinDock payment templates who want to offer multi-language payment experiences.
 
@@ -76,8 +77,8 @@ Payer-facing content in the templates is driven by four primary sources:
 
 Before starting the translation process, ensure:
 
-- Target languages are added and activated in Setup → Translation Language Settings.
-- Translation Workbench is enabled, and your user is assigned as a translator for the target languages.
+- Target languages are added and activated in Salesforce Setup → Translation Language Settings.
+- Translation Workbench is enabled, and your user is assigned as a translator for the target language(s).
 - You have access to Experience Builder for your site.
 
 ### Step-by-Step Translation Process
@@ -88,7 +89,7 @@ Each Flow and LWC template package includes a pre-packaged template file — `tr
 
 1. **Locate the template:** find `CustomLabels_template.xlf` in the `translations/` folder of your template package (e.g., `sfdx-source/packages/checkout/translations/`).
 2. **Copy and rename:** create a copy of the file using your target language code (e.g., `CustomLabels_nl_NL.xlf`).
-3. **Set target language:** open the file in an editor (VS Code, Notepad++), replace `TARGET_LANGUAGE_CODE` in the `target-language` attribute with your language code:
+3. **Set target language:** open the file in an editor (e.g. VS Code, Notepad++), replace `TARGET_LANGUAGE_CODE` in the `target-language` attribute with your language code:
 
    ```xml
    <file original="Salesforce" source-language="en_US" target-language="nl_NL" translation-type="metadata" datatype="xml">
@@ -106,7 +107,7 @@ Translate static page elements, footers, headers, and CMS articles:
 3. Translate content:
    - **Directly in Builder:** switch to the target language in the top bar and edit text components on screen.
    - **Export/Import (LWR bulk):** export site content via Settings → Languages → Export Content, translate the generated XML/XLIFF file, and import it back.
-4. Ensure the **Language Selector** component is placed in the header or navigation if you want guest users to switch languages manually.
+4. Ensure the **Language Selector** component is placed in the header or navigation if you want to allow guest users to switch languages manually.
 
 #### Step 3: Translate Flow Screens (Salesforce Setup UI)
 

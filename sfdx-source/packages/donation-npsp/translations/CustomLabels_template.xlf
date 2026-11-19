@@ -158,6 +158,14 @@
             <source>Enter 2-letter country code.</source>
             <target></target>
         </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_placeholder_redirect_message" maxwidth="1000" size-unit="char">
+            <source>After pressing pay, you will be redirected to a secure {0} page to enter your details and confirm your payment.</source>
+            <target></target>
+        </trans-unit>
+        <trans-unit id="CustomLabel.cpm__ec_placeholder_inline_instruction" maxwidth="1000" size-unit="char">
+            <source>Depending on your bank, you might need to confirm your transaction through another device.</source>
+            <target></target>
+        </trans-unit>
         </body>
     </file>
 </xliff>

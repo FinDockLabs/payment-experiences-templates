@@ -55,6 +55,14 @@
       "path": "sfdx-source/packages/lightning-out-flow",
       "default": false,
       "versionDescription": ""
+    },
+    {
+      "versionName": "January '27",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "sfdx-source/packages/payment-link",
+      "default": false,
+      "package": "FinDock Experiences - Payment Link",
+      "versionDescription": ""
     }
   ],
   "name": "experience-cloud-templates",
@@ -90,6 +98,21 @@
     "FinDock Experiences - Checkout@1.0.0-1": "04tP4000001rFpyIAE",
     "FinDock Experiences - Fundraising@1.0.0-2": "04tP4000001rG9JIAU",
     "FinDock Experiences - Fundraising UK@1.0.0-2": "04tP4000001rGAvIAM",
-    "FinDock Experiences - NPSP@1.0.0-1": "04tP4000001rGCXIA2"
+    "FinDock Experiences - NPSP@1.0.0-1": "04tP4000001rGCXIA2",
+    "FinDock Experiences - Checkout@1.0.0-2": "04tP4000001sGf7IAE",
+    "FinDock Experiences - Checkout Site@1.0.0-1": "04tP4000001sGaIIAU",
+    "FinDock Experiences - Donation Site@1.0.0-1": "04tP4000001sGgjIAE",
+    "FinDock Experiences - NPSP@1.0.0-2": "04tP4000001sGiLIAU",
+    "FinDock Experiences - Fundraising@1.0.0-3": "04tP4000001sGjxIAE",
+    "FinDock Experiences - Payment Link": "0HoP400000003KTKAY",
+    "FinDock Experiences - Payment Link@1.0.0-1": "04tP4000001sGlZIAU",
+    "FinDock Experiences - Checkout@1.0.0-4": "04tP4000001sfvFIAQ",
+    "FinDock Experiences - Payment Link@1.0.0-3": "04tP4000001sfyTIAQ",
+    "FinDock Experiences - NPSP@1.0.0-4": "04tP4000001sg05IAA",
+    "FinDock Experiences - Fundraising@1.0.0-5": "04tP4000001sg1hIAA",
+    "FinDock Experiences - Fundraising UK@1.0.0-4": "04tP4000001sg6XIAQ",
+    "FinDock Experiences - Lightning Out Flow@1.0.0-2": "04tP4000001sg89IAA",
+    "FinDock Experiences - Checkout Site@1.0.0-3": "04tP4000001sg9lIAA",
+    "FinDock Experiences - Donation Site@1.0.0-3": "04tP4000001sgBNIAY"
   }
 }

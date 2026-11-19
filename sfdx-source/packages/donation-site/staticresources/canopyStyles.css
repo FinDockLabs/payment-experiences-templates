@@ -1,0 +1,998 @@
+/*
+ * Canopy Gibbon Trust: shared styles for the donation site and the Lightning Out embed.
+ * Brand and how to restyle: standalone/canopy-gibbon-trust/DESIGN.md.
+ *
+ * Colours, fonts and corner rounding come from the Experience Cloud theme (Experience Builder > Theme)
+ * through its --dxp-* styling hooks, so a rebrand happens in the Theme panel, not in this file.
+ * The one colour the theme has no setting for, the accent (pay button, tags), is set in the site's Head Markup:
+ *   <style>:root { --cgt-accent: #F28C38; --cgt-accent-contrast: #1E2A22; }</style>
+ * The flow uses synthetic shadow DOM, so the selectors below reach into the flow and the template components.
+ */
+
+/*
+ * Font: the device's own interface font (San Francisco on Apple devices, Segoe UI on Windows, Roboto on Android),
+ * so nothing is downloaded. The Theme panel's font fields take a single name, so the full list is set here and
+ * overrides them. To use a web font, put it first in this list and add its domain as a trusted site.
+ */
+html:root {
+    --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --dxp-g-root-font-family: var(--dxp-s-html-font-family);
+}
+
+/*
+ * Brand tokens, derived from the theme. Defined on c-donation-flow as well as :root so the Lightning Out
+ * embed resolves them against the hooks it sets on itself (below), not against the Lightning Out site's theme.
+ */
+:root,
+c-donation-flow {
+    --cgt-forest: var(--dxp-g-brand, #1E4634);
+    --cgt-on-forest: var(--dxp-g-brand-contrast, #FFFFFF);
+    --cgt-leaf: var(--dxp-g-brand-1, var(--cgt-forest));
+    --cgt-mist: color-mix(in srgb, var(--cgt-leaf) 6%, var(--dxp-g-root, #FFFFFF));
+    --cgt-body: var(--dxp-g-root-contrast-1, #3F5A4C);
+    --cgt-muted: var(--dxp-g-root-contrast-2, #587063);
+    --cgt-line: var(--dxp-s-form-element-color-border, #789085);
+    --cgt-display: var(--dxp-s-text-heading-large-font-family, var(--dxp-s-html-font-family, sans-serif));
+    --cgt-sans: var(--dxp-s-html-font-family, sans-serif);
+    --cgt-pill: var(--dxp-s-button-radius-border, 999px);
+    --cgt-sun: var(--cgt-accent, #F28C38);
+    --cgt-on-sun: var(--cgt-accent-contrast, #1E2A22);
+    /* Tints mixed from the brand and accent colours, so they follow a theme change. */
+    --cgt-moss: color-mix(in srgb, var(--cgt-leaf) 14%, var(--dxp-g-root, #FFFFFF));
+    --cgt-dawn: color-mix(in srgb, var(--cgt-sun) 18%, var(--dxp-g-root, #FFFFFF));
+    --cgt-on-dawn: color-mix(in srgb, var(--cgt-sun) 55%, #000000);
+    --cgt-shadow: color-mix(in srgb, var(--cgt-forest) 10%, transparent);
+}
+
+/*
+ * Lightning Out embed. The Lightning Out site has its own theme (the FinDock checkout's) and Lightning Out
+ * doesn't load the Canopy site theme, so the embedded form sets the Canopy values of the theme hooks itself.
+ */
+c-donation-flow {
+    display: block;
+    font-family: var(--cgt-sans);
+    color: var(--cgt-forest);
+    --dxp-g-brand: #1E4634;
+    --dxp-g-brand-1: #2E7D57;
+    --dxp-g-brand-contrast: #FFFFFF;
+    --dxp-g-root: #F2F6F0;
+    --dxp-g-root-contrast: #1E4634;
+    --dxp-g-root-contrast-1: #3F5A4C;
+    --dxp-g-root-contrast-2: #587063;
+    --dxp-s-html-font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --dxp-s-text-heading-large-font-family: var(--dxp-s-html-font-family);
+    --dxp-g-root-font-family: var(--cgt-sans);
+    --dxp-s-text-heading-font-family: var(--cgt-display);
+    --dxp-s-button-font-family: var(--cgt-sans);
+    --dxp-s-form-element-text-font-family: var(--cgt-sans);
+    --dxp-s-form-element-label-font-family: var(--cgt-sans);
+    --dxp-s-form-element-label-font-size: 15px;
+    --dxp-s-form-element-label-font-weight: 600;
+    --dxp-s-form-element-label-color: var(--cgt-forest);
+    --dxp-s-form-element-text-font-size: 16px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --slds-g-font-family: var(--cgt-sans);
+    --lwc-fontFamily: var(--cgt-sans);
+    --dxp-s-button-color: var(--cgt-forest);
+    --dxp-s-button-color-1: var(--cgt-leaf);
+    --dxp-s-button-color-contrast: var(--cgt-on-forest);
+    --dxp-s-button-radius-border: 999px;
+    --dxp-s-form-element-radius-border: 14px;
+    --dxp-s-form-element-width-border: 2px;
+    --dxp-s-form-element-color-background: #FFFFFF;
+    /* 60% forest on white: 3:1 against the field and the page (WCAG 1.4.11) */
+    --dxp-s-form-element-color-border: color-mix(in srgb, var(--cgt-forest) 60%, #FFFFFF);
+    --dxp-s-form-checkbox-color-border: var(--dxp-s-form-element-color-border);
+    --dxp-s-form-element-color-border-focus: var(--cgt-forest);
+    --slds-g-color-brand-base-60: var(--cgt-forest);
+}
+
+
+/*
+ * Page layout. Every block is a standard Experience Builder component (Section, Text Block, Button, Rich Text,
+ * Image, Flow) with a cgt-* class in its "CSS class" property; the rules below key off those classes.
+ * To change a text, a link or a button, select the component in Experience Builder and edit its properties.
+ *
+ * Sections: full-width coloured bands with the content in a 1152px column.
+ */
+:is(.cgt-header, .cgt-hero, .cgt-section-work, .cgt-cards, .cgt-section-quote, .cgt-section-faq, .cgt-footer, .cgt-footer-bottom) {
+    display: block;
+    padding-left: max(24px, calc((100% - 1152px) / 2)) !important;
+    padding-right: max(24px, calc((100% - 1152px) / 2)) !important;
+}
+/* In-page links (#donate, #work, #faq, #about) stop below the sticky header instead of behind it. */
+html {
+    scroll-padding-top: 96px;
+}
+.cgt-anchor {
+    display: block;
+}
+
+/* Text blocks: the classes set the type, the theme sets the font families and colours. */
+:is(.cgt-hero-title, .cgt-section-title, .cgt-card-title, .cgt-quote, .cgt-brand, .cgt-footer-name) :is(h1, h2, h3, p) {
+    font-family: var(--cgt-display) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em;
+}
+
+/* Buttons: pills in the brand colour; .cgt-button-sun in the accent colour. */
+:is(.cgt-header-donate, .cgt-quote-button, .cgt-result-button) :is(a, button) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    padding: 0 30px;
+    border-radius: var(--cgt-pill) !important;
+    background: var(--cgt-forest) !important;
+    border-color: var(--cgt-forest) !important;
+    color: var(--cgt-on-forest) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+:is(.cgt-header-donate, .cgt-quote-button, .cgt-result-button) :is(a, button):hover {
+    background: var(--cgt-leaf) !important;
+    border-color: var(--cgt-leaf) !important;
+}
+.cgt-button-sun :is(a, button),
+.cgt-button-sun :is(a, button):hover {
+    background: var(--cgt-sun) !important;
+    border-color: var(--cgt-sun) !important;
+    color: var(--cgt-on-sun) !important;
+}
+
+/* Header (theme layout): logo and name on the left, links and Donate on the right. */
+.cgt-header {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    min-height: 80px;
+    box-sizing: border-box;
+}
+/* Columns sit next to a spacer element, so "~" (not "+") finds the second column. */
+.cgt-header community_layout-column ~ community_layout-column .column-content {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px 28px !important;
+}
+.cgt-header community_layout-column ~ community_layout-column .column-content > * {
+    width: auto !important;
+    flex: none !important;
+    margin: 0 !important;
+}
+/* No component spacing in the header, so the links line up with the middle of the Donate button. */
+.cgt-header :is(.cgt-brand, .cgt-nav, .cgt-header-donate) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+.cgt-brand :is(p, h1, h2, h3) {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 23px !important;
+    color: var(--cgt-on-forest) !important;
+}
+/* The logo is the canopyLogoLight static resource; replace that file to change it. */
+.cgt-brand :is(p, h1, h2, h3)::before {
+    content: "";
+    display: inline-block !important;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    background: url("canopyLogoLight") center / contain no-repeat;
+}
+/* Header links: one Rich Text block, so editors change the links in the normal text editor. */
+.cgt-nav p {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 28px;
+    margin: 0 !important;
+}
+.cgt-nav a {
+    color: var(--cgt-on-forest) !important;
+    font-weight: 600;
+    text-decoration: none !important;
+}
+.cgt-nav a:hover {
+    color: var(--cgt-dawn) !important;
+}
+.cgt-header-donate :is(a, button) {
+    min-height: 46px;
+    padding: 0 24px;
+}
+
+/* Hero: forest band with the copy and photo on the left, the donation card on the right, a wave at the bottom. */
+.cgt-hero {
+    position: relative;
+    background: var(--cgt-forest);
+    color: var(--cgt-on-forest);
+    padding-top: 32px !important;
+    padding-bottom: 120px !important;
+}
+.cgt-hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 80px;
+    background: var(--dxp-g-root, #FFFFFF);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 80 L0 46 C120 10 220 60 340 34 C470 6 560 58 700 36 C840 14 930 62 1070 34 C1200 8 1320 52 1440 30 L1440 80 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 80 L0 46 C120 10 220 60 340 34 C470 6 560 58 700 36 C840 14 930 62 1070 34 C1200 8 1320 52 1440 30 L1440 80 Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+    pointer-events: none;
+}
+.cgt-tag :is(p, h1, h2, h3) {
+    display: inline-block !important;
+    margin: 0 0 24px;
+    padding: 6px 14px !important;
+    border-radius: var(--cgt-pill) !important;
+    background: var(--cgt-sun) !important;
+    color: var(--cgt-on-sun) !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+.cgt-hero-title :is(h1, h2, p) {
+    margin: 0 0 24px;
+    font-size: clamp(44px, 6vw, 68px) !important;
+    line-height: 1 !important;
+    color: var(--cgt-on-forest) !important;
+}
+.cgt-hero-text :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 20px !important;
+    line-height: 1.55 !important;
+    max-width: 500px;
+    color: color-mix(in srgb, var(--cgt-on-forest) 82%, var(--cgt-forest)) !important;
+}
+.cgt-hero-photo,
+.cgt-hero-photo img {
+    border-radius: 0 150px 0 150px;
+    overflow: hidden;
+}
+.cgt-hero-photo {
+    margin-top: 32px;
+    max-width: 520px;
+}
+/* The image component sizes its inner box to the photo's own proportions; make it fill the column. */
+.cgt-hero-photo .image,
+.cgt-hero-photo picture {
+    display: block;
+    width: 100% !important;
+}
+.cgt-hero-photo img {
+    object-fit: cover !important;
+    object-position: center 30%;
+    width: 100% !important;
+    max-width: none !important;
+    height: 300px;
+}
+.cgt-hero .donate flowruntime-flow {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* Where your gift goes: the heading section, then three cards (one per column of the cgt-cards section). */
+.cgt-section-work {
+    background: var(--dxp-g-root, #FFFFFF);
+    padding-top: 80px !important;
+    padding-bottom: 44px !important;
+}
+.cgt-eyebrow :is(p, h1, h2, h3) {
+    margin: 0 0 12px;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--cgt-leaf) !important;
+}
+.cgt-section-title :is(h1, h2, p) {
+    margin: 0;
+    font-size: clamp(36px, 4.5vw, 48px) !important;
+    line-height: 1.05 !important;
+    color: var(--cgt-forest) !important;
+}
+.cgt-cards {
+    background: var(--dxp-g-root, #FFFFFF);
+    padding-bottom: 96px !important;
+}
+.cgt-cards community_layout-column {
+    align-self: stretch;
+}
+.cgt-cards community_layout-column .column-content {
+    height: 100%;
+    box-sizing: border-box;
+    background: var(--cgt-mist);
+    border-radius: 28px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.cgt-card-title :is(h1, h2, h3, p) {
+    margin: 0;
+    font-size: 24px !important;
+    color: var(--cgt-forest) !important;
+}
+/* Card icons: static resources canopyIconRescue, canopyIconForest and canopyIconRelease. */
+.cgt-card-title :is(h1, h2, h3, p)::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 14px;
+    border-radius: 0 30px 0 30px;
+    background: var(--cgt-icon-bg) var(--cgt-icon) center / 28px no-repeat;
+}
+.cgt-icon-rescue { --cgt-icon: url("canopyIconRescue"); --cgt-icon-bg: var(--cgt-sun); }
+.cgt-icon-forest { --cgt-icon: url("canopyIconForest"); --cgt-icon-bg: var(--cgt-leaf); }
+.cgt-icon-release { --cgt-icon: url("canopyIconRelease"); --cgt-icon-bg: var(--cgt-forest); }
+.cgt-card-text :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 17px !important;
+    line-height: 1.55 !important;
+    color: var(--cgt-body) !important;
+}
+
+/* Quote band */
+.cgt-section-quote .columns-content {
+    align-items: center !important;
+}
+.cgt-section-quote {
+    background: var(--cgt-dawn);
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+}
+.cgt-quote :is(p, h1, h2, h3) {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 3.2vw, 36px) !important;
+    line-height: 1.2 !important;
+    color: var(--cgt-forest) !important;
+}
+.cgt-quote-name :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 17px !important;
+    color: var(--cgt-on-dawn) !important;
+}
+
+/* FAQ: one Rich Text block, a heading per question. */
+.cgt-section-faq {
+    background: var(--dxp-g-root, #FFFFFF);
+    padding-top: 96px !important;
+    padding-bottom: 96px !important;
+}
+.cgt-section-faq community_layout-column .column-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.cgt-section-faq .cgt-section-title :is(h1, h2, p) {
+    font-size: 40px !important;
+    margin-bottom: 28px;
+}
+.cgt-faq h3 {
+    margin: 16px 0 0 !important;
+    padding: 20px 24px 0 !important;
+    border-radius: 20px 20px 0 0;
+    background: var(--cgt-mist);
+    font-family: var(--cgt-sans);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cgt-forest);
+}
+.cgt-faq h3 + p {
+    margin: 0 !important;
+    padding: 12px 24px 20px !important;
+    border-radius: 0 0 20px 20px;
+    background: var(--cgt-mist);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--cgt-body);
+}
+
+/* Footer (theme layout; the Footer colour set gives it the forest background). */
+.cgt-footer,
+.cgt-footer-bottom {
+    background: var(--cgt-forest) !important;
+}
+.cgt-footer {
+    padding-top: 56px !important;
+    padding-bottom: 24px !important;
+    font-size: 15px;
+    color: var(--cgt-moss);
+}
+.cgt-footer community_layout-column .column-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.cgt-footer-name :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 21px !important;
+    color: #FFFFFF !important;
+}
+.cgt-footer-note :is(p, h1, h2, h3),
+.cgt-footer-small :is(p, h1, h2, h3) {
+    margin: 0;
+    font-size: 15px !important;
+    color: var(--cgt-moss) !important;
+}
+.cgt-footer-links p {
+    margin: 0 0 10px !important;
+    font-size: 15px;
+    color: var(--cgt-moss);
+}
+.cgt-footer-links strong {
+    color: #FFFFFF;
+}
+.cgt-footer-links a {
+    color: var(--cgt-moss) !important;
+}
+.cgt-footer-links a:hover {
+    color: #FFFFFF !important;
+}
+.cgt-footer-bottom {
+    padding-bottom: 32px !important;
+}
+/* One line above the small print, as wide as the content */
+.cgt-footer-bottom .columns-content {
+    border-top: 1px solid color-mix(in srgb, var(--cgt-moss) 25%, transparent);
+    padding-top: 20px;
+}
+.cgt-footer-small :is(p, h1, h2, h3) {
+    font-size: 14px !important;
+}
+
+/* Thank-you and failure pages */
+.cgt-result {
+    padding-top: 56px !important;
+    padding-bottom: 72px !important;
+}
+.cgt-result community_layout-column .column-content {
+    max-width: 640px;
+    margin: 0 auto;
+    align-items: center !important;
+    gap: 1rem;
+    text-align: center;
+}
+.cgt-result-icon :is(p, h1, h2, h3) {
+    width: 96px !important;
+    height: 96px !important;
+    margin: 0 auto !important;
+    border-radius: 0 48px 0 48px !important;
+    background: var(--cgt-sun) !important;
+    color: var(--cgt-on-sun) !important;
+    font-size: 44px !important;
+    font-weight: 800 !important;
+    line-height: 96px !important;
+    text-align: center !important;
+}
+.cgt-result-icon.cgt-failed :is(p, h1, h2, h3) {
+    background: var(--cgt-moss) !important;
+    color: var(--cgt-forest) !important;
+}
+.cgt-result-title :is(p, h1, h2, h3) {
+    font-family: var(--cgt-display) !important;
+    font-weight: 800 !important;
+    color: var(--cgt-forest) !important;
+}
+.cgt-result-text :is(p, h1, h2, h3) {
+    margin: 0 auto;
+    font-size: 1.15rem !important;
+    line-height: 1.55 !important;
+    color: var(--cgt-body) !important;
+    max-width: 34rem;
+}
+
+/*
+ * Phones: the theme header stays fixed at the top, so keep it to one compact row (logo and Donate)
+ * and drop the hero photo, like the Netlify page.
+ */
+@media (max-width: 767px) {
+    :is(.cgt-header, .cgt-hero, .cgt-section-work, .cgt-cards, .cgt-section-quote, .cgt-section-faq, .cgt-footer, .cgt-footer-bottom) {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    .cgt-header {
+        min-height: 64px;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .cgt-brand :is(p, h1, h2, h3) {
+        font-size: 0 !important;
+        gap: 0;
+    }
+    .cgt-brand :is(p, h1, h2, h3)::before {
+        width: 40px;
+        height: 40px;
+    }
+    .cgt-nav {
+        display: none !important;
+    }
+    .cgt-header-donate :is(a, button) {
+        min-height: 42px;
+        padding: 0 20px;
+    }
+    .cgt-hero {
+        padding-bottom: 96px !important;
+    }
+    .cgt-hero-photo {
+        display: none;
+    }
+    .cgt-cards community_layout-column ~ community_layout-column {
+        margin-top: 16px;
+    }
+    .cgt-quote-button {
+        --dxp-c-l-button-alignment: left;
+    }
+}
+
+/* The flow is the donation card. */
+:is(.donate, c-donation-flow) flowruntime-flow {
+    display: block;
+    background: var(--dxp-g-root, #FFFFFF);
+    border-radius: 28px;
+    box-shadow: 0 10px 40px var(--cgt-shadow);
+    padding: 1.5rem 2rem;
+}
+.donate {
+    border: 0 !important;
+    box-shadow: none !important;
+}
+/*
+ * On each new screen the flow focuses itself and scrolls its top into view. The theme header is fixed, so
+ * without a margin the top of the card lands under it. 140px matches the card's normal place on desktop
+ * (header plus hero padding), so on desktop the page doesn't move at all.
+ */
+.donate flowruntime-flow,
+.donate {
+    scroll-margin-top: 140px;
+}
+@media (max-width: 767px) {
+    .donate flowruntime-flow,
+    .donate {
+        scroll-margin-top: 80px;
+    }
+}
+/*
+ * The flow's navigation bar is an inline element with SLDS's card-footer border. The Experience Cloud theme
+ * clears that border; the Lightning Out site's theme doesn't, and the border breaks into stray dashes.
+ */
+c-donation-flow flowruntime-navigation-bar.slds-card__footer {
+    display: block;
+    border: 0;
+}
+/*
+ * Loading between screens: only FinDock's grey dots (flowruntime-spinner-lwc, styled in findockAssets/dxp-styles.css).
+ * FinDock hides the blue SLDS spinner only under a .flow container, which the Lightning Out embed doesn't have.
+ * The dots centre themselves with auto margins, which needs a block box.
+ */
+:is(.donate, c-donation-flow) .slds-spinner {
+    display: none;
+}
+:is(.donate, c-donation-flow) flowruntime-spinner-lwc {
+    display: block;
+    margin: 14em auto;
+}
+:is(.donate, c-donation-flow) .stage-progress.stage-progress {
+    --slds-g-sizing-10: 2rem;
+    margin-bottom: 0.75rem;
+    --stage-active-color: var(--cgt-forest);
+    --stage-inactive-color: var(--cgt-moss);
+    --stage-inactive-number-color: var(--cgt-muted);
+}
+:is(.donate, c-donation-flow) h2 {
+    font-size: 1.6rem;
+    color: var(--cgt-forest);
+    margin: 0 0 0.25rem;
+}
+
+/*
+ * Amount and frequency. The template component scopes its styles with lwc-* attributes, which outrank a
+ * plain class selector, so these rules repeat the class to win. Its colours come from CSS variables:
+ * a moss track behind the Give once / Monthly toggle and a moss fill on the chosen amount.
+ */
+:is(.donate, c-donation-flow) {
+    --slds-g-color-neutral-base-95: var(--cgt-moss);
+    --dxp-s-form-element-color-background-active: var(--cgt-moss);
+    --dxp-s-form-element-text-color: var(--cgt-forest);
+}
+:is(.donate, c-donation-flow) .amount-frequency-container.amount-frequency-container {
+    gap: 0.75rem;
+}
+:is(.donate, c-donation-flow) .amount-grid.amount-grid {
+    gap: 0.5rem;
+}
+:is(.donate, c-donation-flow) .frequency-toggle.frequency-toggle,
+:is(.donate, c-donation-flow) .toggle-option.toggle-option {
+    border-radius: var(--cgt-pill);
+}
+:is(.donate, c-donation-flow) .toggle-option.toggle-option {
+    min-height: 2.75rem;
+    font-weight: 700;
+}
+:is(.donate, c-donation-flow) .visually-hidden-input:checked + .toggle-option.toggle-option.toggle-option {
+    background-color: var(--cgt-forest);
+    color: var(--cgt-on-forest);
+    box-shadow: none;
+}
+:is(.donate, c-donation-flow) .visually-hidden-input:checked + .toggle-option.toggle-option.toggle-option lightning-icon {
+    --slds-c-icon-color-foreground-default: var(--cgt-sun);
+}
+:is(.donate, c-donation-flow) .amount-option.amount-option {
+    min-height: 3rem;
+    border-radius: var(--cgt-pill);
+    font-family: var(--cgt-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+:is(.donate, c-donation-flow) .custom-amount-row.custom-amount-row {
+    min-height: 3rem;
+    border-radius: var(--cgt-pill);
+}
+
+/* Payment methods: the selected row in a pale tint of the brand colour, so its white fields stand out. */
+:is(.donate, c-donation-flow) .payment-option {
+    border-radius: 16px;
+}
+:is(.donate, c-donation-flow) .payment-option.payment-option-selected {
+    background: color-mix(in srgb, var(--cgt-forest) 5%, var(--dxp-g-root, #FFFFFF));
+    border-color: var(--cgt-forest);
+}
+
+/* Flow footer buttons: pills; the final pay button in sunrise orange. */
+:is(.donate, c-donation-flow) .slds-button {
+    border-radius: var(--cgt-pill);
+    font-weight: 700;
+    min-height: 3rem;
+    padding-inline: 2rem;
+}
+:is(.donate, c-donation-flow) cpm-pay-button .slds-button_brand,
+:is(.donate, c-donation-flow) cpm-pay-button button {
+    background: var(--cgt-sun);
+    border-color: var(--cgt-sun);
+    color: var(--cgt-on-sun);
+    width: 100%;
+}
+
+/*
+ * Page canvas. The theme colours only the body, which is one viewport tall, so set the page colour on html too.
+ * The template's header wrappers are grey: the header bar takes the brand colour, like the Netlify page.
+ */
+html {
+    background: var(--dxp-g-root, #FFFFFF);
+}
+.community_byo-scoped-header-and-footer__head.community_byo-scoped-header-and-footer__head,
+.community_byo-scoped-header-and-footer__header-content.community_byo-scoped-header-and-footer__header-content.community_byo-scoped-header-and-footer__header-content {
+    background: var(--cgt-forest);
+}
+.community_byo-scoped-header-and-footer__foot.community_byo-scoped-header-and-footer__foot,
+.community_byo-scoped-header-and-footer__footer-content.community_byo-scoped-header-and-footer__footer-content.community_byo-scoped-header-and-footer__footer-content {
+    background: var(--dxp-g-root, #FFFFFF);
+}
+
+/* ===== Payment Link page =====
+ * /paylink?id=<installment GUID>: one white card for an invoice, a payment link or a recurring payment's method,
+ * in the Canopy header and footer. The rules come from the checkout site template's Payment Link part (checkoutStyles) and are
+ * scoped to the page body section, which carries the paylink class.
+ */
+.paylink {
+    --paylink-ink: var(--cgt-forest);
+    --paylink-brand: var(--cgt-forest);
+    --paylink-caption: var(--cgt-muted);
+    --paylink-font: var(--cgt-sans);
+    --paylink-line: color-mix(in srgb, var(--paylink-ink) 12%, transparent);
+    font-family: var(--paylink-font);
+    color: var(--paylink-ink);
+}
+
+/* Page body */
+.paylink {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 56px 24px 72px;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+/* The flow is the one white card. Fields inside stay white. */
+.paylink flowruntime-flow {
+    position: relative;
+    display: block;
+    background: var(--dxp-g-root, #FFFFFF);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--paylink-ink) 8%, transparent);
+    padding: 32px 40px;
+}
+
+.paylink flowruntime-progress-indicator {
+    display: none;
+}
+
+/* Loading: only FinDock's grey dots, not the blue SLDS spinner as well. FinDock hides the blue one only under
+   a .flow container, which the Lightning Out embed doesn't have. */
+.paylink .slds-spinner {
+    display: none !important;
+}
+
+.paylink flowruntime-spinner-lwc {
+    display: block;
+    margin: 4em auto;
+}
+
+.paylink lightning-formatted-rich-text :is(p, h2) {
+    margin: 0;
+}
+
+.paylink lightning-formatted-rich-text h2 {
+    font: inherit;
+    color: inherit;
+}
+
+/* Amount */
+.paylink span[style*="font-size: 44px"] {
+    display: inline-block;
+    font-size: 44px !important;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+}
+
+/* Due / paid line and the status badge after it */
+.paylink span[style*="background-color: rgb(253, 236, 234)"],
+.paylink span[style*="background-color: rgb(230, 244, 236)"] {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    margin-left: 8px;
+    padding: 0 8px;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    vertical-align: 1px;
+}
+
+/* Summary rows: label column + value column */
+.paylink p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) {
+    display: grid;
+    grid-template-columns: 6.5em 1fr;
+    column-gap: 16px;
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+/* Labels stay on one line: rich text otherwise breaks long words like Description */
+.paylink p > span[style*="color: rgb(92, 98, 112)"]:first-child {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+/* The first row sits 24px under the due line */
+.paylink flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) {
+    margin-top: 14px;
+}
+
+/* No extra space under a field of rows, so rows keep one rhythm across fields */
+.paylink flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) .slds-m-bottom_x-small {
+    margin-bottom: 0 !important;
+}
+
+/* Rows split over several fields (e.g. Description, shown only when set) continue at the normal row spacing */
+.paylink flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) ~ flowruntime-screen-field:has(p > span[style*="color: rgb(92, 98, 112)"]:first-child) {
+    margin-top: 0;
+}
+
+/* Invoice PDF: a small document thumbnail in the card's top-right corner */
+.paylink a[href*=".pdf"],
+.paylink a[href*="/resource/"] {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    width: 76px;
+    height: 96px;
+    border-radius: 6px;
+    background:
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 14px / 22px 4px no-repeat,
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 28px / 70% 4px no-repeat,
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 40px / 82% 4px no-repeat,
+        linear-gradient(#E3E6EA, #E3E6EA) 10px 78px / 70% 4px no-repeat,
+        var(--dxp-g-root, #FFFFFF);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--paylink-ink) 10%, transparent);
+    font-size: 0;
+    color: transparent;
+}
+
+.paylink a[href*=".pdf"]::after,
+.paylink a[href*="/resource/"]::after {
+    content: "\2193";
+    position: absolute;
+    right: -8px;
+    bottom: -8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--dxp-g-root, #FFFFFF);
+    box-shadow: 0 1px 4px color-mix(in srgb, var(--paylink-ink) 18%, transparent);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+    color: var(--paylink-ink);
+}
+
+.paylink a[href*=".pdf"]:hover,
+.paylink a[href*="/resource/"]:hover {
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--paylink-ink) 14%, transparent);
+}
+
+/* The line between the summary and the payment part */
+.paylink cpm-payment-method-selector,
+.paylink flowruntime-screen-field:has(cpm-payment-method-selector) {
+    display: block;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--paylink-line);
+}
+
+.paylink flowruntime-screen-field:has(cpm-payment-method-selector) cpm-payment-method-selector {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+/* Recurring: the "Choose a new payment method" intro sits under the line, above the methods */
+.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) {
+    display: block;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--paylink-line);
+}
+
+.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) h2 + p {
+    margin-top: 4px;
+}
+
+.paylink flowruntime-screen-field:has(span[style*="font-size: 16px"]) ~ flowruntime-screen-field:has(cpm-payment-method-selector) {
+    margin-top: 16px;
+    padding-top: 0;
+    border-top: 0;
+}
+
+/* Paid confirmation under the summary gets the same line */
+.paylink h2:has(> span[style*="font-size: 22px"]) {
+    margin-top: 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--paylink-line);
+}
+
+.paylink flowruntime-flow:has(p > span[style*="font-size: 44px"]) h2:has(> span[style*="font-size: 22px"]) + p,
+.paylink h2:has(> span[style*="font-size: 22px"]) + p {
+    margin-top: 8px;
+}
+
+/* Not found / error screens have no summary above them: no line */
+.paylink flowruntime-flow:not(:has(span[style*="font-size: 44px"])) h2:has(> span[style*="font-size: 22px"]) {
+    margin-top: 0;
+    padding-top: 8px;
+    border-top: 0;
+}
+
+/* Payment method rows */
+.paylink .payment-option,
+.paylink .payment-option:hover,
+.paylink .payment-option:focus-within {
+    background: var(--dxp-g-root, #FFFFFF) !important;
+}
+
+.paylink .payment-option.payment-option-selected {
+    border-color: var(--paylink-brand) !important;
+}
+
+.paylink .payment-option .expanded-content-inner {
+    padding: 0 8px 0 40px !important;
+}
+
+@media (max-width: 767px) {
+    .paylink {
+        padding: 12px 12px;
+    }
+
+    .paylink flowruntime-flow {
+        padding: 24px 20px;
+    }
+
+    .paylink span[style*="font-size: 44px"] {
+        font-size: 36px !important;
+    }
+
+    .paylink a[href*=".pdf"],
+    .paylink a[href*="/resource/"] {
+        top: 24px;
+        right: 20px;
+        width: 56px;
+        height: 72px;
+    }
+
+    .paylink p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) {
+        grid-template-columns: 6.5em 1fr;
+    }
+}
+
+/*
+ * Canopy styling, the same as the donation form on the home page: the card on a forest-green band that runs on
+ * from the header, the donation card's corners and shadow, the display font for the amount, a pale brand tint
+ * for the selected method, pill buttons and the pay button in the accent colour.
+ */
+html:has(.paylink),
+body:has(.paylink) {
+    background: linear-gradient(to bottom, var(--cgt-forest) 0, var(--cgt-forest) 260px, var(--cgt-mist) 260px) no-repeat, var(--cgt-mist);
+}
+.paylink {
+    --slds-g-color-neutral-base-95: var(--cgt-moss);
+    --dxp-s-form-element-color-background-active: var(--cgt-moss);
+    --dxp-s-form-element-text-color: var(--cgt-forest);
+}
+.paylink flowruntime-flow {
+    border-radius: 28px;
+    box-shadow: 0 10px 40px var(--cgt-shadow);
+    padding: 2.25rem 2.5rem;
+    color: var(--cgt-body);
+}
+.paylink span[style*="font-size: 44px"] {
+    font-family: var(--cgt-display) !important;
+    font-weight: 800 !important;
+    color: var(--cgt-forest) !important;
+    letter-spacing: -0.02em;
+}
+.paylink p:has(> span[style*="color: rgb(92, 98, 112)"]:first-child) span:not(:first-child) {
+    color: var(--cgt-forest) !important;
+}
+.paylink .slds-spinner {
+    display: none;
+}
+.paylink flowruntime-spinner-lwc {
+    display: block;
+    margin: 10em auto;
+}
+.paylink .stage-progress.stage-progress {
+    --stage-active-color: var(--cgt-forest);
+    --stage-inactive-color: var(--cgt-moss);
+    --stage-inactive-number-color: var(--cgt-muted);
+}
+.paylink h2 {
+    font-family: var(--cgt-display);
+    color: var(--cgt-forest);
+}
+.paylink .payment-option {
+    border-radius: 16px;
+}
+.paylink .payment-option.payment-option-selected {
+    background: color-mix(in srgb, var(--cgt-forest) 5%, var(--dxp-g-root, #FFFFFF)) !important;
+    border-color: var(--cgt-forest) !important;
+}
+.paylink .slds-button {
+    border-radius: var(--cgt-pill);
+    font-weight: 700;
+    min-height: 3rem;
+    padding-inline: 2rem;
+}
+.paylink cpm-pay-button .slds-button_brand,
+.paylink cpm-pay-button button {
+    background: var(--cgt-sun);
+    border-color: var(--cgt-sun);
+    color: var(--cgt-on-sun);
+    width: 100%;
+}
+.paylink a[href*=".pdf"],
+.paylink a[href*="/resource/"] {
+    border-color: var(--cgt-line);
+}
+@media (max-width: 767px) {
+    html:has(.paylink),
+    body:has(.paylink) {
+        background: linear-gradient(to bottom, var(--cgt-forest) 0, var(--cgt-forest) 180px, var(--cgt-mist) 180px) no-repeat, var(--cgt-mist);
+    }
+    .paylink flowruntime-flow {
+        padding: 1.5rem 1.25rem;
+    }
+}

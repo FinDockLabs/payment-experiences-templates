@@ -5,6 +5,10 @@
             <c-lightning-out-flow-container flow-api-name="Donation_Flow"></c-lightning-out-flow-container>
         It can also be set from website JavaScript with setAttribute, or as a Custom Property
         in Lightning Out 2.0 App Manager ({ "flow-api-name": "Donation_Flow" }).
+        success-url, failure-url (optional): full URLs where the payer goes after a successful or
+        a failed payment. Set either the same way; each one that is set is passed to the flow's
+        successUrl or failureUrl input variable, so the flow must have that input. The FinDock flow
+        templates do; without them they use https://www.example.com/success and /failure.
         Other values from the website reach the flow the same way: add an @api property to this
         component, then pass it to the flow with flow-input-variables.
         Docs: TODO add docs link
@@ -13,6 +17,7 @@
     -->
     <lightning-flow
         flow-api-name={flowApiName}
+        flow-input-variables={flowInputVariables}
         onstatuschange={handleStatusChange}>
     </lightning-flow>
 </template>

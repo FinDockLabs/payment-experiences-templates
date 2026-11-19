@@ -25,9 +25,9 @@ Out of the box, the payment form uses fixed amount and frequency values. The for
 | `amount` | String | `10.50` | Amount the payer is charged, preset and displayed as read-only. Dot-decimal form (e.g. `10.50`), never a locale format like `10,50`; must be greater than zero or payment is blocked. |
 | `defaultFrequency` | String | `oneTime` | Payment frequency, preset and displayed as read-only. Set to `One time` or `Monthly` (the `oneTime`/`recurring` codes are also accepted). |
 
-Recurring payments are sent with `Recurring.Frequency: 'Monthly'` — the only frequency currently supported. Add a configurable frequency property if another frequency is needed.
+Recurring payments are sent with `Recurring.Frequency: 'Monthly'`. Add a configurable frequency property if another frequency is needed.
 
-`Recurring.StartDate` is required by the Payment API (`yyyy-mm-dd`) for every source, so the form always sends it, defaulting to **today** (payer's local time). It is the *earliest* collection date — the API normalises the exact day to the org's payment schedule (e.g. day-of-month), so the day sent here need not be exact.
+`Recurring.StartDate` is required by the Payment API (`yyyy-mm-dd`) for every source (FinDock Standalone, Fundraising or NPSP), so the form always sends it, defaulting to **today** (payer's local time). It is the *earliest* collection date — the API normalizes the exact day to the org's payment collection schedule (e.g. day-of-month), so the day sent here need not be exact.
 
 ### `c-payment-selector` — API
 
@@ -63,10 +63,10 @@ This template is provided as source code for you to adapt to your use case. Conf
 2. Generate `paymentMethodConfiguration.js` from your org's active payment methods and fill in the `target` field for each entry. See [Payment Method Configuration](#payment-method-configuration) below for details.
 3. Fill in `SuccessURL` and `FailureURL` in `paymentForm.js` (`_updatePaymentIntentContext`) with pages within your Experience Cloud site.
 4. Set the amount, currency, and frequency by editing the `@api` defaults in `paymentForm.js` (see [Configuration Properties](#c-payment-form--configuration-properties)) — they are not exposed in Experience Builder.
-5. Deploy the `sfdx-source/packages/lwc-procode` folder to your org. Make sure the `shared` folder (a link to `sfdx-source/shared`) is deployed too: it contains components that `paymentForm` depends on.
+5. Deploy the `sfdx-source/packages/lwc-procode` folder to your org. Make sure the `shared` folder (a link to `sfdx-source/shared`) is also deployed: it contains components that `paymentForm` depends on.
 
 **After deployment**
-1. If the site needs to accept payments from unauthenticated (guest) users, complete the [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup) steps — payments will fail at runtime otherwise, even though the page renders correctly.
+1. If the site needs to accept payments from unauthenticated (guest) users, complete the [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup) steps — payments fail at runtime otherwise, even though the page renders correctly.
 2. Assign the **FinDockLabs Payment Guest Access** permission set to your Experience Cloud site guest user.
 3. Add `c-payment-form` to your Experience Cloud page and publish the site.
 
@@ -78,7 +78,7 @@ Which methods appear, and how they're configured, is defined statically in `paym
 
 Use the included script to generate a ready-to-edit `paymentMethodConfiguration.js` from your org's active payment methods.
 
-**Prerequisites:** [Salesforce CLI](https://developer.salesforce.com/tools/salesforcecli) (`sf`) installed and authenticated to the target org.
+**Prerequisites:** [Salesforce CLI](https://developer.salesforce.com/tools/salesforcecli) (`sf`) installed and authenticated for the target org.
 
 ```bash
 npm run generate:config -- --org <orgAlias>
@@ -96,7 +96,7 @@ The script calls `GET /PaymentMethods` via anonymous Apex, formats the response 
 2. **Review `enabledOneTime` / `enabledRecurring`** — the script enables one-time for all methods and recurring only where `supportsRecurring` is `true`. Adjust if needed.
 3. **Set `isDefaultOneTime` / `isDefaultRecurring`** — the script pre-selects the first entry in the sorted list. Change if a different method should be the default.
 
-**Alternative — Developer Console:** paste `scripts/apex/generate-payment-method-config.apex` into Execute Anonymous, run it, then find the `FDPAYCONFIG:` line in the debug log and copy the JSON from there.
+**Alternative — Developer Console:** copy-paste `scripts/apex/generate-payment-method-config.apex` into Execute Anonymous, run it, then find the `FDPAYCONFIG:` line in the debug log and copy the JSON from there.
 
 ### Config field reference
 
@@ -106,18 +106,18 @@ The script calls `GET /PaymentMethods` via anonymous Apex, formats the response 
 | `paymentMethod` | Name of the payment method. Maps to `PaymentMethod.Name` in the PaymentIntent. Source: `PaymentMethods[].Name` from `GET /PaymentMethods`. |
 | `target` | Merchant account name. Maps to `PaymentMethod.Target`. Find it in FinDock Setup → Processors & Methods → Accounts tab. Not returned by the API — must be filled in manually. Optional: leave empty to use the processor's default account, but the processor must have at least one account configured. |
 | `enabledOneTime` | Show this method for one-time payments. |
-| `enabledRecurring` | Show this method for recurring payments. Enabling this for a method whose processor doesn't actually support recurring has no effect — see the guard note below. |
+| `enabledRecurring` | Show this method for recurring payments. Enabling this for a method where the processor doesn't support recurring has no effect — see the note below. |
 | `isDefaultOneTime` | Pre-select this method for one-time payments. Exactly one entry should be `true`. |
 | `isDefaultRecurring` | Pre-select this method for recurring payments. Exactly one entry where `enabledRecurring` is `true` should be `true`. |
 | `displayLabel` | Label shown to the payer. A plain string, or a Custom Label reference (`labels.<name>`) so the name follows the site language. Defaults to `paymentMethod` (the API method name) when omitted — the smart default. See [Localization](#localization). |
-| `redirectInstruction` | Message shown before PSP redirect (e.g. for iDEAL, Bancontact). Payer-facing — use a Custom Label reference (`labels.<name>`) to keep it translatable. Omit when there is no redirect. |
+| `redirectInstruction` | Message shown before payment processor redirect (e.g. for iDEAL, Bancontact). Payer-facing — use a Custom Label reference (`labels.<name>`) to keep it translatable. Omit when there is no redirect. |
 | `parameters` | Array of additional processor parameters (e.g. `locale`, `description`). `null` or omit when none. Each entry: `name`, `value`, `visibleToCustomer`, `displayLabel`, `required`, `description`. |
 
 ### Recurring with an initial payment
 
 Some methods take a first payment up front when a recurring payment is set up. `paymentForm` adds an initial `OneTime` block **only when the method's `recurringRequiresInitialPayment` is `true`** (the first payment is then charged immediately); other methods set up the mandate only. This flag is sourced live from the org, so it always matches the processor's actual behavior.
 
-See [Initial payments for recurring payments](https://docs.findock.com/api/initial-payments-for-recurring-payments) for the full behavior and per-processor support.
+See [Initial payments for recurring payments](https://docs.findock.com/api/initial-payments-for-recurring-payments) for the full behavior and [processor articles](https://docs.findock.com/docs/payment-processors) for per-processor support.
 
 ### Validation and empty states
 
@@ -160,13 +160,13 @@ To use a label, add it to `CustomLabels.labels-meta.xml` and the `paymentFormLab
 - **Your Flow screens** and **picklist values** — Setup → Translation Workbench → Translate (Setup Component = *Flow*). Note: STF file import rejects Flow components, so flows must be translated through the Translate UI.
 - **Experience Builder content** (titles, rich text) — per-language values in the component property editor, or site export/import.
 
-Translation Workbench must be enabled and languages added before installing, and LWR requires a **site republish** after language configuration changes. Untranslated elements fall back to the default (English) label.
+Translation Workbench must be enabled and languages added before installing, and LWR requires **republishing the site** after language configuration changes. Untranslated elements fall back to the default (English) label.
 
 **Numbers and dates.** The amount is formatted with `Intl.NumberFormat` against `@salesforce/i18n/locale` (the active locale), so grouping/decimal separators follow the payer's language. `Recurring.StartDate` is sent to the API as an ISO date (`yyyy-mm-dd`) and is not displayed, so it needs no locale formatting. On LWR the timezone follows the browser.
 
 ## How it works
 
-`c-payment-form` assembles the PaymentIntent reactively from the configured amount and frequency plus form state (personal info, selected payment method) and passes the whole object to `cpm-pay-button` via the `payment-intent` property. The managed Pay Button component calls `cpm.API_PaymentIntent_V2.postPaymentIntent()` in-transaction and handles the PSP redirect — no custom Apex controller is needed.
+`c-payment-form` assembles the PaymentIntent reactively from the configured amount and frequency plus form state (personal info, selected payment method) and passes the whole object to `cpm-pay-button` via the `payment-intent` property. The managed Pay Button component calls `cpm.API_PaymentIntent_V2.postPaymentIntent()` in-transaction and handles the payment processor redirect — no custom Apex controller is needed.
 
 The Pay Button is disabled until all required fields are filled and a payment method is selected.
 
@@ -192,7 +192,7 @@ See the full **Error and response codes** list in the [Payment API reference](ht
 **What the components do out of the box**
 
 - **Field-level errors** (bank-detail codes `201`–`206`) are highlighted inline on the matching input by the managed `cpm-payment-method-selector` — no code needed.
-- **Everything else** is shown by `cpm-pay-button` as its own inline message above the button. `c-payment-form` does **not** render a second banner, so the message isn't duplicated.
+- **Everything else** is shown by `cpm-pay-button` as its own inline message above the button. `c-payment-form` does *not* render a second banner, so the message isn't duplicated.
 
 **Extending / customizing**
 

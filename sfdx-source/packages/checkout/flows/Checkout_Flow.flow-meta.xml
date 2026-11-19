@@ -9,7 +9,7 @@
         <actionName>c:getUserAgentInfo</actionName>
         <actionType>lwcComponent</actionType>
         <connector>
-            <targetReference>Is_HNW_person</targetReference>
+            <targetReference>Get_Order_Details</targetReference>
         </connector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <nameSegment>c:getUserAgentInfo</nameSegment>
@@ -22,8 +22,9 @@
     <apiVersion>68.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
-        <name>Assign_example_variables</name>
-        <label>Assign example variables</label>
+        <description>PLACEHOLDER. Replace this element with a Get Records element that reads the order to pay (for example the standard Order object, an Opportunity or your own object, using the id input variable), then set amount, currency, reference, frequency and the payer&apos;s Contact fields from that record, and the order lines in the Pay screen&apos;s order summary. Until then the checkout shows these example values.</description>
+        <name>Get_Order_Details</name>
+        <label>Placeholder: get order details</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignmentItems>
@@ -85,65 +86,29 @@
             <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
         </value>
     </customProperties>
-    <decisions>
-        <description>Example of branching on userAgentInfo: Yes when the payer uses an Apple device. Both branches are empty and continue the same way. Add elements to a branch to tailor the flow.</description>
-        <name>Is_HNW_person</name>
-        <label>Is HNW person?</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Pay_Existing_Record</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No</defaultConnectorLabel>
-        <rules>
-            <name>Yes</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>userAgentInfo.osVendor</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Apple</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Pay_Existing_Record</targetReference>
-            </connector>
-            <label>Yes</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <description>The flow can either use an existing installment and pay that, or insert a new installment based on record data.</description>
-        <name>Pay_Existing_Record</name>
-        <label>Existing or new record</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <defaultConnector>
-            <targetReference>Assign_example_variables</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>New record</defaultConnectorLabel>
-        <rules>
-            <name>Existing_record</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>id</leftValueReference>
-                <operator>NotEqualTo</operator>
-            </conditions>
-            <connector>
-                <targetReference>Get_Installment</targetReference>
-            </connector>
-            <label>Existing record</label>
-        </rules>
-    </decisions>
     <environments>Default</environments>
+    <formulas>
+        <description>Where the payer goes after a successful payment: the successUrl input if the page passes one (the Lightning Out examples do), else https://www.example.com/success. Replace the example URL with your own page.</description>
+        <name>Success_URL</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!successUrl}, &quot;https://www.example.com/success&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>Where the payer goes after a failed or cancelled payment: the failureUrl input if the page passes one (the Lightning Out examples do), else https://www.example.com/failure. Replace the example URL with your own page.</description>
+        <name>Failure_URL</name>
+        <dataType>String</dataType>
+        <expression>BLANKVALUE({!failureUrl}, &quot;https://www.example.com/failure&quot;)</expression>
+    </formulas>
+    <formulas>
+        <description>The amount with its currency symbol, e.g. €167.00, for the order summary.</description>
+        <name>Amount_Display</name>
+        <dataType>String</dataType>
+        <expression>CASE({!currency},&quot;EUR&quot;,&quot;€&quot;,&quot;USD&quot;,&quot;$&quot;,&quot;GBP&quot;,&quot;£&quot;,{!currency} &amp; &quot; &quot;) &amp; IF(FLOOR(BLANKVALUE({!amount}, 0)) >= 1000, TEXT(FLOOR(FLOOR(BLANKVALUE({!amount}, 0))/1000)) &amp; &quot;,&quot; &amp; RIGHT(&quot;00&quot; &amp; TEXT(MOD(FLOOR(BLANKVALUE({!amount}, 0)),1000)),3), TEXT(FLOOR(BLANKVALUE({!amount}, 0)))) &amp; &quot;.&quot; &amp; RIGHT(&quot;0&quot; &amp; TEXT(ROUND(MOD(BLANKVALUE({!amount}, 0)*100,100),0)),2)</expression>
+    </formulas>
     <formulas>
         <name>Frequency_Display_Text</name>
         <dataType>String</dataType>
         <expression>if({!frequency}=&apos;oneTime&apos;, $Label.ec_frequency_label_one_time, $Label.ec_frequency_label_monthly)</expression>
-    </formulas>
-    <formulas>
-        <name>Frequency_Display_Text_Existing</name>
-        <dataType>String</dataType>
-        <expression>IF(ISNULL({!Get_Recurring_Payment.Id}), $Label.ec_frequency_label_one_time, INITCAP(TEXT({!Get_Recurring_Payment.cpm__Frequency__c})))</expression>
     </formulas>
     <formulas>
         <name>Is_Current_User_Sys_Admin</name>
@@ -162,14 +127,9 @@
         <expression>IF({!frequency} = &apos;recurring&apos;, {!amount}, null)</expression>
         <scale>2</scale>
     </formulas>
-    <formulas>
-        <name>Reference_Existing</name>
-        <dataType>String</dataType>
-        <expression>IF(!ISBLANK({!Get_Installment.cpm__Final_Payment_Reference__c}),{!Get_Installment.cpm__Final_Payment_Reference__c}, {!Get_Recurring_Payment.cpm__Final_Payment_Reference__c})</expression>
-    </formulas>
     <interviewLabel>Pay flow {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
-    <label>Checkout Flow</label>
+    <label>FinDock Checkout Flow</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -189,329 +149,6 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
-    <recordLookups>
-        <name>Get_Installment</name>
-        <label>Get Installment</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Get_Recurring_Payment</targetReference>
-        </connector>
-        <faultConnector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Fault_Screen</targetReference>
-        </faultConnector>
-        <filterLogic>or</filterLogic>
-        <filters>
-            <field>cpm__GUID__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>cpm__Installment__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
-        <description>Retrieve the recurring payment record and add it to the payment intent if found.</description>
-        <name>Get_Recurring_Payment</name>
-        <label>Get Recurring Payment</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Pay_Existing_Screen</targetReference>
-        </connector>
-        <faultConnector>
-            <targetReference>Fault_Screen</targetReference>
-        </faultConnector>
-        <filterLogic>or</filterLogic>
-        <filters>
-            <field>cpm__GUID__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>cpm__Recurring_Payment__c</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <screens>
-        <name>Fault_Screen</name>
-        <label>Fault Screen</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>Fault_Text_Display</name>
-            <fieldText>&lt;p&gt;&lt;strong&gt;Error:&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(173, 0, 0);&quot;&gt;{!$Flow.FaultMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Pay_Existing_Screen</name>
-        <label>Pay Existing Screen</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>Display_Header_Existing</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!Reference_Existing}&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <description>Open amount of the installment being paid, formatted for the viewer&apos;s locale. The currency comes from the existingRecordCurrency variable, which is empty by default and falls back to the org currency (see that variable to enable multi-currency).</description>
-            <name>Installment_Amount</name>
-            <extensionName>c:paymentAmount</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>amount</name>
-                <value>
-                    <elementReference>Get_Installment.cpm__Amount_Open__c</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>currencyIsoCode</name>
-                <value>
-                    <elementReference>existingRecordCurrency</elementReference>
-                </value>
-            </inputParameters>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>Get_Installment.Id</leftValueReference>
-                    <operator>IsNull</operator>
-                    <rightValue>
-                        <booleanValue>false</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <description>Amount of the recurring payment, shown when the checkout is opened for a recurring payment rather than an installment, formatted for the viewer&apos;s locale. The currency comes from the existingRecordCurrency variable, which is empty by default and falls back to the org currency (see that variable to enable multi-currency).</description>
-            <name>Recurring_Payment_Amount</name>
-            <extensionName>c:paymentAmount</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>amount</name>
-                <value>
-                    <elementReference>Get_Recurring_Payment.cpm__Amount__c</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>currencyIsoCode</name>
-                <value>
-                    <elementReference>existingRecordCurrency</elementReference>
-                </value>
-            </inputParameters>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>Get_Installment.Id</leftValueReference>
-                    <operator>IsNull</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-                <conditions>
-                    <leftValueReference>Get_Recurring_Payment.Id</leftValueReference>
-                    <operator>IsNull</operator>
-                    <rightValue>
-                        <booleanValue>false</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <fields>
-            <name>Display_Header_Existing_Bottom</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text_Existing}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;color: rgb(240, 238, 238); font-size: 12px;&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Payment_Method_Selection_Existing</name>
-            <extensionName>cpm:paymentMethodSelector</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>frequency</name>
-                <value>
-                    <elementReference>frequency</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>paymentIntentResponse</name>
-                <value>
-                    <elementReference>Pay_Button_Existing.result</elementReference>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Pay_Button_Existing</name>
-            <dataTypeMappings>
-                <typeName>recurringType</typeName>
-                <typeValue>cpm__Recurring_Payment__c</typeValue>
-            </dataTypeMappings>
-            <extensionName>cpm:payButton</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>pixConfig</name>
-                <value>
-                    <stringValue>{&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection_Existing.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;name&quot;:&quot;oneTimeInstallmentRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Installment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;recurring&quot;:{&quot;name&quot;:&quot;recurringRecordIdVar&quot;,&quot;value&quot;:&quot;{!Get_Recurring_Payment.Id}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>paymentMethodContext</name>
-                <value>
-                    <elementReference>Payment_Method_Selection_Existing.context</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>installmentId</name>
-                <value>
-                    <elementReference>Get_Installment.Id</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>recurringObjectId</name>
-                <value>
-                    <elementReference>Get_Recurring_Payment.Id</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>successUrl</name>
-                <value>
-                    <stringValue>https://www.example.com/success</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>failureUrl</name>
-                <value>
-                    <stringValue>https://www.example.com/failure</stringValue>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Debug2</name>
-            <fieldText>Debug</fieldText>
-            <fieldType>RegionContainer</fieldType>
-            <fields>
-                <name>Debug2_Column1</name>
-                <fieldType>Region</fieldType>
-                <fields>
-                    <name>Debug_Display_Text2</name>
-                    <fieldText>&lt;p&gt;&lt;em&gt;This debug section is only visible when you are logged in as a System Administrator.&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;em&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/em&gt;&lt;span style=&quot;color: rgb(153, 0, 0);&quot;&gt;{!Pay_Button_Existing.result.statusCode} - {!Pay_Button_Existing.result.errorMessage}&lt;/span&gt;&lt;/p&gt;</fieldText>
-                    <fieldType>DisplayText</fieldType>
-                    <styleProperties>
-                        <verticalAlignment>
-                            <stringValue>top</stringValue>
-                        </verticalAlignment>
-                        <width>
-                            <stringValue>12</stringValue>
-                        </width>
-                    </styleProperties>
-                </fields>
-                <inputParameters>
-                    <name>width</name>
-                    <value>
-                        <stringValue>12</stringValue>
-                    </value>
-                </inputParameters>
-                <isRequired>false</isRequired>
-            </fields>
-            <isRequired>false</isRequired>
-            <regionContainerType>SectionWithHeader</regionContainerType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-            <visibilityRule>
-                <conditionLogic>and</conditionLogic>
-                <conditions>
-                    <leftValueReference>Is_Current_User_Sys_Admin</leftValueReference>
-                    <operator>EqualTo</operator>
-                    <rightValue>
-                        <booleanValue>true</booleanValue>
-                    </rightValue>
-                </conditions>
-            </visibilityRule>
-        </fields>
-        <showFooter>false</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
     <screens>
         <name>Pay_Screen</name>
         <label>Pay Screen</label>
@@ -521,170 +158,166 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
-            <name>Display_Header</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong style=&quot;color: rgb(15, 15, 15);&quot;&gt;FinDock for Gibbons&lt;/strong&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Ref. {!reference}&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <description>Amount of the new payment, shown in the currency the flow collected.</description>
-            <name>Payment_Amount</name>
-            <extensionName>c:paymentAmount</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>amount</name>
-                <value>
-                    <elementReference>amount</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>currencyIsoCode</name>
-                <value>
-                    <elementReference>currency</elementReference>
-                </value>
-            </inputParameters>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Display_Header_New_Bottom</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;{!Frequency_Display_Text}&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: rgb(240, 238, 238);&quot;&gt;________________________________&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt; &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;strong style=&quot;font-size: 12px;&quot;&gt;HOW WOULD YOU LIKE TO PAY?&lt;/strong&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Payment_Method_Selection</name>
-            <extensionName>cpm:paymentMethodSelector</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>frequency</name>
-                <value>
-                    <elementReference>frequency</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>paymentIntentResponse</name>
-                <value>
-                    <elementReference>Pay_Button.result</elementReference>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <fields>
-            <name>Pay_Button</name>
-            <dataTypeMappings>
-                <typeName>recurringType</typeName>
-                <typeValue>cpm__Recurring_Payment__c</typeValue>
-            </dataTypeMappings>
-            <extensionName>cpm:payButton</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>pixConfig</name>
-                <value>
-                    <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!amount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!Recurring_Amount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;{!currency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;monthly&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;startDate&quot;:{&quot;name&quot;:&quot;recurringStartDateVar&quot;,&quot;value&quot;:&quot;{!$Flow.CurrentDate}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/success&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;https://www.example.com/failure&quot;,&quot;valueDataType&quot;:&quot;String&quot;}}</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>paymentMethodContext</name>
-                <value>
-                    <elementReference>Payment_Method_Selection.context</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>amountRecurring</name>
-                <value>
-                    <elementReference>Recurring_Amount</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>currencyRecurring</name>
-                <value>
-                    <elementReference>currency</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>frequencyRecurring</name>
-                <value>
-                    <stringValue>monthly</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>startDateRecurring</name>
-                <value>
-                    <elementReference>$Flow.CurrentDate</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>contact</name>
-                <value>
-                    <elementReference>Contact</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>amountOneTime</name>
-                <value>
-                    <elementReference>amount</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>currencyOneTime</name>
-                <value>
-                    <elementReference>currency</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>successUrl</name>
-                <value>
-                    <stringValue>https://www.example.com/success</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>failureUrl</name>
-                <value>
-                    <stringValue>https://www.example.com/failure</stringValue>
-                </value>
-            </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
-            <isRequired>true</isRequired>
-            <storeOutputAutomatically>true</storeOutputAutomatically>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
+            <name>Pay_Section</name>
+            <fieldType>RegionContainer</fieldType>
+            <fields>
+                <name>Pay_Section_Payment</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Pay_Title</name>
+                    <fieldText>&lt;h1&gt;&lt;span style="font-size: 32px;"&gt;&lt;strong&gt;Checkout&lt;/strong&gt;&lt;/span&gt;&lt;/h1&gt;&lt;p&gt;&lt;span style="color: rgb(91, 98, 112);"&gt;Order {!reference} · {!Frequency_Display_Text} payment&lt;/span&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <fields>
+                    <name>Pay_Payment_Heading</name>
+                    <fieldText>&lt;h2&gt;&lt;span style="font-size: 20px;"&gt;&lt;strong&gt;Payment&lt;/strong&gt;&lt;/span&gt;&lt;/h2&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <fields>
+                    <name>Payment_Method_Selection</name>
+                    <extensionName>cpm:paymentMethodSelector</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>frequency</name>
+                        <value>
+                            <elementReference>frequency</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>paymentIntentResponse</name>
+                        <value>
+                            <elementReference>Pay_Button.result</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <fields>
+                    <name>Pay_Button</name>
+                    <dataTypeMappings>
+                        <typeName>recurringType</typeName>
+                        <typeValue>cpm__Recurring_Payment__c</typeValue>
+                    </dataTypeMappings>
+                    <extensionName>cpm:payButton</extensionName>
+                    <fieldType>ComponentInstance</fieldType>
+                    <inputParameters>
+                        <name>pixConfig</name>
+                        <value>
+                            <stringValue>{&quot;payer&quot;:{&quot;contactObject&quot;:{&quot;name&quot;:&quot;payerContactVarName&quot;,&quot;value&quot;:&quot;{!Contact}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}},&quot;paymentMethod&quot;:{&quot;name&quot;:&quot;paymentMethodObjectVar&quot;,&quot;value&quot;:&quot;{!Payment_Method_Selection.context}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;oneTime&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;oneTimeAmount&quot;,&quot;value&quot;:&quot;{!amount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;oneTimeCurrencyVar&quot;,&quot;value&quot;:&quot;{!currency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;recurring&quot;:{&quot;valueDataType&quot;:&quot;Object&quot;,&quot;value&quot;:{&quot;amount&quot;:{&quot;name&quot;:&quot;recurringAmount&quot;,&quot;value&quot;:&quot;{!Recurring_Amount}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;currencyIsoCode&quot;:{&quot;name&quot;:&quot;recurringCurrencyVar&quot;,&quot;value&quot;:&quot;{!currency}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;frequency&quot;:{&quot;name&quot;:&quot;recurringFrequencyVar&quot;,&quot;value&quot;:&quot;monthly&quot;,&quot;valueDataType&quot;:&quot;String&quot;},&quot;startDate&quot;:{&quot;name&quot;:&quot;recurringStartDateVar&quot;,&quot;value&quot;:&quot;{!$Flow.CurrentDate}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}},&quot;successUrl&quot;:{&quot;name&quot;:&quot;successUrl&quot;,&quot;value&quot;:&quot;{!Success_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;},&quot;failureUrl&quot;:{&quot;name&quot;:&quot;failureUrl&quot;,&quot;value&quot;:&quot;{!Failure_URL}&quot;,&quot;valueDataType&quot;:&quot;reference&quot;}}</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>paymentMethodContext</name>
+                        <value>
+                            <elementReference>Payment_Method_Selection.context</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>amountRecurring</name>
+                        <value>
+                            <elementReference>Recurring_Amount</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>currencyRecurring</name>
+                        <value>
+                            <elementReference>currency</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>frequencyRecurring</name>
+                        <value>
+                            <stringValue>monthly</stringValue>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>startDateRecurring</name>
+                        <value>
+                            <elementReference>$Flow.CurrentDate</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>contact</name>
+                        <value>
+                            <elementReference>Contact</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>amountOneTime</name>
+                        <value>
+                            <elementReference>amount</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>currencyOneTime</name>
+                        <value>
+                            <elementReference>currency</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>successUrl</name>
+                        <value>
+                            <elementReference>Success_URL</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>failureUrl</name>
+                        <value>
+                            <elementReference>Failure_URL</elementReference>
+                        </value>
+                    </inputParameters>
+                    <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+                    <isRequired>true</isRequired>
+                    <storeOutputAutomatically>true</storeOutputAutomatically>
+                    <styleProperties>
+                        <verticalAlignment>
+                            <stringValue>top</stringValue>
+                        </verticalAlignment>
+                        <width>
+                            <stringValue>12</stringValue>
+                        </width>
+                    </styleProperties>
+                </fields>
+                <fields>
+                    <name>Pay_Trust</name>
+                    <fieldText>&lt;p style="text-align: center;"&gt;&lt;span style="font-size: 13px; color: rgb(91, 98, 112);"&gt;Payments powered by FinDock&lt;/span&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>7</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <fields>
+                <name>Pay_Section_Summary</name>
+                <fieldType>Region</fieldType>
+                <fields>
+                    <name>Pay_Order_Summary</name>
+                    <fieldText>&lt;h2&gt;&lt;span style="font-size: 18px;"&gt;&lt;strong&gt;Order summary&lt;/strong&gt;&lt;/span&gt;&lt;/h2&gt;&lt;p&gt;&lt;span style="color: rgb(26, 29, 37);"&gt;&lt;strong&gt;Team plan, yearly&lt;/strong&gt;&lt;br&gt;5 seats · 1 Dec 2026 – 30 Nov 2027&lt;/span&gt;€145.00&lt;/p&gt;&lt;p&gt;&lt;span style="color: rgb(26, 29, 37);"&gt;&lt;strong&gt;Priority support&lt;/strong&gt;&lt;br&gt;Add-on, yearly&lt;/span&gt;€22.00&lt;/p&gt;&lt;p&gt;&lt;span style="font-size: 18px;"&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/span&gt;&lt;span style="font-size: 18px;"&gt;&lt;strong&gt;{!Amount_Display}&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="font-size: 14px; color: rgb(91, 98, 112);"&gt;Includes €28.98 VAT (21%). Renews on 1 December 2027; cancel any time from your account.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style="font-size: 14px; color: rgb(91, 98, 112);"&gt;Questions about your subscription? Email billing@example.com&lt;/span&gt;&lt;/p&gt;</fieldText>
+                    <fieldType>DisplayText</fieldType>
+                </fields>
+                <inputParameters>
+                    <name>width</name>
+                    <value>
+                        <stringValue>5</stringValue>
+                    </value>
+                </inputParameters>
+                <isRequired>false</isRequired>
+            </fields>
+            <isRequired>false</isRequired>
+            <regionContainerType>SectionWithoutHeader</regionContainerType>
         </fields>
         <fields>
             <name>Debug</name>
@@ -770,14 +403,6 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <description>Currency of the existing Installment or Recurring Payment. Empty by default (org currency). In a multi-currency org, assign CurrencyIsoCode from the record lookup.</description>
-        <name>existingRecordCurrency</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
         <name>frequency</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
@@ -785,6 +410,7 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
+        <description>Optional: the Id of the order to pay, passed in the page URL (?id=...). Not used yet; the placeholder step that gets the order details can use it to find the record.</description>
         <name>id</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
@@ -805,6 +431,22 @@
         <dataType>Apex</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Optional full URL where the payer goes after a successful payment. Passed by embeds such as Lightning Out; without it the flow uses https://www.example.com/success.</description>
+        <name>successUrl</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Optional full URL where the payer goes after a failed or cancelled payment. Passed by embeds such as Lightning Out; without it the flow uses https://www.example.com/failure.</description>
+        <name>failureUrl</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>
