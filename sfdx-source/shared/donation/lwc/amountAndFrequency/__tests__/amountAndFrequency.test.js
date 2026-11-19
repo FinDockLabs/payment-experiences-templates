@@ -562,6 +562,22 @@ describe('Salesforce Flow validation contract', () => {
         expect(requiredErrorVisible(element)).toBe(true);
     });
 
+    it('does not show the required error when Flow echoes the new frequency and its inputs back', async () => {
+        const element = createAmountComponent();
+        element.showFrequencyToggle = true;
+        await Promise.resolve();
+        selectPreset(element, '50');
+        await Promise.resolve();
+        selectFrequency(element, 'recurring');
+        // Flow writes the frequency output and the inputs back to the component after each change
+        element.frequency = 'recurring';
+        element.minAmount = 1;
+        element.maxAmount = 0;
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(false);
+        expect(element.validate().isValid).toBe(false);
+    });
+
     it('clears a shown required error when switching to a frequency that has an amount', async () => {
         const element = createAmountComponent();
         element.showFrequencyToggle = true;

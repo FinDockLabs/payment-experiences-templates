@@ -32,7 +32,6 @@ export default class AmountAndFrequency extends LightningElement {
     _internalErrorToRender   = '';
     _cachedExternalErrorMessage = '';
     _externalErrorToRender   = '';
-    _hasUserInteracted       = false;
     _focusTimer              = null;
     // A blank Currency setting uses the running user's default currency
     _currencyCode            = normalizeCurrency(USER_CURRENCY);
@@ -383,22 +382,18 @@ export default class AmountAndFrequency extends LightningElement {
 
     handleFrequencyChange(event) {
         this._frequency = event.target.value;
-        if (this._internalErrorToRender) {
-            this._internalErrorToRender = this._getInternalErrorMessageIfInvalid();
-        }
-        this._dispatchChange();
-    }
-
-    handlePresetAmountSelect(event) {
-        this._hasUserInteracted = true;
-        this._selectedPreset = Number(event.target.value);
-        this._customAmount    = '';
         this._updateRenderedInternalError();
         this._dispatchChange();
     }
 
+    handlePresetAmountSelect(event) {
+        this._selectedPreset = Number(event.target.value);
+        this._customAmount    = '';
+        this._internalErrorToRender = this._getInternalErrorMessageIfInvalid();
+        this._dispatchChange();
+    }
+
     handleCustomAmountInput(event) {
-        this._hasUserInteracted = true;
         // Filter the raw locale input (strip grouping/junk, trim the fraction) and write the cleaned
         // locale form straight back so the field never shows characters we rejected.
         const display = sanitizeLocaleAmountInput(event.target.value, this._decimalSeparator, this._currencyDecimals);
@@ -406,7 +401,7 @@ export default class AmountAndFrequency extends LightningElement {
         // Store the plain dot-decimal form — string-based, so huge amounts keep every digit.
         this._customAmount   = toPlainNumberString(display, this._locale);
         this._selectedPreset = this._customAmount !== '' ? null : this._selectedPreset;
-        this._updateRenderedInternalError();
+        this._internalErrorToRender = this._getInternalErrorMessageIfInvalid();
         this._dispatchChange();
     }
 
@@ -507,9 +502,8 @@ export default class AmountAndFrequency extends LightningElement {
     }
 
     _updateRenderedInternalError() {
-        // Once an internal error is visible, keep it reactive even if the change came from Flow
-        // rather than direct user input. Before interaction/reportValidity(), keep the first load clean.
-        if (this._hasUserInteracted || this._internalErrorToRender) {
+        // Flow inputs and frequency switches only update a shown error; a missing amount shows on Next.
+        if (this._internalErrorToRender) {
             this._internalErrorToRender = this._getInternalErrorMessageIfInvalid();
         }
     }
