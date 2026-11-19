@@ -1,4 +1,9 @@
 # Payment Link Flow
+<!-- INSTALL_LINK:START -->
+<a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04tP4000001sfyTIAQ" target="_blank" rel="noopener noreferrer"><img alt="Install in a sandbox" src="https://img.shields.io/badge/Install-Sandbox-6B7A8F?style=for-the-badge"></a>
+
+Version 1.0.0-3 (sandbox only; no released version yet)
+<!-- INSTALL_LINK:END -->
 
 A screen flow for links to an existing FinDock record: pay an invoice or a payment link, or change the payment method of a recurring payment. One card with the amount, a short summary and the FinDock payment methods. The [checkout site](../checkout-site/) and the [donation site](../donation-site/) each have a Payment Link page that runs it.
 
