@@ -55,7 +55,7 @@
                             {
                               "attributes": {
                                 "flowArguments": "[{\"label\":\"id\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"id\",\"type\":\"String\",\"value\":\"{!id}\"},{\"label\":\"type\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"type\",\"type\":\"String\",\"value\":\"{!type}\"},{\"label\":\"invoiceUrl\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"invoiceUrl\",\"type\":\"String\",\"value\":\"{!invoice}\"}]",
-                                "flowName": "{\"flowName\":\"Pay_Link_Flow\",\"flowLabel\":\"FinDock Payment Link Flow\"}"
+                                "flowName": "{\"flowName\":\"Payment_Link_Flow\",\"flowLabel\":\"FinDock Payment Link Flow\"}"
                               },
                               "customCssClasses": "flow",
                               "definition": "dxp_flow:flow",
@@ -117,7 +117,7 @@
     },
     "dataProviders": [],
     "themeLayoutType": "69XzUe66d6QJoqQq8w3osOfIofhW1t",
-    "viewType": "custom-pay-link"
+    "viewType": "custom-payment-link"
   },
-  "urlName": "paylink"
+  "urlName": "payment-link"
 }

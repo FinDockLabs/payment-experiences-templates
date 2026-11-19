@@ -59,7 +59,7 @@
     {
       "versionName": "January '27",
       "versionNumber": "1.0.0.NEXT",
-      "path": "sfdx-source/packages/pay-link",
+      "path": "sfdx-source/packages/payment-link",
       "default": false,
       "package": "FinDock Experiences - Payment Link",
       "versionDescription": ""

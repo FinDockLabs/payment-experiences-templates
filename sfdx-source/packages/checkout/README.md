@@ -16,7 +16,7 @@ This template is meant to be customized and extended to fit specific use cases a
 - Collect new one-time payments
 - Set up new recurring payments
 
-The flow only takes new payments. To pay an existing installment or update a recurring payment's method, use the [Payment Link Flow](../pay-link/).
+The flow only takes new payments. To pay an existing installment or update a recurring payment's method, use the [Payment Link Flow](../payment-link/).
 
 ## Success and failure URLs
 

@@ -1,5 +1,5 @@
 {
-  "apiName": "payLink",
+  "apiName": "paymentLink",
   "type": "sfdc_cms__view",
   "path": "views"
 }

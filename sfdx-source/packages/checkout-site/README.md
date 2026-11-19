@@ -11,16 +11,16 @@ This Experience Cloud site template serves as a starting point for building a ch
 | Page | URL | Flow |
 |---|---|---|
 | Checkout (Home) | `/<prefix>/` | [Checkout Flow](../checkout/): payment on the left, the order summary on the right |
-| Payment Link | `/<prefix>/paylink?id=<GUID>` | [Payment Link Flow](../pay-link/): one card for an invoice, a payment link or a recurring payment's method |
+| Payment Link | `/<prefix>/payment-link?id=<GUID>` | [Payment Link Flow](../payment-link/): one card for an invoice, a payment link or a recurring payment's method |
 | Payment received | `/<prefix>/payment-received` | The checkout's thank-you page |
 
 Payment Link URLs take these parameters:
 
 ```
-https://<your-domain>.my.site.com/<prefix>/paylink?id=<installment GUID>
-https://<your-domain>.my.site.com/<prefix>/paylink?id=<installment GUID>&type=link
-https://<your-domain>.my.site.com/<prefix>/paylink?id=<installment GUID>&invoice=<PDF url>
-https://<your-domain>.my.site.com/<prefix>/paylink?id=<recurring payment GUID>
+https://<your-domain>.my.site.com/<prefix>/payment-link?id=<installment GUID>
+https://<your-domain>.my.site.com/<prefix>/payment-link?id=<installment GUID>&type=link
+https://<your-domain>.my.site.com/<prefix>/payment-link?id=<installment GUID>&invoice=<PDF url>
+https://<your-domain>.my.site.com/<prefix>/payment-link?id=<recurring payment GUID>
 ```
 
 The site is meant to be customized and extended to fit the specific use case and requirements of your site. For other options, see [the main Experience Cloud repository](../../../README.md).
@@ -52,7 +52,7 @@ The neutral brand of the checkout and Payment Link pages. Swap the logo, the bra
 - FinDock is installed and configured.
 - FinDock is the source of payments data ([FinDock Standalone](https://docs.findock.com/docs/source-connectors/findock-standalone)).
 - At least one payment extension is installed and configured.
-- The [Checkout Flow](../checkout/) and the [Payment Link Flow](../pay-link/) are deployed. The site's pages reference flows named `Checkout_Flow` and `Pay_Link_Flow`; the template deploys without them, but the site cannot be *published* until they exist.
+- The [Checkout Flow](../checkout/) and the [Payment Link Flow](../payment-link/) are deployed. The site's pages reference flows named `Checkout_Flow` and `Payment_Link_Flow`; the template deploys without them, but the site cannot be *published* until they exist.
 - Digital Experiences is enabled in the org.
 
 ## Installation
@@ -63,7 +63,7 @@ The neutral brand of the checkout and Payment Link pages. Swap the logo, the bra
 5. Customize the pages in the Experience Cloud builder.
 6. Publish the Experience Cloud site.
 
-> After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/payment-received`; see step 5 of the [Payment Link Flow installation](../pay-link/#installation).
+> After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/payment-received`; see step 5 of the [Payment Link Flow installation](../payment-link/#installation).
 
 The installation will ask you to approve one trusted site: external.findock.com (icons and pictures).
 

@@ -555,7 +555,7 @@
                 </visibilityRule>
             </fields>
             <fields>
-                <name>Pay_Link_Rows</name>
+                <name>Payment_Link_Rows</name>
                 <fieldText>&lt;p&gt;&lt;span style="color: rgb(92, 98, 112);"&gt;From&lt;/span&gt;{!From_Name}&lt;/p&gt;</fieldText>
                 <fieldType>DisplayText</fieldType>
                 <visibilityRule>

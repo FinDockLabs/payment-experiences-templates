@@ -2,11 +2,11 @@
   "type": "sfdc_cms__route",
   "title": "Payment Link",
   "contentBody": {
-    "activeViewId": "payLink",
+    "activeViewId": "paymentLink",
     "configurationTags": [],
     "pageAccess": "UseParent",
-    "routeType": "custom-pay-link",
-    "urlPrefix": "paylink"
+    "routeType": "custom-payment-link",
+    "urlPrefix": "payment-link"
   },
-  "urlName": "paylink"
+  "urlName": "payment-link"
 }

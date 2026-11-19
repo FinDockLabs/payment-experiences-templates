@@ -19,7 +19,7 @@ Lightning Out only loads components that are on your Lightning Out app's list, i
 | Flow | Components to add |
 |---|---|
 | [Checkout Flow](../checkout/#lightning-out) | `c-get-user-agent-info`, `cpm-pay-button`, `cpm-payment-method-selector` |
-| [Payment Link Flow](../pay-link/#lightning-out) | `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Payment Link Flow](../payment-link/#lightning-out) | `cpm-pay-button`, `cpm-payment-method-selector` |
 | [Donation Flow for NPSP](../donation-npsp/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `c-experience-progress-stages`, `c-get-user-agent-info`, `cpm-pay-button`, `cpm-payment-method-selector` |
 | [Donation Flow for Fundraising](../donation-fundraising/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `c-experience-progress-stages`, `c-get-user-agent-info`, `c-transaction-fee-opt-in`, `cpm-pay-button`, `cpm-payment-method-selector` |
 | [One Screen Donation Flow](../donation-fundraising/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `cpm-pay-button`, `cpm-payment-method-selector` |

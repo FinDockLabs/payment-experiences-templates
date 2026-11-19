@@ -20,12 +20,12 @@ The site is meant to be customized and extended to fit the specific use case and
 | Page | URL | Flow |
 |---|---|---|
 | Donation page (Home) | `/<prefix>/` | One of the [Donation Flows](../../../README.md#available-templates) |
-| Payment Link | `/<prefix>/paylink?id=<installment GUID>` | [Payment Link Flow](../pay-link/): one card for an invoice, a payment link or a recurring payment's method |
+| Payment Link | `/<prefix>/payment-link?id=<installment GUID>` | [Payment Link Flow](../payment-link/): one card for an invoice, a payment link or a recurring payment's method |
 | Success, Failure | `/<prefix>/success`, `/<prefix>/failure` | The donation flow's result pages |
 
 The Payment Link page takes the same parameters as the one on the [checkout site](../checkout-site/) (`&type=link`, `&invoice=<PDF url>`) and sits in the site's header and footer.
 
-> After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/success` and `/failure`; see step 5 of the [Payment Link Flow installation](../pay-link/#installation).
+> After a payment the Payment Link Flow sends the payer to `https://www.example.com/success` (or `/failure`). Replace these in the flow with this site's pages, e.g. `https://<your-domain>.my.site.com/<prefix>/success` and `/failure`; see step 5 of the [Payment Link Flow installation](../payment-link/#installation).
 
 
 ## Preview
@@ -48,7 +48,7 @@ The Canopy Gibbon Trust example brand: logo, colours, fonts and components. Repl
 - FinDock is installed and configured.
 - At least one payment extension is installed and configured.
 - One of the [Donation Flow templates](../../../README.md#available-templates) is deployed. The site's home page references a flow named `Donation_Flow`; the template deploys without it, but the site cannot be *published* until it exists.
-- The [Payment Link Flow](../pay-link/) is deployed, for the Payment Link page. As with the donation flow, the site deploys without it but can't be published until it exists.
+- The [Payment Link Flow](../payment-link/) is deployed, for the Payment Link page. As with the donation flow, the site deploys without it but can't be published until it exists.
 - Digital Experiences is enabled in the org.
 
 ## Installation
