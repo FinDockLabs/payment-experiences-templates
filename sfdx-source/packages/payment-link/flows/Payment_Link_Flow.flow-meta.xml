@@ -3,7 +3,7 @@
     <apiVersion>68.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <assignments>
-        <description>PLACEHOLDER. Copies the fields of the recurring record found by Placeholder: get recurring record into the recurring* variables that the screens and formulas show. When you change that lookup to another object (NPSP Recurring Donation, Nonprofit Cloud Gift Commitment), change the fields here; nothing else in the flow reads the record. Also sets currency, the currency the amounts are shown in: the example uses EUR. In a single-currency org set your org currency; in a multi-currency org assign IF({!Is_Recurring}, TEXT({!Get_Recurring_Payment.CurrencyIsoCode}), TEXT({!Get_Installment.CurrencyIsoCode})). The template doesn&apos;t read CurrencyIsoCode because that field only exists in multi-currency orgs. See the README.</description>
+        <description>PLACEHOLDER. Copies the fields of the recurring record found by Placeholder: get recurring record into the recurring* variables that the screens and formulas show. When you change that lookup to another object (NPSP Recurring Donation, Nonprofit Cloud Gift Commitment), change the fields here; nothing else in the flow reads the record. See the README.</description>
         <name>Map_Recurring_Fields</name>
         <label>Placeholder: map recurring fields</label>
         <locationX>0</locationX>
@@ -20,13 +20,6 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Recurring_Payment.cpm__Amount__c</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>currency</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>EUR</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -48,6 +41,23 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>Get_Recurring_Payment.cpm__Bank_Statement_Description__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Set_Currency</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>PLACEHOLDER. The currency the amounts are shown in: the example uses EUR. In a single-currency org set your org currency; in a multi-currency org assign IF({!Is_Recurring}, TEXT({!Get_Recurring_Payment.CurrencyIsoCode}), TEXT({!Get_Installment.CurrencyIsoCode})). The template doesn&apos;t read CurrencyIsoCode because that field only exists in multi-currency orgs. See the README.</description>
+        <name>Set_Currency</name>
+        <label>Placeholder: set currency</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>currency</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>EUR</stringValue>
             </value>
         </assignmentItems>
         <connector>
@@ -77,6 +87,31 @@
                 <targetReference>Get_Installment</targetReference>
             </connector>
             <label>Id given</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Installment_Found</name>
+        <label>Installment found?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Get_Recurring_Payment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No installment</defaultConnectorLabel>
+        <rules>
+            <name>Is_Installment</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_Installment</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_Currency</targetReference>
+            </connector>
+            <label>Installment</label>
         </rules>
     </decisions>
     <decisions>
@@ -279,7 +314,7 @@
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Recurring_Payment</targetReference>
+            <targetReference>Installment_Found</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Fault_Screen</targetReference>
@@ -820,7 +855,7 @@
         <scale>2</scale>
     </variables>
     <variables>
-        <description>Currency code the amounts are shown in, e.g. EUR. Set by Placeholder: map recurring fields.</description>
+        <description>Currency code the amounts are shown in, e.g. EUR. Set by Placeholder: set currency.</description>
         <name>currency</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
