@@ -35,7 +35,7 @@
                 "textAlign" : "left",
                 "textDecoration" : "{}",
                 "textDisplayInfo" : "{\"textStyle\":\"body-small\",\"headingTag\":\"p\",\"enableOverride\":false}",
-                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://www.findockforgibbons.org/\"}}}}"
+                "url" : "{\"linkInfo\":{\"pageReference\":{\"type\":\"standard__webPage\",\"attributes\":{\"url\":\"https://www.example.com/\"}}}}"
               },
               "definition" : "dxp_base:textBlock",
               "id" : "42d1c61b-7e47-4831-acf9-7b6d327b75e4",

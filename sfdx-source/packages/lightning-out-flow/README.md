@@ -12,6 +12,33 @@ Lightning Out 2.0 embeds Lightning web components, not flows. The flow container
 
 The container works with any screen flow: the FinDock donation and checkout flow templates, or a flow you build yourself.
 
+## Lightning Out app components
+
+Lightning Out only loads components that are on your Lightning Out app's list, including the ones a flow uses inside it. Add the container (`c-lightning-out-flow-container`) and the components of the flow you embed, then publish the Lightning Out site. A missing component stops the flow with an unhandled fault.
+
+| Flow | Components to add |
+|---|---|
+| [Checkout Flow](../checkout/#lightning-out) | `c-get-user-agent-info`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Payment Link Flow](../payment-link/#lightning-out) | `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Donation Flow for NPSP](../donation-npsp/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `c-experience-progress-stages`, `c-get-user-agent-info`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Donation Flow for Fundraising](../donation-fundraising/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `c-experience-progress-stages`, `c-get-user-agent-info`, `c-transaction-fee-opt-in`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [One Screen Donation Flow](../donation-fundraising/#lightning-out) | `c-amount-and-frequency`, `c-currency-picker`, `cpm-pay-button`, `cpm-payment-method-selector` |
+| [Donation Flow for Fundraising UK](../donation-fundraising-uk/#lightning-out) | `c-amount-and-frequency`, `c-experience-progress-stages`, `c-get-user-agent-info`, `c-transaction-fee-opt-in`, `cpm-pay-button`, `cpm-payment-method-selector` |
+
+## Website: success and failure URLs
+
+FinDock sends the payer to a success or a failure URL after the payment. Set them on the container with the optional `success-url` and `failure-url` attributes (or as Custom Properties in Lightning Out 2.0 App Manager):
+
+```html
+<c-lightning-out-flow-container
+    flow-api-name="Checkout_Flow"
+    success-url="https://www.example.org/thank-you"
+    failure-url="https://www.example.org/payment-failed">
+</c-lightning-out-flow-container>
+```
+
+The container passes each URL that is set to the flow's `successUrl` or `failureUrl` input variable. All FinDock flow templates have these inputs and use `https://www.example.com/success` and `/failure` without them. For your own flow, add String input variables with these names before you set the attributes, or the flow doesn't start.
+
 ## Website: auto-sizing the flow
 
 The container sends its height to the website as a `flow:height` message; this script applies it. Add it to the website page, after the Lightning Out markup:

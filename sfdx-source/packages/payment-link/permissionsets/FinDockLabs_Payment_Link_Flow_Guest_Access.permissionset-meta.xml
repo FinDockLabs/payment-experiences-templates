@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Guest user access to the Payment Link Flow. Assign to the guest user of each site with a Payment Link page (the checkout and donation sites).</description>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>Payment_Link_Flow</flow>
+    </flowAccesses>
+    <label>FinDockLabs Payment Link Flow Guest Access</label>
+</PermissionSet>

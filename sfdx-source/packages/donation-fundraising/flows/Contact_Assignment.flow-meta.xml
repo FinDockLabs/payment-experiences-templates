@@ -32,7 +32,7 @@
     <environments>Default</environments>
     <interviewLabel>Contact Assignment Flow {!$Flow.CurrentDateTime}</interviewLabel>
     <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
-    <label>Contact Assignment Flow</label>
+    <label>FinDock Contact Assignment Flow</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>

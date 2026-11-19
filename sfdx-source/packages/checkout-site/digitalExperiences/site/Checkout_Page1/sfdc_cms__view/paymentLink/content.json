@@ -1,0 +1,123 @@
+{
+  "type": "sfdc_cms__view",
+  "title": "Payment Link",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "0rem",
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "1280px",
+                "sectionColumnGutterWidth": "0rem",
+                "sectionConfig": "{\"UUID\":\"92186fec-66b3-4696-a148-2ae8131f4fed\",\"columns\":[{\"UUID\":\"e71737b6-0717-49d3-a6b4-46bef4f0dd45\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Secure payment",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+                      },
+                      "customCssClasses": "slds-assistive-text",
+                      "definition": "dxp_base:textBlock",
+                      "id": "0fdcb298-3997-4302-b374-58b9aa8e712f",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "columnGutterWidth": "",
+                        "columnMinHeight": "20rem",
+                        "columnVerticalAlign": "flex-start",
+                        "layoutDirectionDesktop": "row",
+                        "layoutDirectionMobile": "column",
+                        "layoutDirectionTablet": "column",
+                        "sectionConfig": "{\"UUID\":\"01d2a03a-c2ef-428d-9970-90c1623af2b8\",\"columns\":[{\"UUID\":\"2f89485a-86bb-447c-8eb2-e501e333d1b9\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}"
+                      },
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "attributes": {
+                                "flowArguments": "[{\"label\":\"id\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"id\",\"type\":\"String\",\"value\":\"{!id}\"},{\"label\":\"type\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"type\",\"type\":\"String\",\"value\":\"{!type}\"},{\"label\":\"invoiceUrl\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"invoiceUrl\",\"type\":\"String\",\"value\":\"{!invoice}\"}]",
+                                "flowName": "{\"flowName\":\"Payment_Link_Flow\",\"flowLabel\":\"FinDock Payment Link Flow\"}"
+                              },
+                              "customCssClasses": "flow",
+                              "definition": "dxp_flow:flow",
+                              "id": "78843671-c626-425a-8eb6-642638f1161b",
+                              "type": "component"
+                            }
+                          ],
+                          "id": "2f89485a-86bb-447c-8eb2-e501e333d1b9",
+                          "name": "col1",
+                          "title": "Column 1",
+                          "type": "region"
+                        }
+                      ],
+                      "customCssClasses": "paylink",
+                      "definition": "dxp_layout:columns",
+                      "id": "01d2a03a-c2ef-428d-9970-90c1623af2b8",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "e71737b6-0717-49d3-a6b4-46bef4f0dd45",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ],
+              "definition": "community_layout:section",
+              "id": "92186fec-66b3-4696-a148-2ae8131f4fed",
+              "type": "component"
+            }
+          ],
+          "id": "6942c9b5-ffcd-463d-8ff4-37580eb23494",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "pageTitle": "Home",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "e28fd032-f067-4c45-8c8b-af6ba56292d7",
+              "type": "component"
+            }
+          ],
+          "id": "d60cacc1-8d72-4700-bd08-1f7d913461ae",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "b3c84997-54d5-458f-9ef7-ee011baeeb38",
+      "type": "component"
+    },
+    "dataProviders": [],
+    "themeLayoutType": "69XzUe66d6QJoqQq8w3osOfIofhW1t",
+    "viewType": "custom-payment-link"
+  },
+  "urlName": "payment-link"
+}

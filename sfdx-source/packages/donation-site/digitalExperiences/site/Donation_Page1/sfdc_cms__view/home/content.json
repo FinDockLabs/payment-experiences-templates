@@ -1,126 +1,561 @@
 {
-  "type" : "sfdc_cms__view",
-  "title" : "FinDock for Gibbons",
-  "contentBody" : {
-    "component" : {
-      "children" : [ {
-        "children" : [ {
-          "attributes" : {
-            "backgroundImageConfig" : "",
-            "backgroundImageOverlay" : "rgba(0,0,0,0)",
-            "componentSpacerSize" : "",
-            "dxpStyle" : {
-              "margin" : {
-                "bottom" : "",
-                "left" : "",
-                "right" : "",
-                "top" : "3rem"
-              }
+  "type": "sfdc_cms__view",
+  "title": "Donate",
+  "contentBody": {
+    "component": {
+      "children": [
+        {
+          "children": [
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "3.5rem",
+                "sectionConfig": "{\"UUID\": \"818bc1a9-c851-4b32-a5af-1ca5bf724078\", \"columns\": [{\"UUID\": \"f5a0f4ac-5169-4cf3-bd5a-65209840d423\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"6\", \"seedComponents\": []}, {\"UUID\": \"0bbe6489-9ffa-4f87-a317-df00a5e49291\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"6\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
+              },
+              "definition": "community_layout:section",
+              "id": "818bc1a9-c851-4b32-a5af-1ca5bf724078",
+              "type": "component",
+              "customCssClasses": "cgt-hero",
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "imageInfos": "",
+                        "richTextValue": "<span id=\"donate\" class=\"cgt-anchor\"></span>"
+                      },
+                      "definition": "community_builder:htmlEditor",
+                      "id": "019c48d8-15fd-407e-9786-71e9c47c4c05",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Winter appeal 2026",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-small\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "cda4ed84-9ff7-4abe-8aee-99cced59936b",
+                      "type": "component",
+                      "customCssClasses": "cgt-tag"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Keep their song in the forest.",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"h1\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "42500cd8-41e2-4aef-997e-edd327d6c50c",
+                      "type": "component",
+                      "customCssClasses": "cgt-hero-title"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Every morning, gibbon families sing to mark their home. Your gift protects that home, and cares for the gibbons who lost theirs.",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "1d4f6a57-2585-46a6-9a02-3d7716f83254",
+                      "type": "component",
+                      "customCssClasses": "cgt-hero-text"
+                    },
+                    {
+                      "attributes": {
+                        "alignment": "left",
+                        "dxpStyle": {},
+                        "fit": "cover",
+                        "height": 300,
+                        "imageInfo": "{\"imageInfoV1\": {\"url\": \"https://external.findock.com/experience-cloud/gibbons.jpg\", \"altText\": \"Three gibbons in a tree\", \"contentKey\": \"\", \"contentType\": null}}",
+                        "overlayColor": "",
+                        "position": "center 30%",
+                        "width": 100
+                      },
+                      "customCssClasses": "cgt-hero-photo",
+                      "definition": "dxp_base:image",
+                      "id": "99b1a3a6-dfc8-49eb-940f-861673c65d85",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "f5a0f4ac-5169-4cf3-bd5a-65209840d423",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "flowName": "{\"flowName\":\"Donation_Flow\",\"flowLabel\":\"FinDock Donation Flow\"}"
+                      },
+                      "customCssClasses": "flow donate",
+                      "definition": "dxp_flow:flow",
+                      "id": "392ef778-a879-40df-b458-7297b24b840f",
+                      "type": "component"
+                    }
+                  ],
+                  "id": "0bbe6489-9ffa-4f87-a317-df00a5e49291",
+                  "name": "col2",
+                  "title": "Column 2",
+                  "type": "region"
+                }
+              ]
             },
-            "layoutDirectionDesktop" : "row",
-            "layoutDirectionMobile" : "column",
-            "layoutDirectionTablet" : "column",
-            "maxContentWidth" : "",
-            "sectionColumnGutterWidth" : "6rem",
-            "sectionConfig" : "{\"UUID\":\"9e64b30e-7bde-4734-830c-c3c9c71cc672\",\"columns\":[{\"UUID\":\"961670fb-fc2e-45f1-b447-2467bd05d67d\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"6\",\"seedComponents\":null},{\"UUID\":\"ea02e98e-ea7b-4be0-a92f-08f2c535bb17\",\"columnName\":\"Column 2\",\"columnKey\":\"af738\",\"columnWidth\":\"6\",\"seedComponents\":[]}]}",
-            "sectionMinHeight" : "",
-            "sectionVerticalAlign" : "flex-start"
-          },
-          "children" : [ {
-            "children" : [ {
-              "attributes" : {
-                "dxpStyle" : { },
-                "imageInfos" : "",
-                "richTextValue" : "<img src=\"https://external.findock.com/experience-cloud/icons/leaf.svg\" aria-hidden=\"true\" alt=\"\" style=\"background: var(--dxp-g-brand);padding: 4px;border-radius: 5px;margin-top: -5px;\"><span style=\"margin-left: .75rem;/*! line-height: 28px; *//*! margin-top: 10px; */display: inline-block;font-size: 1.25em;margin-top: 5px;\">FinDock for Gibbons</span>"
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "0rem",
+                "sectionConfig": "{\"UUID\": \"625d5375-5ba5-4788-9238-a1ab6446d51d\", \"columns\": [{\"UUID\": \"6303454b-fbdc-4e01-ad6b-ee81be74e15d\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
               },
-              "definition" : "community_builder:htmlEditor",
-              "id" : "72c5e4d2-7e21-42c7-895b-14895e0a38ca",
-              "type" : "component"
-            }, {
-              "attributes" : {
-                "backgroundColor" : "",
-                "dxpStyle" : { },
-                "isLinkable" : false,
-                "linkAssistiveText" : "",
-                "paddingHorizontal" : "none",
-                "paddingVertical" : "none",
-                "text" : "Give Monthly.<br />\nCreate Change",
-                "textAlign" : "left",
-                "textDecoration" : "{}",
-                "textDisplayInfo" : "{\"textStyle\":\"heading-xlarge\",\"headingTag\":\"h1\",\"enableOverride\":false}"
+              "definition": "community_layout:section",
+              "id": "625d5375-5ba5-4788-9238-a1ab6446d51d",
+              "type": "component",
+              "customCssClasses": "cgt-section-work",
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "imageInfos": "",
+                        "richTextValue": "<span id=\"work\" class=\"cgt-anchor\"></span>"
+                      },
+                      "definition": "community_builder:htmlEditor",
+                      "id": "9af6b323-d3a8-4d3d-b14f-b9e373a27f0c",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Where your gift goes",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-small\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "5ddf7db9-b540-4fc6-9443-970fb70c7c55",
+                      "type": "component",
+                      "customCssClasses": "cgt-eyebrow"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "From rescue to release.",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"h2\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "b3f5591f-b52e-4de4-b0a7-f9fb9b547613",
+                      "type": "component",
+                      "customCssClasses": "cgt-section-title"
+                    }
+                  ],
+                  "id": "6303454b-fbdc-4e01-ad6b-ee81be74e15d",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ]
+            },
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "1.5rem",
+                "sectionConfig": "{\"UUID\": \"7fdaf8dd-3f9a-43ba-a215-bd288e35b929\", \"columns\": [{\"UUID\": \"832a390a-6860-4f97-82a0-6d07135622b5\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"b39ab943-26a0-4053-93bc-d3e39ff76392\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}, {\"UUID\": \"f93236cd-47f4-401e-8b5c-9682f102310b\", \"columnName\": \"Column 3\", \"columnKey\": \"col3\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
               },
-              "definition" : "dxp_base:textBlock",
-              "id" : "0a34b5da-7755-437e-b1e0-8623959b05c9",
-              "type" : "component"
-            }, {
-              "attributes" : {
-                "alignment" : "left",
-                "dxpStyle" : { },
-                "fit" : "contain",
-                "height" : 350,
-                "imageInfo" : "{\"imageInfoV1\":{\"url\":\"https://external.findock.com/experience-cloud/gibbons.jpg\",\"altText\":\"Image of three gibbons in a tree\",\"contentKey\":\"\",\"contentType\":null}}",
-                "overlayColor" : "",
-                "position" : "center center",
-                "width" : 100
+              "definition": "community_layout:section",
+              "id": "7fdaf8dd-3f9a-43ba-a215-bd288e35b929",
+              "type": "component",
+              "customCssClasses": "cgt-cards",
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Rescue and care",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "72ed1937-49c9-433b-ab86-0d445949851c",
+                      "type": "component",
+                      "customCssClasses": "cgt-card-title cgt-icon-rescue"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Gibbons taken from the pet trade get vet care, good food and time to recover at our rescue centre.",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "ad20ec38-11b9-409e-adce-2595308affc6",
+                      "type": "component",
+                      "customCssClasses": "cgt-card-text"
+                    }
+                  ],
+                  "id": "832a390a-6860-4f97-82a0-6d07135622b5",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Forest protection",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "84894c61-bb16-4e0b-84f0-5a32b9f254dd",
+                      "type": "component",
+                      "customCssClasses": "cgt-card-title cgt-icon-forest"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Ranger patrols and replanted corridors keep wild families connected and safe from logging.",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "6ef41e8e-04de-4d89-84e8-def18a5719da",
+                      "type": "component",
+                      "customCssClasses": "cgt-card-text"
+                    }
+                  ],
+                  "id": "b39ab943-26a0-4053-93bc-d3e39ff76392",
+                  "name": "col2",
+                  "title": "Column 2",
+                  "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Back to the wild",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"h3\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "40de93df-9299-4c7d-bdfd-8eb58dd6be11",
+                      "type": "component",
+                      "customCssClasses": "cgt-card-title cgt-icon-release"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "When they're ready, gibbons are released in protected forest and followed by our field team.",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "ded94fb8-314e-430f-8807-f0740492a545",
+                      "type": "component",
+                      "customCssClasses": "cgt-card-text"
+                    }
+                  ],
+                  "id": "f93236cd-47f4-401e-8b5c-9682f102310b",
+                  "name": "col3",
+                  "title": "Column 3",
+                  "type": "region"
+                }
+              ]
+            },
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "2.5rem",
+                "sectionConfig": "{\"UUID\": \"c84be40c-caf5-4dd4-ba3e-e583da94698f\", \"columns\": [{\"UUID\": \"9de2bfe8-761c-4e95-bd2b-14fdafcdfdfd\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"8\", \"seedComponents\": []}, {\"UUID\": \"8a95d18f-b1be-4497-bbbb-1feb95a626e9\", \"columnName\": \"Column 2\", \"columnKey\": \"col2\", \"columnWidth\": \"4\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
               },
-              "customCssClasses" : "photo",
-              "definition" : "dxp_base:image",
-              "id" : "99b1a3a6-dfc8-49eb-940f-861673c65d85",
-              "type" : "component"
-            } ],
-            "id" : "961670fb-fc2e-45f1-b447-2467bd05d67d",
-            "name" : "col1",
-            "title" : "Column 1",
-            "type" : "region"
-          }, {
-            "children" : [ {
-              "attributes" : {
-                "dxpStyle" : { },
-                "flowName" : "{\"flowName\":\"Donation_Flow\",\"flowLabel\":\"Donation Flow\"}"
+              "definition": "community_layout:section",
+              "id": "c84be40c-caf5-4dd4-ba3e-e583da94698f",
+              "type": "component",
+              "customCssClasses": "cgt-section-quote",
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "\"I give a little every month. It's the easiest good thing I do.\"",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-medium\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "7feb37cc-6fc1-42a6-9f98-ecb6b57b2a33",
+                      "type": "component",
+                      "customCssClasses": "cgt-quote"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "[Supporter name], monthly donor",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"body-regular\", \"headingTag\": \"p\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "3f7113b1-a3a5-4074-a71b-0bf967c513d6",
+                      "type": "component",
+                      "customCssClasses": "cgt-quote-name"
+                    }
+                  ],
+                  "id": "9de2bfe8-761c-4e95-bd2b-14fdafcdfdfd",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                },
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "alignment": "right",
+                        "dxpStyle": {},
+                        "size": "standard",
+                        "stretch": "standard",
+                        "text": "Give monthly",
+                        "type": "primary",
+                        "url": "{\"linkInfo\": {\"pageReference\": {\"type\": \"comm__namedPage\", \"attributes\": {\"name\": \"Home\"}}}}"
+                      },
+                      "definition": "dxp_base:button",
+                      "id": "4059aee5-e81d-4da5-8896-dec14c5bbd16",
+                      "type": "component",
+                      "customCssClasses": "cgt-quote-button"
+                    }
+                  ],
+                  "id": "8a95d18f-b1be-4497-bbbb-1feb95a626e9",
+                  "name": "col2",
+                  "title": "Column 2",
+                  "type": "region"
+                }
+              ]
+            },
+            {
+              "attributes": {
+                "backgroundImageConfig": "",
+                "backgroundImageOverlay": "rgba(0,0,0,0)",
+                "componentSpacerSize": "",
+                "dxpStyle": {},
+                "layoutDirectionDesktop": "row",
+                "layoutDirectionMobile": "column",
+                "layoutDirectionTablet": "column",
+                "maxContentWidth": "",
+                "sectionColumnGutterWidth": "0rem",
+                "sectionConfig": "{\"UUID\": \"ec722fa2-5177-400f-9751-1e5968fe253a\", \"columns\": [{\"UUID\": \"925da617-a93b-45d4-9454-216cab7fc28c\", \"columnName\": \"Column 1\", \"columnKey\": \"col1\", \"columnWidth\": \"12\", \"seedComponents\": []}]}",
+                "sectionMinHeight": "",
+                "sectionVerticalAlign": "flex-start"
               },
-              "customCssClasses" : "flow",
-              "definition" : "dxp_flow:flow",
-              "id" : "392ef778-a879-40df-b458-7297b24b840f",
-              "type" : "component"
-            } ],
-            "id" : "ea02e98e-ea7b-4be0-a92f-08f2c535bb17",
-            "name" : "af738",
-            "title" : "Column 2",
-            "type" : "region"
-          } ],
-          "definition" : "community_layout:section",
-          "id" : "9e64b30e-7bde-4734-830c-c3c9c71cc672",
-          "type" : "component"
-        } ],
-        "id" : "f53f959e-8e50-404f-9695-dc13839813ef",
-        "name" : "content",
-        "title" : "Content",
-        "type" : "region"
-      }, {
-        "children" : [ {
-          "attributes" : {
-            "customHeadTags" : "",
-            "description" : "",
-            "dxpStyle" : { },
-            "pageTitle" : "FinDock for Gibbons",
-            "recordId" : "{!recordId}"
-          },
-          "definition" : "community_builder:seoAssistant",
-          "id" : "257d05e8-63cd-4a6c-ab20-fdfbbea37845",
-          "type" : "component"
-        } ],
-        "id" : "4b1c935f-5a87-4da7-aa3d-8f460709454b",
-        "name" : "sfdcHiddenRegion",
-        "title" : "sfdcHiddenRegion",
-        "type" : "region"
-      } ],
-      "definition" : "community_layout:sldsFlexibleLayout",
-      "id" : "fbd62213-7ccc-49d7-ac4e-f9b187b31089",
-      "type" : "component"
+              "definition": "community_layout:section",
+              "id": "ec722fa2-5177-400f-9751-1e5968fe253a",
+              "type": "component",
+              "customCssClasses": "cgt-section-faq",
+              "children": [
+                {
+                  "children": [
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "imageInfos": "",
+                        "richTextValue": "<span id=\"faq\" class=\"cgt-anchor\"></span>"
+                      },
+                      "definition": "community_builder:htmlEditor",
+                      "id": "a24c1e8a-2a0c-43ac-b2d9-be7bedaaf1cb",
+                      "type": "component"
+                    },
+                    {
+                      "attributes": {
+                        "backgroundColor": "",
+                        "dxpStyle": {},
+                        "isLinkable": false,
+                        "linkAssistiveText": "",
+                        "paddingHorizontal": "none",
+                        "paddingVertical": "none",
+                        "text": "Questions about giving",
+                        "textAlign": "left",
+                        "textDecoration": "{}",
+                        "textDisplayInfo": "{\"textStyle\": \"heading-xlarge\", \"headingTag\": \"h2\", \"enableOverride\": false}"
+                      },
+                      "definition": "dxp_base:textBlock",
+                      "id": "944d0be6-f4c0-4917-a23b-a9b541cf5300",
+                      "type": "component",
+                      "customCssClasses": "cgt-section-title"
+                    },
+                    {
+                      "attributes": {
+                        "dxpStyle": {},
+                        "imageInfos": "",
+                        "richTextValue": "<h3>Can I change or stop my monthly gift?</h3><p>Yes, at any time. Email us or use the link in your confirmation email.</p><h3>Is my donation tax-deductible?</h3><p>[Tax status and registration details.]</p><h3>How is my payment handled?</h3><p>Payments are encrypted and processed by FinDock in our Salesforce. We never see or store your card details.</p>"
+                      },
+                      "definition": "community_builder:richTextEditor",
+                      "id": "2e197daa-bd14-4cba-944d-cc624e5e49a2",
+                      "type": "component",
+                      "customCssClasses": "cgt-faq"
+                    }
+                  ],
+                  "id": "925da617-a93b-45d4-9454-216cab7fc28c",
+                  "name": "col1",
+                  "title": "Column 1",
+                  "type": "region"
+                }
+              ]
+            }
+          ],
+          "id": "f53f959e-8e50-404f-9695-dc13839813ef",
+          "name": "content",
+          "title": "Content",
+          "type": "region"
+        },
+        {
+          "children": [
+            {
+              "attributes": {
+                "customHeadTags": "",
+                "description": "",
+                "dxpStyle": {},
+                "pageTitle": "Donate",
+                "recordId": "{!recordId}"
+              },
+              "definition": "community_builder:seoAssistant",
+              "id": "257d05e8-63cd-4a6c-ab20-fdfbbea37845",
+              "type": "component"
+            }
+          ],
+          "id": "4b1c935f-5a87-4da7-aa3d-8f460709454b",
+          "name": "sfdcHiddenRegion",
+          "title": "sfdcHiddenRegion",
+          "type": "region"
+        }
+      ],
+      "definition": "community_layout:sldsFlexibleLayout",
+      "id": "fbd62213-7ccc-49d7-ac4e-f9b187b31089",
+      "type": "component"
     },
-    "dataProviders" : [ ],
-    "themeLayoutType" : "Inner",
-    "viewType" : "home"
+    "dataProviders": [],
+    "themeLayoutType": "Inner",
+    "viewType": "home"
   },
-  "urlName" : "home"
+  "urlName": "home"
 }

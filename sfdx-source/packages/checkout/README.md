@@ -15,8 +15,25 @@ This template is meant to be customized and extended to fit specific use cases a
 *Key features*
 - Collect new one-time payments
 - Set up new recurring payments
-- Pay existing one-time payments
-- Update existing recurring payments
+
+The flow only takes new payments. To pay an existing installment or update a recurring payment's method, use the [Payment Link Flow](../payment-link/).
+
+## Success and failure URLs
+
+FinDock needs a success and a failure URL for every payment. The flow uses `https://www.example.com/success` and `https://www.example.com/failure` unless the page passes the optional `successUrl` and `failureUrl` inputs (the Lightning Out embed does). Replace the example URLs in the `Success_URL` and `Failure_URL` formulas with your own pages, e.g. the checkout site's `https://<your-domain>.my.site.com/<prefix>/payment-received`.
+
+## Order details
+The flow shows example order details. The element **Placeholder: get order details** fills `amount`, `currency`, `reference`, `frequency` and the payer's `Contact` with example values, and the Pay screen's order summary lists example order lines. Replace that element with a Get Records element that reads the order to pay, for example the standard Order object (Orders must be enabled in Setup), an Opportunity or your own object. The flow's optional `id` input variable (`?id=` in the page URL) is there to find that record. Give the site guest user read access to the object and fields you read.
+
+## Preview
+
+![The Checkout Flow on the [checkout site](../checkout-site/): payment on the left, the order summary on the right.](../../../docs/images/checkout-site.png)
+
+The Checkout Flow on the [checkout site](../checkout-site/): payment on the left, the order summary on the right.
+
+![The flow in Flow Builder: get the payer's browser details, the placeholder for the order details, and one Pay screen.](../../../docs/images/builder-checkout-flow.png)
+
+The flow in Flow Builder: get the payer's browser details, the placeholder for the order details, and one Pay screen.
 
 ## Prerequisites
 - FinDock is installed and configured.
@@ -27,7 +44,7 @@ This template is meant to be customized and extended to fit specific use cases a
 
 ## Installation
 1. Install the package using the link above.
-2. Assign the **FinDockLabs Checkout Flow Guest Access** permission set to your Experience Cloud site guest user.
+2. Assign the **FinDockLabs Checkout Flow Guest Access** permission set to your Experience Cloud site guest user. Also assign it to internal users who open the site while signed in to Salesforce: the flow only runs for users with access, so they see an access error instead of the form.
 3. Complete the **FinDock Payer** permission set group assignment described in [Experience Cloud & Guest User Setup](https://github.com/FinDockLabs/payment-experiences-templates#experience-cloud--guest-user-setup).
 4. Go to the checkout Flow -> Payment Screen -> Payment Method Selection component
    - configure at least one payment method
@@ -35,3 +52,11 @@ This template is meant to be customized and extended to fit specific use cases a
 6. Activate your flow.
 7. Go to the Experience Cloud Administration -> Preferences -> enable "Allow guest users to access public APIs".
 8. Add the flow to your Experience Cloud site.
+
+## Lightning Out
+
+To run the flow on another website through Lightning Out 2.0, add these components to your Lightning Out app, besides the [Lightning Out flow container](../lightning-out-flow/) (`c-lightning-out-flow-container`) or your own wrapper. Lightning Out only loads components that are on the app's list: a missing one stops the flow with an unhandled fault. Publish the Lightning Out site after changing the list.
+
+- `c-get-user-agent-info`
+- `cpm-pay-button`
+- `cpm-payment-method-selector`
