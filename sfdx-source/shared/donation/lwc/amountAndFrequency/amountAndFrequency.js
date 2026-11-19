@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
+import USER_CURRENCY from '@salesforce/i18n/currency';
 import { currencyLocale,
     localizedCurrencyName,
     currencyDecimals,
@@ -33,7 +34,8 @@ export default class AmountAndFrequency extends LightningElement {
     _externalErrorToRender   = '';
     _hasUserInteracted       = false;
     _focusTimer              = null;
-    _currencyCode            = '';
+    // A blank Currency setting uses the running user's default currency
+    _currencyCode            = normalizeCurrency(USER_CURRENCY);
     _minAmount               = 1;
     _maxAmount               = 0;
     // True while the amount field is focused: display drops grouping separators for stable editing;
@@ -74,10 +76,9 @@ export default class AmountAndFrequency extends LightningElement {
         return this._currencyCode;
     }
     set currencyCode(value) {
-        // Validate as ISO 4217: a misconfigured Flow variable (e.g. a label instead of a code) must
-        // not reach the UI, or the raw text would render as the currency symbol and in preset labels.
-        // An invalid value normalizes to '' — the form then shows plain, symbol-less amounts.
-        const next = normalizeCurrency(value, true);
+        // Blank: the user's default currency. Not an ISO 4217 code: '' (amounts without a symbol).
+        const raw = (value ?? '').toString().trim();
+        const next = raw ? normalizeCurrency(raw, true) : normalizeCurrency(USER_CURRENCY);
         if (this._currencyCode === next) return;
         this._currencyCode = next;
         // Clear custom amount if it has more decimal places than the new currency allows.
@@ -365,6 +366,7 @@ export default class AmountAndFrequency extends LightningElement {
             this._frequency = this.defaultFrequency;
         }
         this._restoreState();
+        this._frequency = this._offeredFrequency(this._frequency);
         this._applyQueryParams();
 
         if (this._customAmount !== '') {
@@ -380,9 +382,10 @@ export default class AmountAndFrequency extends LightningElement {
     }
 
     handleFrequencyChange(event) {
-        this._hasUserInteracted = true;
         this._frequency = event.target.value;
-        this._updateRenderedInternalError();
+        if (this._internalErrorToRender) {
+            this._internalErrorToRender = this._getInternalErrorMessageIfInvalid();
+        }
         this._dispatchChange();
     }
 
@@ -460,6 +463,13 @@ export default class AmountAndFrequency extends LightningElement {
         } catch {
             return `${currencyCode} ${amount}`.trim();
         }
+    }
+
+    _offeredFrequency(value) {
+        // The config editor marks an unused second frequency as 'none'
+        const offered = [this.freq1Value, this.freq2Value].filter((v) => v && v !== 'none');
+        if (offered.includes(value)) return value;
+        return offered.includes(this.defaultFrequency) ? this.defaultFrequency : this.freq1Value;
     }
 
     _resolveActivePresets() {
@@ -551,7 +561,7 @@ export default class AmountAndFrequency extends LightningElement {
             const qAmount    = params.get('amount');
             const qFrequency = params.get('frequency');
 
-            if (qFrequency) this._frequency = qFrequency;
+            if (qFrequency) this._frequency = this._offeredFrequency(qFrequency);
 
             if (qAmount) {
                 const num    = Number(qAmount);

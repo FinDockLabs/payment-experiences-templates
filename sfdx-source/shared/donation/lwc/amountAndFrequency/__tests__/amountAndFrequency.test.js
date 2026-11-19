@@ -109,29 +109,33 @@ describe('sanitizeLocaleAmountInput — keystroke-level input filtering', () => 
     });
 });
 
-describe('amount formatting before a currency is set', () => {
+describe('currency when the Currency setting is blank', () => {
     afterEach(() => {
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }
     });
 
-    it('shows preset amounts without a currency symbol and formats them as plain numbers', () => {
+    // @salesforce/i18n/currency is USD in Jest.
+    it('uses the user\'s default currency when no currency is configured', () => {
         const element = createElement('c-amount-and-frequency', { is: AmountAndFrequency });
         element.presetAmountsOneTime = '25,50,100';
-        // currencyCode intentionally left unset (empty) — mimics the first render before
-        // currencyPicker resolves. No hardcoded fallback currency should leak into the labels.
         document.body.appendChild(element);
 
-        const labels = Array.from(
-            element.shadowRoot.querySelectorAll('label')
-        ).map((el) => el.textContent);
+        expect(element.selectedCurrency).toBe('USD');
+        const adornment = element.shadowRoot.querySelector('.currency-adornment');
+        expect(adornment.textContent.trim()).toBe('$');
+        const presetLabels = Array.from(element.shadowRoot.querySelectorAll('.amount-option'))
+            .map((el) => el.textContent);
+        presetLabels.forEach((text) => expect(text).toMatch(/\$/));
+    });
 
-        // No currency symbol/code, and no stray leading space from a missing symbol.
-        labels.forEach((text) => {
-            expect(text).not.toMatch(/[€$£]|EUR|USD/);
-            expect(text).toBe(text.trim());
-        });
+    it('uses the user\'s default currency when the currency variable is empty', () => {
+        const element = createElement('c-amount-and-frequency', { is: AmountAndFrequency });
+        element.currencyCode = '';
+        document.body.appendChild(element);
+
+        expect(element.selectedCurrency).toBe('USD');
     });
 
     it('rejects a non-ISO currencyCode instead of rendering the raw text as the currency', () => {
@@ -534,6 +538,47 @@ describe('Salesforce Flow validation contract', () => {
         expect(element.validate()).toEqual({ isValid: true, errorMessage: null });
     });
 
+    function selectFrequency(element, value) {
+        const input = element.shadowRoot.querySelector(`input[value="${value}"]`);
+        input.checked = true;
+        input.dispatchEvent(new CustomEvent('change', { bubbles: true, composed: true }));
+    }
+
+    it('does not show the required error when switching to a frequency without an amount', async () => {
+        const element = createAmountComponent();
+        element.showFrequencyToggle = true;
+        await Promise.resolve();
+        selectPreset(element, '50');
+        await Promise.resolve();
+
+        selectFrequency(element, 'recurring');
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(false);
+        // Still invalid, so Flow blocks Next and reportValidity() shows the error then
+        expect(element.validate().isValid).toBe(false);
+
+        element.reportValidity();
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(true);
+    });
+
+    it('clears a shown required error when switching to a frequency that has an amount', async () => {
+        const element = createAmountComponent();
+        element.showFrequencyToggle = true;
+        await Promise.resolve();
+        selectPreset(element, '50');
+        await Promise.resolve();
+        selectFrequency(element, 'recurring');
+        await Promise.resolve();
+        element.reportValidity();
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(true);
+
+        selectFrequency(element, 'oneTime');
+        await Promise.resolve();
+        expect(requiredErrorVisible(element)).toBe(false);
+    });
+
     it('keeps the selected frequency across a remount without persisting errors', async () => {
         const first = createAmountComponent();
         first.showFrequencyToggle = true;
@@ -608,6 +653,40 @@ describe('runtime currency changes', () => {
         element.currencyCode = ' eur ';
         expect(changes).toEqual([]);
         expect(element.amountOneTime).toBe('25.50');
+    });
+});
+
+describe('only the frequencies the form offers', () => {
+    afterEach(resetRuntimeState);
+
+    // Monthly only, as the config editor saves it
+    const MONTHLY_ONLY = {
+        freq1Value: 'recurring', freq2Value: 'recurring', showFrequencyToggle: false,
+        defaultFrequency: 'recurring', presetAmountsOneTime: '25,50', presetAmountsRecurring: '5,10'
+    };
+    const presetValues = (element) => Array.from(
+        element.shadowRoot.querySelectorAll('input[name^="preset-"]')).map((input) => input.value);
+
+    it('shows the recurring presets when one-time is turned off', () => {
+        const { element } = mountWithChanges(MONTHLY_ONLY);
+        expect(element.frequency).toBe('recurring');
+        expect(presetValues(element)).toEqual(['5', '10']);
+    });
+
+    it('ignores a one-time frequency restored from an earlier visit', () => {
+        sessionStorage.setItem('af-state-/', JSON.stringify({ frequency: 'oneTime', selectedPreset: 25 }));
+        const { element } = mountWithChanges(MONTHLY_ONLY);
+        expect(element.frequency).toBe('recurring');
+        expect(presetValues(element)).toEqual(['5', '10']);
+        expect(element.amountOneTime).toBeNull();
+    });
+
+    it('ignores a frequency in the link that the form does not offer', () => {
+        window.history.replaceState({}, '', '/?frequency=oneTime&amount=10');
+        const { element } = mountWithChanges(MONTHLY_ONLY);
+        expect(element.frequency).toBe('recurring');
+        expect(element.amountRecurring).toBe('10');
+        expect(element.amountOneTime).toBeNull();
     });
 });
 
