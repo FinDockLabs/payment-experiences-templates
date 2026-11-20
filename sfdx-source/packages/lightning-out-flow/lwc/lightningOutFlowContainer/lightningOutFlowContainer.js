@@ -8,11 +8,26 @@ const SHRINK_DELAY_MS = 2000;
 // Must match the host website's message listener
 const HEIGHT_MESSAGE_TYPE = 'flow:height';
 
+// Lightning Out passes attributes as strings, so input-variables arrives as JSON
+function parseInputVariables(value) {
+    if (typeof value !== 'string') {
+        return value ?? {};
+    }
+    try {
+        return JSON.parse(value);
+    } catch (error) {
+        console.error('lightningOutFlowContainer: input-variables is not valid JSON', error);
+        return {};
+    }
+}
+
 export default class LightningOutFlowContainer extends LightningElement {
     @api flowApiName;
     // Optional full URLs where the payer goes after a successful or a failed payment
     @api successUrl;
     @api failureUrl;
+    // Optional other String inputs for the flow, as a JSON object, e.g. {"id": "<GUID>", "type": "link"}
+    @api inputVariables;
     resizeObserver;
     shrinkTimeout;
     lastReportedHeight = 0;
@@ -32,12 +47,16 @@ export default class LightningOutFlowContainer extends LightningElement {
         this.resizeObserver.observe(document.body);
     }
 
-    // Only the URLs the website sets are passed: a flow fails to start on an input variable it doesn't have
+    // Only the values the website sets are passed: a flow fails to start on an input variable it doesn't have
     get flowInputVariables() {
-        return [
-            { name: 'successUrl', type: 'String', value: this.successUrl },
-            { name: 'failureUrl', type: 'String', value: this.failureUrl }
-        ].filter((variable) => variable.value);
+        const values = {
+            ...parseInputVariables(this.inputVariables),
+            successUrl: this.successUrl,
+            failureUrl: this.failureUrl
+        };
+        return Object.entries(values)
+            .filter(([, value]) => value)
+            .map(([name, value]) => ({ name, type: 'String', value: String(value) }));
     }
 
     disconnectedCallback() {
