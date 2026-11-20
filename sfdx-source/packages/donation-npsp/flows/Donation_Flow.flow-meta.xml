@@ -144,6 +144,12 @@
         <scale>2</scale>
     </formulas>
     <formulas>
+        <description>True while Gift Aid is ticked and one of its required fields is empty. The Pay Button calls FinDock without Flow validating the screen, so it stays disabled until they are filled in.</description>
+        <name>GiftAidIncomplete</name>
+        <dataType>Boolean</dataType>
+        <expression>AND({!GiftAid}, OR(ISBLANK({!GiftAidFirstName}), ISBLANK({!GiftAidLastName}), ISBLANK({!GiftAidHouseNameOrNumber}), ISBLANK({!GiftAidPostalCode})))</expression>
+    </formulas>
+    <formulas>
         <description>False by default. If your form supports payers from overseas change this formula to determine overseas or not based on the payers address information.</description>
         <name>GiftAidOverseas</name>
         <dataType>Boolean</dataType>
@@ -714,6 +720,12 @@
                 <name>contact</name>
                 <value>
                     <elementReference>Contact_Record</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <elementReference>GiftAidIncomplete</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
