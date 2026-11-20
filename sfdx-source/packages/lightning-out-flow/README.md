@@ -54,6 +54,20 @@ Pass any other String inputs as a JSON object in the optional `input-variables` 
 
 Each key is passed to the flow input variable with that name, so the flow must have it, or it doesn't start.
 
+## Website: template styles
+
+Lightning Out doesn't load your Experience site's theme. To style the flow like a site template, add that template's stylesheet to the Lightning Out site's head markup and set `flow-class` on the container (or the Custom Property of the same name):
+
+| Template stylesheet | `flow-class` |
+|---|---|
+| `canopyStyles` (FinDock Experiences - Donation Site) | `donation-flow` |
+| `checkoutStyles` (FinDock Experiences - Checkout Site), Checkout Flow | `checkout-flow` |
+| `checkoutStyles`, Payment Link Flow | `payment-link-flow` |
+
+```html
+<c-lightning-out-flow-container flow-api-name="Donation_Flow" flow-class="donation-flow"></c-lightning-out-flow-container>
+```
+
 ## Website: auto-sizing the flow and redirects
 
 The container sends its height to the website as a `flow:height` message; this script applies it. When the browser doesn't let the FinDock Pay Button open a hosted payment page (for example iDEAL or PayPal) from the iframe, the button sends a `findock-redirect` message instead, and the script follows it. Add it to the website page, after the Lightning Out markup:

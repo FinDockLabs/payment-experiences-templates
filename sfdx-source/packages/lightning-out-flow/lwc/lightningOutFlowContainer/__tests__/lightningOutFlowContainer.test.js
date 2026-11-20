@@ -97,6 +97,11 @@ describe('flow', () => {
         ]);
     });
 
+    it('puts flow-class around the flow, for the site template stylesheets', () => {
+        const element = render({ flowClass: 'donation-flow' });
+        expect(element.shadowRoot.querySelector('div.donation-flow lightning-flow')).not.toBeNull();
+    });
+
     it('ignores input-variables that are not valid JSON', () => {
         const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
         const element = render({ inputVariables: '{id:' });

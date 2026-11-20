@@ -12,13 +12,17 @@
         input-variables (optional): other String inputs for the flow, as a JSON object, e.g.
             input-variables='{"id": "<GUID>", "type": "link"}'
         Each one is passed to the flow input variable with that name, so the flow must have it.
+        flow-class (optional): class around the flow, for a site template's stylesheet: donation-flow
+        (canopyStyles), checkout-flow or payment-link-flow (checkoutStyles).
         Docs: TODO add docs link
 
         onstatuschange: reports the height once each new screen has rendered (auto-sizing).
     -->
-    <lightning-flow
-        flow-api-name={flowApiName}
-        flow-input-variables={flowInputVariables}
-        onstatuschange={handleStatusChange}>
-    </lightning-flow>
+    <div class={flowClass}>
+        <lightning-flow
+            flow-api-name={flowApiName}
+            flow-input-variables={flowInputVariables}
+            onstatuschange={handleStatusChange}>
+        </lightning-flow>
+    </div>
 </template>

@@ -28,6 +28,8 @@ export default class LightningOutFlowContainer extends LightningElement {
     @api failureUrl;
     // Optional other String inputs for the flow, as a JSON object, e.g. {"id": "<GUID>", "type": "link"}
     @api inputVariables;
+    // Optional class around the flow that a site template's stylesheet styles, e.g. donation-flow
+    @api flowClass;
     resizeObserver;
     shrinkTimeout;
     lastReportedHeight = 0;
