@@ -146,8 +146,3 @@ If you are extending or customizing the FinDock payment templates:
 - **Never hardcode user-facing strings:** always create a Custom Label (`$Label.c.your_label_name`) and reference it in your LWCs or Flow screens.
 - **Keep Flow formulas translatable:** do not hardcode literal text inside Flow formulas. Use Custom Label references (`{!$Label.c.your_label_name}`) instead.
 - **Use native i18n modules:** format currency and dates using `@salesforce/i18n` and JavaScript `Intl` utilities (`Intl.NumberFormat`, `Intl.DateTimeFormat`) to preserve automatic locale awareness.
-
-## License
-
-Licensed under the [PolyForm Shield License 1.0.0](LICENSE).
-You may use and modify these templates, but not to build a product that competes with FinDock.
