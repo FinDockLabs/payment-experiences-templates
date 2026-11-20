@@ -20,11 +20,11 @@ html:root {
 }
 
 /*
- * Brand tokens, derived from the theme. Defined on c-donation-flow as well as :root so the Lightning Out
+ * Brand tokens, derived from the theme. Defined on .donation-flow as well as :root so the Lightning Out
  * embed resolves them against the hooks it sets on itself (below), not against the Lightning Out site's theme.
  */
 :root,
-c-donation-flow {
+.donation-flow {
     --cgt-forest: var(--dxp-g-brand, #1E4634);
     --cgt-on-forest: var(--dxp-g-brand-contrast, #FFFFFF);
     --cgt-leaf: var(--dxp-g-brand-1, var(--cgt-forest));
@@ -48,7 +48,7 @@ c-donation-flow {
  * Lightning Out embed. The Lightning Out site has its own theme (the FinDock checkout's) and Lightning Out
  * doesn't load the Canopy site theme, so the embedded form sets the Canopy values of the theme hooks itself.
  */
-c-donation-flow {
+.donation-flow {
     display: block;
     font-family: var(--cgt-sans);
     color: var(--cgt-forest);
@@ -526,7 +526,7 @@ html {
 }
 
 /* The flow is the donation card. */
-:is(.donate, c-donation-flow) flowruntime-flow {
+:is(.donate, .donation-flow) flowruntime-flow {
     display: block;
     background: var(--dxp-g-root, #FFFFFF);
     border-radius: 28px;
@@ -556,7 +556,7 @@ html {
  * The flow's navigation bar is an inline element with SLDS's card-footer border. The Experience Cloud theme
  * clears that border; the Lightning Out site's theme doesn't, and the border breaks into stray dashes.
  */
-c-donation-flow flowruntime-navigation-bar.slds-card__footer {
+.donation-flow flowruntime-navigation-bar.slds-card__footer {
     display: block;
     border: 0;
 }
@@ -565,21 +565,21 @@ c-donation-flow flowruntime-navigation-bar.slds-card__footer {
  * FinDock hides the blue SLDS spinner only under a .flow container, which the Lightning Out embed doesn't have.
  * The dots centre themselves with auto margins, which needs a block box.
  */
-:is(.donate, c-donation-flow) .slds-spinner {
+:is(.donate, .donation-flow) .slds-spinner {
     display: none;
 }
-:is(.donate, c-donation-flow) flowruntime-spinner-lwc {
+:is(.donate, .donation-flow) flowruntime-spinner-lwc {
     display: block;
     margin: 14em auto;
 }
-:is(.donate, c-donation-flow) .stage-progress.stage-progress {
+:is(.donate, .donation-flow) .stage-progress.stage-progress {
     --slds-g-sizing-10: 2rem;
     margin-bottom: 0.75rem;
     --stage-active-color: var(--cgt-forest);
     --stage-inactive-color: var(--cgt-moss);
     --stage-inactive-number-color: var(--cgt-muted);
 }
-:is(.donate, c-donation-flow) h2 {
+:is(.donate, .donation-flow) h2 {
     font-size: 1.6rem;
     color: var(--cgt-forest);
     margin: 0 0 0.25rem;
@@ -590,63 +590,63 @@ c-donation-flow flowruntime-navigation-bar.slds-card__footer {
  * plain class selector, so these rules repeat the class to win. Its colours come from CSS variables:
  * a moss track behind the Give once / Monthly toggle and a moss fill on the chosen amount.
  */
-:is(.donate, c-donation-flow) {
+:is(.donate, .donation-flow) {
     --slds-g-color-neutral-base-95: var(--cgt-moss);
     --dxp-s-form-element-color-background-active: var(--cgt-moss);
     --dxp-s-form-element-text-color: var(--cgt-forest);
 }
-:is(.donate, c-donation-flow) .amount-frequency-container.amount-frequency-container {
+:is(.donate, .donation-flow) .amount-frequency-container.amount-frequency-container {
     gap: 0.75rem;
 }
-:is(.donate, c-donation-flow) .amount-grid.amount-grid {
+:is(.donate, .donation-flow) .amount-grid.amount-grid {
     gap: 0.5rem;
 }
-:is(.donate, c-donation-flow) .frequency-toggle.frequency-toggle,
-:is(.donate, c-donation-flow) .toggle-option.toggle-option {
+:is(.donate, .donation-flow) .frequency-toggle.frequency-toggle,
+:is(.donate, .donation-flow) .toggle-option.toggle-option {
     border-radius: var(--cgt-pill);
 }
-:is(.donate, c-donation-flow) .toggle-option.toggle-option {
+:is(.donate, .donation-flow) .toggle-option.toggle-option {
     min-height: 2.75rem;
     font-weight: 700;
 }
-:is(.donate, c-donation-flow) .visually-hidden-input:checked + .toggle-option.toggle-option.toggle-option {
+:is(.donate, .donation-flow) .visually-hidden-input:checked + .toggle-option.toggle-option.toggle-option {
     background-color: var(--cgt-forest);
     color: var(--cgt-on-forest);
     box-shadow: none;
 }
-:is(.donate, c-donation-flow) .visually-hidden-input:checked + .toggle-option.toggle-option.toggle-option lightning-icon {
+:is(.donate, .donation-flow) .visually-hidden-input:checked + .toggle-option.toggle-option.toggle-option lightning-icon {
     --slds-c-icon-color-foreground-default: var(--cgt-sun);
 }
-:is(.donate, c-donation-flow) .amount-option.amount-option {
+:is(.donate, .donation-flow) .amount-option.amount-option {
     min-height: 3rem;
     border-radius: var(--cgt-pill);
     font-family: var(--cgt-display);
     font-size: 1.25rem;
     font-weight: 800;
 }
-:is(.donate, c-donation-flow) .custom-amount-row.custom-amount-row {
+:is(.donate, .donation-flow) .custom-amount-row.custom-amount-row {
     min-height: 3rem;
     border-radius: var(--cgt-pill);
 }
 
 /* Payment methods: the selected row in a pale tint of the brand colour, so its white fields stand out. */
-:is(.donate, c-donation-flow) .payment-option {
+:is(.donate, .donation-flow) .payment-option {
     border-radius: 16px;
 }
-:is(.donate, c-donation-flow) .payment-option.payment-option-selected {
+:is(.donate, .donation-flow) .payment-option.payment-option-selected {
     background: color-mix(in srgb, var(--cgt-forest) 5%, var(--dxp-g-root, #FFFFFF));
     border-color: var(--cgt-forest);
 }
 
 /* Flow footer buttons: pills; the final pay button in sunrise orange. */
-:is(.donate, c-donation-flow) .slds-button {
+:is(.donate, .donation-flow) .slds-button {
     border-radius: var(--cgt-pill);
     font-weight: 700;
     min-height: 3rem;
     padding-inline: 2rem;
 }
-:is(.donate, c-donation-flow) cpm-pay-button .slds-button_brand,
-:is(.donate, c-donation-flow) cpm-pay-button button {
+:is(.donate, .donation-flow) cpm-pay-button .slds-button_brand,
+:is(.donate, .donation-flow) cpm-pay-button button {
     background: var(--cgt-sun);
     border-color: var(--cgt-sun);
     color: var(--cgt-on-sun);

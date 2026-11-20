@@ -41,9 +41,36 @@ FinDock sends the payer to a success or a failure URL after the payment. Set the
 
 The container passes each URL that is set to the flow's `successUrl` or `failureUrl` input variable. All FinDock flow templates have these inputs and use `https://www.example.com/success` and `/failure` without them. For your own flow, add String input variables with these names before you set the attributes, or the flow doesn't start.
 
-## Website: auto-sizing the flow
+## Website: other flow inputs
 
-The container sends its height to the website as a `flow:height` message; this script applies it. Add it to the website page, after the Lightning Out markup:
+Pass any other String inputs as a JSON object in the optional `input-variables` attribute (or the Custom Property of the same name). The [Payment Link Flow](../payment-link/) needs the GUID of the installment or recurring payment, for example:
+
+```html
+<c-lightning-out-flow-container
+    flow-api-name="Payment_Link_Flow"
+    input-variables='{"id": "459c3102-3f92-3117-57bd-ed99cb65982a", "type": "link"}'>
+</c-lightning-out-flow-container>
+```
+
+Each key is passed to the flow input variable with that name, so the flow must have it, or it doesn't start.
+
+## Website: template styles
+
+Lightning Out doesn't load your Experience site's theme. To style the flow like a site template, add that template's stylesheet to the Lightning Out site's head markup and set `flow-class` on the container (or the Custom Property of the same name):
+
+| Template stylesheet | `flow-class` |
+|---|---|
+| `canopyStyles` (FinDock Experiences - Donation Site) | `donation-flow` |
+| `checkoutStyles` (FinDock Experiences - Checkout Site), Checkout Flow | `checkout-flow` |
+| `checkoutStyles`, Payment Link Flow | `payment-link-flow` |
+
+```html
+<c-lightning-out-flow-container flow-api-name="Donation_Flow" flow-class="donation-flow"></c-lightning-out-flow-container>
+```
+
+## Website: auto-sizing the flow and redirects
+
+The container sends its height to the website as a `flow:height` message; this script applies it. When the browser doesn't let the FinDock Pay Button open a hosted payment page (for example iDEAL or PayPal) from the iframe, the button sends a `findock-redirect` message instead, and the script follows it. Add it to the website page, after the Lightning Out markup:
 
 ```html
 <script>
@@ -51,15 +78,21 @@ The container sends its height to the website as a `flow:height` message; this s
     const flowContainer = document.querySelector('c-lightning-out-flow-container');
 
     window.addEventListener('message', (event) => {
-        if (event.origin === flowOrigin && event.data?.type === 'flow:height') {
+        if (event.origin !== flowOrigin) {
+            return;
+        }
+        if (event.data?.type === 'flow:height') {
             flowContainer.style.height = `${event.data.height}px`;
+        }
+        if (event.data?.type === 'findock-redirect' && event.data.url?.startsWith('https://')) {
+            window.location.href = event.data.url;
         }
     });
 </script>
 ```
 
 - `flowOrigin` is the site's address, read from the `org-url` attribute. Messages from any other address are ignored.
-- `type === 'flow:height'` skips Lightning Out's own messages.
+- `type === 'flow:height'` and `type === 'findock-redirect'` skip Lightning Out's own messages; only `https://` addresses are followed.
 - The iframe fills `<c-lightning-out-flow-container>`, so setting the container's height sizes the iframe.
 
 Do not use `flex: 1` or a height `transition` on `c-lightning-out-flow-container`. Using `flex: 1` overrides the height the script sets, and a transition makes a scrollbar flash each time the Flow screen grows.

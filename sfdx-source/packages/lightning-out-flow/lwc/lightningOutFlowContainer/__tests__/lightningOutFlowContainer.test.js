@@ -84,6 +84,31 @@ describe('flow', () => {
         const withoutUrls = render();
         expect(withoutUrls.shadowRoot.querySelector('lightning-flow').flowInputVariables).toEqual([]);
     });
+
+    it('passes the inputs from input-variables to the flow', () => {
+        const element = render({
+            inputVariables: '{"id": "459c3102-3f92-3117-57bd-ed99cb65982a", "type": "link"}',
+            successUrl: 'https://www.example.org/thank-you'
+        });
+        expect(element.shadowRoot.querySelector('lightning-flow').flowInputVariables).toEqual([
+            { name: 'id', type: 'String', value: '459c3102-3f92-3117-57bd-ed99cb65982a' },
+            { name: 'type', type: 'String', value: 'link' },
+            { name: 'successUrl', type: 'String', value: 'https://www.example.org/thank-you' }
+        ]);
+    });
+
+    it('puts flow-class around the flow, for the site template stylesheets', () => {
+        const element = render({ flowClass: 'donation-flow' });
+        expect(element.shadowRoot.querySelector('div.donation-flow lightning-flow')).not.toBeNull();
+    });
+
+    it('ignores input-variables that are not valid JSON', () => {
+        const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+        const element = render({ inputVariables: '{id:' });
+        expect(element.shadowRoot.querySelector('lightning-flow').flowInputVariables).toEqual([]);
+        expect(consoleError).toHaveBeenCalled();
+        consoleError.mockRestore();
+    });
 });
 
 describe('setup inside Lightning Out', () => {
