@@ -637,6 +637,10 @@ html {
     background: color-mix(in srgb, var(--cgt-forest) 5%, var(--dxp-g-root, #FFFFFF));
     border-color: var(--cgt-forest);
 }
+/* The fields themselves stay white inside the tinted row, for contrast. Lightning Out doesn't give them a background of their own. */
+:is(.donate, c-donation-flow, .paylink) .payment-option :is(input, select, textarea):not([type="radio"]):not([type="checkbox"]) {
+    background-color: #FFFFFF !important;
+}
 
 /* Flow footer buttons: pills; the final pay button in sunrise orange. */
 :is(.donate, .donation-flow) .slds-button {
