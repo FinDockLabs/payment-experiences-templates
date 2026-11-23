@@ -92,3 +92,5 @@ To run the flow on another website through Lightning Out 2.0, add these componen
 
 - `cpm-pay-button`
 - `cpm-payment-method-selector`
+
+Pass the GUID (and `type` for a payment link) to the container with `input-variables`; see [Website: other flow inputs](../lightning-out-flow/#website-other-flow-inputs).
